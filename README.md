@@ -1,1 +1,1 @@
-👋 Welcome to PrintHub
+👋 Welcome to <b>PrintHub</b>
