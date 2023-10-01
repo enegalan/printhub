@@ -65,7 +65,6 @@ Run the following command to install React:
   <code>npm install create-vite</code>
   <code>npm install @vitejs/plugin-react</code>
   <code>npm install react@latest react-dom@latest</code>
-  <code>npm install react/jsx-dev-runtime</code>
 </pre>
 
 ## Build React assets
@@ -76,7 +75,7 @@ Run the following command to install React:
 ## Run Laravel development server
 In two terminals run the following commands:
 <pre>
-  <code>npm run dev</code>
+    <code>npm run dev</code>
 </pre>
 <pre>
   <code>php artisan serve</code>
@@ -97,4 +96,22 @@ To create a route URL for a view add a similar code in <code>routes/web.php</cod
   <code>Route::get('/url', function () {
     return view('view_name without .blade.php');
   });</code>
+</pre>
+
+# For developers
+Clone this repository, create a <code>.env</code> file and configure it, there will be a template of <code>.env</code> in <code>.env.example</code> file.
+
+Run the following commands:
+<pre>
+  <code>composer install</code>
+  <code>npm install create-vite</code>
+</pre>
+
+## Run Laravel development server
+In two terminals run the following commands:
+<pre>
+    <code>npm run dev</code>
+</pre>
+<pre>
+  <code>php artisan serve</code>
 </pre>
