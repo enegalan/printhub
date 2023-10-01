@@ -13,6 +13,8 @@ import {
     Avatar,
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
+import LoginDropdown from './loginDropdown';
+import { DarkModeToggle } from './buttons';
 
 const Nav = () => {
     return (
@@ -21,8 +23,8 @@ const Nav = () => {
             align="center"
             justify="space-between"
             padding="1rem"
-            bg="gray.900" // Change color
-            color="white" // Change color
+            bg="var(--main-blue)" // Change color
+            color="var(--white)" // Change color
         >
             <Link href="/" fontSize="2xl" fontWeight="bold">
                 PrintHub
@@ -40,56 +42,38 @@ const Nav = () => {
                 <Link mr="4" href="/upload">
                     Upload your piece
                 </Link>
-                <Link href="/contact">
+                <Link mr="20px" href="/contact">
                     Contact
                 </Link>
             </Box>
 
-            <Box display={{ base: "block", md: "none"}}>
-                <Menu>
-                    <MenuButton as={IconButton} icon={<Avatar size="sm" name="Usuario" />} variant="outline" color="white" />
-                    <MenuList bg="red.100">
-                        <MenuItem background="red.400" _hover={{ bg: "gray.800" }}>
-                            <Link href="/inicio">Home</Link>
-                        </MenuItem>
-                        <MenuItem _hover={{ bg: "gray.800" }}>
-                            <Link href="/productos">Market</Link>
-                        </MenuItem>
-                        <MenuItem _hover={{ bg: "gray.800" }}>
-                            <Link href="/servicios">Upload your piece</Link>
-                        </MenuItem>
-                        <MenuItem _hover={{ bg: "gray.800" }}>
-                            <Link href="/contacto">Contact</Link>
-                        </MenuItem>
-                    </MenuList>
-                </Menu>
+            <DarkModeToggle></DarkModeToggle>
+
+            <Box ml="10px">
+                <LoginDropdown></LoginDropdown>
             </Box>
             
             <Box ml="10px" display={{ base: "block", md: "none"}}>
                 <Menu>
                     <MenuButton as={IconButton} icon={<HamburgerIcon />} variant="outline" color="white" />
-                    <MenuList bg="red.100">
-                        <MenuItem background="red.400" _hover={{ bg: "gray.800" }}>
-                            <Link href="/inicio">Home</Link>
+                    <MenuList>
+                        <MenuItem _hover={{ bg: "var(--dark-blue)" }}>
+                            <Link href="/index">Home</Link>
                         </MenuItem>
-                        <MenuItem _hover={{ bg: "gray.800" }}>
-                            <Link href="/productos">Market</Link>
+                        <MenuItem _hover={{ bg: "var(--dark-blue)" }}>
+                            <Link href="/market">Market</Link>
                         </MenuItem>
-                        <MenuItem _hover={{ bg: "gray.800" }}>
-                            <Link href="/servicios">Upload your piece</Link>
+                        <MenuItem _hover={{ bg: "var(--dark-blue)" }}>
+                            <Link href="/upload">Upload your piece</Link>
                         </MenuItem>
-                        <MenuItem _hover={{ bg: "gray.800" }}>
-                            <Link href="/contacto">Contact</Link>
+                        <MenuItem _hover={{ bg: "var(--dark-blue)" }}>
+                            <Link href="/contact">Contact</Link>
                         </MenuItem>
                     </MenuList>
                 </Menu>
             </Box>
 
-            <Button ml="6" mr="2" colorScheme="teal" size="sm" display={{ base: "none", md: "block" }}>
-                Log in
-            </Button>
-
-            <Box display={{ base: "none", md: "block" }}>
+            <Box ml="10px" display={{ base: "none", md: "block" }}>
                 <Avatar size="sm" name="Usuario" />
             </Box>
         </Flex>

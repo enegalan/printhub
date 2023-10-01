@@ -1,5 +1,5 @@
-import './bootstrap';
+import './bootstrap'
 
-import './components/index'
+import '../css/app.css'
 
-import './components/navbar'
+import './pages/index'

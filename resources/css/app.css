@@ -1,0 +1,18 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --dark: #2F303A;
+    --dark-blue: #2B4168;
+    --main-blue: #4A55A2;
+    --light-blue: #A0BFE0;
+    --white: #FFFFFF;
+    --light-grey: #BAC3D0;
+}
+
+.main{
+    margin: 5%;
+}

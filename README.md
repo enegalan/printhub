@@ -72,6 +72,11 @@ Run the following command to install React:
   <code>npm install</code>
 </pre>
 
+## Install Chakra UI
+<pre>
+  <code>npm install @chakra-ui/react @emotion/react @emotion/styled framer-motion</code>
+</pre>
+
 ## Run Laravel development server
 In two terminals run the following commands:
 <pre>
@@ -82,7 +87,9 @@ In two terminals run the following commands:
 </pre>
 
 # How to proceed
-Create React components in <code>resources/js/components/name.jsx</code> and add if's to control where the components will be displayed.
+Create React components in <code>resources/js/components/name.jsx</code>
+
+Create React pages in <code>resources/js/pages/page.jsx</code>, in each of them add the necessary if's to control where the components will be displayed.
 
 Import each component in <code>resources/js/app.js</code>
 
