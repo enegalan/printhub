@@ -7,8 +7,6 @@
     @vite("resources/js/app.js")
 </head>
 <body>
-    <h1>Hello</h1>
-    <div id="navbar"></div>
-    <div id="root"></div>
+    <div id="index"></div>
 </body>
 </html>
