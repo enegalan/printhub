@@ -76,7 +76,7 @@ Run the following command to install React:
 ## Run Laravel development server
 In two terminals run the following commands:
 <pre>
-    <code>npm run dev</code>
+  <code>npm run dev</code>
 </pre>
 <pre>
   <code>php artisan serve</code>
