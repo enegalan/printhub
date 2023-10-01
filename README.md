@@ -40,9 +40,13 @@ Enable the Apache rewrite module for Laravel:
   <code>sudo mysql_secure_installation</code>
 </pre>
 
+## Upgrade npm version to the latest
+<pre>
+  <code>npm install npm@latest</code>
+</pre>
 ## Create the Laravel project
 <pre>
-  <code>composer create-project --prefer-dist laravel/laravel printhub</code>
+  <code>composer create-project laravel/laravel printhub</code>
   <code>cd printhub</code>
 </pre>
 
@@ -56,27 +60,43 @@ Run the following command to install Laravel dependencies:
 </pre>
 
 ## Include React into the Laravel project
-Run the following command to install React in <code>js/react</code> directory:
+Run the following command to install React:
 <pre>
-  <code>npx create-react-app js/react</code>
+  <code>npm install create-vite</code>
+  <code>npm install @vitejs/plugin-react</code>
+  <code>npm install react@latest react-dom@latest</code>
+  <code>npm install react/jsx-dev-runtime</code>
 </pre>
-
-## Set up Laravel Mix to build React
-Edit the <code>webpack.mix.js</code> file in the root of the Laravel project to include the React build. Add the following lines to the file:
-<pre>
-  <code>mix.react('resources/js/react-app/src/index.js', 'public/js')
-   .sass('resources/sass/app.css', 'public/css');</code>
-</pre>
-This indicates to Laravel Mix to compile the React code and styles and place them in the <code>public/js</code> and <code>public/css</code> folders.
 
 ## Build React assets
 <pre>
   <code>npm install</code>
-  <code>npm run dev</code>
 </pre>
 This will compile the React JavaScript and CSS files and place them in the <code>public/js</code> and <code>public/css</code> folders.
 
 ## Run Laravel development server
+In two terminals run the following commands:
+<pre>
+    <code>npm run dev</code>
+</pre>
 <pre>
   <code>php artisan serve</code>
+</pre>
+
+
+# How to proceed
+Create React components in <code>resources/js/components/name.jsx</code> and add if's to control where the components will be displayed.
+
+Import each component in <code>resources/js/app.js</code>
+
+Create a view in <code>resources/views/name.blade.php</code> and add the following line in the head of the HTML:
+<pre>
+  <code>@vite("resources/js/app.js")</code>
+</pre>
+
+To create a route URL for a view add a similar code in <code>routes/web.php</code> file:
+<pre>
+  <code>Route::get('/url', function () {
+    return view('view_name without .blade.php');
+  });</code>
 </pre>
