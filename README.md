@@ -72,7 +72,6 @@ Run the following command to install React:
 <pre>
   <code>npm install</code>
 </pre>
-This will compile the React JavaScript and CSS files and place them in the <code>public/js</code> and <code>public/css</code> folders.
 
 ## Run Laravel development server
 In two terminals run the following commands:
@@ -82,7 +81,6 @@ In two terminals run the following commands:
 <pre>
   <code>php artisan serve</code>
 </pre>
-
 
 # How to proceed
 Create React components in <code>resources/js/components/name.jsx</code> and add if's to control where the components will be displayed.
