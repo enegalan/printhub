@@ -8,6 +8,7 @@
 </head>
 <body>
     <h1>Hello</h1>
+    <div id="navbar"></div>
     <div id="root"></div>
 </body>
 </html>

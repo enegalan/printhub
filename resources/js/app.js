@@ -1,3 +1,5 @@
 import './bootstrap';
 
-import './components/Index'
+import './components/index'
+
+import './components/navbar'
