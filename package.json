@@ -2,7 +2,9 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "dev": "vite",
+        "dev:frontend": "vite",
+        "dev:backend": "php artisan serve",
+        "printhub": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
         "build": "vite build"
     },
     "devDependencies": {
@@ -11,13 +13,9 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
-        "@chakra-ui/icons": "^2.1.1",
-        "@chakra-ui/react": "^2.8.1",
-        "@emotion/react": "^11.11.1",
-        "@emotion/styled": "^11.11.0",
         "@vitejs/plugin-react": "^4.1.0",
+        "concurrently": "^8.2.1",
         "create-vite": "^4.4.1",
-        "framer-motion": "^10.16.4",
         "react": "^18.2.0",
         "react-dom": "^18.2.0"
     }
