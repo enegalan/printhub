@@ -5,16 +5,26 @@ Make sure you have <b>Node.js</b> & <b>npm</b> (Node Package Manager) v18.18.0 a
 ### On Windows OS
 Get Node.js and npm v18.18.0 from the official website (https://nodejs.org/) and Composer from the official Laravel website (https://getcomposer.org/).
 ### On Linux/Ubuntu OS
-#### Install Node.js & npm
+#### Install Node Version Manager
 <pre>
-  <code>sudo apt update</code>
-  <code>sudo apt install nodejs npm</code>
+  <code>curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash</code>
+  <code>source ~/.zshrc</code>
+  <code>export NVM_DIR="$HOME/.nvm"</code>
+  <code>[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"</code>
+  <code>[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"</code>
 </pre>
-Verify Node.js & npm are correctly installed
+## Verify Node Version Manager is installed
 <pre>
-  <code>node -v</code>
-  <code>npm -v</code>
+  <code>nvm</code>
 </pre>
+
+## Install a node version
+<pre>
+  <code>nvm ls-remote</code>
+  <code>nvm install [version]</code>
+  <code>nvm use [version]</code>
+</pre>
+
 #### Install composer
 <pre>
   <code>sudo apt install composer</code>
@@ -72,18 +82,10 @@ Run the following command to install React:
   <code>npm install</code>
 </pre>
 
-## Install Chakra UI
-<pre>
-  <code>npm install @chakra-ui/react @emotion/react @emotion/styled framer-motion</code>
-</pre>
-
 ## Run Laravel development server
 In two terminals run the following commands:
 <pre>
-    <code>npm run dev</code>
-</pre>
-<pre>
-  <code>php artisan serve</code>
+    <code>npm run printhub</code>
 </pre>
 
 # How to proceed
