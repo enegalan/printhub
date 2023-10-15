@@ -36,7 +36,7 @@ Verify composer is correctly installed
 #### Set up web server and PHP
 <b>Laravel</b> requires a web server like <b>Apache2</b> or <b>Nginx</b> and <b>PHP</b>.
 <pre>
-  <code>sudo apt install apache2 php libapache2-mod-php</code>
+  <code>sudo apt install apache2 php libapache2-mod-php php-curl php-xml php-dom</code>
 </pre>
 Enable the Apache rewrite module for Laravel:
 <pre>
@@ -67,6 +67,7 @@ Configure the <code>.env</code> file in the root of your Laravel project based o
 Run the following command to install Laravel dependencies:
 <pre>
   <code>composer install</code>
+  <code>composer update</code>
 </pre>
 
 ## Include React into the Laravel project
@@ -85,7 +86,7 @@ Run the following command to install React:
 ## Run Laravel development server
 In two terminals run the following commands:
 <pre>
-    <code>npm run printhub</code>
+  <code>npm run printhub</code>
 </pre>
 
 # How to proceed
