@@ -36,7 +36,7 @@ Verify composer is correctly installed
 #### Set up web server and PHP
 <b>Laravel</b> requires a web server like <b>Apache2</b> or <b>Nginx</b> and <b>PHP</b>.
 <pre>
-  <code>sudo apt install apache2 php libapache2-mod-php php-curl php-xml php-dom</code>
+  <code>sudo apt install apache2 php libapache2-mod-php php-curl php-xml php-dom php-mysql</code>
 </pre>
 Enable the Apache rewrite module for Laravel:
 <pre>
