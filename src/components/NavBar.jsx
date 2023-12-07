@@ -74,24 +74,26 @@ const Navbar = ({ sectionsBg, sectionsText }) => {
 
   return (
     <>
-      <header className={`items-center flex flex-wrap py-2 md:px-20 px-10 w-full justify-between text-[${headerTextColor}] fixed top-0 z-30 bg-[${headerBgColor}] transition ease-in-out duration-500`}>
-        <div className="justify-start flex gap-8 items-center md:flex md:items-center">
-          {<img src={headerBgColor === 'white' ? logo : logoblue} alt="Logo" />}
-          <a href="/" className="text-4xl font-bold">PrintHub</a>
-        </div>
-
-        <div className="lg:hidden ml-auto">
-          <button
-            id="burger-icon"
-            className="text-white focus:outline-none"
-            onClick={toggleNavbar}
-          >
-            <svg className="h-6 w-6" fill="none" stroke={headerBgColor === 'white' ? "--main-blue" : "white"} viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
-                d="M4 6h16M4 12h16m-7 6h7"></path>
-            </svg>
-          </button>
+      <header className={`items-center flex flex-wrap py-2 px-10 w-full justify-between text-[${headerTextColor}] fixed top-0 z-30 bg-[${headerBgColor}] transition ease-in-out duration-500`}>
+        <div className='flex gap-5 items-center'>
+          {/* Hamburger */}
+          <div className="lg:hidden">
+            <button
+              id="burger-icon"
+              className="text-white focus:outline-none"
+              onClick={toggleNavbar}
+            >
+              <svg className="h-6 w-6" fill="none" stroke={headerBgColor === 'white' ? "var(--main-blue)" : "white"} viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+                  d="M4 6h16M4 12h16m-7 6h7"></path>
+              </svg>
+            </button>
+          </div>
+          <div className="justify-start flex gap-8 items-center md:flex md:items-center">
+            {<img src={headerBgColor === 'white' ? logo : logoblue} alt="Logo" />}
+            <a href="/" className="text-4xl font-bold">PrintHub</a>
+          </div>
         </div>
         <div className="hidden lg:flex" >
           {/*Menu links*/}
