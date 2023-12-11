@@ -14,6 +14,10 @@ export default function Dashboard({ auth }) {
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900">You're logged in!</div>
                     </div>
+                    {/* { UNA PRUEBA } */}
+                    <div className='bg-white overflow-hidden shadow-sm sm:rounded-lg mt-5'>
+                        <h1 className='p-6 text-gray-900'>Hello User {auth.user.name}</h1>
+                    </div>
                 </div>
             </div>
         </AuthenticatedLayout>

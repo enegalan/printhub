@@ -98,7 +98,7 @@ const Navbar = ({ sectionsBg, sectionsText }) => {
         <div className="hidden lg:flex" >
           {/*Menu links*/}
           <ul className="justify-center hidden md:flex md:[&>li>a]:px-4 md:[&>li>a]:py-2">
-            <li><a href="#" className='block p-4 text-lg hover:text-[#a2c0f8]'>Scan</a></li>
+            <li><a href={route('dashboard')} className='block p-4 text-lg hover:text-[#a2c0f8]'>Scan</a></li>
             <li><a href="#" className='block p-4 text-lg hover:text-[#a2c0f8]'>Shop</a></li>
             <li><a href="#" className='block p-4 text-lg hover:text-[#a2c0f8]'>About</a></li>
           </ul>
@@ -110,7 +110,7 @@ const Navbar = ({ sectionsBg, sectionsText }) => {
         </div >
 
         <div className="hidden lg:flex justify-center items-center gap-[5px]">
-          <GlowButton href="/auth/login" value="Login" />
+          <GlowButton href={route('login')} value="Login" />
           <GlowButton textColor="black" backgroundColor="white" href="/auth/login" value="Register" />
         </div>
 
