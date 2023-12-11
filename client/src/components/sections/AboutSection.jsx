@@ -1,6 +1,6 @@
 export const AboutSection = () => {
     return (
-        <div className={"z-10 relative parallax-container parallax bg-cover bg-center bg-[url('/src/assets/printer.mp4')]"}>
+        <div className={"z-10 relative parallax-container parallax bg-cover bg-center"}>
             <div className="relative overflow-hidden flex flex-col pb-20 md:flex-row lg:flex-row md:pt-[100px] lg:pt-[100px]">
                 <div className="absolute -top-full bottom-0 -z-[1]">
                     <video autoPlay={true} muted={true} loop={true}  className="h-screen w-screen object-cover brightness-[0.30]" src="/src/assets/printer1.mp4"></video>
