@@ -23,7 +23,6 @@ import LatestProductsSection from '../Components/sections/LatestProductsSection'
 
 function Index() {
   
-
   return (
     <>
       <div className='overflow-hidden bg-[var(--light-grey)]'>
