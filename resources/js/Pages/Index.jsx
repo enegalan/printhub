@@ -28,7 +28,7 @@ function Index() {
       <div className='overflow-hidden bg-[var(--light-grey)]'>
         <NavBar sectionsBg={{ 'thanks': '--dark' }} sectionsText={{ 'thanks': 'white' }} />
         {/* Hero Section */}
-        <div className="w-full bg-gradient-to-r from-blue-900 to-blue-700 ">
+        <div className="w-full bg-gradient-to-r h-screen from-blue-900 to-blue-700 ">
           <div className='dotted_bg flex relative flex-col justify-center items-center'>
             
             <div className='flex flex-col items-center lg:flex-row content-center justify-evenly w-full'>

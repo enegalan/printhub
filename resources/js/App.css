@@ -91,4 +91,5 @@ body {
   background-image: radial-gradient(#ffffff33 1px, #ffffff00 1px);
   background-size: 20px 20px;
   border-radius: 32px;
+  height: 100vh;
 }
