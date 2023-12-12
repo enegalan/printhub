@@ -22,7 +22,6 @@ import { PricingSection } from '../Components/sections/PricingSection';
 import LatestProductsSection from '../Components/sections/LatestProductsSection';
 
 function Index() {
-  
   return (
     <>
       <div className='overflow-hidden bg-[var(--light-grey)]'>
@@ -30,7 +29,6 @@ function Index() {
         {/* Hero Section */}
         <div className="w-full bg-gradient-to-r h-screen from-blue-900 to-blue-700 ">
           <div className='dotted_bg flex relative flex-col justify-center items-center'>
-            
             <div className='flex flex-col items-center lg:flex-row content-center justify-evenly w-full'>
               <div className='flex flex-col items-center self-center text-center mt-[150px] lg:mt-0'>
                 <p className='text-white animate-heartbeat text-2xl lg:text-5xl mb-2 lg:mb-4 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]'>
@@ -68,8 +66,8 @@ function Index() {
                 <button
                   style={{
                     position: 'absolute',
-                    top: '50%',
-                    transform: 'translateY(-50%)',
+                    top: '55%',
+                    transform: 'translateY(-55%)',
                     left: '10px',
                     cursor: 'pointer',
                     fontSize: '36px',
@@ -88,8 +86,8 @@ function Index() {
                 <button
                   style={{
                     position: 'absolute',
-                    top: '50%',
-                    transform: 'translateY(-50%)',
+                    top: '55%',
+                    transform: 'translateY(-55%)',
                     right: '10px',
                     cursor: 'pointer',
                     fontSize: '36px',
@@ -105,9 +103,9 @@ function Index() {
                 </button>
               )}
             >
-              <img src={impresion1} style={{ width: '100%', height: '585px', display: 'block', marginTop: '80px' }} />
-              <img src={impresion2} style={{ width: '100%', height: '585px', display: 'block', marginTop: '80px' }} />
-              <img src={impresion3} style={{ width: '100%', height: '585px', display: 'block', marginTop: '80px' }} />
+              <img src={impresion1} style={{ width: '100%', height: '650px', display: 'block', marginTop: '80px' }} />
+              <img src={impresion2} style={{ width: '100%', height: '650px', display: 'block', marginTop: '80px' }} />
+              <img src={impresion3} style={{ width: '100%', height: '650px', display: 'block', marginTop: '80px' }} />
             </Carousel>
           </div>
         </div>
