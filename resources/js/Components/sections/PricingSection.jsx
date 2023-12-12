@@ -1,4 +1,4 @@
-import { Button, SubmitButton } from "../Buttons"
+import { Button } from "../Buttons"
 
 export const PricingSection = () => {
     return (
@@ -10,7 +10,7 @@ export const PricingSection = () => {
                     <p className="relative z-10 font-semibold">Free plan</p>
                     <p className="relative z-10 mt-4 md:mt-6">Take your printings to another level with us.</p>
                     <div className="mt-6 md:mt-10">
-                        <SubmitButton value="Join us" hoverBackgroundColor="var(--main-blue)" hoverTextColor="var(--white)" textColor="var(--main-blue)" borderColor="var(--main-blue)"/>
+                        <Button href="#" value="Join us" hoverBackgroundColor="var(--main-blue)" hoverTextColor="var(--white)" textColor="var(--main-blue)" borderColor="var(--main-blue)"/>
                     </div>
                 </div>
                 <div className="relative md:-top-20 w-full md:w-1/2 px-8 md:px-10 bg-blue-800 text-white flex flex-col rounded-xl py-4">
