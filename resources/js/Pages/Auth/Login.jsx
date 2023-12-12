@@ -34,15 +34,15 @@ export default function Login({ status, canResetPassword }) {
                 </a>
             </div>
             {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
-            <form onSubmit={submit}>
+            <form className='-mt-16' onSubmit={submit}>
                 <div className="flex justify-center items-center h-screen">
-                    <div className="w-1/2">
+                    <div className="w-1/2 max-w-[500px]">
                         <div className="flex justify-center items-center">
                             <a href="/">
-                                <img src="/logoWhite.svg" className='w-40' alt="" />
+                                <img src="/logoWhite.svg" className='w-40' alt="Logo PrintHub" />
                             </a>
                         </div>
-                        <div className="mt-8 border bg-[var(--main-blue)] border-gray-500 rounded-xl p-8 shadow-2xl">
+                        <div className="mt-8 border bg-[var(--main-blue)] border-gray-500 rounded-xl p-12 px-26 shadow-2xl">
                             <h2 className="text-white text-3xl font-bold mb-4">Log In</h2>
                             <div className="mb-4">
                                 <input
@@ -76,9 +76,9 @@ export default function Login({ status, canResetPassword }) {
                                     onChange={(e) => setData('remember', e.target.checked)}
                                     className="mr-2"
                                 />
-                                <label htmlFor="remember_me" className="text-white">Remember Me!</label>
+                                <label htmlFor="remember_me" className="text-white">Remember Me</label>
                             </div>
-                            <div className="flex flex-col items-center mb-4 gap-3">
+                            <div className="flex flex-col items-center mb-4 gap-5">
                                 <GlowSubmitButton backgroundColor='var(--blue-1)' value='Log in'/>
                                 {canResetPassword && (
                                     <Link
