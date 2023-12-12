@@ -166,8 +166,8 @@ const Navbar = ({ sectionsBg, sectionsText }) => {
   )
 }
 Navbar.propTypes = {
-  sectionsBg: PropTypes.array,
-  sectionsText: PropTypes.array,
+  sectionsBg: PropTypes.object,
+  sectionsText: PropTypes.object,
 };
 
 export default Navbar;
