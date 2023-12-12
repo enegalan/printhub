@@ -1,66 +1,127 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 👋 Welcome to <b>PrintHub!!</b>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Set up the development environment
+Make sure you have <b>Node.js</b> & <b>npm</b> (Node Package Manager) v18.18.0 and <b>Composer</b> installed on your system.
+### On Windows OS
+Get Node.js and npm v18.18.0 from the official website (https://nodejs.org/) and Composer from the official Laravel website (https://getcomposer.org/).
+### On Linux/Ubuntu OS
+#### Install Node Version Manager
+<pre>
+  <code>curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash</code>
+  <code>source ~/.zshrc</code>
+  <code>export NVM_DIR="$HOME/.nvm"</code>
+  <code>[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"</code>
+  <code>[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"</code>
+</pre>
+## Verify Node Version Manager is installed
+<pre>
+  <code>nvm</code>
+</pre>
 
-## About Laravel
+## Install a node version
+<pre>
+  <code>nvm ls-remote</code>
+  <code>nvm install [version]</code>
+  <code>nvm use [version]</code>
+</pre>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+#### Install composer
+<pre>
+  <code>sudo apt install composer</code>
+</pre>
+Verify composer is correctly installed
+<pre>
+  <code>composer</code>
+</pre>
+#### Set up web server and PHP
+<b>Laravel</b> requires a web server like <b>Apache2</b> or <b>Nginx</b> and <b>PHP</b>.
+<pre>
+  <code>sudo apt install apache2 php libapache2-mod-php php-curl php-xml php-dom php-mysql</code>
+</pre>
+Enable the Apache rewrite module for Laravel:
+<pre>
+  <code>sudo a2enmod rewrite</code>
+</pre>
+### Install mariadb:
+<pre>
+  <code>sudo apt install mariadb-server</code>
+  <code>sudo systemctl start mariadb</code>
+  <code>sudo systemctl enable mariadb</code>
+  <code>sudo mysql_secure_installation</code>
+</pre>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Upgrade npm version to the latest
+<pre>
+  <code>npm install npm@latest</code>
+</pre>
+## Create the Laravel project
+<pre>
+  <code>composer create-project laravel/laravel printhub</code>
+  <code>cd printhub</code>
+</pre>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Configure the .env file
+Configure the <code>.env</code> file in the root of your Laravel project based on your database credentials and other necessary settings.
 
-## Learning Laravel
+## Install Laravel dependencies
+Run the following command to install Laravel dependencies:
+<pre>
+  <code>composer install</code>
+  <code>composer update</code>
+</pre>
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Include React into the Laravel project
+Run the following command to install React:
+<pre>
+  <code>npm install create-vite</code>
+  <code>npm install @vitejs/plugin-react</code>
+  <code>npm install react@latest react-dom@latest</code>
+</pre>
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Build React assets
+<pre>
+  <code>npm install</code>
+</pre>
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Run Laravel development server
+In two terminals run the following commands:
+<pre>
+  <code>npm run printhub</code>
+</pre>
 
-## Laravel Sponsors
+# How to proceed
+Create React components in <code>resources/js/components/name.jsx</code>
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Create React pages in <code>resources/js/pages/page.jsx</code>, in each of them add the necessary if's to control where the components will be displayed.
 
-### Premium Partners
+Import each component in <code>resources/js/app.js</code>
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+Create a view in <code>resources/views/name.blade.php</code> and add the following line in the head of the HTML:
+<pre>
+  <code>@vite("resources/js/app.js")</code>
+</pre>
 
-## Contributing
+To create a route URL for a view add a similar code in <code>routes/web.php</code> file:
+<pre>
+  <code>Route::get('/url', function () {
+    return view('view_name without .blade.php');
+  });</code>
+</pre>
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+# For developers
+Clone this repository, create a <code>.env</code> file and configure it, there will be a template of <code>.env</code> in <code>.env.example</code> file.
 
-## Code of Conduct
+Run the following commands:
+<pre>
+  <code>composer install</code>
+  <code>npm install create-vite</code>
+</pre>
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Run Laravel development server
+In two terminals run the following commands:
+<pre>
+  <code>npm run dev</code>
+</pre>
+<pre>
+  <code>php artisan serve</code>
+</pre>

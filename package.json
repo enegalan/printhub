@@ -2,8 +2,10 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "dev": "vite",
-        "build": "vite build"
+        "client": "vite",
+        "build": "vite build",
+        "server": "php artisan serve",
+        "printhub": "concurrently \"npm run client\" \"npm run server\""
     },
     "devDependencies": {
         "@headlessui/react": "^1.4.2",
@@ -21,6 +23,7 @@
     },
     "dependencies": {
         "chroma-js": "^2.4.2",
+        "concurrently": "^8.2.2",
         "gsap": "^3.12.3",
         "nuka-carousel": "^7.0.0",
         "prop-types": "^15.8.1",
