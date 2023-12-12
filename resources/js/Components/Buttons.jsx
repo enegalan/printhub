@@ -4,14 +4,7 @@ import gsap from 'gsap';
 import chroma from 'chroma-js';
 import '../../css/ButtonGlow.css';
 
-const GlowButton = (props) => {
-    var { value, href, backgroundColor, textColor, image, imageClass, icon } = props;
-    backgroundColor = backgroundColor ? backgroundColor : "#09041e";
-    textColor = textColor ? textColor : "white";
-    value = value ? value : "";
-    href = href ? href : "#";
-    image = image ? image : "";
-    icon = icon ? icon : "";
+const GlowButton = ({ value = "", href = "#", backgroundColor = "#09041e", textColor = "white", image = "", imageClass = "", icon = "" }) => {
     const buttonRef = useRef(null);
     const gradientRef = useRef(null);
     useEffect(() => {
