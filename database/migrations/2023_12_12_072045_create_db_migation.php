@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
@@ -37,14 +36,21 @@ return new class extends Migration
             $table->string('name');
             $table->string('lastname');
             $table->date('birthdate');
-            $table->string('picture');
+            $table->string('picture')->nullable(true);
             $table->timestamps();
         });
 
         Schema::create('roles', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->timestamps();
+        });
+
+
+        Schema::create('users_roles', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('user_id')->constrained();
+            $table->foreignId('role_id')->constrained();
             $table->timestamps();
         });
 
