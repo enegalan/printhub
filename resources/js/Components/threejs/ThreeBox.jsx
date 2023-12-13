@@ -6,7 +6,7 @@ const ThreeBox = () => {
 
   useEffect(() => {
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1005);
+    const camera = new THREE.PerspectiveCamera(60, 1000/ 500, 0.1, 1005);
 
 
     // Verifica si ya existe un renderizador
