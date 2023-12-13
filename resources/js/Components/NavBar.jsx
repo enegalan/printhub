@@ -80,7 +80,7 @@ const Navbar = ({ user, sectionsBg, sectionsText }) => {
       <header
         className={`items-center flex flex-wrap py-2 px-10 w-full justify-between text-[${headerTextColor}] fixed top-0 z-30 bg-[${headerBgColor}] transition ease-in-out duration-500`}
       >
-        <div className="flex gap-5 items-center">
+        <div className="flex flex-1 gap-5 items-center justify-start">
           {/* Hamburger */}
           <div className="lg:hidden">
             <button
@@ -118,7 +118,7 @@ const Navbar = ({ user, sectionsBg, sectionsText }) => {
             </a>
           </div>
         </div>
-        <div className="hidden lg:flex">
+        <div className="hidden flex-1 justify-center lg:flex">
           {/*Menu links*/}
           <ul className="justify-center hidden md:flex md:[&>li>a]:px-4 md:[&>li>a]:py-2">
             <li>
@@ -146,8 +146,7 @@ const Navbar = ({ user, sectionsBg, sectionsText }) => {
             <div className={`bg-${headerTextColor}`}></div>
           </div>
         </div>
-
-        <div className="hidden lg:flex justify-center items-center gap-[5px]">
+        <div className="hidden flex-1 lg:flex justify-end items-center gap-[5px]">
           {user ? (
             <div className="hidden sm:flex sm:items-center sm:ms-6">
               <div className="ms-3 relative">
@@ -158,26 +157,26 @@ const Navbar = ({ user, sectionsBg, sectionsText }) => {
                         type="button"
                         className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
                       >
-                        <strong>{user.name[0]}</strong>
-                        <svg
-                          className="ms-2 -me-0.5 h-4 w-4"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
+                        <div className="w-7 h-7 bg-blue-500 rounded-full flex items-center justify-center text-white text-xl font-bold">
+                          {user.name[0].toUpperCase()}
+                        </div>
+                        <p className="ms-2 font-medium">{user.name}</p>
                       </button>
                     </span>
                   </Dropdown.Trigger>
 
                   <Dropdown.Content>
-                    <p class="ms-4 text-slate-700">{user.name}</p>
-                    <p class="ms-4 text-slate-700">{user.email}</p>
+                    <h3 className=" ms-4 text-sm text-slate-700 mt-3">ACCOUNT</h3>
+                    <div className="flex items-center content-center justify-center mt-3 mb-3">  
+                      <div className="w-10 h-10 bg-blue-500 ms-4 rounded-full flex items-center content-center justify-center text-white text-2xl font-bold">
+                        {user.name[0].toUpperCase()}
+                      </div>
+                      <div className="flex flex-col">
+                      <p class="ms-4 text-slate-700">{user.name}</p>
+                      <p class="ms-4 text-slate-700 me-4">{user.email}</p>
+                      </div>
+                    </div>
+                      
                     <hr></hr>
                     <Dropdown.Link href={route("profile.edit")}>
                       Profile
@@ -192,10 +191,11 @@ const Navbar = ({ user, sectionsBg, sectionsText }) => {
                     >
                       Wishlist
                     </Dropdown.Link>
+                    <hr></hr>
                     <Dropdown.Link
                       href={route("logout")}
                       method="post"
-                      as="button"
+                      as="button" className="text-red-700"
                     >
                       Log Out
                     </Dropdown.Link>
@@ -297,7 +297,7 @@ const Navbar = ({ user, sectionsBg, sectionsText }) => {
                 <div className="pt-6 flex flex-col justify-center items-center gap-[20px]">
                   {user ? (
                     <Link
-                      className="w-[40%] text-center  items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md text-gray-500 bg-white text-gray-700 focus:outline-none"
+                      className="w-[40%] text-center  items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md bg-white text-red-700 focus:outline-none"
                       href={route("logout")}
                       method="post"
                       as="button"
