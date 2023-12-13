@@ -7,7 +7,7 @@ import Carousel from "nuka-carousel"
 import NavBar from '../Components/NavBar';
 import { Footer } from '../Components/Footer';
 import ThreeBox from '../Components/threejs/ThreeBox';
-import ReactTyped from "react-typed";
+import { TypeAnimation } from 'react-type-animation';
 import { GlowButton, BouncingButton } from '../Components/Buttons';
 
 
@@ -38,7 +38,7 @@ function Index({ auth }) {
                 <p className='z-10 flex gap-3 items-center text-white text-base lg:text-xl mt-2 lg:mt-5 mb-4 lg:w-2/3 self-center'>
                   Make your ideas become 
                   <span className='bg-[#00000052] p-1 rounded min-w-[85px] block w-[110px] h-[35px]'>
-                    <ReactTyped strings={["3D piece", "true"]} typeSpeed={300} backSpeed={100} loop />
+                    <TypeAnimation sequence={["3D piece", "true"]} speed={400} deletionSpeed={400} loop repeat={Infinity}/>
                   </span>
                 </p>
                 <div className='mt-10'>
