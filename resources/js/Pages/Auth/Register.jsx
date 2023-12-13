@@ -3,6 +3,7 @@ import GuestLayout from '@/Layouts/GuestLayout';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
+import BackButtonArrow  from '@/Components/BackButtonArrow.jsx';
 import TextInput from '@/Components/TextInput';
 import { Head, Link, useForm } from '@inertiajs/react';
 
@@ -29,13 +30,16 @@ export default function Register() {
     return (
         <GuestLayout>
             <Head title="Register" />
-
+            {/*Go back button*/}
+            <BackButtonArrow />
+            {/*Register form*/}
             <form onSubmit={submit}>
+                <h1 className="text-white text-3xl font-bold mb-4">Register</h1>
                 <div>
-                    <InputLabel htmlFor="name" value="Name" />
-
+                    <InputLabel forInput="name" value="Name" className="text-white"/>
                     <TextInput
                         id="name"
+                        placeholder="Name"
                         name="name"
                         value={data.name}
                         className="mt-1 block w-full"
@@ -44,16 +48,14 @@ export default function Register() {
                         onChange={(e) => setData('name', e.target.value)}
                         required
                     />
-
                     <InputError message={errors.name} className="mt-2" />
                 </div>
-
                 <div className="mt-4">
-                    <InputLabel htmlFor="email" value="Email" />
-
+                    <InputLabel forInput="email" value="Email" className="text-white"/>
                     <TextInput
                         id="email"
                         type="email"
+                        placeholder="Email"
                         name="email"
                         value={data.email}
                         className="mt-1 block w-full"
@@ -66,11 +68,11 @@ export default function Register() {
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="password" value="Password" />
-
+                    <InputLabel forInput="password" value="Password" className="text-white"/>
                     <TextInput
                         id="password"
                         type="password"
+                        placeholder="Password"
                         name="password"
                         value={data.password}
                         className="mt-1 block w-full"
@@ -83,10 +85,10 @@ export default function Register() {
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="password_confirmation" value="Confirm Password" />
-
+                    <InputLabel forInput="password_confirmation" value="Password confirmation" className="text-white"/>
                     <TextInput
                         id="password_confirmation"
+                        placeholder="Password confirmation"
                         type="password"
                         name="password_confirmation"
                         value={data.password_confirmation}
@@ -102,7 +104,7 @@ export default function Register() {
                 <div className="flex items-center justify-end mt-4">
                     <Link
                         href={route('login')}
-                        className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        className="underline text-sm text-[--light-blue] hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
                         Already registered?
                     </Link>
