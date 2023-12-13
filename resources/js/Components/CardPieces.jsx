@@ -1,4 +1,4 @@
-import {GlowButton} from "./Buttons.jsx";
+import { Button } from "./Buttons.jsx";
 import PropTypes from "prop-types";
 
 export default function CardPieces({image, title,description,hashtag}){
@@ -17,7 +17,7 @@ export default function CardPieces({image, title,description,hashtag}){
                 ))}
             </div>
             <div className="px-6 pt-4 pb-4 flex-grow flex justify-center items-end">
-                <GlowButton value="Download piece" />
+                <Button value="More info" hoverBackgroundColor="var(--main-blue)" hoverTextColor="var(--white)" textColor="var(--main-blue)" borderColor="var(--main-blue)"/>
             </div>
         </div>
     );

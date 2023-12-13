@@ -1,10 +1,7 @@
 export const AboutSection = () => {
     return (
-        <div className={"z-10 relative parallax-container parallax bg-cover bg-center"}>
+        <div className={"z-10 relative parallax-container parallax bg-cover bg-center bg-[url('/images/blue-prints-banner.png')]"}>
             <div className="relative overflow-hidden flex flex-col pb-20 md:flex-row lg:flex-row md:pt-[100px] lg:pt-[100px]">
-                <div className="absolute -top-full bottom-0 -z-[1]">
-                    <video autoPlay={true} muted={true} loop={true}  className="h-screen w-screen object-cover brightness-[0.30]" src="/images/printer1.mp4"></video>
-                </div>
                 <div className="w-full md:w-1/2 flex items-center justify-center">
                     <div className="p-6 text-white">
                         <h2 className="text-6xl font-bold">PrintHub:</h2>

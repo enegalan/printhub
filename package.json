@@ -28,6 +28,7 @@
         "nuka-carousel": "^7.0.0",
         "prop-types": "^15.8.1",
         "react-tsparticles": "^2.12.2",
+        "react-typed": "^1.2.0",
         "three": "^0.159.0",
         "tsparticles": "^3.0.2"
     }

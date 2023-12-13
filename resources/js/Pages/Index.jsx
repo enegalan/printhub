@@ -7,7 +7,7 @@ import Carousel from "nuka-carousel"
 import NavBar from '../Components/NavBar';
 import { Footer } from '../Components/Footer';
 import ThreeBox from '../Components/threejs/ThreeBox';
-import TextChanger from '../Components/TextChanger';
+import ReactTyped from "react-typed";
 import { GlowButton, BouncingButton } from '../Components/Buttons';
 
 
@@ -30,14 +30,16 @@ function Index({ auth }) {
         {/* Hero Section */}
         <div className="w-full bg-gradient-to-r h-screen from-blue-900 to-blue-700 ">
           <div className='dotted_bg flex relative flex-col justify-center items-center'>
-            
             <div className='flex flex-col items-center lg:flex-row content-center justify-evenly w-full'>
               <div className='flex flex-col items-center self-center text-center mt-[300px] lg:mt-0'>
                 <p className='text-white animate-heartbeat text-2xl lg:text-5xl mb-2 lg:mb-4 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]'>
                   SCAN AND PRINT ANYTHING <strong className="text-4xl lg:text-7xl inline"><br></br>RIGHT NOW</strong>
                 </p>
                 <p className='z-10 flex gap-3 items-center text-white text-base lg:text-xl mt-2 lg:mt-5 mb-4 lg:w-2/3 self-center'>
-                  Make your ideas become <TextChanger toRotate='["3D piece", "true"]' period={3000} />
+                  Make your ideas become 
+                  <span className='bg-[#00000052] p-1 rounded min-w-[85px] block w-[110px] h-[35px]'>
+                    <ReactTyped strings={["3D piece", "true"]} typeSpeed={300} backSpeed={100} loop />
+                  </span>
                 </p>
                 <div className='mt-10'>
                   <GlowButton value="SCAN" image="/images/scan.png" imageClass="w-[20%] mr-5 invert" />
@@ -68,8 +70,8 @@ function Index({ auth }) {
                 <button
                   style={{
                     position: 'absolute',
-                    top: '50%',
-                    transform: 'translateY(-50%)',
+                    top: '55%',
+                    transform: 'translateY(-55%)',
                     left: '10px',
                     cursor: 'pointer',
                     fontSize: '36px',
@@ -88,8 +90,8 @@ function Index({ auth }) {
                 <button
                   style={{
                     position: 'absolute',
-                    top: '50%',
-                    transform: 'translateY(-50%)',
+                    top: '55%',
+                    transform: 'translateY(-55%)',
                     right: '10px',
                     cursor: 'pointer',
                     fontSize: '36px',
@@ -105,9 +107,9 @@ function Index({ auth }) {
                 </button>
               )}
             >
-              <img src={impresion1} style={{ width: '100%', height: '585px', display: 'block', marginTop: '80px' }} />
-              <img src={impresion2} style={{ width: '100%', height: '585px', display: 'block', marginTop: '80px' }} />
-              <img src={impresion3} style={{ width: '100%', height: '585px', display: 'block', marginTop: '80px' }} />
+              <img src={impresion1} style={{ width: '100%', height: '650px', display: 'block', marginTop: '80px' }} />
+              <img src={impresion2} style={{ width: '100%', height: '650px', display: 'block', marginTop: '80px' }} />
+              <img src={impresion3} style={{ width: '100%', height: '650px', display: 'block', marginTop: '80px' }} />
             </Carousel>
           </div>
         </div>

@@ -8,6 +8,7 @@
 
         <!-- Fonts -->
         <script src="https://cdn.tailwindcss.com"></script>        
+        <script src="https://kit.fontawesome.com/8e4bd12ccb.js" crossorigin="anonymous"></script>
         <!-- Scripts -->
         @routes
         @viteReactRefresh

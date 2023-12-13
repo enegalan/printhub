@@ -4,14 +4,7 @@ import gsap from 'gsap';
 import chroma from 'chroma-js';
 import '../../css/ButtonGlow.css';
 
-const GlowButton = (props) => {
-    var { value, href, backgroundColor, textColor, image, imageClass, icon } = props;
-    backgroundColor = backgroundColor ? backgroundColor : "#09041e";
-    textColor = textColor ? textColor : "white";
-    value = value ? value : "";
-    href = href ? href : "#";
-    image = image ? image : "";
-    icon = icon ? icon : "";
+const GlowButton = ({ value = "", href = "#", backgroundColor = "#09041e", textColor = "white", image = "", imageClass = "", icon = "" }) => {
     const buttonRef = useRef(null);
     const gradientRef = useRef(null);
     useEffect(() => {
@@ -158,4 +151,47 @@ const BouncingButton = () => {
     )
 }
 
-export { GlowButton, GlowSubmitButton, BouncingButton };
+const Button = ({ value = "", href = "#", hoverBackgroundColor = "var(--light-grey)", hoverTextColor = "", backgroundColor = "transparent", borderColor = "white", textColor = "white", image = "", imageClass = "", icon = "" }) => {
+    return (
+        <a href={href} className={`bg-[${backgroundColor}] text-[${textColor}] rounded-xl p-3 px-8 ${borderColor ? 'border-2' : ''} border-[${borderColor}] transition hover:bg-[${hoverBackgroundColor}] hover:text-[${hoverTextColor}]`}>
+            {image ? <img src={`${image}`} className={`${imageClass}`} /> : ""}
+            {icon ? <i className={icon}></i> : ""}
+            {value}
+        </a>
+    );
+};
+Button.propTypes = {
+    value: PropTypes.string,
+    href: PropTypes.string,
+    hoverBackgroundColor: PropTypes.string,
+    hoverTextColor: PropTypes.string,
+    backgroundColor: PropTypes.string,
+    borderColor: PropTypes.string,
+    textColor: PropTypes.string,
+    image: PropTypes.string,
+    imageClass: PropTypes.string,
+    icon: PropTypes.string,
+};
+
+const SubmitButton = ({ value = "", hoverBackgroundColor = "var(--light-grey)", hoverTextColor = "", backgroundColor = "transparent", borderColor = "white", textColor = "white", image = "", imageClass = "", icon = "" }) => {
+    return (
+        <div className='flex items-center gap-5'>
+            {image ? <img src={`${image}`} className={`${imageClass}`} /> : ""}
+            {icon ? <i className={icon}></i> : ""}
+            <input value={value} type="submit" className={`bg-[${backgroundColor}] text-[${textColor}] rounded-xl p-3 px-8 ${borderColor ? 'border-2' : ''} border-[${borderColor}] transition hover:bg-[${hoverBackgroundColor}] hover:text-[${hoverTextColor}] hover:cursor-pointer`}/>
+        </div>
+    );
+};
+SubmitButton.propTypes = {
+    value: PropTypes.string,
+    hoverBackgroundColor: PropTypes.string,
+    hoverTextColor: PropTypes.string,
+    backgroundColor: PropTypes.string,
+    borderColor: PropTypes.string,
+    textColor: PropTypes.string,
+    image: PropTypes.string,
+    imageClass: PropTypes.string,
+    icon: PropTypes.string,
+};
+
+export { GlowButton, GlowSubmitButton, BouncingButton, Button, SubmitButton };
