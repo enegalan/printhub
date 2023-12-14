@@ -135,7 +135,7 @@ const Navbar = ({ user, sectionsBg, sectionsText }) => {
               </a>
             </li>
             <li>
-              <a href="#" className="block p-4 text-lg hover:text-[#a2c0f8]">
+              <a href={route("about")} className="block p-4 text-lg hover:text-[#a2c0f8]">
                 About
               </a>
             </li>
@@ -260,7 +260,7 @@ const Navbar = ({ user, sectionsBg, sectionsText }) => {
                   <li className="mb-1">
                     <a
                       className="block p-4 text-lg font-semibold text-gray-400 hover:bg-blue-50 hover:text-[--blue-1] rounded"
-                      href="#"
+                      href={route('index')}
                     >
                       Home
                     </a>
@@ -279,6 +279,14 @@ const Navbar = ({ user, sectionsBg, sectionsText }) => {
                       href="#"
                     >
                       Market
+                    </a>
+                  </li>
+                  <li className="mb-1">
+                    <a
+                      className="block p-4 text-lg font-semibold text-gray-400 hover:bg-blue-50 hover:text-[--blue-1] rounded"
+                      href={route('about')}
+                    >
+                      About
                     </a>
                   </li>
                   {user && (
