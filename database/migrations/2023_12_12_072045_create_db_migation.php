@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('lastname');
             $table->date('birthdate');
-            $table->string('picture')->nullable(true);
+            $table->string('avatar')->nullable(true);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
@@ -102,7 +102,7 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained();
             $table->timestamps();
         });
-        
+
         Schema::create('wishlists', function (Blueprint $table) {
             $table->id();
             $table->timestamps();

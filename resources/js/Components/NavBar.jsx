@@ -8,9 +8,16 @@ import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 import { Link } from "@inertiajs/react";
+import NavLink from "@/Components/NavLink";
 
-const Navbar = ({ user = null, sectionsBg = [], sectionsText = [], dynamicBackground = true, defaultBackgroundColor = "transparent", defaultTextColor = "white" }) => {
-
+const Navbar = ({
+  user = null,
+  sectionsBg = [],
+  sectionsText = [],
+  dynamicBackground = true,
+  defaultBackgroundColor = "transparent",
+  defaultTextColor = "white",
+}) => {
   const [headerBgColor, setHeaderBgColor] = useState(
     dynamicBackground ? "transparent" : defaultBackgroundColor
   );
@@ -41,7 +48,7 @@ const Navbar = ({ user = null, sectionsBg = [], sectionsText = [], dynamicBackgr
           }
         }
       });
-  
+
       Object.values(sectionsText).forEach((sectionText, index) => {
         const section = Object.keys(sectionsText)[index];
         const sectionDom = document.getElementById(section);
@@ -110,38 +117,41 @@ const Navbar = ({ user = null, sectionsBg = [], sectionsText = [], dynamicBackgr
               </svg>
             </button>
           </div>
-          <div className="justify-start flex gap-8 items-center md:flex md:items-center">
-            {
-              <img
-                src={headerBgColor === "white" ? logo : logoblue}
-                alt="Logo"
-              />
-            }
-            <a href="/" className="text-4xl font-bold">
-              PrintHub
-            </a>
-          </div>
+          {/* Logo y Printhub con Link */}
+          <Link
+            href="/"
+            className="text-4xl font-bold justify-start flex gap-8 items-center md:flex md:items-center"
+          >
+            <img src={headerBgColor === "white" ? logo : logoblue} alt="Logo" />
+            PrintHub
+          </Link>
         </div>
         <div className="hidden flex-1 justify-center lg:flex">
           {/*Menu links*/}
           <ul className="justify-center hidden md:flex md:[&>li>a]:px-4 md:[&>li>a]:py-2">
             <li>
-              <a
+              <Link
                 href={route("scan")}
                 className="block p-4 text-lg hover:text-[#a2c0f8]"
               >
                 Scan
-              </a>
+              </Link>
             </li>
             <li>
-              <a href={route('market')} className="block p-4 text-lg hover:text-[#a2c0f8]">
+              <Link
+                href={route("market")}
+                className="block p-4 text-lg hover:text-[#a2c0f8]"
+              >
                 Market
-              </a>
+              </Link>
             </li>
             <li>
-              <a href={route("about")} className="block p-4 text-lg hover:text-[#a2c0f8]">
+              <Link
+                href={route("about")}
+                className="block p-4 text-lg hover:text-[#a2c0f8]"
+              >
                 About
-              </a>
+              </Link>
             </li>
           </ul>
           <div id="burger" className="md:hidden cursor-pointer">
@@ -170,36 +180,31 @@ const Navbar = ({ user = null, sectionsBg = [], sectionsText = [], dynamicBackgr
                   </Dropdown.Trigger>
 
                   <Dropdown.Content>
-                    <h3 className=" ms-4 text-sm text-slate-700 mt-3">ACCOUNT</h3>
-                    <div className="flex items-center content-center justify-center mt-3 mb-3">  
+                    <h3 className=" ms-4 text-sm text-slate-700 mt-3">
+                      ACCOUNT
+                    </h3>
+                    <div className="flex items-center content-center justify-center mt-3 mb-3">
                       <div className="w-10 h-10 bg-blue-500 ms-4 rounded-full flex items-center content-center justify-center text-white text-2xl font-bold">
                         {user.name[0].toUpperCase()}
                       </div>
                       <div className="flex flex-col">
-                      <p className="ms-4 text-slate-700">{user.name}</p>
-                      <p className="ms-4 text-slate-700 me-4">{user.email}</p>
+                        <p className="ms-4 text-slate-700">{user.name}</p>
+                        <p className="ms-4 text-slate-700 me-4">{user.email}</p>
                       </div>
                     </div>
-                      
+
                     <hr></hr>
                     <Dropdown.Link href={route("profile.edit")}>
                       Profile
                     </Dropdown.Link>
-                    <Dropdown.Link
-                      href="#"
-                    >
-                      Cart
-                    </Dropdown.Link>
-                    <Dropdown.Link
-                      href="#"
-                    >
-                      Wishlist
-                    </Dropdown.Link>
+                    <Dropdown.Link href="#">Cart</Dropdown.Link>
+                    <Dropdown.Link href="#">Wishlist</Dropdown.Link>
                     <hr></hr>
                     <Dropdown.Link
                       href={route("logout")}
                       method="post"
-                      as="button" className="text-red-700"
+                      as="button"
+                      className="text-red-700"
                     >
                       Log Out
                     </Dropdown.Link>
@@ -209,13 +214,18 @@ const Navbar = ({ user = null, sectionsBg = [], sectionsText = [], dynamicBackgr
             </div>
           ) : (
             <>
-              <GlowButton href={route("login")} value="Login" />
-              <GlowButton
-                textColor="black"
-                backgroundColor="white"
+              <Link
+                href={route("login")}
+                className="bg-blue-950 px-8 py-2 text-white font-bold rounded-lg hover:bg-blue-900"
+              >
+                Login
+              </Link>
+              <Link
                 href={route("register")}
-                value="Register"
-              />
+                className="bg-blue-950 px-8 py-2 text-white font-bold rounded-lg hover:bg-blue-900"
+              >
+                Register
+              </Link>
             </>
           )}
         </div>
@@ -225,15 +235,14 @@ const Navbar = ({ user = null, sectionsBg = [], sectionsText = [], dynamicBackgr
             <div className="navbar-backdrop fixed inset-0 bg-gray-800 opacity-25"></div>
             <nav className="fixed top-0 left-0 bottom-0 flex flex-col w-5/6 max-w-sm py-6 px-6 bg-[var(--dark-gray)] border-r overflow-y-auto">
               <div className="flex items-center mb-8">
-                <a
-                  className="flex items-center gap-5 mr-auto text-3xl font-bold leading-none"
-                  href="/"
-                >
-                  {<img src={logoblue} alt="Logo" />}
-                  <span href="/" className="text-white text-4xl font-bold">
+                <div className="flex items-center gap-5 mr-auto text-3xl font-bold leading-none">
+                  <Link href="/">
+                    <img src={logoblue} alt="Logo" />
+                  </Link>
+                  <span className="text-white text-4xl font-bold">
                     PrintHub
                   </span>
-                </a>
+                </div>
                 <button className="navbar-close" onClick={toggleNavbar}>
                   <svg
                     className="h-6 w-6 text-gray-400 cursor-pointer hover:text-gray-500"
@@ -262,45 +271,45 @@ const Navbar = ({ user = null, sectionsBg = [], sectionsText = [], dynamicBackgr
                     </li>
                   )}
                   <li className="mb-1">
-                    <a
+                    <Link
+                      href={route("index")}
                       className="block p-4 text-lg font-semibold text-gray-400 hover:bg-blue-50 hover:text-[--blue-1] rounded"
-                      href={route('index')}
                     >
                       Home
-                    </a>
+                    </Link>
                   </li>
                   <li className="mb-1">
-                    <a
+                    <Link
                       className="block p-4 text-lg font-semibold text-gray-400 hover:bg-blue-50 hover:text-[--blue-1] rounded"
-                      href={route('scan')}
+                      href={route("scan")}
                     >
                       Scan
-                    </a>
+                    </Link>
                   </li>
                   <li className="mb-1">
-                    <a
+                    <Link
                       className="block p-4 text-lg font-semibold text-gray-400 hover:bg-blue-50 hover:text-[--blue-1] rounded"
-                      href={route('market')}
+                      href={route("market")}
                     >
                       Market
-                    </a>
+                    </Link>
                   </li>
                   <li className="mb-1">
-                    <a
+                    <Link
                       className="block p-4 text-lg font-semibold text-gray-400 hover:bg-blue-50 hover:text-[--blue-1] rounded"
-                      href={route('about')}
+                      href={route("about")}
                     >
                       About
-                    </a>
+                    </Link>
                   </li>
                   {user && (
                     <li className="mb-1">
-                      <a
+                      <Link
                         className="block p-4 text-lg font-semibold text-gray-400 hover:bg-blue-50 hover:text-[--blue-1] rounded"
                         href={route("profile.edit")}
                       >
                         Profile
-                      </a>
+                      </Link>
                     </li>
                   )}
                 </ul>
