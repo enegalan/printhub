@@ -76,4 +76,4 @@ function About({ auth }) {
   )
 }
 
-export default Index;
+export default About;
