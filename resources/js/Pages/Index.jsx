@@ -1,25 +1,20 @@
-import '../App.css';
+import '@/App.css';
 
 import Particles from 'react-tsparticles';
 import { loadFull } from 'tsparticles'
 import Carousel from "nuka-carousel"
 
-import NavBar from '../Components/NavBar';
-import { Footer } from '../Components/Footer';
-import ThreeBox from '../Components/threejs/ThreeBox';
+import NavBar from '@/Components/NavBar';
+import { Footer } from '@/Components/Footer';
+import ThreeBox from '@/Components/threejs/ThreeBox';
 import { TypeAnimation } from 'react-type-animation';
-import { GlowButton, BouncingButton } from '../Components/Buttons';
+import { GlowButton, BouncingButton } from '@/Components/Buttons';
 
-
-import impresion1 from '../../../public/images/impresion1.jpg'
-import impresion2 from '../../../public/images/impresion2.jpeg'
-import impresion3 from '../../../public/images/impresion3.jpg'
-
-import { InfoSection } from '../Components/sections/InfoSection'
-import { NewsSection } from '../Components/sections/NewsSection';
-import { AboutSection } from '../Components/sections/AboutSection';
-import { PricingSection } from '../Components/sections/PricingSection';
-import LatestProductsSection from '../Components/sections/LatestProductsSection';
+import { InfoSection } from '@/Components/sections/InfoSection'
+import { NewsSection } from '@/Components/sections/NewsSection';
+import { AboutSection } from '@/Components/sections/AboutSection';
+import { PricingSection } from '@/Components/sections/PricingSection';
+import LatestProductsSection from '@/Components/sections/LatestProductsSection';
 
 function Index({ auth }) {
   
@@ -107,9 +102,9 @@ function Index({ auth }) {
                 </button>
               )}
             >
-              <img src={impresion1} style={{ width: '100%', height: '650px', display: 'block', marginTop: '80px' }} />
-              <img src={impresion2} style={{ width: '100%', height: '650px', display: 'block', marginTop: '80px' }} />
-              <img src={impresion3} style={{ width: '100%', height: '650px', display: 'block', marginTop: '80px' }} />
+              <img src="/images/impresion1.jpg" style={{ width: '100%', height: '650px', display: 'block', marginTop: '80px' }} />
+              <img src="/images/impresion2.jpeg" style={{ width: '100%', height: '650px', display: 'block', marginTop: '80px' }} />
+              <img src="/images/impresion3.jpg" style={{ width: '100%', height: '650px', display: 'block', marginTop: '80px' }} />
             </Carousel>
           </div>
         </div>

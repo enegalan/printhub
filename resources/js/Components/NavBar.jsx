@@ -1,6 +1,6 @@
 import logo from "../../../public/logoWhite.svg";
 import logoblue from "../../../public/logoBlue.svg";
-import "../App.css"; // Import the stylesheet with the animation styles
+import "@/App.css";
 import { GlowButton } from "./Buttons";
 import Dropdown from "@/Components/Dropdown";
 
@@ -9,46 +9,50 @@ import PropTypes from "prop-types";
 
 import { Link } from "@inertiajs/react";
 
-const Navbar = ({ user, sectionsBg, sectionsText }) => {
-  sectionsBg = sectionsBg ? sectionsBg : [];
-  sectionsText = sectionsText ? sectionsText : [];
+const Navbar = ({ user = null, sectionsBg = [], sectionsText = [], dynamicBackground = true, defaultBackgroundColor = "transparent", defaultTextColor = "white" }) => {
 
-  const [headerBgColor, setHeaderBgColor] = useState("transparent");
-  const [headerTextColor, setHeaderTextColor] = useState("white");
+  const [headerBgColor, setHeaderBgColor] = useState(
+    dynamicBackground ? "transparent" : defaultBackgroundColor
+  );
+
+  const [headerTextColor, setHeaderTextColor] = useState(
+    dynamicBackground ? "white" : defaultTextColor
+  );
 
   const handleScroll = () => {
     const scrollPosition = window.scrollY;
 
     const threshold = 50;
-    if (scrollPosition > threshold) {
-      setHeaderBgColor("white");
-      setHeaderTextColor("--main-blue");
-    } else {
-      setHeaderBgColor("transparent");
-      setHeaderTextColor("white");
+    if (dynamicBackground) {
+      if (scrollPosition > threshold) {
+        setHeaderBgColor("white");
+        setHeaderTextColor("var(--main-blue)");
+      } else {
+        setHeaderBgColor("transparent");
+        setHeaderTextColor("white");
+      }
+      Object.values(sectionsBg).forEach((sectionBg, index) => {
+        const section = Object.keys(sectionsBg)[index];
+        const sectionDom = document.getElementById(section);
+        if (sectionDom) {
+          const sectionPosition = sectionDom.offsetTop;
+          if (scrollPosition > sectionPosition) {
+            setHeaderBgColor(sectionBg);
+          }
+        }
+      });
+  
+      Object.values(sectionsText).forEach((sectionText, index) => {
+        const section = Object.keys(sectionsText)[index];
+        const sectionDom = document.getElementById(section);
+        if (sectionDom) {
+          const sectionPosition = sectionDom.offsetTop;
+          if (scrollPosition > sectionPosition) {
+            setHeaderTextColor(sectionText);
+          }
+        }
+      });
     }
-
-    Object.values(sectionsBg).forEach((sectionBg, index) => {
-      const section = Object.keys(sectionsBg)[index];
-      const sectionDom = document.getElementById(section);
-      if (sectionDom) {
-        const sectionPosition = sectionDom.offsetTop;
-        if (scrollPosition > sectionPosition) {
-          setHeaderBgColor(sectionBg);
-        }
-      }
-    });
-
-    Object.values(sectionsText).forEach((sectionText, index) => {
-      const section = Object.keys(sectionsText)[index];
-      const sectionDom = document.getElementById(section);
-      if (sectionDom) {
-        const sectionPosition = sectionDom.offsetTop;
-        if (scrollPosition > sectionPosition) {
-          setHeaderTextColor(sectionText);
-        }
-      }
-    });
   };
 
   useEffect(() => {
@@ -123,15 +127,15 @@ const Navbar = ({ user, sectionsBg, sectionsText }) => {
           <ul className="justify-center hidden md:flex md:[&>li>a]:px-4 md:[&>li>a]:py-2">
             <li>
               <a
-                href={route("dashboard")}
+                href={route("scan")}
                 className="block p-4 text-lg hover:text-[#a2c0f8]"
               >
                 Scan
               </a>
             </li>
             <li>
-              <a href="#" className="block p-4 text-lg hover:text-[#a2c0f8]">
-                Shop
+              <a href={route('market')} className="block p-4 text-lg hover:text-[#a2c0f8]">
+                Market
               </a>
             </li>
             <li>
@@ -172,8 +176,8 @@ const Navbar = ({ user, sectionsBg, sectionsText }) => {
                         {user.name[0].toUpperCase()}
                       </div>
                       <div className="flex flex-col">
-                      <p class="ms-4 text-slate-700">{user.name}</p>
-                      <p class="ms-4 text-slate-700 me-4">{user.email}</p>
+                      <p className="ms-4 text-slate-700">{user.name}</p>
+                      <p className="ms-4 text-slate-700 me-4">{user.email}</p>
                       </div>
                     </div>
                       
@@ -252,7 +256,7 @@ const Navbar = ({ user, sectionsBg, sectionsText }) => {
                 <ul>
                   {user && (
                     <li className="mb-1">
-                      <span class="block p-4 text-2xl font-semibold text-white">
+                      <span className="block p-4 text-2xl font-semibold text-white">
                         Welcome, {user.name}!
                       </span>
                     </li>
@@ -268,7 +272,7 @@ const Navbar = ({ user, sectionsBg, sectionsText }) => {
                   <li className="mb-1">
                     <a
                       className="block p-4 text-lg font-semibold text-gray-400 hover:bg-blue-50 hover:text-[--blue-1] rounded"
-                      href="#"
+                      href={route('scan')}
                     >
                       Scan
                     </a>
@@ -276,7 +280,7 @@ const Navbar = ({ user, sectionsBg, sectionsText }) => {
                   <li className="mb-1">
                     <a
                       className="block p-4 text-lg font-semibold text-gray-400 hover:bg-blue-50 hover:text-[--blue-1] rounded"
-                      href="#"
+                      href={route('market')}
                     >
                       Market
                     </a>
@@ -357,6 +361,9 @@ const Navbar = ({ user, sectionsBg, sectionsText }) => {
 Navbar.propTypes = {
   sectionsBg: PropTypes.object,
   sectionsText: PropTypes.object,
+  dynamicBackground: PropTypes.bool,
+  defaultBackgroundColor: PropTypes.string,
+  defaultTextColor: PropTypes.string,
 };
 
 export default Navbar;

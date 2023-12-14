@@ -24,6 +24,14 @@ Route::get('/about', function () {
     return Inertia::render('About');
 })->name('about');
 
+Route::get('/scan', function () {
+    return Inertia::render('Scan');
+})->name('scan');
+
+Route::get('/market', function () {
+    return Inertia::render('Market');
+})->name('market');
+
 Route::get('/dashboard', function () {
     return Inertia::render('Index');
 })->middleware(['auth', 'verified'])->name('dashboard');
