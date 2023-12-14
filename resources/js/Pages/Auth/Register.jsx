@@ -10,6 +10,8 @@ import { Head, Link, useForm } from '@inertiajs/react';
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
         name: '',
+        lastname:'',
+        birthdate:'',
         email: '',
         password: '',
         password_confirmation: '',
@@ -39,7 +41,7 @@ export default function Register() {
                     <InputLabel forInput="name" value="Name" className="text-white"/>
                     <TextInput
                         id="name"
-                        placeholder="Name"
+
                         name="name"
                         value={data.name}
                         className="mt-1 block w-full"
@@ -49,6 +51,20 @@ export default function Register() {
                         required
                     />
                     <InputError message={errors.name} className="mt-2" />
+                </div>
+                <div>
+                    <InputLabel forInput="lastname" value="Last name" className="text-white"/>
+                    <TextInput
+                        id="lastname"
+                        name="lastname"
+                        value={data.lastname}
+                        className="mt-1 block w-full"
+                        autoComplete="lastname"
+                        isFocused={true}
+                        onChange={(e) => setData('lastname', e.target.value)}
+                        required
+                    />
+                    <InputError message={errors.lastname} className="mt-2" />
                 </div>
                 <div className="mt-4">
                     <InputLabel forInput="email" value="Email" className="text-white"/>
@@ -66,7 +82,22 @@ export default function Register() {
 
                     <InputError message={errors.email} className="mt-2" />
                 </div>
+                <div className="mt-4">
+                    <InputLabel forInput="birthdate" value="Birth date" className="text-white"/>
+                    <TextInput
+                        id="birthdate"
+                        type="date"
+                        placeholder="birthdate"
+                        name="birthdate"
+                        value={data.birthdate}
+                        className="mt-1 block w-full"
+                        autoComplete="birthdate"
+                        onChange={(e) => setData('birthdate', e.target.value)}
+                        required
+                    />
 
+                    <InputError message={errors.birthdate} className="mt-2" />
+                </div>
                 <div className="mt-4">
                     <InputLabel forInput="password" value="Password" className="text-white"/>
                     <TextInput
