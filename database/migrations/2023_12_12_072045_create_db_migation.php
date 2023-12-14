@@ -13,7 +13,11 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->string('email')->unique();
+            $table->string('lastname');
+            $table->date('birthdate');
+            $table->string('picture')->nullable(true);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
@@ -27,16 +31,6 @@ return new class extends Migration
             $table->string('owner_name');
             $table->string('cvv');
             $table->string('expire_date');
-            $table->timestamps();
-        });
-
-        Schema::create('profiles', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->string('name');
-            $table->string('lastname');
-            $table->date('birthdate');
-            $table->string('picture')->nullable(true);
             $table->timestamps();
         });
 
