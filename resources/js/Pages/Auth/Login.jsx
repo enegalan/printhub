@@ -21,8 +21,19 @@ export default function Login({ status, canResetPassword }) {
 
     const submit = (e) => {
         e.preventDefault();
+    
+        if (!data.email || !data.password) {
+            setData('errors', {
+                email: !data.email ? 'Email is required' : null,
+                password: !data.password ? 'Password is required' : null,
+            });
+        }
 
-        post(route('login'));
+        try {
+            post(route('login'));
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     return (
