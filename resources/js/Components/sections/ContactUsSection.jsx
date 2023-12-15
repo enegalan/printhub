@@ -1,5 +1,5 @@
-import { TextInput, TextAreaInput } from '../Inputs';
-import { GlowButton } from '../Buttons';
+import { TextInput, TextAreaInput } from '@/Components/Inputs';
+import { GlowButton } from '@/Components/Buttons';
 
 export const ContactUsSection = () => {
     return (

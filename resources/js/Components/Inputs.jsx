@@ -151,4 +151,57 @@ TextAreaInput.propTypes = {
     cols: PropTypes.string||PropTypes.number,
 };
 
-export { SearchInput, DragAndDropBox, TextInput, TextAreaInput };
+const DropdownCheckbox = ({ options = [{}] }) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const [selectedOptions, setSelectedOptions] = useState([]);
+
+    const toggleDropdown = () => {
+        setIsOpen(!isOpen);
+    };
+
+    const handleCheckboxChange = (option) => {
+        if (selectedOptions.includes(option.id)) {
+            setSelectedOptions(selectedOptions.filter((id) => id !== option.id));
+        } else {
+            setSelectedOptions([...selectedOptions, option.id]);
+        }
+    };
+
+    return (
+        <div className="relative inline-block text-left">
+            <div>
+                <button
+                    type="button"
+                    onClick={toggleDropdown}
+                    className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-70"
+                    id="options-menu"
+                    aria-haspopup="true"
+                    aria-expanded="true"
+                >
+                    Seleccionados: {selectedOptions.length}
+                </button>
+            </div>
+
+            {isOpen && (
+                <div className="origin-top-right mt-2 w-full rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                    <div className="py-1">
+                        {options.map((option) => (
+                            <label key={option.id} className="flex items-center py-2 px-4">
+                                <input
+                                    type="checkbox"
+                                    value={option.id}
+                                    onChange={() => handleCheckboxChange(option)}
+                                    checked={selectedOptions.includes(option.id)}
+                                    className="rounded form-checkbox h-5 w-5 text-[var(--main-blue)]"
+                                />
+                                <span className="ml-2 text-gray-700 text-sm">{option.label}</span>
+                            </label>
+                        ))}
+                    </div>
+                </div>
+            )}
+        </div>
+    );
+};
+
+export { SearchInput, DragAndDropBox, TextInput, TextAreaInput, DropdownCheckbox };
