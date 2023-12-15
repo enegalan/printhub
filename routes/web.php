@@ -17,7 +17,7 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Index', []);
+    return Inertia::render('Index');
 })->name('index');
 
 Route::get('/about', function () {
@@ -40,9 +40,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [UserController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [UserController::class, 'update'])->name('profile.update');
     Route::post('/upload-avatar', [UserController::class, 'avatar'])->name('profile.avatar');
-
     Route::delete('/avatar-delete', [UserController::class, 'deleteAvatar'])->name('profile.avatar-delete');
-
     Route::delete('/profile', [UserController::class, 'destroy'])->name('profile.destroy');
 });
 
