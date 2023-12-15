@@ -22,6 +22,8 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
+        "@inertiajs/inertia": "^0.11.1",
+        "@inertiajs/inertia-react": "^0.8.1",
         "chroma-js": "^2.4.2",
         "concurrently": "^8.2.2",
         "gsap": "^3.12.3",

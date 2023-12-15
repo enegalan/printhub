@@ -44,7 +44,7 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'lastname'=> $request->lastname,
             'birthdate'=>$request->birthdate,
-            'picture' => null,
+            'avatar' => null,
         ]);
         event(new Registered($user));
 

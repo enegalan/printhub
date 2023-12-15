@@ -127,5 +127,4 @@ return [
             'path' => storage_path('logs/laravel.log'),
         ],
     ],
-
 ];

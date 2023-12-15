@@ -157,8 +157,14 @@ const Navbar = ({ user, sectionsBg, sectionsText }) => {
                         type="button"
                         className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
                       >
-                        <div className="w-7 h-7 bg-blue-500 rounded-full flex items-center justify-center text-white text-xl font-bold">
-                          {user.name[0].toUpperCase()}
+                        <div className="">
+                        {user.avatar ? (
+                            <img className="w-7 h-7" src={`/storage/avatars/${user.avatar}`} alt="Avatar" />
+                        ) : (
+                            <div className="w-7 h-7 bg-blue-500 rounded-full flex items-center content-center justify-center text-white text-xl font-bold">
+                              {user.name[0].toUpperCase() + user.lastname[0].toUpperCase()}
+                            </div>
+                        )}
                         </div>
                         <p className="ms-2 font-medium">{user.name}</p>
                       </button>
@@ -168,12 +174,18 @@ const Navbar = ({ user, sectionsBg, sectionsText }) => {
                   <Dropdown.Content>
                     <h3 className=" ms-4 text-sm text-slate-700 mt-3">ACCOUNT</h3>
                     <div className="flex items-center content-center justify-center mt-3 mb-3">  
-                      <div className="w-10 h-10 bg-blue-500 ms-4 rounded-full flex items-center content-center justify-center text-white text-2xl font-bold">
-                        {user.name[0].toUpperCase()}
-                      </div>
-                      <div className="flex flex-col">
-                      <p class="ms-4 text-slate-700">{user.name}</p>
-                      <p class="ms-4 text-slate-700 me-4">{user.email}</p>
+                    
+                        {user.avatar ? (
+                            <img src={`/storage/avatars/${user.avatar}`} className="w-10 h-10 ms-4"alt="Avatar" />
+                        ) : (
+                            <div className="w-10 h-10 bg-blue-500 ms-4 rounded-full flex items-center content-center justify-center text-white text-2xl font-bold">
+                              {user.name[0].toUpperCase() + user.lastname[0].toUpperCase()}
+                            </div>
+                        )}
+                    
+                      <div className="flex flex-col overflow-hidden">
+                      <p class="ms-4 text-slate-700 font-bold">{user.name} {user.lastname}</p>
+                      <p class="ms-4 text-slate-700 me-4 truncate">{user.email}</p>
                       </div>
                     </div>
                       

@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileUpdateRequest;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
+use Illuminate\Http\Request;
+use Intervention\Image\Image as Image;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Redirect;
+use App\Http\Requests\ProfileUpdateRequest;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -22,6 +25,45 @@ class UserController extends Controller
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
             'status' => session('status'),
         ]);
+    }
+
+    public function avatar(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'avatar' => ['required', 'image', 'max:2048'],
+        ]);
+
+        $user = $request->user();
+        $avatar = $request->file('avatar');
+
+        $avatarName = $avatar->hashName();
+        $avatar->storeAs('avatars', $avatarName, 'public');
+
+        // Delete the previous avatar if it exists
+        if ($user->avatar) {
+            Storage::disk('public')->delete('avatars/' . $user->avatar);
+        }
+
+        $user->avatar = $avatarName;
+        $user->save();
+
+        return redirect()->route('profile.edit')->with('status', 'Avatar uploaded successfully.');
+    }
+
+    // UserController.php
+
+
+    public function deleteAvatar(Request $request)
+    {
+        $user = $request->user();
+
+        if ($user->avatar) {
+            Storage::disk('public')->delete('avatars/' . $user->avatar);
+            $user->avatar = null;
+            $user->save();
+        }
+
+        return back()->with('status', 'Avatar deleted successfully.');
     }
 
     /**
