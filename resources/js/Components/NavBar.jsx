@@ -1,6 +1,6 @@
 import logo from "../../../public/logoWhite.svg";
 import logoblue from "../../../public/logoBlue.svg";
-import "../App.css"; // Import the stylesheet with the animation styles
+import "@/App.css";
 import { GlowButton } from "./Buttons";
 import Dropdown from "@/Components/Dropdown";
 
@@ -8,47 +8,58 @@ import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 import { Link } from "@inertiajs/react";
+import NavLink from "@/Components/NavLink";
 
-const Navbar = ({ user, sectionsBg, sectionsText }) => {
-  sectionsBg = sectionsBg ? sectionsBg : [];
-  sectionsText = sectionsText ? sectionsText : [];
+const Navbar = ({
+  user = null,
+  sectionsBg = [],
+  sectionsText = [],
+  dynamicBackground = true,
+  defaultBackgroundColor = "transparent",
+  defaultTextColor = "white",
+}) => {
+  const [headerBgColor, setHeaderBgColor] = useState(
+    dynamicBackground ? "transparent" : defaultBackgroundColor
+  );
 
-  const [headerBgColor, setHeaderBgColor] = useState("transparent");
-  const [headerTextColor, setHeaderTextColor] = useState("white");
+  const [headerTextColor, setHeaderTextColor] = useState(
+    dynamicBackground ? "white" : defaultTextColor
+  );
 
   const handleScroll = () => {
     const scrollPosition = window.scrollY;
 
     const threshold = 50;
-    if (scrollPosition > threshold) {
-      setHeaderBgColor("white");
-      setHeaderTextColor("--main-blue");
-    } else {
-      setHeaderBgColor("transparent");
-      setHeaderTextColor("white");
+    if (dynamicBackground) {
+      if (scrollPosition > threshold) {
+        setHeaderBgColor("white");
+        setHeaderTextColor("var(--main-blue)");
+      } else {
+        setHeaderBgColor("transparent");
+        setHeaderTextColor("white");
+      }
+      Object.values(sectionsBg).forEach((sectionBg, index) => {
+        const section = Object.keys(sectionsBg)[index];
+        const sectionDom = document.getElementById(section);
+        if (sectionDom) {
+          const sectionPosition = sectionDom.offsetTop;
+          if (scrollPosition > sectionPosition) {
+            setHeaderBgColor(sectionBg);
+          }
+        }
+      });
+
+      Object.values(sectionsText).forEach((sectionText, index) => {
+        const section = Object.keys(sectionsText)[index];
+        const sectionDom = document.getElementById(section);
+        if (sectionDom) {
+          const sectionPosition = sectionDom.offsetTop;
+          if (scrollPosition > sectionPosition) {
+            setHeaderTextColor(sectionText);
+          }
+        }
+      });
     }
-
-    Object.values(sectionsBg).forEach((sectionBg, index) => {
-      const section = Object.keys(sectionsBg)[index];
-      const sectionDom = document.getElementById(section);
-      if (sectionDom) {
-        const sectionPosition = sectionDom.offsetTop;
-        if (scrollPosition > sectionPosition) {
-          setHeaderBgColor(sectionBg);
-        }
-      }
-    });
-
-    Object.values(sectionsText).forEach((sectionText, index) => {
-      const section = Object.keys(sectionsText)[index];
-      const sectionDom = document.getElementById(section);
-      if (sectionDom) {
-        const sectionPosition = sectionDom.offsetTop;
-        if (scrollPosition > sectionPosition) {
-          setHeaderTextColor(sectionText);
-        }
-      }
-    });
   };
 
   useEffect(() => {
@@ -106,38 +117,41 @@ const Navbar = ({ user, sectionsBg, sectionsText }) => {
               </svg>
             </button>
           </div>
-          <div className="justify-start flex gap-8 items-center md:flex md:items-center">
-            {
-              <img
-                src={headerBgColor === "white" ? logo : logoblue}
-                alt="Logo"
-              />
-            }
-            <a href="/" className="text-4xl font-bold">
-              PrintHub
-            </a>
-          </div>
+          {/* Logo y Printhub con Link */}
+          <Link
+            href="/"
+            className="text-4xl font-bold justify-start flex gap-8 items-center md:flex md:items-center"
+          >
+            <img src={headerBgColor === "white" ? logo : logoblue} alt="Logo" />
+            PrintHub
+          </Link>
         </div>
         <div className="hidden flex-1 justify-center lg:flex">
           {/*Menu links*/}
           <ul className="justify-center hidden md:flex md:[&>li>a]:px-4 md:[&>li>a]:py-2">
             <li>
-              <a
-                href={route("dashboard")}
+              <Link
+                href={route("scan")}
                 className="block p-4 text-lg hover:text-[#a2c0f8]"
               >
                 Scan
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="block p-4 text-lg hover:text-[#a2c0f8]">
-                Shop
-              </a>
+              <Link
+                href={route("market")}
+                className="block p-4 text-lg hover:text-[#a2c0f8]"
+              >
+                Market
+              </Link>
             </li>
             <li>
-              <a href={route("about")} className="block p-4 text-lg hover:text-[#a2c0f8]">
+              <Link
+                href={route("about")}
+                className="block p-4 text-lg hover:text-[#a2c0f8]"
+              >
                 About
-              </a>
+              </Link>
             </li>
           </ul>
           <div id="burger" className="md:hidden cursor-pointer">
@@ -188,26 +202,19 @@ const Navbar = ({ user, sectionsBg, sectionsText }) => {
                       <p class="ms-4 text-slate-700 me-4 truncate">{user.email}</p>
                       </div>
                     </div>
-                      
+
                     <hr></hr>
                     <Dropdown.Link href={route("profile.edit")}>
                       Profile
                     </Dropdown.Link>
-                    <Dropdown.Link
-                      href="#"
-                    >
-                      Cart
-                    </Dropdown.Link>
-                    <Dropdown.Link
-                      href="#"
-                    >
-                      Wishlist
-                    </Dropdown.Link>
+                    <Dropdown.Link href="#">Cart</Dropdown.Link>
+                    <Dropdown.Link href="#">Wishlist</Dropdown.Link>
                     <hr></hr>
                     <Dropdown.Link
                       href={route("logout")}
                       method="post"
-                      as="button" className="text-red-700"
+                      as="button"
+                      className="text-red-700"
                     >
                       Log Out
                     </Dropdown.Link>
@@ -217,13 +224,18 @@ const Navbar = ({ user, sectionsBg, sectionsText }) => {
             </div>
           ) : (
             <>
-              <GlowButton href={route("login")} value="Login" />
-              <GlowButton
-                textColor="black"
-                backgroundColor="white"
+              <Link
+                href={route("login")}
+                className="bg-blue-950 px-8 py-2 text-white font-bold rounded-lg hover:bg-blue-900"
+              >
+                Login
+              </Link>
+              <Link
                 href={route("register")}
-                value="Register"
-              />
+                className="bg-blue-950 px-8 py-2 text-white font-bold rounded-lg hover:bg-blue-900"
+              >
+                Register
+              </Link>
             </>
           )}
         </div>
@@ -233,15 +245,14 @@ const Navbar = ({ user, sectionsBg, sectionsText }) => {
             <div className="navbar-backdrop fixed inset-0 bg-gray-800 opacity-25"></div>
             <nav className="fixed top-0 left-0 bottom-0 flex flex-col w-5/6 max-w-sm py-6 px-6 bg-[var(--dark-gray)] border-r overflow-y-auto">
               <div className="flex items-center mb-8">
-                <a
-                  className="flex items-center gap-5 mr-auto text-3xl font-bold leading-none"
-                  href="/"
-                >
-                  {<img src={logoblue} alt="Logo" />}
-                  <span href="/" className="text-white text-4xl font-bold">
+                <div className="flex items-center gap-5 mr-auto text-3xl font-bold leading-none">
+                  <Link href="/">
+                    <img src={logoblue} alt="Logo" />
+                  </Link>
+                  <span className="text-white text-4xl font-bold">
                     PrintHub
                   </span>
-                </a>
+                </div>
                 <button className="navbar-close" onClick={toggleNavbar}>
                   <svg
                     className="h-6 w-6 text-gray-400 cursor-pointer hover:text-gray-500"
@@ -264,51 +275,51 @@ const Navbar = ({ user, sectionsBg, sectionsText }) => {
                 <ul>
                   {user && (
                     <li className="mb-1">
-                      <span class="block p-4 text-2xl font-semibold text-white">
+                      <span className="block p-4 text-2xl font-semibold text-white">
                         Welcome, {user.name}!
                       </span>
                     </li>
                   )}
                   <li className="mb-1">
-                    <a
+                    <Link
+                      href={route("index")}
                       className="block p-4 text-lg font-semibold text-gray-400 hover:bg-blue-50 hover:text-[--blue-1] rounded"
-                      href={route('index')}
                     >
                       Home
-                    </a>
+                    </Link>
                   </li>
                   <li className="mb-1">
-                    <a
+                    <Link
                       className="block p-4 text-lg font-semibold text-gray-400 hover:bg-blue-50 hover:text-[--blue-1] rounded"
-                      href="#"
+                      href={route("scan")}
                     >
                       Scan
-                    </a>
+                    </Link>
                   </li>
                   <li className="mb-1">
-                    <a
+                    <Link
                       className="block p-4 text-lg font-semibold text-gray-400 hover:bg-blue-50 hover:text-[--blue-1] rounded"
-                      href="#"
+                      href={route("market")}
                     >
                       Market
-                    </a>
+                    </Link>
                   </li>
                   <li className="mb-1">
-                    <a
+                    <Link
                       className="block p-4 text-lg font-semibold text-gray-400 hover:bg-blue-50 hover:text-[--blue-1] rounded"
-                      href={route('about')}
+                      href={route("about")}
                     >
                       About
-                    </a>
+                    </Link>
                   </li>
                   {user && (
                     <li className="mb-1">
-                      <a
+                      <Link
                         className="block p-4 text-lg font-semibold text-gray-400 hover:bg-blue-50 hover:text-[--blue-1] rounded"
                         href={route("profile.edit")}
                       >
                         Profile
-                      </a>
+                      </Link>
                     </li>
                   )}
                 </ul>
@@ -369,6 +380,9 @@ const Navbar = ({ user, sectionsBg, sectionsText }) => {
 Navbar.propTypes = {
   sectionsBg: PropTypes.object,
   sectionsText: PropTypes.object,
+  dynamicBackground: PropTypes.bool,
+  defaultBackgroundColor: PropTypes.string,
+  defaultTextColor: PropTypes.string,
 };
 
 export default Navbar;

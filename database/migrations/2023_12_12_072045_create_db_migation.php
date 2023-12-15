@@ -96,6 +96,13 @@ return new class extends Migration
             $table->timestamps();
         });
 
+        Schema::create('products_categories', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('product_id')->constrained();
+            $table->foreignId('category_id')->constrained();
+            $table->timestamps();
+        });
+
         Schema::create('wishlists', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
@@ -111,6 +118,8 @@ return new class extends Migration
         Schema::create('prod_combs', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id')->constrained();
+            $table->foreignId('color_id')->constrained();
+            $table->foreignId('material_id')->constrained();
             $table->timestamps();
         });
         Schema::create('stock_carts', function (Blueprint $table) {
