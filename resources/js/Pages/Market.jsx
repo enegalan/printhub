@@ -7,7 +7,9 @@ import Carousel from "nuka-carousel";
 import { DropdownCheckbox } from '@/Components/Inputs';
 import OrderBy from '@/Components/OrderBy';
 
-function Market({ auth }) {
+import ProductsSection from '@/Components/sections/ProductsSection';
+
+function Market({ auth, products = [] }) {
     return (
         <>
             <NavBar user={auth.user} sectionsBg={{ 'market': '--dark' }} sectionsText={{ 'market': 'white' }} />
@@ -26,16 +28,16 @@ function Market({ auth }) {
                         <></>
                     )}
                 >
-                    <img src='/images/impresion1.jpg' style={{ width: '100%', height: '650px', display: 'block', marginTop: '80px' }} />
+                    <img src='/images/impresion1.jpg' style={{ width: '100%', height: '650px', display: 'block', marginTop: '80px', objectFit: 'cover' }} />
                 </Carousel>
             </header>
 
             <main id="market" className='flex mb-64 mt-16 mx-5 gap-10'>
                 {/* Left side - Filter by */}
-                <div className='w-[180px] flex flex-col gap-5'>
+                <div className='w-[235px] flex flex-col gap-5'>
                     <section className='flex flex-col gap-3'>
                         <h4 className='font-bold text-lg'>Category</h4>
-                        <form method="POST" action="">
+                        <form className='flex' method="POST" action="">
                             <DropdownCheckbox options={[{ id: 1, 'label': 'Decoration' }, { id: 2, 'label': 'Spares' }]} />
                         </form>
                     </section>
@@ -45,15 +47,15 @@ function Market({ auth }) {
                             <ul className='flex flex-col gap-2'>
                                 {/* Set inputs values like if they were intervals. Example: 0-20, 30-50... */}
                                 <li className='flex gap-3 items-center'>
-                                    <input type="checkbox" name="price" value="0-20" />
+                                    <input className='rounded text-[var(--main-blue)]' type="checkbox" name="price" value="0-20" />
                                     <label className='text-sm' htmlFor="price">0 - 20 EUR</label>
                                 </li>
                                 <li className='flex gap-3 items-center'>
-                                    <input type="checkbox" name="price" value="20-50" />
+                                    <input className='rounded text-[var(--main-blue)]' type="checkbox" name="price" value="20-50" />
                                     <label className='text-sm' htmlFor="price">20 - 50 EUR</label>
                                 </li>
                                 <li className='flex gap-3 items-center'>
-                                    <input type="checkbox" name="price" value="20-50" />
+                                    <input className='rounded text-[var(--main-blue)]' type="checkbox" name="price" value="20-50" />
                                     <label className='text-sm' htmlFor="price">More than 50 EUR</label>
                                 </li>
                             </ul>
@@ -64,11 +66,11 @@ function Market({ auth }) {
                         <form method="POST" action="">
                             <ul className='flex flex-col gap-2'>
                                 <li className='flex gap-3 items-center'>
-                                    <input type="checkbox" name="new_arrivals" value="30" />
+                                    <input className='rounded text-[var(--main-blue)]' type="checkbox" name="new_arrivals" value="30" />
                                     <label className='text-sm' htmlFor="new_arrivals">Last 30 days</label>
                                 </li>
                                 <li className='flex gap-3 items-center'>
-                                    <input type="checkbox" name="new_arrivals" value="90" />
+                                    <input className='rounded text-[var(--main-blue)]' type="checkbox" name="new_arrivals" value="90" />
                                     <label className='text-sm' htmlFor="new_arrivals">Last 90 days</label>
                                 </li>
                             </ul>
@@ -77,20 +79,12 @@ function Market({ auth }) {
                 </div>
                 
                 {/* Right side */}
-                <div className=''>
+                <div className='flex flex-col w-full px-6'>
                     {/* Order by */}
-                    <div className=''>
-                        <span>Order by</span>
+                    <section className='self-end'>
                         <OrderBy options={['Featured', 'Price: Low to High', 'Price: High to Low', 'Avg. Customer Review', 'Newest Arrivals', 'Best Sellers']} />
-                    </div>
-                    {/* Products */}
-                    <div className=''>
-                        <span>Products</span>
-                    </div>
-                    {/* Pagination */}
-                    <div className=''>
-                        <span>Pagination</span>
-                    </div>
+                    </section>
+                    <ProductsSection products={products} />
                 </div>
                 
             </main>

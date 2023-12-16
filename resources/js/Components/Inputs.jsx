@@ -168,7 +168,7 @@ const DropdownCheckbox = ({ options = [{}] }) => {
     };
 
     return (
-        <div className="relative inline-block text-left">
+        <div className="relative inline-block text-left flex-1">
             <div>
                 <button
                     type="button"
@@ -178,7 +178,7 @@ const DropdownCheckbox = ({ options = [{}] }) => {
                     aria-haspopup="true"
                     aria-expanded="true"
                 >
-                    Seleccionados: {selectedOptions.length}
+                    Selected: {selectedOptions.length}
                 </button>
             </div>
 

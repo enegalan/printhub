@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -28,9 +29,7 @@ Route::get('/scan', function () {
     return Inertia::render('Scan');
 })->name('scan');
 
-Route::get('/market', function () {
-    return Inertia::render('Market');
-})->name('market');
+Route::get('/market', [ProductController::class, 'getAll'])->name('market');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Index');
