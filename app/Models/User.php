@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Profile;
+use App\Models\Role;
 
 class User extends Authenticatable
 {
@@ -47,7 +48,17 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
     public function roles(){
-        return $this->belongsToMany('App\Models\Role');
+        return $this->belongsToMany(Role::class, 'users_roles');
+    }
+
+    public function hasRole($role)
+    {
+        return $this->roles()->where('name', $role)->exists();
+    }
+
+    public function adminAccess()
+    {
+        return $this->hasRole('admin');
     }
 
     public function profile()
