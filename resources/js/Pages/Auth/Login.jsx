@@ -45,7 +45,7 @@ export default function Login({ status, canResetPassword }) {
                 </a>
             </div>
             {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
-            <form className='-mt-16' onSubmit={submit}>
+            <form onSubmit={submit}>
                 <div className="flex justify-center items-center h-screen">
                     <div className="w-1/2 max-w-[500px]">
                         <div className="flex justify-center items-center">
