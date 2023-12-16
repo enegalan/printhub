@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Foundation\Application;
@@ -42,5 +43,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/avatar-delete', [UserController::class, 'deleteAvatar'])->name('profile.avatar-delete');
     Route::delete('/profile', [UserController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::get('/admin', [AdminController::class, 'dashboard']);
 
 require __DIR__.'/auth.php';
