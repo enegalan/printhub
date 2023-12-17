@@ -12,7 +12,7 @@ function ProductsSection({ products = [] }) {
         <section id="products_section" className="relative z-10 bg-[var(--light-grey)]">
             <div className="mt-10 pb-10 flex flex-wrap justify-center gap-4">
                 {data.map((product) => (
-                    <ProductCard key={product.id} image={piece} title={product.title} price={product.price} />
+                    <ProductCard key={product.id} image={piece} name={product.name} price={product.price} />
                 ))}
             </div>
             <Pagination
