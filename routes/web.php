@@ -34,6 +34,7 @@ Route::get('/scan', function () {
 })->name('scan');
 
 Route::get('/market', [ProductController::class, 'getAll'])->name('market');
+Route::get('/market/search', [ProductController::class, 'search'])->name('products.search');
 
 Route::get('/dashboard', function () {
     $roles = app()->call([UserController::class, 'getRoles']);

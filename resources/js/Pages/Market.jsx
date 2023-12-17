@@ -1,15 +1,70 @@
 import '@/App.css';
 
+import React, { useState } from 'react';
+import { Inertia } from '@inertiajs/inertia';
+
 import NavBar from '@/Components/NavBar';
 import { Footer } from '@/Components/Footer';
 
 import Carousel from "nuka-carousel";
 import { DropdownCheckbox } from '@/Components/Inputs';
 import OrderBy from '@/Components/OrderBy';
+import { SearchInput } from '@/Components/Inputs';
 
 import ProductsSection from '@/Components/sections/ProductsSection';
 
-function Market({ auth, roles, products = [] }) {
+function Market({ auth, roles, products = [], query = "" }) {
+    console.log(products);
+    console.log(query);
+    // SEARCH INPUT
+    const [searchTerm, setSearchTerm] = useState('');
+    async function onSearchChange(newSearchTerm) {
+        //console.log(newSearchTerm);
+
+        /*try {
+            // Send a POST request to the server to handle the search
+            const response = await Inertia.post(`/market/search/${newSearchTerm}`);
+            console.log('Response:', response);
+            // Check if the response is an object with a valid format
+            if (!response || typeof response !== 'object') {
+                console.error('Error during search: Invalid response format', response);
+                return;
+            }
+
+            // If response has a 'url' property, update the component state with the new data using Inertia.get()
+            if (response.url) {
+                Inertia.get(response.url);
+            }
+
+            // Update the local state with the new search term
+            setSearchTerm(newSearchTerm);
+        } catch (error) {
+            console.error('Error during search:', error.message);
+        }*/
+    }
+    // FILTER BY
+    function onCategoryChange() {
+
+    }
+    function onPriceChange() {
+
+    }
+    function onArrivalsChange() {
+
+    }
+    // ORDER BY
+    function onOrderByChange() {
+
+    }
+
+    // PRODUCT CARDS FUNCTIONS
+    function onAddToWishlist() {
+
+    }
+    function onAddToCart() {
+
+    }
+
     return (
         <>
             <NavBar user={auth.user} roles={roles} sectionsBg={{ 'market': '--dark' }} sectionsText={{ 'market': 'white' }} />
@@ -77,16 +132,21 @@ function Market({ auth, roles, products = [] }) {
                         </form>
                     </section>
                 </div>
-                
+
                 {/* Right side */}
                 <div className='flex flex-col w-full px-6'>
                     {/* Order by */}
-                    <section className='self-end'>
-                        <OrderBy options={['Featured', 'Price: Low to High', 'Price: High to Low', 'Avg. Customer Review', 'Newest Arrivals', 'Best Sellers']} />
-                    </section>
+                    <div className='flex gap-10 items-center'>
+                        <section className='w-full'>
+                            <SearchInput action="/market/search" placeholder='Search...' />
+                        </section>
+                        <section className='self-end'>
+                            <OrderBy options={['Featured', 'Price: Low to High', 'Price: High to Low', 'Avg. Customer Review', 'Newest Arrivals', 'Best Sellers']} />
+                        </section>
+                    </div>
                     <ProductsSection products={products} />
                 </div>
-                
+
             </main>
 
             <Footer />

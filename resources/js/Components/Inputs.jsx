@@ -1,10 +1,27 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Inertia } from '@inertiajs/inertia';
+import { router } from '@inertiajs/react'
+import { useForm } from "@inertiajs/inertia-react";
 import PropTypes from "prop-types";
 import '../../css/Inputs.css';
 
 
 // TODO: This input should be updated in order to allow to display the results in a "Result modal" for the navbar' search input
-const SearchInput = ({ placeholder = "", onChange = "" }) => {
+const SearchInput = ({ placeholder = '', action = null }) => {
+    const { data, setData, post, processing, errors } = useForm({
+        query: '',
+    });
+
+    const handleSearchChange = (event) => {
+        const newQueryValue = event.target.value;
+        event.stopPropagation();
+        setData('query', newQueryValue);
+        if (action) {
+            setData('query', newQueryValue);
+            router.get(action, {'query': newQueryValue}, { preserveState: true })
+        }
+    };
+
     return (
         <div className="relative flex items-center mt-4 md:mt-0">
             <span className="absolute">
@@ -13,13 +30,20 @@ const SearchInput = ({ placeholder = "", onChange = "" }) => {
                 </svg>
             </span>
 
-            <input type="text" placeholder={placeholder} onChange={onChange} className="block w-full py-1.5 pr-5 text-gray-700 bg-white border border-gray-200 rounded-lg md:w-80 placeholder-gray-400/70 pl-11 rtl:pr-11 rtl:pl-5 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"/>
+            <input
+                type="text"
+                placeholder={placeholder}
+                onChange={handleSearchChange}
+                value={data.query}
+                className="block w-full py-1.5 pr-5 text-gray-700 bg-white border border-gray-200 rounded-lg placeholder-gray-400/70 pl-11 rtl:pr-11 rtl:pl-5"/>
+                {errors.query && (
+                    <div className="text-red-500">{errors.query}</div>
+                )}
         </div>
     );
-}
+};
 SearchInput.propTypes = {
     placeholder: PropTypes.string,
-    onChange: PropTypes.string,
 };
 
 const DragAndDropBox = () => {
