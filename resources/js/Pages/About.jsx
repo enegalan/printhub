@@ -12,7 +12,7 @@ function About({ auth, roles }) {
       <div className='overflow-hidden bg-[var(--light-grey)]'>
         <NavBar user={auth.user} roles={roles} sectionsBg={{ 'about': '--dark' }} sectionsText={{ 'about': 'white' }} />
         
-        <header id="about" className='relative overflow-hidden bg-[url(/images/impresion1.jpg)] py-48 text-center'>
+        <header id="about" className='relative overflow-hidden py-48 text-center'>
           <div className="absolute top-0 bottom-0">
             <video autoPlay={true} muted={true} loop={true}  className="h-screen w-screen object-cover brightness-[0.20]" src='/images/printer1.mp4'></video>
           </div>
