@@ -14,6 +14,7 @@ class ProductController extends Controller
         $pagination = 16;
         $products = Product::paginate($pagination);
 
-        return Inertia::render('Market', ['products' => $products]);
+        $roles = app()->call([UserController::class, 'getRoles']);
+        return Inertia::render('Market', ['products' => $products, 'roles' => $roles]);
     }
 }

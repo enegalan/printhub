@@ -21,9 +21,11 @@ class UserController extends Controller
      */
     public function edit(Request $request): Response
     {
+        $roles = $this->getRoles();
         return Inertia::render('Profile/Edit', [
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
             'status' => session('status'),
+            'roles' => $roles,
         ]);
     }
 
@@ -49,9 +51,6 @@ class UserController extends Controller
 
         return redirect()->route('profile.edit')->with('status', 'Avatar uploaded successfully.');
     }
-
-    // UserController.php
-
 
     public function deleteAvatar(Request $request)
     {
@@ -101,5 +100,13 @@ class UserController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    public static function getRoles() {
+        if (auth()->check()) {
+            $roles = auth()->user()->roles->pluck('name')->toArray();
+            return $roles;
+        }
+        return array('You are not logged in.');
     }
 }

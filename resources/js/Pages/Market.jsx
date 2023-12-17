@@ -9,10 +9,10 @@ import OrderBy from '@/Components/OrderBy';
 
 import ProductsSection from '@/Components/sections/ProductsSection';
 
-function Market({ auth, products = [] }) {
+function Market({ auth, roles, products = [] }) {
     return (
         <>
-            <NavBar user={auth.user} sectionsBg={{ 'market': '--dark' }} sectionsText={{ 'market': 'white' }} />
+            <NavBar user={auth.user} roles={roles} sectionsBg={{ 'market': '--dark' }} sectionsText={{ 'market': 'white' }} />
 
             <header className='-mt-24 h-[550px] relative overflow-hidden'>
                 <Carousel

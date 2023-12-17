@@ -12,12 +12,15 @@ import NavLink from "@/Components/NavLink";
 
 const Navbar = ({
   user = null,
+  roles = [],
   sectionsBg = [],
   sectionsText = [],
   dynamicBackground = true,
   defaultBackgroundColor = "transparent",
   defaultTextColor = "white",
 }) => {
+  const isAdmin = roles.includes('admin');
+
   const [headerBgColor, setHeaderBgColor] = useState(
     dynamicBackground ? "transparent" : defaultBackgroundColor
   );
@@ -210,6 +213,8 @@ const Navbar = ({
                     <Dropdown.Link href="#">Cart</Dropdown.Link>
                     <Dropdown.Link href="#">Wishlist</Dropdown.Link>
                     <hr></hr>
+                    {isAdmin && (<Dropdown.Link href={route('admin.dashboard')}>Admin Dashboard</Dropdown.Link>)}
+                    {isAdmin && (<hr/>)}
                     <Dropdown.Link
                       href={route("logout")}
                       method="post"

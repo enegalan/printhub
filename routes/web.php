@@ -19,21 +19,25 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Index');
+    $roles = app()->call([UserController::class, 'getRoles']);
+    return Inertia::render('Index', ['roles' => $roles]);
 })->name('index');
 
 Route::get('/about', function () {
-    return Inertia::render('About');
+    $roles = app()->call([UserController::class, 'getRoles']);
+    return Inertia::render('About', ['roles' => $roles]);
 })->name('about');
 
 Route::get('/scan', function () {
-    return Inertia::render('Scan');
+    $roles = app()->call([UserController::class, 'getRoles']);
+    return Inertia::render('Scan', ['roles' => $roles]);
 })->name('scan');
 
 Route::get('/market', [ProductController::class, 'getAll'])->name('market');
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Index');
+    $roles = app()->call([UserController::class, 'getRoles']);
+    return Inertia::render('Index', ['roles' => $roles]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -44,6 +48,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [UserController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin/dashboard');
+Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 
 require __DIR__.'/auth.php';
