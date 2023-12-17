@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Inertia } from '@inertiajs/inertia';
 import { router } from '@inertiajs/react'
 import { useForm } from "@inertiajs/inertia-react";
 import PropTypes from "prop-types";
@@ -175,20 +174,49 @@ TextAreaInput.propTypes = {
     cols: PropTypes.string||PropTypes.number,
 };
 
-const DropdownCheckbox = ({ options = [{}] }) => {
+const DropdownCheckbox = ({ options = [{}], action = null, name = "elements" }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedOptions, setSelectedOptions] = useState([]);
+    const [filters, setFilters] = useState(null);
 
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
     };
+    useEffect(() => {
+        if (selectedOptions.length > 0) {
+            // This effect runs every time selectedOptions changes
+            console.log(selectedOptions);
+
+            const newFilters = {
+                filters: {
+                    [name]: selectedOptions,
+                },
+            };
+
+            if (JSON.stringify(filters) !== JSON.stringify(newFilters)) {
+                if (action) {
+                    router.get(action, { filters: newFilters }, { preserveState: true });
+                }
+                setFilters(newFilters);
+            }
+        } else {
+            if (filters !== null) {
+                console.log(action.split('/'));
+                router.get('/market');
+                setFilters(null);
+            }
+        }
+    }, [selectedOptions, action, name, router, filters]);
+    
 
     const handleCheckboxChange = (option) => {
-        if (selectedOptions.includes(option.id)) {
-            setSelectedOptions(selectedOptions.filter((id) => id !== option.id));
-        } else {
-            setSelectedOptions([...selectedOptions, option.id]);
-        }
+        setSelectedOptions((prevSelectedOptions) => {
+            if (prevSelectedOptions.includes(option.id)) {
+                return prevSelectedOptions.filter((id) => id !== option.id);
+            } else {
+                return [...prevSelectedOptions, option.id];
+            }
+        });
     };
 
     return (
@@ -202,14 +230,14 @@ const DropdownCheckbox = ({ options = [{}] }) => {
                     aria-haspopup="true"
                     aria-expanded="true"
                 >
-                    Selected: {selectedOptions.length}
+                    Selected: {selectedOptions && selectedOptions.length}
                 </button>
             </div>
 
             {isOpen && (
                 <div className="origin-top-right mt-2 w-full rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
                     <div className="py-1">
-                        {options.map((option) => (
+                        {selectedOptions && Array.isArray(options) && options?.length > 0 && options.map((option) => (
                             <label key={option.id} className="flex items-center py-2 px-4">
                                 <input
                                     type="checkbox"

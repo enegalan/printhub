@@ -1,7 +1,7 @@
 import '@/App.css';
 
 import React, { useState } from 'react';
-import { Inertia } from '@inertiajs/inertia';
+import { router } from '@inertiajs/react'
 
 import NavBar from '@/Components/NavBar';
 import { Footer } from '@/Components/Footer';
@@ -13,38 +13,14 @@ import { SearchInput } from '@/Components/Inputs';
 
 import ProductsSection from '@/Components/sections/ProductsSection';
 
-function Market({ auth, roles, products = [], query = "" }) {
-    console.log(products);
-    console.log(query);
-    // SEARCH INPUT
-    const [searchTerm, setSearchTerm] = useState('');
-    async function onSearchChange(newSearchTerm) {
-        //console.log(newSearchTerm);
+function Market({ auth, roles, products = [] }) {
 
-        /*try {
-            // Send a POST request to the server to handle the search
-            const response = await Inertia.post(`/market/search/${newSearchTerm}`);
-            console.log('Response:', response);
-            // Check if the response is an object with a valid format
-            if (!response || typeof response !== 'object') {
-                console.error('Error during search: Invalid response format', response);
-                return;
-            }
-
-            // If response has a 'url' property, update the component state with the new data using Inertia.get()
-            if (response.url) {
-                Inertia.get(response.url);
-            }
-
-            // Update the local state with the new search term
-            setSearchTerm(newSearchTerm);
-        } catch (error) {
-            console.error('Error during search:', error.message);
-        }*/
-    }
     // FILTER BY
-    function onCategoryChange() {
-
+    function onCategoryChange(event) {
+        const categories = event.target.value;
+        event.stopPropagation();
+        console.log(categories);
+        //router.get('/market/filter', {'categories': newQueryValue}, { preserveState: true })
     }
     function onPriceChange() {
 
@@ -92,8 +68,8 @@ function Market({ auth, roles, products = [], query = "" }) {
                 <div className='w-[235px] flex flex-col gap-5'>
                     <section className='flex flex-col gap-3'>
                         <h4 className='font-bold text-lg'>Category</h4>
-                        <form className='flex' method="POST" action="">
-                            <DropdownCheckbox options={[{ id: 1, 'label': 'Decoration' }, { id: 2, 'label': 'Spares' }]} />
+                        <form className='flex' method="GET" action="">
+                            <DropdownCheckbox name='categories' action="/market/filter" options={[{ id: 1, 'label': 'Decoration' }, { id: 2, 'label': 'Spares' }]} />
                         </form>
                     </section>
                     <section className='flex flex-col gap-3'>

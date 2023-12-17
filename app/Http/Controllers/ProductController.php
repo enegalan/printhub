@@ -19,15 +19,26 @@ class ProductController extends Controller
     }
 
     public function search(Request $request) {
-        //dump($request);
-
         $roles = app()->call([UserController::class, 'getRoles']);
 
         $query = $request->input('query');
-        $results = Product::where('name', 'like', "%$query%")->paginate($this->productPerPagination);
+        $products = Product::where('name', 'like', "%$query%")->paginate($this->productPerPagination);
+        return Inertia::render('Market', ['products' => $products, 'roles' => $roles]);
+    }
 
-        //return response()->json($results);
-        return Inertia::render('Market', ['products' => $results, 'roles' => $roles, 'query' => $query]);
-        // return redirect()->route('index');
+    public function filter(Request $request) {
+        $roles = app()->call([UserController::class, 'getRoles']);
+        if (is_array($request->input('filters')) && count($request->input('filters')) > 0) {
+            $filters = $request->input('filters')['filters'];
+            if (isset($filters['categories'])) {
+                $products = Product::whereHas('categories', function ($query) use ($filters) {
+                    $query->whereIn('categories.id', $filters['categories']);
+                })->paginate($this->productPerPagination);
+    
+                return Inertia::render('Market', ['products' => $products, 'roles' => $roles]);
+            }
+            
+        } else return $this->getAll();
+        
     }
 }
