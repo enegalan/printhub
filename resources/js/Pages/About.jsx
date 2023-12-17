@@ -43,7 +43,7 @@ function About({ auth, roles }) {
             </p>
           </section>
           {/* Our Team */}
-          <section className='my-6'>
+          <section className='my-6' id="team">
             <h3 className='font-bold text-4xl mb-6'>Our Team</h3>
             <div className='flex flex-col md:flex-row justify-center gap-16'>
               <article id="urtzi" className='flex flex-col items-center'>
@@ -64,7 +64,7 @@ function About({ auth, roles }) {
             </div>
           </section>
            {/* FAQS */}
-          <section className='my-6 mt-8'>
+          <section className='my-6 mt-8' id='faqs'>
             <h3 className='font-bold text-2xl'>FAQS</h3>
             <Faqs/>
           </section>

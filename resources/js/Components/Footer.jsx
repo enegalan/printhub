@@ -48,13 +48,13 @@ export const Footer = () => {
                             <h6 className="text-left text-sm font-bold">Products</h6>
                             <ul className="flex flex-col items-start">
                                 <li>
-                                    <a className="text-sm text-slate-300 transition duration-150 ease-in-out hover:text-white" href="#0">Pricing &amp; Plans</a>
+                                    <a className="text-sm text-slate-300 transition duration-150 ease-in-out hover:text-white" href="/#pricing">Pricing &amp; Plans</a>
                                 </li>
                                 <li>
-                                    <a className="text-sm text-slate-300 transition duration-150 ease-in-out hover:text-white" href="#0">Market</a>
+                                    <a className="text-sm text-slate-300 transition duration-150 ease-in-out hover:text-white" href={route('market')}>Market</a>
                                 </li>
                                 <li>
-                                    <a className="text-sm text-slate-300 transition duration-150 ease-in-out hover:text-white" href="#0">Scan</a>
+                                    <a className="text-sm text-slate-300 transition duration-150 ease-in-out hover:text-white" href={route('scan')}>Scan</a>
                                 </li>
                             </ul>
                         </div>
@@ -63,10 +63,10 @@ export const Footer = () => {
                             <h6 className="text-left text-sm font-bold">Company</h6>
                             <ul className="flex flex-col items-start">
                                 <li>
-                                    <a className="text-sm text-slate-300 transition duration-150 ease-in-out hover:text-white" href="#0">About us</a>
+                                    <a className="text-sm text-slate-300 transition duration-150 ease-in-out hover:text-white" href={route('about')}>About us</a>
                                 </li>
                                 <li>
-                                    <a className="text-sm text-slate-300 transition duration-150 ease-in-out hover:text-white" href="#0">Careers</a>
+                                    <a className="text-sm text-slate-300 transition duration-150 ease-in-out hover:text-white" href="/about#team">Our Team</a>
                                 </li>
                             </ul>
                         </div>
@@ -75,7 +75,7 @@ export const Footer = () => {
                             <h6 className="text-left text-sm font-bold">Others</h6>
                             <ul className="flex flex-col items-start">
                                 <li>
-                                    <a className="text-sm text-slate-300 transition duration-150 ease-in-out hover:text-white" href="#0">FAQ & Help</a>
+                                    <a className="text-sm text-slate-300 transition duration-150 ease-in-out hover:text-white" href="/about#faqs">FAQ & Help</a>
                                 </li>
                                 <li>
                                     <a className="text-sm text-slate-300 transition duration-150 ease-in-out hover:text-white" href="#0">Terms of privacity</a>

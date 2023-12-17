@@ -43,7 +43,7 @@ function Market({ auth, roles, products = [] }) {
 
     return (
         <>
-            <NavBar user={auth.user} roles={roles} sectionsBg={{ 'market': '--dark' }} sectionsText={{ 'market': 'white' }} />
+            <NavBar user={auth.user} roles={roles} dynamicBackground={false} defaultBackgroundColor='var(--main-blue)' defaultTextColor='white' />
 
             <header className='-mt-24 h-[550px] relative overflow-hidden'>
                 <Carousel

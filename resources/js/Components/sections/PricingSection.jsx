@@ -2,7 +2,7 @@ import { Button } from "../Buttons"
 
 export const PricingSection = () => {
     return (
-        <section id="Pricing" className="bg-gradient-to-b my-24 from-blue-600 to-blue-900 rounded-lg mx-5 p-10 md:p-20 2xl:mx-72 xl:mx-52 lg:mx-10">
+        <section id="pricing" className="bg-gradient-to-b my-24 from-blue-600 to-blue-900 rounded-lg mx-5 p-10 md:p-20 2xl:mx-72 xl:mx-52 lg:mx-10">
             <h1 className="relative z-10 mb-5 text-4xl md:text-5xl text-white font-bold">Plans & Pricing</h1>
             <div className="bg-gradient-to-b from-white to-blue-50 rounded-xl p-8 md:p-10 flex flex-col md:flex-row text-blue-950">
                 <div className="mb-8 md:mb-0 md:mr-8 w-full md:w-1/2">
