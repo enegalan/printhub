@@ -327,6 +327,16 @@ const Navbar = ({
                       </Link>
                     </li>
                   )}
+                  {isAdmin && (
+                    <li className="mb-1">
+                      <Link
+                        className="block p-4 text-lg font-semibold text-gray-400 hover:bg-blue-50 hover:text-[--blue-1] rounded"
+                        href={route("admin.dashboard")}
+                      >
+                        Admin Dashboard
+                      </Link>
+                    </li>
+                  )}
                 </ul>
               </div>
               <div className="mt-auto">
