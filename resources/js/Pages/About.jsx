@@ -5,12 +5,12 @@ import { Footer } from '@/Components/Footer';
 
 import { Faqs } from '@/Components/Faqs';
 
-function About({ auth, roles }) {
+function About({ auth }) {
   
   return (
     <>
       <div className='overflow-hidden bg-[var(--light-grey)]'>
-        <NavBar user={auth.user} roles={roles} sectionsBg={{ 'about': '--dark' }} sectionsText={{ 'about': 'white' }} />
+        <NavBar user={auth.user} sectionsBg={{ 'about': '--dark' }} sectionsText={{ 'about': 'white' }} />
         
         <header id="about" className='relative overflow-hidden py-48 text-center'>
           <div className="absolute top-0 bottom-0">

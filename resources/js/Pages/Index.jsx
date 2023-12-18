@@ -16,11 +16,11 @@ import { AboutSection } from '@/Components/sections/AboutSection';
 import { PricingSection } from '@/Components/sections/PricingSection';
 import LatestProductsSection from '@/Components/sections/LatestProductsSection';
 
-function Index({ auth, roles }) {
+function Index({ auth }) {
   return (
     <>
       <div className='overflow-hidden bg-[var(--light-grey)]'>
-        <NavBar user={auth.user} roles={roles} sectionsBg={{ 'thanks': '--dark' }} sectionsText={{ 'thanks': 'white' }} />
+        <NavBar user={auth.user} sectionsBg={{ 'thanks': '--dark' }} sectionsText={{ 'thanks': 'white' }} />
         {/* Hero Section */}
         <div className="w-full bg-gradient-to-r h-screen from-blue-900 to-blue-700 ">
           <div className='dotted_bg flex relative flex-col justify-center items-center'>

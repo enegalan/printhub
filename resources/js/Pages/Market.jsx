@@ -13,7 +13,7 @@ import { SearchInput } from '@/Components/Inputs';
 
 import ProductsSection from '@/Components/sections/ProductsSection';
 
-function Market({ auth, roles, products = [] }) {
+function Market({ auth, products = [] }) {
 
     // FILTER BY
     function onCategoryChange(event) {
@@ -43,7 +43,7 @@ function Market({ auth, roles, products = [] }) {
 
     return (
         <>
-            <NavBar user={auth.user} roles={roles} dynamicBackground={false} defaultBackgroundColor='var(--main-blue)' defaultTextColor='white' />
+            <NavBar user={auth.user} dynamicBackground={false} defaultBackgroundColor='var(--main-blue)' defaultTextColor='white' />
 
             <header className='-mt-24 h-[550px] relative overflow-hidden'>
                 <Carousel

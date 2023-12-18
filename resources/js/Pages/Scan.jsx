@@ -5,10 +5,10 @@ import { Footer } from '@/Components/Footer';
 
 import { DragAndDropBox } from '@/Components/Inputs';
 
-function Scan ({auth, roles}) {
+function Scan ({auth}) {
     return (
         <>
-            <NavBar defaultBackgroundColor="var(--main-blue)" defaultTextColor="var(--white)" dynamicBackground={false} user={auth.user} roles={roles} />
+            <NavBar defaultBackgroundColor="var(--main-blue)" defaultTextColor="var(--white)" dynamicBackground={false} user={auth.user} />
             <main id="scan" className='mt-32'>
                 <h1 className='font-bold text-4xl text-center'>Upload your 3D model here</h1>
                 <div className='my-16 flex items-center justify-center'>

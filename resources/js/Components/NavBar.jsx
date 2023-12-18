@@ -12,16 +12,15 @@ import NavLink from "@/Components/NavLink";
 
 const Navbar = ({
   user = null,
-  roles = [],
   sectionsBg = [],
   sectionsText = [],
   dynamicBackground = true,
   defaultBackgroundColor = "transparent",
   defaultTextColor = "white",
 }) => {
-  console.log(user);
+  
   const isAdmin = user.roles.some(role => role.name === 'admin');
-  console.log(isAdmin);
+
   const [headerBgColor, setHeaderBgColor] = useState(
     dynamicBackground ? "transparent" : defaultBackgroundColor
   );

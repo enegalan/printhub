@@ -11,9 +11,9 @@ class AdminController extends Controller
 {
     public function __construct() {
         $this->middleware('admin');
-        app()->call([UserController::class, 'getRoles']);
     }
     public function dashboard() {
+        app()->call([UserController::class, 'getRoles']);
         return (
             Inertia::render('Admin/Dashboard')
         );
