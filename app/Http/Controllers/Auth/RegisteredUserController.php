@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cart;
 use App\Models\Profile;
+use App\Models\Role;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -46,6 +48,17 @@ class RegisteredUserController extends Controller
             'birthdate'=>$request->birthdate,
             'avatar' => null,
         ]);
+
+        $role = Role::where('name', 'guest')->first(); // Reemplaza 'tu_rol' con el nombre del rol que desees asignar
+        $user->roles()->attach($role);
+
+        $cart = Cart::create([
+            'user_id' => $user->id,
+            'active' => 1
+        ]);
+
+        $cart->save();
+
         event(new Registered($user));
 
         Auth::login($user);
