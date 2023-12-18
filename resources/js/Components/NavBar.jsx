@@ -19,7 +19,9 @@ const Navbar = ({
   defaultTextColor = "white",
 }) => {
   
-  const isAdmin = user.roles.some(role => role.name === 'admin');
+  var isAdmin = false;
+  
+  if (user && user.hasOwnProperty('roles')) isAdmin = user.roles.some(role => role.name === 'admin'); 
 
   const [headerBgColor, setHeaderBgColor] = useState(
     dynamicBackground ? "transparent" : defaultBackgroundColor
