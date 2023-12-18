@@ -9,15 +9,13 @@ use Inertia\Response;
 
 class AdminController extends Controller
 {
-    private $roles;
     public function __construct() {
         $this->middleware('admin');
-        $roles = app()->call([UserController::class, 'getRoles']);
-        $this->roles = $roles;
+        app()->call([UserController::class, 'getRoles']);
     }
     public function dashboard() {
         return (
-            Inertia::render('Admin/Dashboard', ['roles' => $this->roles])
+            Inertia::render('Admin/Dashboard')
         );
     }
 }

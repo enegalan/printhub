@@ -21,11 +21,10 @@ class UserController extends Controller
      */
     public function edit(Request $request): Response
     {
-        $roles = $this->getRoles();
+        $this->getRoles();
         return Inertia::render('Profile/Edit', [
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
             'status' => session('status'),
-            'roles' => $roles,
         ]);
     }
 

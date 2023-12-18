@@ -19,18 +19,18 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    $roles = app()->call([UserController::class, 'getRoles']);
-    return Inertia::render('Index', ['roles' => $roles]);
+    app()->call([UserController::class, 'getRoles']);
+    return Inertia::render('Index');
 })->name('index');
 
 Route::get('/about', function () {
-    $roles = app()->call([UserController::class, 'getRoles']);
-    return Inertia::render('About', ['roles' => $roles]);
+    app()->call([UserController::class, 'getRoles']);
+    return Inertia::render('About');
 })->name('about');
 
 Route::get('/scan', function () {
-    $roles = app()->call([UserController::class, 'getRoles']);
-    return Inertia::render('Scan', ['roles' => $roles]);
+    app()->call([UserController::class, 'getRoles']);
+    return Inertia::render('Scan');
 })->name('scan');
 
 Route::get('/market', [ProductController::class, 'getAll'])->name('market');
@@ -38,8 +38,8 @@ Route::get('/market/search', [ProductController::class, 'search'])->name('produc
 Route::get('/market/filter', [ProductController::class, 'filter'])->name('products.filter');
 
 Route::get('/dashboard', function () {
-    $roles = app()->call([UserController::class, 'getRoles']);
-    return Inertia::render('Index', ['roles' => $roles]);
+    app()->call([UserController::class, 'getRoles']);
+    return Inertia::render('Index');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {

@@ -19,6 +19,7 @@ const Navbar = ({
   defaultBackgroundColor = "transparent",
   defaultTextColor = "white",
 }) => {
+  console.log(user);
   const isAdmin = roles.includes('admin');
 
   const [headerBgColor, setHeaderBgColor] = useState(

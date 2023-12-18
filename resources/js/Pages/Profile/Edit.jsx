@@ -10,7 +10,7 @@ import Navbar from "@/Components/NavBar";
 export default function Edit({ auth, mustVerifyEmail, status }) {
   return (
     <div>
-    <Navbar user={auth.user} roles={roles}></Navbar>
+    <Navbar user={auth.user}></Navbar>
       <Head title="Profile" />
 
       <div className="py-12">
