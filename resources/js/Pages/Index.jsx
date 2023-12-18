@@ -36,7 +36,7 @@ function Index({ auth }) {
                   </span>
                 </p>
                 <div className='mt-10'>
-                  <GlowButton value="SCAN" image="/images/scan.png" imageClass="w-[20%] mr-5 invert" />
+                  <GlowButton href={route('scan')} value="SCAN" image="/images/scan.png" imageClass="w-[20%] mr-5 invert" />
                 </div>
               </div>
               <ThreeBox></ThreeBox>
