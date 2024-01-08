@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Inertia\Inertia;
 use Inertia\Response;
 use Illuminate\Http\Request;
@@ -107,5 +108,15 @@ class UserController extends Controller
             return $roles;
         }
         return array('You are not logged in.');
+    }
+
+    public function restore($id) {
+        $user = User::withTrashed()->find($id);
+
+        if ($user) {
+            $user->restore();
+        } else {
+            abort('402', 'User not found');
+        }
     }
 }
