@@ -12,14 +12,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
         \App\Models\User::factory(100)->create();
         \App\Models\Payment_method::factory(30)->create();
+        //User roles
         \App\Models\Role::factory()->create([
             'name' => 'admin',
         ]);
@@ -32,6 +27,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\Role::factory()->create([
             'name' => 'provider',
         ]);
+        //Material #6
         \App\Models\Material::create([
             'name' => 'pla'
         ]);
@@ -50,7 +46,38 @@ class DatabaseSeeder extends Seeder
         \App\Models\Material::create([
             'name' => 'blue'
         ]);
+        //Colors #4
+        \App\Models\Color::create([
+            'name' => 'blue'
+        ]);
+        \App\Models\Color::create([
+            'name' => 'orange'
+        ]);
+        \App\Models\Color::create([
+            'name' => 'red'
+        ]);
+        \App\Models\Color::create([
+            'name' => 'green'
+        ]);
+        //Categories for proucts_cob #2
+        \App\Models\Category::create([
+            'name' => 'decoration'
+        ]);
+        \App\Models\Category::create([
+            'name' => 'spares'
+        ]);
+        //Product & Cart
         \App\Models\Product::factory(100)->create();
         \App\Models\Cart::factory(40)->create();
+
+        // Needs user, country, region.
+        \App\Models\Country::factory(40)->create();
+        \App\Models\Region::factory(20)->create();
+        \App\Models\Fact_address::factory(10)->create();
+        \App\Models\Ship_address::factory(10)->create();
+        \App\Models\Order::factory(20)->create();
+        
+        //addresse
+        //orders
     }
 }
