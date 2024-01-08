@@ -3,7 +3,7 @@ import { GlowButton } from '@/Components/Buttons';
 
 export const ContactUsSection = () => {
     return (
-        <div className="overflow-hidden w-full lg:w-2/3">
+        <div className="overflow-hidden w-full lg:w-2/3" id="contact">
             <form method='POST' action='' className="max-w-lg mx-auto relative z-10">
                 <p className='text-3xl mb-5 font-bold'>Contact us</p>
                 <div className="mb-4">

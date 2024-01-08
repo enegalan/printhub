@@ -76,20 +76,6 @@ return new class extends Migration
             $table->timestamps();
         });
         
-        Schema::create('orders', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('cart_id')->constrained();
-            $table->enum('status',['Not paid', 'Paid', 'Shipping', 'Delivered']);
-            $table->timestamps();
-        });
-
-        Schema::create('invoices', function (Blueprint $table) {
-            $table->id();
-            $table->enum('payment_method',['Paypal', 'Credit Card']);
-            $table->foreignId('order_id')->constrained();
-            $table->timestamps();
-        });
-        
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -105,6 +91,7 @@ return new class extends Migration
 
         Schema::create('wishlists', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
 
@@ -158,6 +145,21 @@ return new class extends Migration
             $table->string('name');
             $table->string('address');
             $table->integer('zip');
+            $table->timestamps();
+        });
+        Schema::create('orders', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('cart_id')->constrained();
+            $table->foreignId('fact_addresse_id')->constrained();
+            $table->foreignId('ship_addresse_id')->constrained();
+            $table->enum('status',['Not paid', 'Paid', 'Shipping', 'Delivered']);
+            $table->timestamps();
+        });
+
+        Schema::create('invoices', function (Blueprint $table) {
+            $table->id();
+            $table->enum('payment_method',['Paypal', 'Credit Card']);
+            $table->foreignId('order_id')->constrained();
             $table->timestamps();
         });
     }

@@ -33,6 +33,11 @@ Route::get('/scan', function () {
     return Inertia::render('Scan');
 })->name('scan');
 
+Route::get('/privacy', function () {
+    app()->call([UserController::class, 'getRoles']);
+    return Inertia::render('Privacy');
+})->name('privacy');
+
 Route::get('/market', [ProductController::class, 'getAll'])->name('market');
 Route::get('/market/search', [ProductController::class, 'search'])->name('products.search');
 Route::get('/market/filter', [ProductController::class, 'filter'])->name('products.filter');
