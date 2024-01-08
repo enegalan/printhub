@@ -78,7 +78,7 @@ export const Footer = () => {
                                     <a className="text-sm text-slate-300 transition duration-150 ease-in-out hover:text-white" href="/about#faqs">FAQ & Help</a>
                                 </li>
                                 <li>
-                                    <a className="text-sm text-slate-300 transition duration-150 ease-in-out hover:text-white" href="#0">Terms of privacity</a>
+                                    <a className="text-sm text-slate-300 transition duration-150 ease-in-out hover:text-white" href="/privacy">Terms of privacity</a>
                                 </li>
                             </ul>
                         </div>
