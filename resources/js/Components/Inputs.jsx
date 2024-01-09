@@ -185,7 +185,6 @@ const DropdownCheckbox = ({ options = [{}], action = null, name = "elements" }) 
     useEffect(() => {
         if (selectedOptions.length > 0) {
             // This effect runs every time selectedOptions changes
-            console.log(selectedOptions);
 
             const newFilters = {
                 filters: {
@@ -201,7 +200,6 @@ const DropdownCheckbox = ({ options = [{}], action = null, name = "elements" }) 
             }
         } else {
             if (filters !== null) {
-                console.log(action.split('/'));
                 router.get('/market');
                 setFilters(null);
             }

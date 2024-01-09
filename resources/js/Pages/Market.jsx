@@ -1,49 +1,107 @@
 import '@/App.css';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { router } from '@inertiajs/react'
 
 import NavBar from '@/Components/NavBar';
 import { Footer } from '@/Components/Footer';
 
 import Carousel from "nuka-carousel";
-import { DropdownCheckbox } from '@/Components/Inputs';
+import { DropdownCheckbox, SearchInput } from '@/Components/Inputs';
 import OrderBy from '@/Components/OrderBy';
-import { SearchInput } from '@/Components/Inputs';
 
 import ProductsSection from '@/Components/sections/ProductsSection';
 
 function Market({ auth, products = [] }) {
+    const [categoriesFilter, setCategories] = useState([]);
+    const [priceFilter, setPrice] = useState([]);
+    const [arrivalFilter, setArrival] = useState([]);
+    const [orderFilter, setOrder] = useState([]);
+    const [searchFilter, setSearch] = useState([]);
 
-    // FILTER BY
+    useEffect(() => {
+        sendFilters();
+    }, [categoriesFilter, priceFilter, arrivalFilter, orderFilter, searchFilter]);
+
     function onCategoryChange(event) {
-        const categories = event.target.value;
-        event.stopPropagation();
-        console.log(categories);
-        //router.get('/market/filter', {'categories': newQueryValue}, { preserveState: true })
-    }
-    function onPriceChange() {
-
-    }
-    function onArrivalsChange() {
-
-    }
-    // ORDER BY
-    function onOrderByChange() {
-
+        const categoryValue = event.target.value;
+        // Check if the value is already in the array
+        if (categoriesFilter.includes(categoryValue)) {
+            // If it is, remove it
+            setCategories(categoriesFilter.filter((value) => value !== categoryValue));
+        } else {
+            // If it is not, add it to the array
+            setCategories([...categoriesFilter, categoryValue]);
+        }
     }
 
-    // PRODUCT CARDS FUNCTIONS
-    function onAddToWishlist() {
+    function onPriceChange(event) {
+        const price_interval = event.target.value;
 
+        // Si el precio ya está presente, deselección
+        if (priceFilter.includes(price_interval)) {
+            setPrice(priceFilter.filter((value) => value !== price_interval));
+        } else {
+            // Si no está presente, selección o deselección
+            setPrice((prevPriceFilter) => {
+                // Si el precio ya estaba seleccionado, deselección
+                if (prevPriceFilter.includes(price_interval)) {
+                    return prevPriceFilter.filter((value) => value !== price_interval);
+                }
+                // Si el precio no estaba seleccionado, selección
+                return [...prevPriceFilter, price_interval];
+            });
+        }
     }
-    function onAddToCart() {
 
+    function onArrivalsChange(event) {
+        const arrivalValue = event.target.value;
+        // Check if the value is already in the array
+        if (arrivalFilter.includes(arrivalValue)) {
+            // If it is, remove it
+            setArrival(arrivalFilter.filter((value) => value !== arrivalValue));
+        } else {
+            // If it is not, add it to the array
+            setArrival([...arrivalFilter, arrivalValue]);
+        }
+    }
+
+    function onOrderByChange(event) {
+        const order = event;
+        setOrder(order);
+    }
+
+    function onSearchChange(event) {
+        const search = event.target.value;
+        setSearch(search);
+    }
+
+    function sendFilters() {
+        const newFilters = {
+            categories: categoriesFilter,
+            price: priceFilter,
+            arrival: arrivalFilter.length != 0 ? arrivalFilter : '%',
+            order: orderFilter.length != 0 ? orderFilter : '%',
+            search: searchFilter.length != 0 ? searchFilter : '%',
+        };
+        
+        const filteredFilters = Object.fromEntries(
+            Object.entries(newFilters).filter(([_, value]) => value.length > 0)
+        );
+
+        if (Object.keys(filteredFilters).length > 0) {
+            router.post('/market/filter', { filters: newFilters }, { preserveState: true });
+        }
     }
 
     return (
         <>
-            <NavBar user={auth.user} dynamicBackground={false} defaultBackgroundColor='var(--main-blue)' defaultTextColor='white' />
+            <NavBar
+                user={auth.user}
+                dynamicBackground={false}
+                defaultBackgroundColor='var(--main-blue)'
+                defaultTextColor='white'
+            />
 
             <header className='-mt-24 h-[550px] relative overflow-hidden'>
                 <Carousel
@@ -52,41 +110,37 @@ function Market({ auth, products = [] }) {
                     wrapAround={true}
                     disableEdgeSwiping={true}
                     renderBottomCenterControls={() => null}
-                    renderCenterLeftControls={({ previousSlide }) => (
-                        <></>
-                    )}
-                    renderCenterRightControls={({ nextSlide }) => (
-                        <></>
-                    )}
+                    renderCenterLeftControls={({ previousSlide }) => <></>}
+                    renderCenterRightControls={({ nextSlide }) => <></>}
                 >
                     <img src='/images/impresion1.jpg' style={{ width: '100%', height: '650px', display: 'block', marginTop: '80px', objectFit: 'cover' }} />
                 </Carousel>
             </header>
 
-            <main id="market" className='flex mb-64 mt-16 mx-5 gap-10'>
-                {/* Left side - Filter by */}
+            <main id='market' className='flex mb-64 mt-16 mx-5 gap-10'>
                 <div className='w-[235px] flex flex-col gap-5'>
                     <section className='flex flex-col gap-3'>
                         <h4 className='font-bold text-lg'>Category</h4>
-                        <form className='flex' method="GET" action="">
-                            <DropdownCheckbox name='categories' action="/market/filter" options={[{ id: 1, 'label': 'Decoration' }, { id: 2, 'label': 'Spares' }]} />
+                        <form className='flex' method="POST" action="">
+                            <span onChange={onCategoryChange}>
+                                <DropdownCheckbox name='categories' options={[{ id: 1, 'label': 'Decoration' }, { id: 2, 'label': 'Spares' }]} />
+                            </span>
                         </form>
                     </section>
                     <section className='flex flex-col gap-3'>
                         <h4 className='font-bold text-lg'>Price</h4>
                         <form method="POST" action="">
-                            <ul className='flex flex-col gap-2'>
-                                {/* Set inputs values like if they were intervals. Example: 0-20, 30-50... */}
+                            <ul className='flex flex-col gap-2' onChange={onPriceChange}>
                                 <li className='flex gap-3 items-center'>
-                                    <input className='rounded text-[var(--main-blue)]' type="checkbox" name="price" value="0-20" />
+                                    <input className='rounded text-[var(--main-blue)]' type="checkbox" name="price" value="0" />
                                     <label className='text-sm' htmlFor="price">0 - 20 EUR</label>
                                 </li>
                                 <li className='flex gap-3 items-center'>
-                                    <input className='rounded text-[var(--main-blue)]' type="checkbox" name="price" value="20-50" />
+                                    <input className='rounded text-[var(--main-blue)]' type="checkbox" name="price" value="20" />
                                     <label className='text-sm' htmlFor="price">20 - 50 EUR</label>
                                 </li>
                                 <li className='flex gap-3 items-center'>
-                                    <input className='rounded text-[var(--main-blue)]' type="checkbox" name="price" value="20-50" />
+                                    <input className='rounded text-[var(--main-blue)]' type="checkbox" name="price" value="50" />
                                     <label className='text-sm' htmlFor="price">More than 50 EUR</label>
                                 </li>
                             </ul>
@@ -95,7 +149,7 @@ function Market({ auth, products = [] }) {
                     <section className='flex flex-col gap-3'>
                         <h4 className='font-bold text-lg'>New arrivals</h4>
                         <form method="POST" action="">
-                            <ul className='flex flex-col gap-2'>
+                            <ul className='flex flex-col gap-2' onChange={onArrivalsChange}>
                                 <li className='flex gap-3 items-center'>
                                     <input className='rounded text-[var(--main-blue)]' type="checkbox" name="new_arrivals" value="30" />
                                     <label className='text-sm' htmlFor="new_arrivals">Last 30 days</label>
@@ -109,20 +163,17 @@ function Market({ auth, products = [] }) {
                     </section>
                 </div>
 
-                {/* Right side */}
                 <div className='flex flex-col w-full px-6'>
-                    {/* Order by */}
                     <div className='flex gap-10 items-center'>
-                        <section className='w-full'>
-                            <SearchInput action="/market/search" placeholder='Search...' />
+                        <section className='w-full' onInput={onSearchChange}>
+                            <SearchInput action="" placeholder='Search...' onChange={onSearchChange} />
                         </section>
                         <section className='self-end'>
-                            <OrderBy options={['Featured', 'Price: Low to High', 'Price: High to Low', 'Avg. Customer Review', 'Newest Arrivals', 'Best Sellers']} />
+                            <OrderBy options={{ 'lowhigh' : 'Price: Low to High', 'highlow' : 'Price: High to Low' }} onChange={onOrderByChange} />
                         </section>
                     </div>
                     <ProductsSection products={products} />
                 </div>
-
             </main>
 
             <Footer />
