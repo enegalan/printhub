@@ -38,6 +38,16 @@ Route::get('/privacy', function () {
     return Inertia::render('Privacy');
 })->name('privacy');
 
+Route::get('/payment', function () {
+    app()->call([UserController::class, 'getRoles']);
+    return Inertia::render('Payment');
+})->name('payment');
+
+Route::get('/payment/complete', function () {
+    app()->call([UserController::class, 'getRoles']);
+    return Inertia::render('PaymentComplete');
+})->name('paymentcomplete');
+
 Route::get('/market', [ProductController::class, 'getAll'])->name('market');
 Route::get('/market/search', [ProductController::class, 'search'])->name('products.search');
 Route::get('/market/filter', [ProductController::class, 'filter'])->name('products.filter');
