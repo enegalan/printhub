@@ -41,6 +41,7 @@ Route::get('/privacy', function () {
 Route::get('/market', [ProductController::class, 'getAll'])->name('market');
 Route::get('/market/search', [ProductController::class, 'search'])->name('products.search');
 Route::get('/market/filter', [ProductController::class, 'filter'])->name('products.filter');
+Route::get('/market/product/{id}',[ProductController::class, 'show'])->name('product.show');
 
 Route::get('/dashboard', function () {
     app()->call([UserController::class, 'getRoles']);

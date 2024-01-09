@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 use App\Http\Controllers\UserController;
+use App\Models\Color;
+use App\Models\Material;
 
 class ProductController extends Controller
 {
@@ -20,7 +22,7 @@ class ProductController extends Controller
 
     public function search(Request $request) {
         app()->call([UserController::class, 'getRoles']);
-
+        
         $query = $request->input('query');
         $products = Product::where('name', 'like', "%$query%")->paginate($this->productPerPagination);
         return Inertia::render('Market', ['products' => $products]);
@@ -39,5 +41,12 @@ class ProductController extends Controller
             
         } else return $this->getAll();
         
+    }
+    public function show(string $id){
+        $product = Product::findOrFail($id);
+        $colors = Color::all();
+        $materials = Material::all();
+        $product->categories;
+        return Inertia::render('Product/Show', ['product' => $product,'colors' => $colors,'materials' => $materials]);
     }
 }
