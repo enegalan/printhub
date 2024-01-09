@@ -6,13 +6,9 @@ use App\Http\Controllers\UserController;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-<<<<<<< HEAD
 use Inertia\Response;
-use App\Http\Controllers\UserController;
 use App\Models\Color;
 use App\Models\Material;
-=======
->>>>>>> fda850a8e1adb929b09d6a8fd8c1dc7573950a04
 
 class ProductController extends Controller
 {
