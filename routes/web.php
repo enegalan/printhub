@@ -50,7 +50,12 @@ Route::get('/payment/complete', function () {
 
 Route::get('/market', [ProductController::class, 'getAll'])->name('market');
 Route::get('/market/search', [ProductController::class, 'search'])->name('products.search');
-Route::get('/market/filter', [ProductController::class, 'filter'])->name('products.filter');
+Route::get('/market/product/{id}',[ProductController::class, 'show'])->name('product.show');
+Route::post('/market/filter', [ProductController::class, 'filter'])->name('products.filter');
+// Avoid page reload in filters
+Route::get('/market/filter', function () {
+    return redirect()->route('market');
+});
 
 Route::get('/dashboard', function () {
     app()->call([UserController::class, 'getRoles']);

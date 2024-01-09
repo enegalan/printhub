@@ -1,13 +1,13 @@
 import React from "react";
 
-function OrderBy ({options = []}) {
+function OrderBy ({ options = {}, onChange = () => {} }) {
     return(
         <div id="order_by" className="inline-flex flex-wrap">
-            <select className="rounded border-[var(--light-grey)]" name="order_by">
+            <select className="rounded border-[var(--light-grey)]" name="order_by" onChange={(e) => onChange(e.target.value)}>
                 <option key="-1" value="-1" className="text-sm font-medium">Order by</option>
-                {options.map((option, i) =>
-                    <option key={i} value={option} className="text-sm font-medium">{option}</option>
-                )}
+                {Object.entries(options).map(([key, value], i) => (
+                    <option key={i} value={key} className="text-sm font-medium">{value}</option>
+                ))}
             </select>
         </div>
     );

@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import gsap from 'gsap';
 import chroma from 'chroma-js';
 import '../../css/ButtonGlow.css';
+import { Link } from '@inertiajs/react';
 
 const GlowButton = ({ value = "", href = "#", backgroundColor = "#09041e", textColor = "white", image = "", imageClass = "", icon = "" }) => {
     const buttonRef = useRef(null);
@@ -153,11 +154,11 @@ const BouncingButton = () => {
 
 const Button = ({ value = "", href = "#", hoverBackgroundColor = "var(--light-grey)", hoverTextColor = "", backgroundColor = "transparent", borderColor = "white", textColor = "white", image = "", imageClass = "", icon = "" }) => {
     return (
-        <a href={href} className={`bg-[${backgroundColor}] text-[${textColor}] rounded-xl p-3 px-8 ${borderColor ? 'border-2' : ''} border-[${borderColor}] transition hover:bg-[${hoverBackgroundColor}] hover:text-[${hoverTextColor}]`}>
+        <Link href={href} className={`bg-[${backgroundColor}] text-[${textColor}] rounded-xl p-3 px-8 ${borderColor ? 'border-2' : ''} border-[${borderColor}] transition hover:bg-[${hoverBackgroundColor}] hover:text-[${hoverTextColor}]`}>
             {image ? <img src={`${image}`} className={`${imageClass}`} /> : ""}
             {icon ? <i className={icon}></i> : ""}
             {value}
-        </a>
+        </Link>
     );
 };
 Button.propTypes = {
