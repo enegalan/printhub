@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import '@/App.css';
 
 import InputError from '@/Components/InputError';
 import { Link, useForm } from '@inertiajs/react';

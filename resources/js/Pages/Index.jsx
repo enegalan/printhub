@@ -1,5 +1,3 @@
-import '@/App.css';
-
 import Particles from 'react-tsparticles';
 import { loadFull } from 'tsparticles'
 import Carousel from "nuka-carousel"

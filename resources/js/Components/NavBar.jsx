@@ -1,6 +1,5 @@
 import logo from "../../../public/logoWhite.svg";
 import logoblue from "../../../public/logoBlue.svg";
-import "@/App.css";
 import { GlowButton } from "./Buttons";
 import Dropdown from "@/Components/Dropdown";
 
