@@ -119,4 +119,12 @@ class UserController extends Controller
             abort('402', 'User not found');
         }
     }
+    public function show(string $id){
+        if(auth()->user()->id == $id){
+            $user = User::findOrFail($id);
+            return Inertia::render('Profile/Show', ['user' => $user]);
+        }else{
+            abort(401, 'Unauthorized');
+        }
+    }
 }
