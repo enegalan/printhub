@@ -241,7 +241,7 @@ const Navbar = ({
                 href={route("register")}
                 className="transition duration-300 bg-gray-200 px-8 py-2 text-[var(--main-blue)] font-bold rounded-lg hover:bg-blue-900 hover:text-white"
               >
-                Register
+                START PRINTING
               </Link>
             </>
           )}
