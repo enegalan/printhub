@@ -10,8 +10,16 @@ class Invoice extends Model
     protected $table = 'invoices';
     protected $fillable = [
         'payment_method', 
-        'order_id'
+        'order_id',
+        'name',
+        'surname',
+        'email'
     ];
     
     use HasFactory;
+
+    public function order()
+{
+    return $this->belongsTo(Order::class);
+}
 }

@@ -160,6 +160,9 @@ return new class extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
             $table->enum('payment_method',['Paypal', 'Credit Card']);
+            $table->string('name');
+            $table->string('surname');
+            $table->string('email');
             $table->foreignId('order_id')->constrained();
             $table->timestamps();
         });

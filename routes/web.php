@@ -3,6 +3,8 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
+use App\Models\Country;
+use App\Models\Region;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -38,16 +40,6 @@ Route::get('/privacy', function () {
     return Inertia::render('Privacy');
 })->name('privacy');
 
-Route::get('/payment', function () {
-    app()->call([UserController::class, 'getRoles']);
-    return Inertia::render('Payment');
-})->name('payment');
-
-Route::get('/payment/complete', function () {
-    app()->call([UserController::class, 'getRoles']);
-    return Inertia::render('PaymentComplete');
-})->name('paymentcomplete');
-
 Route::get('/market', [ProductController::class, 'getAll'])->name('market');
 Route::get('/market/search', [ProductController::class, 'search'])->name('products.search');
 Route::get('/market/product/{id}',[ProductController::class, 'show'])->name('product.show');
@@ -68,6 +60,17 @@ Route::middleware('auth')->group(function () {
     Route::post('/upload-avatar', [UserController::class, 'avatar'])->name('profile.avatar');
     Route::delete('/avatar-delete', [UserController::class, 'deleteAvatar'])->name('profile.avatar-delete');
     Route::delete('/profile', [UserController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/payment', function () {
+        app()->call([UserController::class, 'getRoles']);
+        $countries = Country::all();
+        $regions = Region::all();
+        return Inertia::render('Payment', ['countries' => $countries, 'regions' => $regions]);
+    })->name('payment');
+
+    Route::get('/payment/complete', function () {
+        app()->call([UserController::class, 'getRoles']);
+        return Inertia::render('PaymentComplete');
+    })->name('paymentcomplete');
 });
 
 Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin.dashboard');

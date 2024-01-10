@@ -12,4 +12,14 @@ class Order extends Model
 
     protected $fillable = ['cart_id', 'status'];
 
+    public function shipAddress()
+{
+    return $this->belongsTo(Ship_address::class, 'ship_addresse_id');
+}
+
+public function factAddress()
+{
+    return $this->belongsTo(Fact_address::class, 'fact_addresse_id');
+}
+
 }
