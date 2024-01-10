@@ -28,5 +28,13 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('adminAccess', function ($user) {
             return $user->adminAccess();
         });
+
+        Gate::define('vipAccess', function ($user) {
+            return $user->vipAccess();
+        });
+
+        Gate::define('providerAccess', function ($user) {
+            return $user->providerAccess();
+        });
     }
 }
