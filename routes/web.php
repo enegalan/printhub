@@ -54,9 +54,9 @@ Route::get('/dashboard', function () {
     return Inertia::render('Index');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile', [UserController::class, 'edit'])->name('profile.edit');
-    Route::get('/profile/{id}', [UserController::class, 'show'])->name('profile.show');
+    Route::get('/dashboard', [UserController::class, 'dashboard'])->name('profile.dashboard');
     Route::patch('/profile', [UserController::class, 'update'])->name('profile.update');
     Route::post('/upload-avatar', [UserController::class, 'avatar'])->name('profile.avatar');
     Route::delete('/avatar-delete', [UserController::class, 'deleteAvatar'])->name('profile.avatar-delete');

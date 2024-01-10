@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Stock_cart;
 use App\Models\User;
+use App\Models\Order;
+use App\Models\Product;
+use App\Models\Cart;
+use App\Models\Prod_comb;
 use Inertia\Inertia;
 use Inertia\Response;
 use Illuminate\Http\Request;
@@ -119,12 +124,54 @@ class UserController extends Controller
             abort('402', 'User not found');
         }
     }
-    public function show(string $id){
-        if(auth()->user()->id == $id){
-            $user = User::findOrFail($id);
-            return Inertia::render('Profile/Show', ['user' => $user]);
-        }else{
-            abort(401, 'Unauthorized');
+    public function dashboard(){
+        $user = User::findOrFail(auth()->user()->id);
+        $products = $this->getProducts(0);
+        return Inertia::render('Profile/Show', ['user' => $user, 'products' => $products]);
+    }
+
+    function getProducts ($active = 0) {
+        if (auth()->check()) {
+            $userId = auth()->user()->id;
+
+            // Search users carts that are active = 0
+            $userCarts = Cart::where('user_id', $userId)
+            ->where('active', $active)
+            ->get();
+
+            // Search carts that are in orders and status = "Paid"
+            $userCartIds = $userCarts->pluck('id');
+
+            // Find cart IDs in orders with status = "Paid"
+            $paidOrderCartIds = Order::whereIn('cart_id', $userCartIds)
+            ->where('status', 'Paid')
+            ->pluck('cart_id');
+
+            // Combine the cart IDs from both steps and get unique cart IDs
+            $combinedCartIds = $userCartIds->merge($paidOrderCartIds)->unique();
+
+            // Get prod_comb_id
+            $prodCombIds = Stock_cart::whereIn('cart_id', $combinedCartIds)->pluck('prod_comb_id');
+
+            if ($prodCombIds->isNotEmpty()) {
+                // Get product_id from prod_combs
+                $productIds = Prod_comb::whereIn('id', $prodCombIds)->pluck('product_id');
+            
+                // Check if there are any product_ids
+                if ($productIds->isNotEmpty()) {
+                    $products = [];
+
+                    // Get products from the combined carts
+                    foreach($productIds as $id) {
+                        $product = Product::where('id', $id)->get();
+                        array_push($products, $product);
+                    }
+                    
+                    //echo var_dump($products);
+                    return $products;
+                }
+            }
         }
+        return [];
     }
 }

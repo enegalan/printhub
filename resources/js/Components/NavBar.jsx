@@ -209,7 +209,7 @@ const Navbar = ({
                     </div>
 
                     <hr></hr>
-                    <Dropdown.Link href={route("profile.edit")}>
+                    <Dropdown.Link href={route("profile.dashboard")}>
                       Profile
                     </Dropdown.Link>
                     <Dropdown.Link href="#">Cart</Dropdown.Link>
@@ -323,7 +323,7 @@ const Navbar = ({
                     <li className="mb-1">
                       <Link
                         className="block p-4 text-lg font-semibold text-gray-400 hover:bg-blue-50 hover:text-[--blue-1] rounded"
-                        href={route("profile.edit")}
+                        href={route("profile.dashboard")}
                       >
                         Profile
                       </Link>
