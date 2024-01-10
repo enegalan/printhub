@@ -20,12 +20,9 @@ function PaymentComplete({ auth }) {
         <main className='my-12 mx-5 md:mx-24 mb-36 relative z-10'>
           {/* What is PrintHub */}
           <section className='my-6 flex flex-col gap-3'>
-            <h3 className='font-bold text-4xl'>What is PrintHub</h3>
+            
             <p className='ml-5 text-gray-700'>
-              PrintHub, a cutting-edge 3D printing company, revolutionizes the industry by seamlessly integrating AI technology. 
-              Specializing in transforming videos into intricate 3D models, PrintHub empowers users to effortlessly bring their ideas to life. 
-              With an intuitive interface, this innovative platform caters to both beginners and experts, making 3D printing accessible to all. 
-              Elevate your creativity with PrintHub's dynamic fusion of 3D printing and artificial intelligence.
+              Thank you for your purchase.
             </p>
           </section>
            
