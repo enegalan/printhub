@@ -101,9 +101,9 @@ export default function ProfileLayout({ children,pageName='Dashboard' }) {
             <p className="text-gray-700">Welcome to the admin section</p>
           </div>
           <div className="bg-gray-200/60 overflow-auto rounded-xl px-10 py-10 flex-1 mb-14 flex flex-col mr-5">
-            <div className="">
+            
               {children}
-            </div>
+            
           </div>
         </div>
       </div>

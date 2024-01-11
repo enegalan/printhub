@@ -10,6 +10,8 @@ export default function({regions}){
       };
     return(
         <Dashboard>
+            <div className='flex flex-col min-h-full '>
+            <div className=''>
             <table className="min-w-full bg-white border border-gray-300">
         <thead>
           <tr className="bg-gray-100">
@@ -43,12 +45,16 @@ export default function({regions}){
           ))}
         </tbody>
       </table>
+      </div>
+      <div className='flex self-center flex-1 flex-wrap content-end '>
       <Pagination
             prevPageUrl={prev_page_url}
             nextPageUrl={next_page_url}
             currentPage={current_page}
             totalPages={last_page}
             />
+        </div>
+        </div>
         </Dashboard>
     )
 }
