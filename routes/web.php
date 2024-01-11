@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProviderController;
 use App\Models\Country;
 use App\Models\Region;
 use Illuminate\Foundation\Application;
@@ -58,6 +59,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile', [UserController::class, 'edit'])->name('profile.edit');
     Route::get('/dashboard', [UserController::class, 'dashboard'])->name('profile.dashboard');
     Route::patch('/profile', [UserController::class, 'update'])->name('profile.update');
+    Route::get('/profile/provider', [ProviderController::class, 'dashboard'])->name('profile.provider');
     Route::post('/upload-avatar', [UserController::class, 'avatar'])->name('profile.avatar');
     Route::delete('/avatar-delete', [UserController::class, 'deleteAvatar'])->name('profile.avatar-delete');
     Route::delete('/profile', [UserController::class, 'destroy'])->name('profile.destroy');

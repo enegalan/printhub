@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Gate;
 
-class AdminMiddleware
+class VipMiddleware
 {
     /**
      * Handle an incoming request.
