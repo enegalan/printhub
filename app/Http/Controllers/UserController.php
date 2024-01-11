@@ -126,6 +126,7 @@ class UserController extends Controller
     }
     public function dashboard(){
         $user = User::findOrFail(auth()->user()->id);
+        $user->roles;
         $products = $this->getProducts(0);
         return Inertia::render('Profile/Show', ['user' => $user, 'products' => $products]);
     }
