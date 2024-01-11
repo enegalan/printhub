@@ -125,3 +125,8 @@ In two terminals run the following commands:
 <pre>
   <code>php artisan serve</code>
 </pre>
+
+# Run this command for image uploads
+<pre>
+  <code>php artisan storage:link</code>
+</pre>
