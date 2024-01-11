@@ -75,5 +75,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+Route::get('/admin/users', [AdminController::class, 'users'])->name('admin.users');
+Route::get('/admin/products', [AdminController::class, 'products'])->name('admin.products');
+Route::get('/admin/orders', [AdminController::class, 'orders'])->name('admin.orders');
+Route::get('/admin/materials', [AdminController::class, 'materials'])->name('admin.materials');
+Route::get('/admin/colors', [AdminController::class, 'colors'])->name('admin.colors');
+Route::get('/admin/countries', [AdminController::class, 'countries'])->name('admin.countries');
+Route::get('/admin/regions', [AdminController::class, 'regions'])->name('admin.regions');
 
 require __DIR__.'/auth.php';
