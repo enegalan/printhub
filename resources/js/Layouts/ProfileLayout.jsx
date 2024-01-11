@@ -120,7 +120,7 @@ export default function ProfileLayout({
                   </li>
                   <li className="hover:bg-blue-100 py-2">
                     <Link
-                      href={route("profile.provider")}
+                      href={route("profile.provider.show")}
                       className="flex gap-2 items-center pl-11"
                     >
                       <FaLock className="text-blue-700" />
@@ -142,7 +142,7 @@ export default function ProfileLayout({
             <h1 className="text-4xl">Profile {pageName}</h1>
             <p className="text-gray-700">Welcom to the profile section</p>
           </div>
-          <div className="bg-gray-200/60 rounded-xl px-10 py-10 flex-1 mb-14 flex flex-col mr-5">
+          <div className="bg-gray-200/60 rounded-xl px-10 py-10 flex-1 mb-14 flex flex-col mr-5 overflow-auto">
             {children}
           </div>
         </div>
