@@ -11,4 +11,7 @@ class Wishlist extends Model
     protected $table = 'wishlists';
     protected $fillable = ['user_id'];
 
+    public function products () {
+        return $this->belongsToMany(Product::class, 'wishlists_products', 'wishlist_id', 'product_id');
+    }
 }

@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\Cart;
 use App\Models\Prod_comb;
+use App\Models\Wishlist;
 use Inertia\Inertia;
 use Inertia\Response;
 use Illuminate\Http\Request;
@@ -127,17 +128,18 @@ class UserController extends Controller
     public function dashboard(){
         $user = User::findOrFail(auth()->user()->id);
         $user->roles;
-        $products = $this->getProducts(0);
-        return Inertia::render('Profile/Show', ['user' => $user, 'products' => $products]);
+        $orders = $this->getOrders();
+        $wishlist = $this->getWishlistProducts();
+        return Inertia::render('Profile/Show', compact('user', 'orders', 'wishlist'));
     }
 
-    function getProducts ($active = 0) {
+    function getProducts () {
         if (auth()->check()) {
             $userId = auth()->user()->id;
 
             // Search users carts that are active = 0
             $userCarts = Cart::where('user_id', $userId)
-            ->where('active', $active)
+            ->where('active', 0)
             ->get();
 
             // Search carts that are in orders and status = "Paid"
@@ -171,6 +173,32 @@ class UserController extends Controller
                     //echo var_dump($products);
                     return $products;
                 }
+            }
+        }
+        
+    }
+    function getOrders () {
+        if (auth()->check()) {
+            $userId = auth()->user()->id;
+            $userCarts = Cart::where('user_id', $userId)
+            ->where('active', 0)
+            ->get();
+            $userCartIds = $userCarts->pluck('id');
+
+            // Search users carts that are active = 0
+            $userOrders = Order::whereIn('cart_id', $userCartIds)
+            ->where('status', "Paid")->get();
+
+            return $userOrders;
+        }
+    }
+    function getWishlistProducts () {
+        if (auth()->check()) {
+            $userId = auth()->user()->id;
+            $userWishlist = Wishlist::where('user_id', $userId)->first();
+            if ($userWishlist) {
+                $products = $userWishlist->products;
+                return $products;
             }
         }
         return [];

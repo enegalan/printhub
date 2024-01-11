@@ -8,6 +8,7 @@ import {
   FaAddressCard,
   FaLock,
 } from "react-icons/fa";
+import { AiFillDashboard } from "react-icons/ai";
 import { FaCartShopping, FaGear, FaHandshake } from "react-icons/fa6";
 import { useState } from "react";
 
@@ -43,8 +44,17 @@ export default function ProfileLayout({
                 href={route("profile.dashboard")}
                 className="flex gap-2 items-center pl-5"
               >
-                <FaUser className="text-blue-700" />
+                <AiFillDashboard className="text-blue-700" />
                 <p className="">Dashboard</p>
+              </Link>
+            </li>
+            <li className="hover:bg-blue-100 py-2">
+              <Link
+                href={route("profile.edit")}
+                className="flex gap-2 items-center pl-5"
+              >
+                <FaUser className="text-blue-700" />
+                <p className="">Profile</p>
               </Link>
             </li>
             <li className="hover:bg-blue-100 py-2">
@@ -131,11 +141,6 @@ export default function ProfileLayout({
               </li>
             )}
           </ul>
-          <div className="flex pb-4 pl-4 justify-start">
-            <Link href={route("profile.edit")} className="">
-              <FaGear className="text-blue-700 text-4xl" />
-            </Link>
-          </div>
         </nav>
         <div className="flex flex-col flex-1">
           <div className="my-4">
