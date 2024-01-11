@@ -209,8 +209,12 @@ const Navbar = ({
 
                     <hr></hr>
                     <Dropdown.Link href={route("profile.dashboard")}>
+                      Dashboard
+                    </Dropdown.Link>
+                    <Dropdown.Link href={route("profile.edit")}>
                       Profile
                     </Dropdown.Link>
+                    
                     <Dropdown.Link href="#">Cart</Dropdown.Link>
                     <Dropdown.Link href="#">Wishlist</Dropdown.Link>
                     <hr></hr>
