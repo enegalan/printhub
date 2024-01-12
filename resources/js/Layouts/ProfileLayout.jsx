@@ -17,15 +17,8 @@ export default function ProfileLayout({
   pageName = "Dashboard",
   user,
 }) {
-  const [showProviderOptions, setShowProviderOptions] = useState(false);
-  const handleProviderClick = () => {
-    setShowProviderOptions(!showProviderOptions);
-    document.getElementById("providerDropdown");
-  };
-  var isAdmin = false;
+
   var isProvider = false;
-  if (user && user.hasOwnProperty("roles"))
-    isAdmin = user.roles.some((role) => role.name === "admin");
   if (user && user.hasOwnProperty("roles"))
     isProvider = user.roles.some((role) => role.name === "provider");
 
@@ -63,7 +56,7 @@ export default function ProfileLayout({
                 className="flex gap-2 items-center pl-5"
               >
                 <FaCartShopping className="text-blue-700" />
-                <p>Products</p>
+                <p>Orders</p>
               </Link>
             </li>
             <li className="hover:bg-blue-100 py-2">
@@ -93,51 +86,15 @@ export default function ProfileLayout({
                 <p>Payment</p>
               </Link>
             </li>
-            {isAdmin && (
+            {isProvider && (
               <li className="hover:bg-blue-100 py-2">
                 <Link
                   href={route("index")}
-                  className="flex gap-2 items-center pl-5"
-                >
-                  <FaLock className="text-blue-700" />
-                  <p>Admin</p>
-                </Link>
-              </li>
-            )}
-            {isProvider && (
-              <li className="py-2">
-                <button
-                  onClick={handleProviderClick}
                   className="flex gap-2 items-center pl-5 "
                 >
                   <FaHandshake className="text-blue-700" />
                   <p>Provider</p>
-                </button>
-                <ul
-                  id="providerDropdown"
-                  className={`py-2 text-lg space-y-2 flex-col ${
-                    showProviderOptions ? "flex" : "hidden"
-                  }`}
-                >
-                  <li className="hover:bg-blue-100 py-2">
-                    <Link
-                      href={route("profile.provider")}
-                      className="flex gap-2 items-center pl-11"
-                    >
-                      <FaLock className="text-blue-700" />
-                      <p>Add product</p>
-                    </Link>
-                  </li>
-                  <li className="hover:bg-blue-100 py-2">
-                    <Link
-                      href={route("profile.provider.show")}
-                      className="flex gap-2 items-center pl-11"
-                    >
-                      <FaLock className="text-blue-700" />
-                      <p>See products</p>
-                    </Link>
-                  </li>
-                </ul>
+                </Link>
               </li>
             )}
           </ul>
