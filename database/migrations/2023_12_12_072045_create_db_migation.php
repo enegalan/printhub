@@ -154,6 +154,9 @@ return new class extends Migration
             $table->foreignId('cart_id')->constrained();
             $table->foreignId('fact_addresse_id')->constrained();
             $table->foreignId('ship_addresse_id')->constrained();
+            $table->string('name');
+            $table->string('lastname');
+            $table->string('email');
             $table->enum('status',['Not paid', 'Paid', 'Shipping', 'Delivered']);
             $table->timestamps();
         });
