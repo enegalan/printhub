@@ -104,4 +104,27 @@ class ProductController extends Controller
         $product->categories;
         return Inertia::render('Product/Show', ['product' => $product,'colors' => $colors,'materials' => $materials]);
     }
+    public function destroy(Product $product){
+        Product::destroy($product);
+        return redirect()->back()->with('destroy' , 'Product destroy successfully');
+    }
+    public function store(Request $request){
+        $request->validate([
+            'name' => 'required|string|max:100',
+            'description' => 'required|string',
+            'image' => 'required|image|max:2048',
+            'price' => 'required|integer',
+            'user_id'=>'exists:App\Models\User,id',
+        ]);
+        $product = Product::create($request->all());
+        $productImage = $request->file('image');
+        
+        $productImageName = $productImage->hashName();
+        $product->image = $productImageName;
+        
+
+        //$product = Product::create($request->all());
+
+        // return redirect()->back()->with('success', 'Address created successfully.');
+    }
 }
