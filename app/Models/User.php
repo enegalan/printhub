@@ -66,6 +66,16 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasRole('admin');
     }
 
+    public function vipAccess()
+    {
+        return $this->hasRole('vip');
+    }
+
+    public function providerAccess()
+    {
+        return $this->hasRole('provider');
+    }
+
     public function profile()
     {
         return $this->hasOne(Profile::class);
