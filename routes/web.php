@@ -88,6 +88,18 @@ Route::get('/admin/materials', [AdminController::class, 'materials'])->name('adm
 Route::get('/admin/colors', [AdminController::class, 'colors'])->name('admin.colors');
 Route::get('/admin/countries', [AdminController::class, 'countries'])->name('admin.countries');
 Route::get('/admin/regions', [AdminController::class, 'regions'])->name('admin.regions');
+Route::get('/admin/categories', [AdminController::class, 'categories'])->name('admin.categories');
+
+Route::get('/admin/user/{user}/edit', [AdminController::class, 'edituser'])->name('admin.user.edit');
+Route::get('/admin/product/{product}/edit', [AdminController::class, 'editproduct'])->name('admin.product.edit');
+Route::get('/admin/order/{order}/view', [AdminController::class, 'vieworder'])->name('admin.order.view');
+Route::get('/admin/material/{material}/edit', [AdminController::class, 'editmaterial'])->name('admin.material.edit');
+Route::get('/admin/color/{color}/edit', [AdminController::class, 'edituser'])->name('admin.color.edit');
+Route::get('/admin/country/{country}/edit', [AdminController::class, 'edituser'])->name('admin.country.edit');
+Route::get('/admin/region/{region}/edit', [AdminController::class, 'edituser'])->name('admin.region.edit');
+Route::get('/admin/category/{category}/edit', [AdminController::class, 'editcategory'])->name('admin.category.edit');
+
+Route::get('/admin/country/{country}/regions', [AdminController::class, 'viewregionscountry'])->name('admin.country.viewregions');
 
 //PRODUCTS
 Route::delete('/produts/{product}', [ProductController::class, 'destroy'])->name('product.destroy');

@@ -1,10 +1,11 @@
 import React from 'react'
-import Dashboard from './Dashboard'
+import Dashboard from '../Dashboard'
 import Pagination from "@/Components/Pagination";
+import { Link } from '@inertiajs/react';
 
-export default function({regions}){
-    const { data, prev_page_url, next_page_url, current_page, last_page } = regions;
-    const handleDelete = (regionId) => {
+export default function({categories}){
+    const { data, prev_page_url, next_page_url, current_page, last_page } = categories;
+    const handleDelete = (productId) => {
         
         //console.log(`Eliminar región con ID: ${regionId}`);
       };
@@ -17,25 +18,27 @@ export default function({regions}){
           <tr className="bg-gray-100">
             <th className="py-2 px-4 border-b">ID</th>
             <th className="py-2 px-4 border-b">Name</th>
-            <th className="py-2 px-4 border-b">Country</th>
+            <th className="py-2 px-4 border-b">Created at</th>
             <th className="py-2 px-4 border-b">Actions</th>
           </tr>
         </thead>
         <tbody className=''>
-          {data.map((region) => (
-            <tr key={region.id} className="hover:bg-gray-50 text-center">
-              <td className="py-2 px-4 border-b">{region.id}</td>
-              <td className="py-2 px-4 border-b">{region.name}</td>
-              <td className="py-2 px-4 border-b">{region.country.name}</td>
+          {data.map((category) => (
+            <tr key={category.id} className="hover:bg-gray-50 text-center divide-x">
+              <td className="py-2 px-4 border-b">{category.id}</td>
+              <td className="py-2 px-4 border-b">{category.name}</td>
+              <td className="py-2 px-4 border-b">{category.created_at}</td>
               <td className="py-2 px-4 border-b">
-                <a
-                  href={`/admin/region/${region.id}`}
+                <Link
+                  href={route('admin.category.edit', category.id)}
+
+
                   className="text-blue-500 hover:underline mr-2"
                 >
                   Edit
-                </a>
+                </Link>
                 <button
-                  onClick={() => handleDelete(region.id)}
+                  onClick={() => handleDelete(category.id)}
                   className="text-red-500 hover:underline"
                 >
                   Delete
