@@ -62,8 +62,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //PROVIDERS
     Route::get('/profile/provider', [ProviderController::class, 'dashboard'])->name('profile.provider');
     Route::get('/profile/provider/show', [ProviderController::class, 'show'])->name('profile.provider.show');
-    Route::delete('/profile/provider/destroy/{product}', [ProviderController::class, 'destroy'])->name('profile.provider.destroy');
-    Route::put('/profile/provider/{product}', [ProviderController::class, 'update'])->name('profile.provider.update');
+    
     // ---
     Route::post('/upload-avatar', [UserController::class, 'avatar'])->name('profile.avatar');
     Route::delete('/avatar-delete', [UserController::class, 'deleteAvatar'])->name('profile.avatar-delete');
@@ -102,4 +101,8 @@ Route::get('/admin/category/{category}/edit', [AdminController::class, 'editcate
 
 Route::get('/admin/country/{country}/regions', [AdminController::class, 'viewregionscountry'])->name('admin.country.viewregions');
 
+//PRODUCTS
+Route::delete('/produts/{product}', [ProductController::class, 'destroy'])->name('product.destroy');
+Route::put('/produts/{product}', [ProductController::class, 'update'])->name('product.update');
+Route::post('/produts', [ProductController::class, 'store'])->name('products.store');
 require __DIR__.'/auth.php';
