@@ -17,7 +17,7 @@ class RegionFactory extends Factory
     public function definition(): array
     {
         return [
-            'country_id' => fake()->numberBetween(1,20),
+            'country_id' => fake()->numberBetween(1,10),
             'name' => fake()->name()
         ];
     }

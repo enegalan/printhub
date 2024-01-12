@@ -17,7 +17,7 @@ class Payment_methodFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => fake()->numberBetween(1, 80),
+            'user_id' => fake()->numberBetween(1, 10),
             'number' => fake()->creditCardNumber(),
             'owner_name'=> fake()->firstName() .' '. fake()->lastname().' '. fake()->lastName(),
             'cvv'=>fake()->randomNumber('3',true),

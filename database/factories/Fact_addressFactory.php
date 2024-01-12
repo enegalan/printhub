@@ -17,7 +17,7 @@ class Fact_addressFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => fake()->numberBetween(1, 80),
+            'user_id' => fake()->numberBetween(1, 10),
             'name'=> fake()->name(),
             'address' => fake()->streetAddress(),
             'country_id' => fake()->numberBetween(1, 10),

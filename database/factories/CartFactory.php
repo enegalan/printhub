@@ -17,7 +17,7 @@ class CartFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id'=> fake()->numberBetween(1, 20),
+            'user_id'=> fake()->numberBetween(1, 10),
             'active'=> fake()->boolean(),
         ];
     }
