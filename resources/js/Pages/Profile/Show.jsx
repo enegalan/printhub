@@ -26,10 +26,10 @@ export default function ({user, orders = [], wishlist = []}){
     };
 
     return(
-        <ProfileLayout>
-            <div className="flex gap-4 flex-1 items-center justify-start flex-wrap">
-                <div className="flex gap-4 items-center w-full flex-wrap">
-                    <div className="flex flex-col gap-3 justify-content items-center row-span-2 bg-white rounded-xl p-4">
+        <ProfileLayout user={user}>
+            <div className="flex gap-4 flex-1 items-center justify-start flex-col">
+                <div className="flex gap-4 items-center w-full flex-1">
+                    <div className="flex flex-col h-full w-96 gap-3 justify-content items-center row-span-2 bg-white rounded-xl p-4">
                         {user.avatar ? (
                             <img className="rounded-full" src={`/storage/avatars/${user.avatar}`} />
                         ) : (
@@ -52,7 +52,7 @@ export default function ({user, orders = [], wishlist = []}){
                         </div>
 
                     </div>
-                    <div className="flex-1 flex flex-col divide-y col-span-2 bg-white rounded-xl p-4 overflow-y-scroll max-h-[25rem]">
+                    <div className="flex-1 h-full flex flex-col divide-y col-span-2 bg-white rounded-xl p-4 overflow-y-scroll max-h-[25rem]">
                         <h2 className="text-xl font-bold mb-5">Orders</h2>
                         {orders.length > 0 ? orders.map((order, index) => (
                             <div key={index}>
@@ -69,7 +69,7 @@ export default function ({user, orders = [], wishlist = []}){
                         )) : <span className="pt-5">No orders found. Click <Link className="text-[#1e40af]" href="/market">here</Link> to check out the market.</span>}
                     </div>
                 </div>
-                <div className="row-span-2 bg-white rounded-xl p-4 divide-y w-full">
+                <div className="flex-1 w-full row-span-2 bg-white rounded-xl p-4 divide-y">
                     <h2 className="text-xl font-bold mb-5">Wishlist</h2>
                     {wishlist.length > 0 ? wishlist.map((product, index) => (
                         <div key={index}>
