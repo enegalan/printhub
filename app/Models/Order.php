@@ -22,4 +22,8 @@ public function factAddress()
     return $this->belongsTo(Fact_address::class, 'fact_addresse_id');
 }
 
+public function invoice(){
+    return $this->hasOne(Invoice::class);
+}
+
 }
