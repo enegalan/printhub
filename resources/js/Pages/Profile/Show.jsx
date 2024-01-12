@@ -3,7 +3,7 @@ import { FaAngleRight } from "react-icons/fa";
 import { Link } from "@inertiajs/react";
 export default function ({user, orders = [], wishlist = []}){
     const priorities = ['admin', 'provider', 'vip', 'guest'];
-
+    console.log(wishlist)
     const getBackgroundColor = (roles) => {
         const priorityRole = getHighestPriorityRole(roles);
 
@@ -90,7 +90,10 @@ export default function ({user, orders = [], wishlist = []}){
                                             <img className="w-[120px] h-[100px]" src="images/imagen1.png" />
                                             {product.name}
                                         </div>
-                                        {product.price}€
+                                        <div className="flex gap-12 items-center flex-nowrap text-center">
+                                            <span>{product.price}€</span>
+                                            <span className="text-justify px-3">{product.description}</span>
+                                        </div>
                                     </div>
                                     <FaAngleRight />
                                 </div>
