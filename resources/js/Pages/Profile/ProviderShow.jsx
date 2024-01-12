@@ -5,6 +5,7 @@ import { Link, useForm } from "@inertiajs/react";
 
 export default function ProviderShow({ user, products }) {
   const { data, prev_page_url, next_page_url, current_page, last_page } = products;
+  const { delete: handleDelete } = useForm();
 
   return (
     <ProfileLayout user={user}>
@@ -16,6 +17,7 @@ export default function ProviderShow({ user, products }) {
                 <th className="py-2 px-4 border-b">ID</th>
                 <th className="py-2 px-4 border-b">Product name</th>
                 <th className="py-2 px-4 border-b">Product description</th>
+                <th className="py-2 px-4 border-b">Product categories</th>
                 <th className="py-2 px-4 border-b">Image URL</th>
                 <th className="py-2 px-4 border-b">Price</th>
                 <th className="py-2 px-4 border-b">Actions</th>
@@ -30,6 +32,14 @@ export default function ProviderShow({ user, products }) {
                   <td className="py-2 px-4 border-b">{product.id}</td>
                   <td className="py-2 px-4 border-b">{product.name}</td>
                   <td className="py-2 px-4 border-b">{product.description}</td>
+                  <td className="py-2 px-4 border-b">
+                    {product.categories.map((category, index) => (
+                      <span key={index}>
+                        {category.name}
+                        {index !== product.categories.length - 1 ? ',' : ''}
+                      </span>
+                    ))}
+                  </td>
                   <td className="py-2 px-4 border-b">
                     <img
                       width={100}
@@ -47,7 +57,7 @@ export default function ProviderShow({ user, products }) {
                       Edit
                     </Link>
                     <button
-                      onClick={() => deleteProduct(product.id)}
+                      onClick={() => handleDelete(route("product.destroy", product))}
                       className="text-red-500 cursor-pointer hover:underline mr-2"
                     >
                       Delete

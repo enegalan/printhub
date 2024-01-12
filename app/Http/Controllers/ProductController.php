@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\UserController;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 use App\Models\Color;
 use App\Models\Material;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ProductController extends Controller
 {
@@ -105,26 +107,41 @@ class ProductController extends Controller
         return Inertia::render('Product/Show', ['product' => $product,'colors' => $colors,'materials' => $materials]);
     }
     public function destroy(Product $product){
-        Product::destroy($product);
-        return redirect()->back()->with('destroy' , 'Product destroy successfully');
+        try {
+            $product->categories()->detach();
+            $product->delete();
+    
+            return redirect()->back()->with('destroy', 'Product destroyed successfully');
+        } catch (ModelNotFoundException $e) {
+            return redirect()->back()->with('error', 'Product not found');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Error deleting product');
+        }
     }
     public function store(Request $request){
         $request->validate([
             'name' => 'required|string|max:100',
             'description' => 'required|string',
             'image' => 'required|image|max:2048',
-            'price' => 'required|integer',
+            'price' => 'required|numeric',
             'user_id'=>'exists:App\Models\User,id',
+            'categories' => 'array',
         ]);
-        $product = Product::create($request->all());
+        
         $productImage = $request->file('image');
-        
         $productImageName = $productImage->hashName();
-        $product->image = $productImageName;
-        
+        $productImage->storeAs('products', $productImageName, 'public');
 
-        //$product = Product::create($request->all());
+        $productData = $request->except('image');
+        $productData['image'] = $productImageName;
 
-        // return redirect()->back()->with('success', 'Address created successfully.');
+        $product = Product::create($productData);
+
+        $categories = $request->input('categories');
+        if (!empty($categories)) {
+            $product->categories()->attach($categories);
+        }
+
+        return redirect()->back()->with('success', 'Product created successfully.');
     }
 }
