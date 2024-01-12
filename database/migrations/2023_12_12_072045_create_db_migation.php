@@ -154,9 +154,6 @@ return new class extends Migration
             $table->foreignId('cart_id')->constrained();
             $table->foreignId('fact_addresse_id')->constrained();
             $table->foreignId('ship_addresse_id')->constrained();
-            $table->string('name');
-            $table->string('lastname');
-            $table->string('email');
             $table->enum('status',['Not paid', 'Paid', 'Shipping', 'Delivered']);
             $table->timestamps();
         });
@@ -165,7 +162,7 @@ return new class extends Migration
             $table->id();
             $table->enum('payment_method',['Paypal', 'Credit Card']);
             $table->string('name');
-            $table->string('surname');
+            $table->string('lastname');
             $table->string('email');
             $table->foreignId('order_id')->constrained();
             $table->timestamps();
