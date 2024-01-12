@@ -66,7 +66,7 @@ Route::post('/complete-payment', function (Request $request) {
     $invoice->payment_method = 'Paypal'; 
     $invoice->order_id = $order->id;
     $invoice->name = $allFormData['personalInfo']['name'];
-    $invoice->surname = $allFormData['personalInfo']['surname'];
+    $invoice->lastname = $allFormData['personalInfo']['surname'];
     $invoice->email = $allFormData['personalInfo']['email'];
     $invoice->save();
 

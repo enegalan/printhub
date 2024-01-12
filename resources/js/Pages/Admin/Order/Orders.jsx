@@ -30,7 +30,7 @@ export default function({orders}){
             <tr key={order.id} className="hover:bg-gray-50 text-center divide-x">
               <td className="py-2 px-4 border-b">{order.id}</td>
               <td className="py-2 px-4 border-b">{order.invoice.name}</td>
-              <td className="py-2 px-4 border-b">{order.invoice.surname}</td>
+              <td className="py-2 px-4 border-b">{order.invoice.lastname}</td>
               <td className="py-2 px-4 border-b">{order.invoice.email}</td>
               <td className="py-2 px-4 border-b">{order.status}</td>
               <td className="py-2 px-4 border-b">
