@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Color;
 use App\Models\Country;
 use App\Models\Material;
@@ -28,9 +29,9 @@ class AdminController extends Controller
 
     public function countries() {
         app()->call([UserController::class, 'getRoles']);
-        $countries = Country::all();
+        $countries = Country::paginate($this->productPerPagination);
         return (
-            Inertia::render('Admin/Countries', ['countries' => $countries])
+            Inertia::render('Admin/Country/Countries', ['countries' => $countries])
         );
     }
 
@@ -42,47 +43,59 @@ class AdminController extends Controller
         $regions->load('country');
         
         return (
-            Inertia::render('Admin/Regions', ['regions' => $regions])
+            Inertia::render('Admin/Region/Regions', ['regions' => $regions])
         );
     }
 
     public function products() {
         app()->call([UserController::class, 'getRoles']);
-        $products = Product::all();
+        $products = Product::paginate($this->productPerPagination);
+        $products->load('user');
+        $products->load('categories');
         return (
-            Inertia::render('Admin/Products', ['products' => $products])
+            Inertia::render('Admin/Product/Products', ['products' => $products])
         );
     }
 
     public function users() {
         app()->call([UserController::class, 'getRoles']);
-        $users = User::all();
+        $users = User::paginate($this->productPerPagination);
+        $users->load('roles');
         return (
-            Inertia::render('Admin/Users', ['users' => $users])
+            Inertia::render('Admin/User/Users', ['users' => $users])
         );
     }
 
     public function orders() {
         app()->call([UserController::class, 'getRoles']);
-        $orders = Order::all();
+        $orders = Order::paginate($this->productPerPagination);
+        $orders->load('invoice');
         return (
-            Inertia::render('Admin/Orders', ['orders' => $orders])
+            Inertia::render('Admin/Order/Orders', ['orders' => $orders])
         );
     }
 
     public function materials() {
         app()->call([UserController::class, 'getRoles']);
-        $materials = Material::all();
+        $materials = Material::paginate($this->productPerPagination);
         return (
-            Inertia::render('Admin/Materials', ['materials' => $materials])
+            Inertia::render('Admin/Material/Materials', ['materials' => $materials])
         );
     }
 
     public function colors() {
         app()->call([UserController::class, 'getRoles']);
-        $colors = Color::all();
+        $colors = Color::paginate($this->productPerPagination);
         return (
-            Inertia::render('Admin/Colors', ['colors' => $colors])
+            Inertia::render('Admin/Color/Colors', ['colors' => $colors])
+        );
+    }
+
+    public function categories(){
+        app()->call([UserController::class, 'getRoles']);
+        $categories = Category::paginate($this->productPerPagination);
+        return (
+            Inertia::render('Admin/Category/Categories', ['categories' => $categories])
         );
     }
 

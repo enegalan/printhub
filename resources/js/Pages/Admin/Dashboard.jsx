@@ -85,6 +85,15 @@ export default function ProfileLayout({ children,pageName='Dashboard' }) {
                 <p>Regions</p>
               </Link>
             </li>
+            <li className="hover:bg-blue-100 py-2">
+              <Link
+                href={route("admin.categories")}
+                className="flex gap-2 items-center pl-5"
+              >
+                <FaWallet className="text-blue-700" />
+                <p>Categories</p>
+              </Link>
+            </li>
           </ul>
           <div className="flex pb-4 pl-4 justify-start">
             <Link
