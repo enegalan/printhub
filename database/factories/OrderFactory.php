@@ -19,10 +19,7 @@ class OrderFactory extends Factory
         return [
             'cart_id' => fake()->numberBetween(1,10),
             'fact_addresse_id' => fake()->numberBetween(1,10),
-            'ship_addresse_id' => fake()->numberBetween(1,10),
-            'name' => fake()->name(),
-            'lastname' => fake()->lastName(),
-            'email' => fake()->email(), 
+            'ship_addresse_id' => fake()->numberBetween(1,10), 
             'status' => fake()->randomElement(['Not paid','Paid','Shipping','Delivered'])
         ];
     }

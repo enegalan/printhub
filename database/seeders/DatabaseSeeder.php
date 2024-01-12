@@ -75,6 +75,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\Fact_address::factory(10)->create();
         \App\Models\Ship_address::factory(10)->create();
         \App\Models\Order::factory(20)->create();
+        \App\Models\Invoice::factory(20)->create();
         //addresse
         //orders
     }
