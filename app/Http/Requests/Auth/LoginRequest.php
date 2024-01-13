@@ -49,6 +49,15 @@ class LoginRequest extends FormRequest
             ]);
         }
 
+        $user = Auth::user();
+        if (!$user || !$user->hasVerifiedEmail()) {
+            Auth::logout();
+
+            throw ValidationException::withMessages([
+                'email' => 'This is an unverified account',
+            ]);
+        }
+
         RateLimiter::clear($this->throttleKey());
     }
 
