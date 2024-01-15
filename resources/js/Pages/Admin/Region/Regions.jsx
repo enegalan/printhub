@@ -1,17 +1,24 @@
 import React from 'react'
 import Dashboard from '../Dashboard'
 import Pagination from "@/Components/Pagination";
-import { Link } from '@inertiajs/react';
+import { Link, useForm } from '@inertiajs/react';
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function({regions}){
     const { data, prev_page_url, next_page_url, current_page, last_page } = regions;
-    const handleDelete = (regionId) => {
-        
-        //console.log(`Eliminar región con ID: ${regionId}`);
-      };
+    const {delete: handleDelete, data: formData } = useForm();
+
+    const onDelete = () => {
+      toast.success('Category deleted successfully');
+    }
+
+    const onError = () => {
+      toast.error('Error deleting category');
+    }
     return(
         <Dashboard>
             <div className='flex flex-col min-h-full '>
+            <Toaster />
             <div className=''>
             <table className="min-w-full bg-white border border-gray-300">
         <thead>
@@ -36,7 +43,12 @@ export default function({regions}){
                   Edit
                 </Link>
                 <button
-                  onClick={() => handleDelete(region.id)}
+                  onClick={() => handleDelete(route("admin.region.delete", region),{
+                    onSuccess: onDelete,
+                    onError: onError,
+                  }
+                  
+                  )}
                   className="text-red-500 hover:underline"
                 >
                   Delete
