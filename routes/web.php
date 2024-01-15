@@ -61,8 +61,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::patch('/profile', [UserController::class, 'update'])->name('profile.update');
     //PROVIDERS
     Route::get('/profile/provider', [ProviderController::class, 'dashboard'])->name('profile.provider');
-    Route::get('/profile/provider/show', [ProviderController::class, 'show'])->name('profile.provider.show');
-    
+    Route::get('/profile/provider/add-product', [ProviderController::class, 'add'])->name('provider.add');
+    Route::get('/profile/provider/edit-product/{product}', [ProviderController::class, 'edit'])->name('provider.edit');
     // ---
     Route::post('/upload-avatar', [UserController::class, 'avatar'])->name('profile.avatar');
     Route::delete('/avatar-delete', [UserController::class, 'deleteAvatar'])->name('profile.avatar-delete');
