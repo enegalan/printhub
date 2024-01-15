@@ -35,6 +35,15 @@ class AdminController extends Controller
         );
     }
 
+    public function deletecountry(Country $country){
+        try {
+            $country->delete();
+            
+        } catch (\Exception $e) {
+            throw $e;
+        }
+    }
+
     private $productPerPagination = 15;
 
     public function regions() {
@@ -47,6 +56,16 @@ class AdminController extends Controller
         );
     }
 
+    public function deleteregion(Region $region){
+        try {
+
+            $region->delete();            
+            
+        } catch (\Exception $e) {
+            throw $e;
+        }
+    }
+
     public function products() {
         app()->call([UserController::class, 'getRoles']);
         $products = Product::paginate($this->productPerPagination);
@@ -57,6 +76,16 @@ class AdminController extends Controller
         );
     }
 
+    public function deleteproduct(Product $product){
+        try {
+
+            $product->delete();
+            
+        } catch (\Exception $e) {
+            throw $e;
+        }
+    }
+
     public function users() {
         app()->call([UserController::class, 'getRoles']);
         $users = User::paginate($this->productPerPagination);
@@ -64,6 +93,16 @@ class AdminController extends Controller
         return (
             Inertia::render('Admin/User/Users', ['users' => $users])
         );
+    }
+
+    public function deleteuser(User $user){
+        try {
+
+            $user->delete();
+            
+        } catch (\Exception $e) {
+            throw $e;
+        }
     }
 
     public function orders() {
@@ -83,6 +122,16 @@ class AdminController extends Controller
         );
     }
 
+    public function deletematerial(Material $material){
+        try {
+
+            $material->delete();
+            
+        } catch (\Exception $e) {
+            throw $e;
+        }
+    }
+
     public function colors() {
         app()->call([UserController::class, 'getRoles']);
         $colors = Color::paginate($this->productPerPagination);
@@ -91,12 +140,32 @@ class AdminController extends Controller
         );
     }
 
+    public function deletecolor(Color $color){
+        try {
+
+            $color->delete();
+            
+        } catch (\Exception $e) {
+            throw $e;
+        }
+    }
+
     public function categories(){
         app()->call([UserController::class, 'getRoles']);
         $categories = Category::paginate($this->productPerPagination);
         return (
             Inertia::render('Admin/Category/Categories', ['categories' => $categories])
         );
+    }
+
+    public function deletecategory(Category $category){
+        try {
+
+            $category->delete();
+            
+        } catch (\Exception $e) {
+            throw $e;
+        }
     }
 
 }
