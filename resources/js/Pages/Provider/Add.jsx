@@ -4,8 +4,10 @@ import InputLabel from "@/Components/InputLabel";
 import TextInput from "@/Components/TextInput";
 import InputError from "@/Components/InputError";
 import { useForm } from "@inertiajs/inertia-react";
+import { IoMdArrowRoundBack } from "react-icons/io";
+import { Link } from "@inertiajs/react";
 
-export default function ProviderDashboard({ user, categories }) {
+export default function ProviderDashboard({ user, categories = [] }) {
   const { data, setData, post, processing, errors, reset } = useForm({
     name: "",
     description: "",
@@ -45,6 +47,9 @@ export default function ProviderDashboard({ user, categories }) {
 
   return (
     <ProfileLayout user={user} pageName="provider">
+      <Link href={route('profile.provider')} className="bg-[lightgrey] w-[40px] p-3 rounded-lg mb-5 self-start transition hover:bg-[#bbbbbb]">
+          <IoMdArrowRoundBack />
+      </Link>
       <h1 className="text-2xl mb-5 text-center">Add new product</h1>
       <div className="row-span-4 bg-white rounded-xl p-4 lg:mx-20">
         <form
@@ -53,7 +58,7 @@ export default function ProviderDashboard({ user, categories }) {
           encType="multipart/form-data"
         >
           <div>
-            <InputLabel forInput="name" value="Product name" className="" />
+            <InputLabel forInput="name" value="Product name*" className="" />
             <TextInput
               id="name"
               name="name"
@@ -76,7 +81,6 @@ export default function ProviderDashboard({ user, categories }) {
               autoComplete="description"
               isFocused={true}
               onChange={(e) => setData("description", e.target.value)}
-              required
               rows="5"
               placeholder="Maximun 255 chararcters"
             />
@@ -85,7 +89,7 @@ export default function ProviderDashboard({ user, categories }) {
           <div>
             <InputLabel
               forInput="image"
-              value="Choose an image"
+              value="Choose an image*"
               className="font-medium text-gray-900"
             />
             <TextInput
@@ -115,7 +119,7 @@ export default function ProviderDashboard({ user, categories }) {
           <div>
             <InputLabel
               forInput="price"
-              value="Inset the price"
+              value="Set price*"
               className="font-medium text-gray-900"
             />
             <div className="flex gap-2">
@@ -137,7 +141,7 @@ export default function ProviderDashboard({ user, categories }) {
           <div>
             <InputLabel
               forInput="categories"
-              value="Chosse category"
+              value="Choose categories"
               className="font-medium text-gray-900"
             />
             <div className="flex gap-2 flex-col">
@@ -169,7 +173,7 @@ export default function ProviderDashboard({ user, categories }) {
           </div>
           <div>
             <button className="rounded bg-blue-500 text-white px-5 py-2 font-medium">
-              Submit item
+              Submit product
             </button>
           </div>
         </form>

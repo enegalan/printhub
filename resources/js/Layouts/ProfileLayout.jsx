@@ -6,7 +6,7 @@ import {
   FaHeart,
   FaWallet,
   FaAddressCard,
-  FaLock,
+  FaHome,
 } from "react-icons/fa";
 import { AiFillDashboard } from "react-icons/ai";
 import { FaCartShopping, FaGear, FaHandshake } from "react-icons/fa6";
@@ -32,6 +32,15 @@ export default function ProfileLayout({
             </Link>
           </div>
           <ul className="flex flex-col gap-2 mt-10 text-xl flex-1">
+            <li className="hover:bg-blue-100 py-2">
+              <Link
+                href={route("index")}
+                className="flex gap-2 items-center pl-5"
+              >
+                <FaHome className="text-blue-700" />
+                <p className="">Home</p>
+              </Link>
+            </li>
             <li className="hover:bg-blue-100 py-2">
               <Link
                 href={route("profile.dashboard")}
@@ -89,7 +98,7 @@ export default function ProfileLayout({
             {isProvider && (
               <li className="hover:bg-blue-100 py-2">
                 <Link
-                  href={route("index")}
+                  href={route("profile.provider")}
                   className="flex gap-2 items-center pl-5 "
                 >
                   <FaHandshake className="text-blue-700" />

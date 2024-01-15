@@ -2,6 +2,7 @@ import Pagination from "@/Components/Pagination";
 import TextInput from "@/Components/TextInput";
 import ProfileLayout from "@/Layouts/ProfileLayout";
 import { Link, useForm } from "@inertiajs/react";
+import { FaPlus } from "react-icons/fa6";
 
 export default function ProviderShow({ user, products }) {
   const { data, prev_page_url, next_page_url, current_page, last_page } = products;
@@ -9,15 +10,18 @@ export default function ProviderShow({ user, products }) {
 
   return (
     <ProfileLayout user={user}>
+      <Link href={route('provider.add')} className="bg-[lightgrey] w-[40px] p-3 rounded-lg mb-5 self-end transition hover:bg-[#bbbbbb]">
+          <FaPlus />
+      </Link>
       <div className="flex flex-col min-h-full">
         <div className="">
           <table className="min-w-full bg-white border border-gray-300">
             <thead>
               <tr className="bg-gray-100">
                 <th className="py-2 px-4 border-b">ID</th>
-                <th className="py-2 px-4 border-b">Product name</th>
-                <th className="py-2 px-4 border-b">Product description</th>
-                <th className="py-2 px-4 border-b">Product categories</th>
+                <th className="py-2 px-4 border-b">Name</th>
+                <th className="py-2 px-4 border-b">Description</th>
+                <th className="py-2 px-4 border-b">Categories</th>
                 <th className="py-2 px-4 border-b">Image URL</th>
                 <th className="py-2 px-4 border-b">Price</th>
                 <th className="py-2 px-4 border-b">Actions</th>
@@ -51,7 +55,7 @@ export default function ProviderShow({ user, products }) {
                   <td className="py-2 px-4 border-b">{product.price}€</td>
                   <td className="py-2 px-4 border-b">
                     <Link
-                      href="#"
+                      href={route('provider.edit', product)}
                       className="text-blue-500 hover:underline mr-2"
                     >
                       Edit

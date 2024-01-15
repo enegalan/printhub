@@ -142,6 +142,6 @@ class ProductController extends Controller
             $product->categories()->attach($categories);
         }
 
-        return redirect()->back()->with('success', 'Product created successfully.');
+        return redirect()->route('profile.provider')->with('success', 'Product created successfully.');
     }
 }
