@@ -17,4 +17,12 @@ class Country extends Model
 {
     return $this->hasMany(Region::class);
 }
+
+    public function fact_addresses(){
+        return $this->hasMany(Fact_address::class);
+    }
+
+    public function ship_addresses(){
+        return $this->hasMany(Ship_address::class);
+    }
 }
