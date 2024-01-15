@@ -102,7 +102,7 @@ Route::get('/admin/category/{category}/edit', [AdminController::class, 'editcate
 Route::get('/admin/country/{country}/regions', [AdminController::class, 'viewregionscountry'])->name('admin.country.viewregions');
 
 //PRODUCTS
-Route::delete('/produts/{product}', [ProductController::class, 'destroy'])->name('product.destroy');
-Route::put('/produts/{product}', [ProductController::class, 'update'])->name('product.update');
-Route::post('/produts', [ProductController::class, 'store'])->name('products.store');
+Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('product.destroy');
+Route::put('/products/{product}', [ProductController::class, 'update'])->name('product.update');
+Route::post('/products', [ProductController::class, 'store'])->name('product.store');
 require __DIR__.'/auth.php';

@@ -3,20 +3,20 @@ import ProfileLayout from "@/Layouts/ProfileLayout";
 import InputLabel from "@/Components/InputLabel";
 import TextInput from "@/Components/TextInput";
 import InputError from "@/Components/InputError";
-import { useForm } from "@inertiajs/inertia-react";
+import { useForm, put } from "@inertiajs/inertia-react";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { Link } from "@inertiajs/react";
 
 export default function ProviderDashboard({ user, product, categories = [] }) {
-    const { data, setData, post, processing, errors, reset } = useForm({
+    const { data, setData, put, processing, errors, reset } = useForm({
         name: product.name,
         description: product.description,
-        image: `/storage/products/${product.image}`,
+        image: null,
         price: product.price,
-        categories: categories,
+        categories: [],
         user_id: user.id,
     });
-    const [previewUrl, setPreviewUrl] = useState(null);
+    const [previewUrl, setPreviewUrl] = useState(`/storage/products/${product.image}`);
     const handleFileChange = (e) => {
         const selectedImage = e.target.files[0];
         setData("image", selectedImage);
@@ -38,11 +38,13 @@ export default function ProviderDashboard({ user, product, categories = [] }) {
         const formData = new FormData();
         formData.append("name", data.name);
         formData.append("description", data.description);
-        formData.append("image", data.image);
+        formData.append("image", data.image !== "" || data.image !== null ? data.image : image);
         formData.append("price", data.price);
         formData.append("categories", data.categories);
         formData.append("user_id", data.user_id);
-        post(route("products.store"));
+        formData.append("product_id", data.product_id);
+    
+        put(route("product.update", product));
     };
 
     return (
@@ -58,7 +60,7 @@ export default function ProviderDashboard({ user, product, categories = [] }) {
                     encType="multipart/form-data"
                 >
                     <div>
-                        <InputLabel forInput="name" value="Product name*" className="" />
+                        <InputLabel forInput="name" value="Product name" className="" />
                         <TextInput
                             id="name"
                             name="name"
@@ -67,7 +69,6 @@ export default function ProviderDashboard({ user, product, categories = [] }) {
                             autoComplete="name"
                             isFocused={true}
                             onChange={(e) => setData("name", e.target.value)}
-                            required
                         />
                         <InputError message={errors.name} className="mt-2" />
                     </div>
@@ -89,7 +90,7 @@ export default function ProviderDashboard({ user, product, categories = [] }) {
                     <div>
                         <InputLabel
                             forInput="image"
-                            value="Choose an image*"
+                            value="Choose an image"
                             className="font-medium text-gray-900"
                         />
                         <TextInput
@@ -105,7 +106,6 @@ export default function ProviderDashboard({ user, product, categories = [] }) {
                             autoComplete="image"
                             isFocused={true}
                             onChange={handleFileChange}
-                            required
                         />
                         {previewUrl && (
                             <img
@@ -119,7 +119,7 @@ export default function ProviderDashboard({ user, product, categories = [] }) {
                     <div>
                         <InputLabel
                             forInput="price"
-                            value="Set price*"
+                            value="Set price"
                             className="font-medium text-gray-900"
                         />
                         <div className="flex gap-2">
@@ -133,7 +133,6 @@ export default function ProviderDashboard({ user, product, categories = [] }) {
                                 autoComplete="price"
                                 isFocused={true}
                                 onChange={(e) => setData("price", e.target.value)}
-                                required
                             />
                         </div>
                         <InputError message={errors.price} className="mt-2" />
@@ -148,25 +147,26 @@ export default function ProviderDashboard({ user, product, categories = [] }) {
                             {categories.map((category, index) => (
                                 <div key={index} className="flex gap-2">
                                     <TextInput
-                                        id="categories"
+                                        id={`category-${category.id}`}
                                         type="checkbox"
                                         name="categories[]"
                                         value={data.categories.includes(category.id)}
                                         className="mt-1"
-                                        autoComplete="categories"
+                                        autoComplete={`categories-${category.id}`}
                                         isFocused={true}
-                                        {...categories.filter((id) => id !== category.id) ? 'not-checked' : 'checked'}
-                                        onChange={(e) => {
-                                            const isChecked = e.target.checked;
+                                        onChange={() => {
                                             setData(
                                                 "categories",
-                                                isChecked
-                                                    ? [...data.categories, category.id]
-                                                    : data.categories.filter((id) => id !== category.id)
+                                                data.categories.includes(category.id)
+                                                    ? data.categories.filter((id) => id !== category.id)
+                                                    : [...data.categories, category.id]
                                             );
                                         }}
+                                        checked={data.categories.includes(category.id)}
                                     />
-                                    <label> {category.name.charAt(0).toUpperCase() + category.name.slice(1)}</label>
+                                    <label htmlFor={`category-${category.id}`}>
+                                        {category.name.charAt(0).toUpperCase() + category.name.slice(1)}
+                                    </label>
                                 </div>
                             ))}
                         </div>

@@ -41,6 +41,7 @@ class ProviderController extends Controller
         // Verify that product provider is the session user Provider
         if ($product->user_id === auth()->user()->id) {
             $categories = Category::all();
+            $product->load('categories');
             return Inertia::render('Provider/Edit', ['user' => auth()->user(), 'product' => $product, 'categories' => $categories]);
         }
     }

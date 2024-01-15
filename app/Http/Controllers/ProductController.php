@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\UserController;
-use App\Models\Category;
-use App\Models\Product;
-use Illuminate\Http\Request;
-use Inertia\Inertia;
-use Inertia\Response;
 use App\Models\Color;
 use App\Models\Material;
+use App\Models\Product;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Request;
+use Inertia\Inertia;
+
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -25,7 +25,7 @@ class ProductController extends Controller
     public function search(Request $request)
     {
         app()->call([UserController::class, 'getRoles']);
-        
+
         $query = $request->input('query');
         $products = Product::where('name', 'like', "%$query%")->paginate($this->productPerPagination);
         return Inertia::render('Market', ['products' => $products]);
@@ -99,18 +99,20 @@ class ProductController extends Controller
             return $this->getAll();
         }
     }
-    public function show(string $id){
+    public function show(string $id)
+    {
         $product = Product::findOrFail($id);
         $colors = Color::all();
         $materials = Material::all();
         $product->categories;
-        return Inertia::render('Product/Show', ['product' => $product,'colors' => $colors,'materials' => $materials]);
+        return Inertia::render('Product/Show', ['product' => $product, 'colors' => $colors, 'materials' => $materials]);
     }
-    public function destroy(Product $product){
+    public function destroy(Product $product)
+    {
         try {
             $product->categories()->detach();
             $product->delete();
-    
+
             return redirect()->back()->with('destroy', 'Product destroyed successfully');
         } catch (ModelNotFoundException $e) {
             return redirect()->back()->with('error', 'Product not found');
@@ -118,16 +120,17 @@ class ProductController extends Controller
             return redirect()->back()->with('error', 'Error deleting product');
         }
     }
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $request->validate([
             'name' => 'required|string|max:100',
             'description' => 'required|string',
             'image' => 'required|image|max:2048',
             'price' => 'required|numeric',
-            'user_id'=>'exists:App\Models\User,id',
+            'user_id' => 'exists:App\Models\User,id',
             'categories' => 'array',
         ]);
-        
+
         $productImage = $request->file('image');
         $productImageName = $productImage->hashName();
         $productImage->storeAs('products', $productImageName, 'public');
@@ -143,5 +146,47 @@ class ProductController extends Controller
         }
 
         return redirect()->route('profile.provider')->with('success', 'Product created successfully.');
+    }
+
+    public function update(Request $request, String $id)
+    {
+        $request->validate([
+            'name' => 'required|string|max:100',
+            'description' => 'required|string',
+            'price' => 'required|numeric',
+            'user_id' => 'exists:App\Models\User,id',
+            'categories' => 'array',
+        ]);
+
+        $product = Product::findOrFail($id);
+
+        // Update basic product information
+        $product->update($request->except('image'));
+
+        // Update image if provided
+        if ($request->hasFile('image')) {
+            $request->validate([
+                'image' => 'image|max:2048',
+            ]);
+
+            $productImage = $request->file('image');
+            $productImageName = $productImage->hashName();
+            $productImage->storeAs('products', $productImageName, 'public');
+
+            // Delete old image if exists
+            if ($product->image) {
+                Storage::disk('public')->delete('products/' . $product->image);
+            }
+
+            $product->update(['image' => $productImageName]);
+        }
+
+        $categories = $request->input('categories');
+        $product->categories()->detach();
+        if(!empty($categories)){
+            $product->categories()->attach($categories);
+        }
+
+        return redirect()->route('profile.provider')->with('success', 'Product updated successfully.');
     }
 }
