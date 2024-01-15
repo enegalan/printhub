@@ -17,4 +17,14 @@ class Ship_address extends Model
         'region_id',
         'zip'
     ];
+
+
+    public function country(){
+        return $this->belongsTo(Country::class);
+    }
+
+    public function orders(){
+        return $this->hasMany(Order::class, 'ship_addresse_id');
+    }
+
 }

@@ -5,13 +5,10 @@ import { Link } from '@inertiajs/react';
 
 export default function({orders}){
     const { data, prev_page_url, next_page_url, current_page, last_page } = orders;
-    const handleDelete = (productId) => {
-        
-        //console.log(`Eliminar región con ID: ${regionId}`);
-      };
     return(
         <Dashboard>
             <div className='flex flex-col min-h-full '>
+            
             <div className=''>
             <table className="min-w-full bg-white border border-gray-300">
         <thead>

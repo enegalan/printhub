@@ -27,7 +27,7 @@ return new class extends Migration
 
         Schema::create('payment_methods', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('number');
             $table->string('owner_name');
             $table->string('cvv');
@@ -44,8 +44,8 @@ return new class extends Migration
 
         Schema::create('users_roles', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('role_id')->constrained();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('role_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
 
@@ -67,13 +67,13 @@ return new class extends Migration
             $table->longText('description');
             $table->string('image');
             $table->double('price');
-            $table->foreignId('user_id')->constrained()->nullable();
+            $table->foreignId('user_id')->constrained()->nullable()->onDelete('cascade');
             $table->timestamps();
         });
         
         Schema::create('carts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->boolean('active');
             $table->timestamps();
         });
@@ -86,35 +86,35 @@ return new class extends Migration
 
         Schema::create('products_categories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_id')->constrained();
-            $table->foreignId('category_id')->constrained();
+            $table->foreignId('product_id')->constrained()->onDelete('cascade');
+            $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
 
         Schema::create('wishlists', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
 
         Schema::create('wishlists_products', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('wishlist_id')->constrained();
-            $table->foreignId('product_id')->constrained();
+            $table->foreignId('wishlist_id')->constrained()->onDelete('cascade');
+            $table->foreignId('product_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
         
         Schema::create('prod_combs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_id')->constrained();
-            $table->foreignId('color_id')->constrained();
-            $table->foreignId('material_id')->constrained();
+            $table->foreignId('product_id')->constrained()->onDelete('cascade');
+            $table->foreignId('color_id')->constrained()->onDelete('cascade');
+            $table->foreignId('material_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
         Schema::create('stock_carts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('cart_id')->constrained();
-            $table->foreignId('prod_comb_id')->constrained();
+            $table->foreignId('cart_id')->constrained()->onDelete('cascade');
+            $table->foreignId('prod_comb_id')->constrained()->onDelete('cascade');
             $table->integer('quantity');
             $table->timestamps();
         });
@@ -125,25 +125,25 @@ return new class extends Migration
         });
         Schema::create('regions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('country_id')->constrained();// constrained
+            $table->foreignId('country_id')->constrained()->onDelete('cascade');
             $table->string('name');
             $table->timestamps();
         });
         Schema::create('fact_addresses', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('name');
             $table->string('address');
-            $table->foreignId('country_id')->constrained();
-            $table->foreignId('region_id')->constrained();
+            $table->foreignId('country_id')->constrained()->onDelete('cascade');
+            $table->foreignId('region_id')->constrained()->onDelete('cascade');
             $table->integer('zip');
             $table->timestamps();
         });
         Schema::create('ship_addresses', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('country_id')->constrained();
-            $table->foreignId('region_id')->constrained();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('country_id')->constrained()->onDelete('cascade');
+            $table->foreignId('region_id')->constrained()->onDelete('cascade');
             $table->string('name');
             $table->string('address');
             $table->integer('zip');
@@ -152,8 +152,8 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('cart_id')->constrained();
-            $table->foreignId('fact_addresse_id')->constrained();
-            $table->foreignId('ship_addresse_id')->constrained();
+            $table->foreignId('fact_addresse_id')->constrained()->onDelete('cascade');
+            $table->foreignId('ship_addresse_id')->constrained()->onDelete('cascade');
             $table->enum('status',['Not paid', 'Paid', 'Shipping', 'Delivered']);
             $table->timestamps();
         });
@@ -164,7 +164,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('lastname');
             $table->string('email');
-            $table->foreignId('order_id')->constrained();
+            $table->foreignId('order_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
