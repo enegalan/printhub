@@ -42,7 +42,7 @@ export default function ProviderDashboard({ user, categories = [] }) {
     formData.append("price", data.price);
     formData.append("categories", data.categories);
     formData.append("user_id", data.user_id);
-    post(route("products.store"));
+    post(route("product.store"));
   };
 
   return (

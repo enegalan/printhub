@@ -109,7 +109,7 @@ Route::delete('/admin/region/{region}/delete', [AdminController::class, 'deleter
 Route::delete('/admin/category/{category}/delete', [AdminController::class, 'deletecategory'])->name('admin.category.delete');
 
 //PRODUCTS
-Route::delete('/produts/{product}', [ProductController::class, 'destroy'])->name('product.destroy');
-Route::put('/produts/{product}', [ProductController::class, 'update'])->name('product.update');
-Route::post('/produts', [ProductController::class, 'store'])->name('products.store');
+Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('product.destroy');
+Route::put('/products/{product}', [ProductController::class, 'update'])->name('product.update');
+Route::post('/products', [ProductController::class, 'store'])->name('product.store');
 require __DIR__.'/auth.php';
