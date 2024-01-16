@@ -11,7 +11,7 @@ use App\Models\Profile;
 use App\Models\Role;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class User extends Authenticatable implements MustVerifyEmail
+class   User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable, softDeletes;
 
