@@ -88,20 +88,29 @@ class AdminController extends Controller
 
     public function users() {
         app()->call([UserController::class, 'getRoles']);
-        $users = User::paginate($this->productPerPagination);
+
+        $users = User::withTrashed()->paginate($this->productPerPagination);
         $users->load('roles');
         return (
             Inertia::render('Admin/User/Users', ['users' => $users])
         );
     }
 
-    public function deleteuser(User $user){
+    public function toggleStatus(string $id)
+    {
+        $user = User::withTrashed()->findOrFail($id);
         try {
-
-            $user->delete();
             
+            if ($user->trashed()) {
+                
+                $user->restore();
+            } else {
+                
+                $user->delete();
+            }
+        
         } catch (\Exception $e) {
-            throw $e;
+            
         }
     }
 

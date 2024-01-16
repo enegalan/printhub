@@ -100,6 +100,7 @@ Route::get('/admin/region/{region}/edit', [AdminController::class, 'edituser'])-
 Route::get('/admin/category/{category}/edit', [AdminController::class, 'editcategory'])->name('admin.category.edit');
 Route::get('/admin/country/{country}/regions', [AdminController::class, 'viewregionscountry'])->name('admin.country.viewregions');
 
+Route::post('/admin/user/{user}/toggle', [AdminController::class, 'toggleStatus'])->name('admin.user.toggle');
 Route::delete('/admin/product/{product}/delete', [AdminController::class, 'deleteproduct'])->name('admin.product.delete');
 Route::delete('/admin/material/{material}/delete', [AdminController::class, 'deletematerial'])->name('admin.material.delete');
 Route::delete('/admin/color/{color}/delete', [AdminController::class, 'deletecolor'])->name('admin.color.delete');
