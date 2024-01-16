@@ -52,9 +52,9 @@ export default function ProviderDashboard({ user, product, categories = [] }) {
     put(route("product.update", product));
   };
 
-  const handleCheck = (category)=>{
+  const handleCheck = (categoryId)=>{
     for (const categoryP of product.categories) {
-        if (category.id === categoryP.id) {
+        if (categoryId === categoryP.id) {
           return true
         }
       }
@@ -171,7 +171,7 @@ export default function ProviderDashboard({ user, product, categories = [] }) {
                     className="mt-1"
                     autoComplete={`categories-${category.id}`}
                     isFocused={true}
-                    checked={data.categories.includes(category.id) || handleCheck()}
+                    checked={data.categories.includes(category.id) || handleCheck(category.id)}
                     onChange={() => {
                       setData(
                         "categories",
