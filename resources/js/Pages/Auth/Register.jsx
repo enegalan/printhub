@@ -3,6 +3,7 @@ import GuestLayout from '@/Layouts/GuestLayout';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
+import SecondaryButton from '@/Components/SecondaryButton';
 import BackButtonArrow  from '@/Components/BackButtonArrow.jsx';
 import TextInput from '@/Components/TextInput';
 import { Head, Link, useForm } from '@inertiajs/react';
@@ -23,10 +24,27 @@ export default function Register() {
         };
     }, []);
 
+    const openModal = () => {
+        // Mostrar el modal
+        document.getElementById('confirmModal').classList.remove('hidden');
+    };
+
+    const closeModal = () => {
+        // Ocultar el modal
+        document.getElementById('confirmModal').classList.add('hidden');
+    };
+
+    const confirmModal = () => {
+        closeModal();
+        // Después de confirmar, enviar la solicitud de registro
+        post(route('register'));
+    };
+
     const submit = (e) => {
         e.preventDefault();
-
-        post(route('register'));
+        openModal();
+        // No es necesario realizar la solicitud aquí
+        // post(route('register'));
     };
 
     return (
@@ -34,8 +52,17 @@ export default function Register() {
             <Head title="Register" />
             {/*Go back button*/}
             <BackButtonArrow />
+            <div id="confirmModal" className="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center hidden">
+                <div className="bg-white p-8 rounded shadow-md">
+                    <p className="text-lg font-semibold mb-4">¿Estás seguro de que deseas registrar este usuario?</p>
+                    <div className="flex justify-end">
+                        <PrimaryButton className="mr-2" onClick={confirmModal}>Sí</PrimaryButton>
+                        <SecondaryButton onClick={closeModal}>Cancelar</SecondaryButton>
+                    </div>
+                </div>
+            </div>
             {/*Register form*/}
-            <form onSubmit={submit}>
+            <form>
                 <h1 className="text-white text-3xl font-bold mb-4">Register</h1>
                 <div>
                     <InputLabel forInput="name" value="Name" className="text-white"/>
@@ -140,7 +167,7 @@ export default function Register() {
                         Already registered?
                     </Link>
 
-                    <PrimaryButton className="ms-4" disabled={processing}>
+                    <PrimaryButton className="ms-4" disabled={processing} onClick={submit}>
                         Register
                     </PrimaryButton>
                 </div>

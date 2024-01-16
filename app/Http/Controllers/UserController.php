@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
+    private $productPerPagination = 15;
     /**
      * Display the user's profile form.
      */
@@ -128,7 +129,7 @@ class UserController extends Controller
     public function dashboard(){
         $user = User::findOrFail(auth()->user()->id);
         $user->roles;
-        $orders = $this->getOrders();
+        $orders = $this->getOrders(false, true);
         $wishlist = $this->getWishlistProducts();
         return Inertia::render('Profile/Show', compact('user', 'orders', 'wishlist'));
     }
@@ -177,18 +178,32 @@ class UserController extends Controller
         }
         
     }
-    function getOrders () {
+    function orders () {
+        $orders = $this->getOrders(true, false);
+        return Inertia::render('Profile/Orders', ['user' => auth()->user(), 'orders'=> $orders]);
+    }
+    function getOrders (bool $paginate = false, bool $activeCart = true) {
         if (auth()->check()) {
             $userId = auth()->user()->id;
-            $userCarts = Cart::where('user_id', $userId)
-            ->where('active', 0)
-            ->get();
+            if (!$activeCart) {
+                $userCarts = Cart::where('user_id', $userId)
+                ->where('active', 0)
+                ->get();
+            } else {
+                $userCarts = Cart::where('user_id', $userId)
+                ->where('active', 1)
+                ->get();
+            }
             $userCartIds = $userCarts->pluck('id');
 
             // Search users carts that are active = 0
-            $userOrders = Order::whereIn('cart_id', $userCartIds)
-            ->where('status', "Paid")->get();
-
+            if ($paginate) {
+                $userOrders = Order::whereIn('cart_id', $userCartIds)
+                ->paginate($this->productPerPagination);
+            } else {
+                $userOrders = Order::whereIn('cart_id', $userCartIds)
+                ->get();
+            }
             return $userOrders;
         }
     }

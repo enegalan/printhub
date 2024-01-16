@@ -6,6 +6,7 @@ import InputError from "@/Components/InputError";
 import { useForm } from "@inertiajs/inertia-react";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { Link } from "@inertiajs/react";
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function ProviderDashboard({ user, categories = [] }) {
   const { data, setData, post, processing, errors, reset } = useForm({
@@ -16,6 +17,13 @@ export default function ProviderDashboard({ user, categories = [] }) {
     categories: [],
     user_id: user.id,
   });
+  const onAdd = () => {
+    toast.success('Product added successfully');
+  }
+
+  const onError = (e) => {
+    toast.error('Error adding product');
+  }
   const [previewUrl, setPreviewUrl] = useState(null);
   const handleFileChange = (e) => {
     const selectedImage = e.target.files[0];
@@ -42,7 +50,11 @@ export default function ProviderDashboard({ user, categories = [] }) {
     formData.append("price", data.price);
     formData.append("categories", data.categories);
     formData.append("user_id", data.user_id);
-    post(route("product.store"));
+    try {
+      post(route("product.store"));
+    } catch (e) {
+      onError(e);
+    }
   };
 
   return (

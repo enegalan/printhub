@@ -1,7 +1,7 @@
 import { Link } from "@inertiajs/react";
 import logoBlue from "../../../../public/logoWhite.svg";
 import gbBlue from "../../../../public/images/Blue-dotted-Background-images.jpg"
-import { FaUser, FaHeart,FaWallet,FaAddressCard } from "react-icons/fa";
+import { FaUser, FaHeart,FaWallet,FaAddressCard, FaHome } from "react-icons/fa";
 import { FaCartShopping, FaGear } from "react-icons/fa6";
 
 export default function ProfileLayout({ children,pageName='Dashboard' }) {
@@ -10,9 +10,20 @@ export default function ProfileLayout({ children,pageName='Dashboard' }) {
       <div className="h-screen flex bg-white/30">
         <nav className="w-52 flex flex-col">
           <div className="p-2 flex justify-center">
-            <img src={logoBlue} alt="Logo" />
+            <Link href={route("index")}>
+              <img src={logoBlue} alt="Logo" />
+            </Link>
           </div>
           <ul className="flex flex-col gap-2 mt-10 text-xl flex-1">
+            <li className="hover:bg-blue-100 py-2">
+              <Link
+                href={route("index")}
+                className="flex gap-2 items-center px-5"
+              >
+                <FaHome className="text-blue-700" />
+                <p className="">Home</p>
+              </Link>
+            </li>
             <li className="hover:bg-blue-100 py-2">
               <Link
                 href={route("admin.dashboard")}
@@ -95,12 +106,14 @@ export default function ProfileLayout({ children,pageName='Dashboard' }) {
               </Link>
             </li>
           </ul>
-          <div className="flex pb-4 pl-4 justify-start">
+          <div className="self-center mb-5">
             <Link
-              href={route("index")}
-              className=""
+              href={route("logout")}
+              method="post"
+              as="button"
+              className="text-white hover:underline text-lg bg-blue-700 py-1 px-4 rounded font-bold"
             >
-              <FaGear className="text-blue-700 text-4xl" />
+              Log out
             </Link>
           </div>
         </nav>

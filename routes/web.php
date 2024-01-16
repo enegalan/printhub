@@ -50,15 +50,13 @@ Route::get('/market/filter', function () {
     return redirect()->route('market');
 });
 
-Route::get('/dashboard', function () {
-    app()->call([UserController::class, 'getRoles']);
-    return Inertia::render('Index');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::middleware(['auth', 'verified'])->group(function () {
+    //USERS
     Route::get('/profile', [UserController::class, 'edit'])->name('profile.edit');
+    Route::get('/account', [UserController::class, 'edit'])->name('profile.edit');
     Route::get('/dashboard', [UserController::class, 'dashboard'])->name('profile.dashboard');
     Route::patch('/profile', [UserController::class, 'update'])->name('profile.update');
+    Route::get('/profile/orders', [UserController::class, 'orders'])->name('profile.orders');
     //PROVIDERS
     Route::get('/profile/provider', [ProviderController::class, 'dashboard'])->name('profile.provider');
     Route::get('/profile/provider/add-product', [ProviderController::class, 'add'])->name('provider.add');

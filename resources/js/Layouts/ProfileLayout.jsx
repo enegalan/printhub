@@ -55,12 +55,12 @@ export default function ProfileLayout({
                 className="flex gap-2 items-center px-5"
               >
                 <FaUser className="text-blue-700" />
-                <p className="">Profile</p>
+                <p className="">Account</p>
               </Link>
             </li>
             <li className="hover:bg-blue-100 py-2">
               <Link
-                href={route("index")}
+                href={route("profile.orders")}
                 className="flex gap-2 items-center px-5"
               >
                 <FaCartShopping className="text-blue-700" />
@@ -118,14 +118,14 @@ export default function ProfileLayout({
           </div>
         </nav>
         <div className="flex flex-col flex-1">
-          <div className="my-4 flex flex-col md:flex-row justify-between md:items-center md:mr-5">
-            <div className="mb-4 md:mb-0">
-              <h1 className="text-4xl">Profile {pageName}</h1>
-              <p className="text-gray-700">Welcom to the profile section</p>
-            </div>
+          <div className="my-4">
+            <h1 className="text-4xl">Admin {pageName}</h1>
+            <p className="text-gray-700">Welcome to the admin section</p>
           </div>
-          <div className="bg-gray-200/60 rounded-xl px-10 py-10 mb-8 md:mb-14 flex-1 flex flex-col mr-4 md:mr-5 overflow-auto">
-            {children}
+          <div className="bg-gray-200/60 overflow-auto rounded-xl px-10 py-10 flex-1 mb-14 flex flex-col mr-5">
+            
+              {children}
+            
           </div>
         </div>
       </div>
