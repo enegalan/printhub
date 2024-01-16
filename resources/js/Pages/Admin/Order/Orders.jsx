@@ -2,13 +2,15 @@ import React from 'react'
 import Dashboard from '../Dashboard'
 import Pagination from "@/Components/Pagination";
 import { Link } from '@inertiajs/react';
-
+import { FaPlus } from 'react-icons/fa';
 export default function({orders}){
     const { data, prev_page_url, next_page_url, current_page, last_page } = orders;
     return(
         <Dashboard>
             <div className='flex flex-col min-h-full '>
-            
+            <Link href={route('provider.add')} className="bg-[lightgrey] w-[40px] p-3 rounded-lg mb-5 self-end transition hover:bg-[#bbbbbb]">
+                <FaPlus />
+            </Link>
             <div className=''>
             <table className="min-w-full bg-white border border-gray-300">
         <thead>

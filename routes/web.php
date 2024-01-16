@@ -88,7 +88,17 @@ Route::get('/admin/countries', [AdminController::class, 'countries'])->name('adm
 Route::get('/admin/regions', [AdminController::class, 'regions'])->name('admin.regions');
 Route::get('/admin/categories', [AdminController::class, 'categories'])->name('admin.categories');
 
-Route::get('/admin/user/{user}/edit', [AdminController::class, 'edituser'])->name('admin.user.edit');
+Route::get('/admin/add-user', [AdminController::class, 'createUser'])->name('admin.user.add');
+Route::post('/admin/add-user', [AdminController::class, 'storeUser'])->name('admin.user.store');
+Route::get('/admin/product/add-product', [AdminController::class, 'addproduct'])->name('admin.product.edit');
+Route::get('/admin/material/create-material', [AdminController::class, 'addmaterial'])->name('admin.material.add');
+Route::get('/admin/color/create-color', [AdminController::class, 'adduser'])->name('admin.color.add');
+Route::get('/admin/country/create-country', [AdminController::class, 'adduser'])->name('admin.country.add');
+Route::get('/admin/region/create-region', [AdminController::class, 'adduser'])->name('admin.region.add');
+Route::get('/admin/category/create-category', [AdminController::class, 'addcategory'])->name('admin.category.add');
+
+Route::get('/admin/user/{user}/edit', [AdminController::class, 'editUser'])->name('admin.user.edit');
+Route::post('/admin/user/{user}/edited', [AdminController::class, 'updateUser'])->name('admin.user.update');
 Route::get('/admin/product/{product}/edit', [AdminController::class, 'editproduct'])->name('admin.product.edit');
 Route::get('/admin/order/{order}/view', [AdminController::class, 'vieworder'])->name('admin.order.view');
 Route::get('/admin/material/{material}/edit', [AdminController::class, 'editmaterial'])->name('admin.material.edit');

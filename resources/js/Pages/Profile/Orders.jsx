@@ -2,6 +2,7 @@ import React from 'react'
 import ProfileLayout from "@/Layouts/ProfileLayout";
 import Pagination from "@/Components/Pagination";
 import { Link } from '@inertiajs/react';
+import { FaPlus } from 'react-icons/fa';
 
 export default function({orders = [], user = []}){
   
@@ -9,8 +10,11 @@ export default function({orders = [], user = []}){
     return(
         <ProfileLayout user={user}>
             <div className='flex flex-col min-h-full '>
-            
+            <Link href={route('provider.add')} className="bg-[lightgrey] w-[40px] p-3 rounded-lg mb-5 self-end transition hover:bg-[#bbbbbb]">
+                <FaPlus />
+            </Link>
             <div className=''>
+            
             <table className="min-w-full bg-white border border-gray-300">
         <thead>
           <tr className="bg-gray-100">

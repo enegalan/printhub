@@ -3,7 +3,7 @@ import Dashboard from '../Dashboard'
 import Pagination from "@/Components/Pagination";
 import { Link, usePage, useForm } from '@inertiajs/react';
 import toast, { Toaster } from 'react-hot-toast';
-
+import { FaPlus } from 'react-icons/fa';
 
 export default function({users}){
     const { data, prev_page_url, next_page_url, current_page, last_page } = users; 
@@ -30,8 +30,6 @@ export default function({users}){
         return roles.find(role => priorities.includes(role.name)) || {};
     };
 
-   
-
     const onDelete = () => {
       toast.success('User status changed successfully');
     }
@@ -40,11 +38,13 @@ export default function({users}){
       toast.error('Error deleting category');
     }
 
-
     return(
-        <Dashboard>
+        <Dashboard pageName='Users' pageSubtitle='Manage PrintHub users'>
             <div className='flex flex-col min-h-full '>
             <Toaster />
+            <Link href={route('admin.user.add')} className="bg-[lightgrey] w-[40px] p-3 rounded-lg mb-5 self-end transition hover:bg-[#bbbbbb]">
+                <FaPlus />
+            </Link>
             <div className=''>
             <table className="min-w-full bg-white border border-gray-300">
         <thead>
@@ -100,7 +100,7 @@ export default function({users}){
               
               <td className="py-2 px-4 border-b">
                 <Link
-                  href={route('admin.user.edit', user.id)}
+                  href={route('admin.user.edit', user)}
                   className="text-blue-500 hover:underline mr-2"
                 >
                   Edit

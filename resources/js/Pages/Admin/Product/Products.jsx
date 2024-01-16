@@ -3,7 +3,7 @@ import Dashboard from '../Dashboard'
 import Pagination from "@/Components/Pagination";
 import { Link, useForm } from '@inertiajs/react';
 import toast, { Toaster } from 'react-hot-toast';
-
+import { FaPlus } from 'react-icons/fa';
 export default function({products}){
     const { data, prev_page_url, next_page_url, current_page, last_page } = products;
     const {delete: handleDelete, data: formData } = useForm();
@@ -19,6 +19,9 @@ export default function({products}){
         <Dashboard>
             <div className='flex flex-col min-h-full '>
             <Toaster />
+            <Link href={route('provider.add')} className="bg-[lightgrey] w-[40px] p-3 rounded-lg mb-5 self-end transition hover:bg-[#bbbbbb]">
+                <FaPlus />
+            </Link>
             <div className=''>
             <table className="min-w-full bg-white border border-gray-300">
         <thead>

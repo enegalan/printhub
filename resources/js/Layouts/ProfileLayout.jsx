@@ -15,6 +15,7 @@ import { FaCartShopping, FaGear, FaHandshake } from "react-icons/fa6";
 export default function ProfileLayout({
   children,
   pageName = "Dashboard",
+  pageSubtitle = "Welcome to the admin section",
   user,
 }) {
   var isProvider = false;
@@ -119,8 +120,8 @@ export default function ProfileLayout({
         </nav>
         <div className="flex flex-col flex-1">
           <div className="my-4">
-            <h1 className="text-4xl">Admin {pageName}</h1>
-            <p className="text-gray-700">Welcome to the admin section</p>
+            <h1 className="text-4xl">{pageName}</h1>
+            <p className="text-gray-700">{pageSubtitle}</p>
           </div>
           <div className="bg-gray-200/60 overflow-auto rounded-xl px-10 py-10 flex-1 mb-14 flex flex-col mr-5">
             

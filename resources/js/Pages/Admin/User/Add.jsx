@@ -8,26 +8,28 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 import { Link } from "@inertiajs/react";
 import toast, { Toaster } from 'react-hot-toast';
 
-export default function ProviderDashboard({ user, categories = [] }) {
+export default function Add({ user, roles = [] }) {
   const { data, setData, post, processing, errors, reset } = useForm({
     name: "",
-    description: "",
-    image: null,
-    price: "",
-    categories: [],
-    user_id: user.id,
+    lastname: "",
+    birthdate: "",
+    avatar: "",
+    email: "",
+    password: "",
+    roles: [],
   });
+  
   const onAdd = () => {
-    toast.success('Product added successfully');
+    toast.success('User created successfully');
   }
 
   const onError = (e) => {
-    toast.error('Error adding product');
+    toast.error('Error creating user');
   }
   const [previewUrl, setPreviewUrl] = useState(null);
   const handleFileChange = (e) => {
     const selectedImage = e.target.files[0];
-    setData("image", selectedImage);
+    setData("avatar", selectedImage);
 
     // Create an object URL for the preview
     const objectUrl = URL.createObjectURL(selectedImage);
@@ -45,25 +47,24 @@ export default function ProviderDashboard({ user, categories = [] }) {
     e.preventDefault();
     const formData = new FormData();
     formData.append("name", data.name);
-    formData.append("description", data.description);
-    formData.append("image", data.image);
-    formData.append("price", data.price);
-    formData.append("categories", data.categories);
-    formData.append("user_id", data.user_id);
+    formData.append("lastname", data.lastname);
+    formData.append("birthdate", data.birthdate);
+    formData.append("password", data.password);
+    formData.append("roles", JSON.stringify(data.roles));
     try {
-      post(route("product.store"));
+      post(route("admin.user.store"));
     } catch (e) {
       onError(e);
     }
   };
 
   return (
-    <ProfileLayout user={user} pageName="provider">
-      <Link href={route('profile.provider')} className="bg-[lightgrey] w-[40px] p-3 rounded-lg mb-5 self-start transition hover:bg-[#bbbbbb]">
+    <ProfileLayout user={user} pageName="Users" pageSubtitle="Manage PrintHub users">
+      <Link href={route('admin.users')} className="bg-[lightgrey] w-[40px] p-3 rounded-lg mb-5 self-start transition hover:bg-[#bbbbbb]">
           <IoMdArrowRoundBack />
       </Link>
       <Toaster />
-      <h1 className="text-2xl mb-5 text-center">Add new product</h1>
+      <h1 className="text-2xl mb-5 text-center">Add user</h1>
       <div className="row-span-4 bg-white rounded-xl p-4 lg:mx-20">
         <form
           className="px-10 py-5 flex flex-col gap-5"
@@ -71,7 +72,7 @@ export default function ProviderDashboard({ user, categories = [] }) {
           encType="multipart/form-data"
         >
           <div>
-            <InputLabel forInput="name" value="Product name*" className="" />
+            <InputLabel forInput="name" value="Name*" className="" />
             <TextInput
               id="name"
               name="name"
@@ -85,30 +86,44 @@ export default function ProviderDashboard({ user, categories = [] }) {
             <InputError message={errors.name} className="mt-2" />
           </div>
           <div>
-            <InputLabel value="Description" className="" />
-            <textarea
-              id="description"
-              name="description"
-              value={data.description}
-              className="mt-1 block w-full border-gray-300 focus:border-blue-400 focus:ring-blue-400 rounded-md shadow-sm"
-              autoComplete="description"
+            <InputLabel forInput="lastname" value="Last name*" className="" />
+            <TextInput
+              id="lastname"
+              name="lastname"
+              value={data.lastname}
+              className="mt-1 block w-full"
+              autoComplete="lastname"
               isFocused={true}
-              onChange={(e) => setData("description", e.target.value)}
-              rows="5"
-              placeholder="Maximun 255 chararcters"
+              onChange={(e) => setData("lastname", e.target.value)}
+              required
             />
-            <InputError message={errors.description} className="mt-2" />
+            <InputError message={errors.lastname} className="mt-2" />
+          </div>
+          <div>
+            <InputLabel forInput="birthdate" value="Birthdate*" className="" />
+            <TextInput
+              id="birthdate"
+              type="date"
+              name="birthdate"
+              value={data.birthdate}
+              className="mt-1 block w-full"
+              autoComplete="birthdate"
+              isFocused={true}
+              onChange={(e) => setData("birthdate", e.target.value)}
+              required
+            />
+            <InputError message={errors.birthdate} className="mt-2" />
           </div>
           <div>
             <InputLabel
-              forInput="image"
-              value="Choose an image*"
+              forInput="avatar"
+              value="Add an avatar"
               className="font-medium text-gray-900"
             />
             <TextInput
-              id="image"
+              id="avatar"
               type="file"
-              name="image"
+              name="avatar"
               className="mt-1 block shadow-transparent text-slate-500
                 file:mr-4 file:py-2 file:px-10
                 file:rounded-full file:border-0
@@ -118,7 +133,6 @@ export default function ProviderDashboard({ user, categories = [] }) {
               autoComplete="image"
               isFocused={true}
               onChange={handleFileChange}
-              required
             />
             {previewUrl && (
               <img
@@ -127,66 +141,73 @@ export default function ProviderDashboard({ user, categories = [] }) {
                 className="mt-2 w-32 h-32"
               />
             )}
-            <InputError message={errors.image} className="mt-2" />
+            <InputError message={errors.avatar} className="mt-2" />
           </div>
           <div>
-            <InputLabel
-              forInput="price"
-              value="Set price*"
-              className="font-medium text-gray-900"
+            <InputLabel forInput="email" value="E-mail*" className="" />
+            <TextInput
+              id="email"
+              name="email"
+              type="email"
+              value={data.email}
+              className="mt-1 block w-full"
+              autoComplete="email"
+              isFocused={true}
+              onChange={(e) => setData("email", e.target.value)}
+              required
             />
-            <div className="flex gap-2">
-              <TextInput
-                id="price"
-                type="number"
-                step="any"
-                name="price"
-                value={data.price}
-                className="mt-1 w-full"
-                autoComplete="price"
-                isFocused={true}
-                onChange={(e) => setData("price", e.target.value)}
-                required
-              />
-            </div>
-            <InputError message={errors.price} className="mt-2" />
+            <InputError message={errors.email} className="mt-2" />
+          </div>
+          <div>
+            <InputLabel forInput="password" value="Password*" className="" />
+            <TextInput
+              id="password"
+              name="password"
+              type="password"
+              value={data.password}
+              className="mt-1 block w-full"
+              autoComplete="password"
+              isFocused={true}
+              onChange={(e) => setData("password", e.target.value)}
+              required
+            />
+            <InputError message={errors.password} className="mt-2" />
           </div>
           <div>
             <InputLabel
-              forInput="categories"
-              value="Choose categories"
+              forInput="roles"
+              value="Choose role(s)"
               className="font-medium text-gray-900"
             />
             <div className="flex gap-2 flex-col">
-              {categories.map((category, index) => (
+              {roles.map((role, index) => (
                 <div key={index} className="flex gap-2">
                   <TextInput
-                    id="categories"
+                    id="roles"
                     type="checkbox"
-                    name="categories[]"
-                    value={data.categories.includes(category.id)}
+                    name="roles[]"
+                    value={data.roles}
                     className="mt-1"
-                    autoComplete="categories"
                     isFocused={true}
                     onChange={(e) => {
                       const isChecked = e.target.checked;
                       setData(
-                        "categories",
+                        "roles",
                         isChecked
-                          ? [...data.categories, category.id]
-                          : data.categories.filter((id) => id !== category.id)
+                          ? [...data.roles, role.id]
+                          : data.roles.filter((id) => id !== role.id)
                       );
                     }}
                   />
-                  <label> {category.name.charAt(0).toUpperCase() + category.name.slice(1)}</label>
+                  <label> {role.name.charAt(0).toUpperCase() + role.name.slice(1)}</label>
                 </div>
               ))}
             </div>
-            <InputError message={errors.categories} className="mt-2" />
+            <InputError message={errors.roles} className="mt-2" />
           </div>
           <div>
             <button className="rounded bg-blue-500 text-white px-5 py-2 font-medium">
-              Submit product
+              Submit user
             </button>
           </div>
         </form>

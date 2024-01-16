@@ -69,6 +69,7 @@ export default function ProviderDashboard({ user, product, categories = [] }) {
       >
         <IoMdArrowRoundBack />
       </Link>
+      <Toaster />
       <h1 className="text-2xl mb-5 text-center">Edit product</h1>
       <div className="row-span-4 bg-white rounded-xl p-4 lg:mx-20">
         <form

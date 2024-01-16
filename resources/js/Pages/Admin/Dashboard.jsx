@@ -4,7 +4,7 @@ import gbBlue from "../../../../public/images/Blue-dotted-Background-images.jpg"
 import { FaUser, FaHeart,FaWallet,FaAddressCard, FaHome } from "react-icons/fa";
 import { FaCartShopping, FaGear } from "react-icons/fa6";
 
-export default function ProfileLayout({ children,pageName='Dashboard' }) {
+export default function ProfileLayout({ children, pageName='Admin Dashboard', pageSubtitle='Welcome to admin section' }) {
   return (
     <main className={`bg-[url('${gbBlue}')] bg-cover`}>
       <div className="h-screen flex bg-white/30">
@@ -119,8 +119,8 @@ export default function ProfileLayout({ children,pageName='Dashboard' }) {
         </nav>
         <div className="flex flex-col flex-1">
           <div className="my-4">
-            <h1 className="text-4xl">Admin {pageName}</h1>
-            <p className="text-gray-700">Welcome to the admin section</p>
+            <h1 className="text-4xl">{pageName}</h1>
+            <p className="text-gray-700">{pageSubtitle}</p>
           </div>
           <div className="bg-gray-200/60 overflow-auto rounded-xl px-10 py-10 flex-1 mb-14 flex flex-col mr-5">
             
