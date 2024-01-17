@@ -100,7 +100,7 @@ export default function({users}){
               
               <td className="py-2 px-4 border-b">
                 <Link
-                  href={route('admin.user.edit', user)}
+                  href={route('admin.user.edit', user.id)}
                   className="text-blue-500 hover:underline mr-2"
                 >
                   Edit

@@ -49,7 +49,7 @@ class   User extends Authenticatable implements MustVerifyEmail
         'password' => 'hashed',
     ];
     public function roles(){
-        return $this->belongsToMany(Role::class, 'users_roles');
+        return $this->belongsToMany(Role::class, 'users_roles', 'user_id', 'role_id');
     }
 
     public function carts(){

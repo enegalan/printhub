@@ -147,10 +147,10 @@ class AdminController extends Controller
         return redirect()->route('admin.users');
     }
 
-    public function editUser(User $user)
+    public function editUser(string $id)
     {
         $roles = Role::all();
-        $user->load('roles');
+        $user = User::withTrashed()->find($id)->load('roles');
         return Inertia::render('Admin/User/Edit', ['user' => $user, 'roles' => $roles]);
     }
 
@@ -160,12 +160,12 @@ class AdminController extends Controller
             'lastname' => 'string|required',
             'birthdate' => 'required',
             'email' => 'string|required',
-            'roles' => 'array|required',
+            'roles' => 'array',
         ]);
     
         // Find the user by ID
-        $user = User::findOrFail($user->id);
-    
+        $user = User::withTrashed()->findOrFail($user->id);
+
         // Prepare the update array with fields that should always be updated
         $updateData = [
             'name' => $validatedData['name'],
@@ -176,18 +176,20 @@ class AdminController extends Controller
     
         // Check if password is provided in the request, and include it in the update array
         if ($request->has('password')) {
-            $updateData['password'] = $request->has('password');
+            $updateData['password'] = bcrypt($request->input('password')); // Hash the password
         }
     
         // Update user attributes
         $user->update($updateData);
-    
 
-        // Sync user roles
         $roles = $request->input('roles');
+
         $user->roles()->detach();
-        if (!empty($roles)) {
-            $user->roles()->attach($roles);
+        if (count($roles) > 0) {
+            $roleIds = array_map(function ($role) {
+                return $role['id'];
+            }, $roles);
+            $user->roles()->attach($roleIds);
         }
     
         if ($request->hasFile('avatar')) {

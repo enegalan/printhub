@@ -8,7 +8,7 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 import { Link } from "@inertiajs/react";
 import toast, { Toaster } from 'react-hot-toast';
 
-export default function Edit({ user, roles = [] }) {
+export default function Edit({ user = [], roles = [] }) {
     const { data, setData, post, processing, errors, reset } = useForm({
         name: user.name,
         lastname: user.lastname,
@@ -16,9 +16,12 @@ export default function Edit({ user, roles = [] }) {
         avatar: user.avatar,
         email: user.email,
         password: "",
-        roles: user.roles,
+        roles: user.roles || [],
         id: user.id,
     });
+
+    console.log('asdasd')
+    console.log(data.roles)
 
     const onAdd = () => {
         toast.success('User created successfully');
@@ -52,8 +55,8 @@ export default function Edit({ user, roles = [] }) {
         formData.append("birthdate", data.birthdate);
         formData.append("password", data.password);
         formData.append("roles", JSON.stringify(data.roles));
-        post(route("admin.user.update", user));
         try {
+            post(route("admin.user.update", user), formData); // Usar await para esperar la respuesta
             onAdd();
         } catch (e) {
             console.log(e);
@@ -62,7 +65,7 @@ export default function Edit({ user, roles = [] }) {
     };
 
     const handleCheck = (roleId) => {
-        return user.roles?.some((roleP) => roleId === roleP.id) || false;
+        return user.roles?.some((roleP) => roleId === roleP.id) || false
     }
 
     return (
@@ -188,21 +191,30 @@ export default function Edit({ user, roles = [] }) {
                             {roles.map((role, index) => (
                                 <div key={index} className="flex gap-2">
                                     <TextInput
-                                        id="roles"
+                                        id={`role-${role.id}`}
                                         type="checkbox"
                                         name="roles[]"
-                                        value={data.roles}
-                                        checked={data.roles?.includes(role.id) || handleCheck(role.id)}
+                                        value={role.id}
+                                        checked={data.roles?.some((userRole) => userRole.id === role.id)}
                                         className="mt-1"
                                         isFocused={true}
                                         onChange={(e) => {
                                             const isChecked = e.target.checked;
-                                            setData(
-                                                "roles",
-                                                isChecked
-                                                    ? [...data.roles, role.id]
-                                                    : data.roles.filter((id) => id !== role.id)
-                                            );
+                                            setData((prevData) => {
+                                                let updatedRoles;
+                                                if (isChecked) {
+                                                    // Agregar el rol si no está presente
+                                                    updatedRoles = [...prevData.roles, role];
+                                                } else {
+                                                    // Filtrar el rol si ya está presente
+                                                    updatedRoles = prevData.roles.filter((userRole) => userRole.id !== role.id);
+                                                }
+                                    
+                                                return {
+                                                    ...prevData,
+                                                    roles: updatedRoles,
+                                                };
+                                            });
                                         }}
                                     />
                                     <label> {role.name.charAt(0).toUpperCase() + role.name.slice(1)}</label>
