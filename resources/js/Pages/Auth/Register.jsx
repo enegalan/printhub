@@ -54,10 +54,10 @@ export default function Register() {
             <BackButtonArrow />
             <div id="confirmModal" className="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center hidden">
                 <div className="bg-white p-8 rounded shadow-md">
-                    <p className="text-lg font-semibold mb-4">¿Estás seguro de que deseas registrar este usuario?</p>
+                    <p className="text-lg font-semibold mb-4">Are you sure you want to register?</p>
                     <div className="flex justify-end">
-                        <PrimaryButton className="mr-2" onClick={confirmModal}>Sí</PrimaryButton>
-                        <SecondaryButton onClick={closeModal}>Cancelar</SecondaryButton>
+                        <PrimaryButton className="mr-2" onClick={confirmModal}>Yes</PrimaryButton>
+                        <SecondaryButton onClick={closeModal}>Cancel</SecondaryButton>
                     </div>
                 </div>
             </div>
