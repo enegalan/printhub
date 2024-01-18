@@ -169,11 +169,11 @@ export default function ProviderDashboard({ user, product, categories = [] }) {
                     id={`category-${category.id}`}
                     type="checkbox"
                     name="categories[]"
-                    value={data.categories.includes(category.id)}
+                    value={category.id}
                     className="mt-1"
                     autoComplete={`categories-${category.id}`}
                     isFocused={true}
-                    checked={data.categories.includes(category.id) || handleCheck(category.id)}
+                    //checked={}
                     onChange={() => {
                       setData(
                         "categories",
