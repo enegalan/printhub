@@ -13,4 +13,8 @@ export default defineConfig({
     alias: {
         images: "/images"
     },
+    server: {
+        host: '0.0.0.0',
+        port: 5173,
+    },
 });

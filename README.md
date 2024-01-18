@@ -83,47 +83,43 @@ Run the following command to install React:
   <code>npm install</code>
 </pre>
 
-## Run Laravel development server
-In two terminals run the following commands:
-<pre>
-  <code>npm run printhub</code>
-</pre>
-
-# How to proceed
-Create React components in <code>resources/js/components/name.jsx</code>
-
-Create React pages in <code>resources/js/pages/page.jsx</code>, in each of them add the necessary if's to control where the components will be displayed.
-
-Import each component in <code>resources/js/app.js</code>
-
-Create a view in <code>resources/views/name.blade.php</code> and add the following line in the head of the HTML:
-<pre>
-  <code>@vite("resources/js/app.js")</code>
-</pre>
-
-To create a route URL for a view add a similar code in <code>routes/web.php</code> file:
-<pre>
-  <code>Route::get('/url', function () {
-    return view('view_name without .blade.php');
-  });</code>
-</pre>
-
 # For developers
 Clone this repository, create a <code>.env</code> file and configure it, there will be a template of <code>.env</code> in <code>.env.example</code> file.
 
+## Local development
 Run the following commands:
 <pre>
   <code>composer install</code>
   <code>npm install create-vite</code>
 </pre>
 
-## Run Laravel development server
+### Run Laravel development server
 In two terminals run the following commands:
 <pre>
   <code>npm run dev</code>
 </pre>
 <pre>
   <code>php artisan serve</code>
+</pre>
+Or run the following custom command:
+<pre>
+  <code>npm run printhub</code>
+</pre>
+
+## Docker deploy
+To build and start a container with the application, you can use the provided Dockerfile.
+<pre>
+  <code>docker build -t printhub .</code>
+</pre>
+<pre>
+  <code>docker run -d -p 8000:8000 -p 5173:5173 printhub</code>
+</pre>
+To get container's IP address the first step is to get container's ID via:
+<pre>
+  <code>docker ps</code>
+</pre>
+<pre>
+  <code>docker inspect {containerID} | grep "IPAddress"</code>
 </pre>
 
 # Run this command for image uploads
