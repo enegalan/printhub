@@ -46,9 +46,8 @@ export default function Register() {
             errors.birthdate = !data.birthdate ? 'Birthdate is required' : null;
             errors.email = !data.email ? 'Email is required' : null;
             errors.password = !data.password ? 'Password is required' : null;
-        } else {openModal
+        } else {
             openModal();
-            
         }
 
     };
