@@ -25,26 +25,35 @@ export default function Register() {
     }, []);
 
     const openModal = () => {
-        // Mostrar el modal
         document.getElementById('confirmModal').classList.remove('hidden');
     };
 
     const closeModal = () => {
-        // Ocultar el modal
         document.getElementById('confirmModal').classList.add('hidden');
     };
 
     const confirmModal = () => {
         closeModal();
-        // Después de confirmar, enviar la solicitud de registro
         post(route('register'));
     };
 
     const submit = (e) => {
         e.preventDefault();
-        openModal();
-        // No es necesario realizar la solicitud aquí
-        // post(route('register'));
+
+        if (!data.name || !data.lastname || !data.birthdate || !data.email || !data.password) {
+            setData('errors', {
+                name: !data.name ? 'Name is required' : null,
+                lastname: !data.lastname ? 'Last name is required' : null,
+                birthdate: !data.birthdate ? 'Birthdate is required' : null,
+                email: !data.email ? 'Email is required' : null,
+                password: !data.password ? 'Password is required' : null,
+            });
+            post(route('register'));
+        } else {
+            openModal();
+            
+        }
+
     };
 
     return (
