@@ -5,7 +5,9 @@
         "client": "vite",
         "build": "vite build",
         "server": "php artisan serve",
-        "printhub": "concurrently \"npm run client\" \"npm run server\""
+        "docker": "php artisan serve --host=0.0.0.0 --port=8000",
+        "printhub": "concurrently \"npm run client\" \"npm run server\"",
+        "printhub_docker": "concurrently \"npm run client\" \"npm run docker\""
     },
     "devDependencies": {
         "@headlessui/react": "^1.4.2",
