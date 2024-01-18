@@ -7,9 +7,8 @@ import { FaPlus } from "react-icons/fa6";
 export default function ProviderShow({ user, products }) {
   const { data, prev_page_url, next_page_url, current_page, last_page } = products;
   const { delete: handleDelete } = useForm();
-
   return (
-    <ProfileLayout user={user}>
+    <ProfileLayout user={user} pageName="provider" pageSubtitle="Provider dashboard">
       <Link href={route('provider.add')} className="bg-[lightgrey] w-[40px] p-3 rounded-lg mb-5 self-end transition hover:bg-[#bbbbbb]">
           <FaPlus />
       </Link>

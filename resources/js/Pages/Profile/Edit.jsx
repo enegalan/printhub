@@ -3,17 +3,12 @@ import DeleteUserForm from "./Partials/DeleteUserForm";
 import AvatarUpload from "@/Components/AvatarUpload";
 import UpdatePasswordForm from "./Partials/UpdatePasswordForm";
 import UpdateProfileInformationForm from "./Partials/UpdateProfileInformationForm";
-import { Head } from "@inertiajs/react";
-import AvatarDelete from "@/Components/AvatarDelete";
-import Navbar from "@/Components/NavBar";
+import ProfileLayout from "@/Layouts/ProfileLayout";
 
 export default function Edit({ auth, mustVerifyEmail, status }) {
   return (
-    <div>
-    <Navbar user={auth.user}></Navbar>
-      <Head title="Profile" />
-
-      <div className="py-12">
+    <ProfileLayout user={auth.user} pageName="Account section" pageSubtitle="Manage your account profile">
+      <div className="">
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
           <div className="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
             <UpdateProfileInformationForm
@@ -35,7 +30,6 @@ export default function Edit({ auth, mustVerifyEmail, status }) {
             </header>
 
             <AvatarUpload user={auth.user}></AvatarUpload>
-            
           </div>
 
           <div className="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
@@ -47,6 +41,6 @@ export default function Edit({ auth, mustVerifyEmail, status }) {
           </div>
         </div>
       </div>
-    </div>
+    </ProfileLayout>
   );
 }
