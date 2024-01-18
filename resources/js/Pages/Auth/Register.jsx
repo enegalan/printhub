@@ -41,15 +41,12 @@ export default function Register() {
         e.preventDefault();
 
         if (!data.name || !data.lastname || !data.birthdate || !data.email || !data.password) {
-            setData('errors', {
-                name: !data.name ? 'Name is required' : null,
-                lastname: !data.lastname ? 'Last name is required' : null,
-                birthdate: !data.birthdate ? 'Birthdate is required' : null,
-                email: !data.email ? 'Email is required' : null,
-                password: !data.password ? 'Password is required' : null,
-            });
-            post(route('register'));
-        } else {
+            errors.name = !data.name ? 'Name is required' : null;
+            errors.lastname = !data.lastname ? 'Last name is required' : null;
+            errors.birthdate = !data.birthdate ? 'Birthdate is required' : null;
+            errors.email = !data.email ? 'Email is required' : null;
+            errors.password = !data.password ? 'Password is required' : null;
+        } else {openModal
             openModal();
             
         }
