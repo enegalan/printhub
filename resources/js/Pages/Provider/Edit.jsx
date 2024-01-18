@@ -6,6 +6,7 @@ import InputError from "@/Components/InputError";
 import { useForm, put } from "@inertiajs/inertia-react";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { Link } from "@inertiajs/react";
+import { Toaster } from "react-hot-toast";
 
 export default function ProviderDashboard({ user, product, categories = [] }) {
   const { data, setData, put, processing, errors, reset } = useForm({

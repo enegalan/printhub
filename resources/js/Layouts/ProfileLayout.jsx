@@ -7,23 +7,18 @@ import {
   FaWallet,
   FaAddressCard,
   FaHome,
-  FaBars
+  FaBars,
 } from "react-icons/fa";
 import { AiFillDashboard } from "react-icons/ai";
 import { FaCartShopping, FaGear, FaHandshake } from "react-icons/fa6";
 
-export default function ProfileLayout({
-  children,
-  pageName = "Dashboard",
-  pageSubtitle = "Welcome to the admin section",
-  user,
-}) {
+export default function ProfileLayout({ children, pageName = "Dashboard", pageSubtitle = "Welcome to the admin section", user }) {
   var isProvider = false;
   if (user && user.hasOwnProperty("roles"))
     isProvider = user.roles.some((role) => role.name === "provider");
 
   return (
-    <main className={`bg-[url('${gbBlue}')] bg-auto`} >
+    <main className={`bg-[url('${gbBlue}')] bg-cover`}>
       <div className="h-screen flex bg-white/30">
         <nav className="w-52 flex flex-col justify-center">
           <div className="mt-4 flex justify-center">
@@ -124,9 +119,7 @@ export default function ProfileLayout({
             <p className="text-gray-700">{pageSubtitle}</p>
           </div>
           <div className="bg-gray-200/60 overflow-auto rounded-xl px-10 py-10 flex-1 mb-14 flex flex-col mr-5">
-            
-              {children}
-            
+            {children}
           </div>
         </div>
       </div>

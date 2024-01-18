@@ -4,6 +4,7 @@ import InputError from '@/Components/InputError';
 import { Link, useForm } from '@inertiajs/react';
 
 import { GlowSubmitButton } from '@/Components/Buttons';
+import BackButtonArrow from '@/Components/BackButtonArrow';
 
 export default function Login({ status, canResetPassword }) {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -20,29 +21,21 @@ export default function Login({ status, canResetPassword }) {
 
     const submit = (e) => {
         e.preventDefault();
-    
         if (!data.email || !data.password) {
-            setData('errors', {
-                email: !data.email ? 'Email is required' : null,
-                password: !data.password ? 'Password is required' : null,
-            });
-        }
-
-        try {
+            setData('email', data.email);  
+            setData('password', data.password);
+            errors.email = !data.email ? 'Email is required' : null;
+            errors.password = !data.password ? 'Password is required' : null;
+            console.log('error');
+        }else{
             post(route('login'));
-        } catch (error) {
-            console.error(error);
         }
     };
 
     return (
-        <div className="bg-gradient-to-b from-gray-50 via-gray-300 to-gray-50">
+        <div className="bg-gray-100">
             {/*Go back button*/}
-            <div className='absolute top-10 left-12'>
-                <a className='text-4xl transition text-gray-500 hover:text-black hover:cursor-pointer' onClick={ () => window.history.back()}>
-                    <i className='fas fa-arrow-left'></i>
-                </a>
-            </div>
+            <BackButtonArrow/>
             {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
             <form onSubmit={submit}>
                 <div className="flex justify-center items-center h-screen">

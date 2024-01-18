@@ -41,6 +41,11 @@ export default function Register() {
         e.preventDefault();
 
         if (!data.name || !data.lastname || !data.birthdate || !data.email || !data.password) {
+            setData('name', data.name);
+            setData('lastname', data.lastname);
+            setData('birthdate', data.birthdate);
+            setData('email', data.email);
+            setData('password', data.password);
             errors.name = !data.name ? 'Name is required' : null;
             errors.lastname = !data.lastname ? 'Last name is required' : null;
             errors.birthdate = !data.birthdate ? 'Birthdate is required' : null;
@@ -55,8 +60,6 @@ export default function Register() {
     return (
         <GuestLayout>
             <Head title="Register" />
-            {/*Go back button*/}
-            <BackButtonArrow />
             <div id="confirmModal" className="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center hidden">
                 <div className="bg-white p-8 rounded shadow-md">
                     <p className="text-lg font-semibold mb-4">Are you sure you want to register?</p>
