@@ -82,7 +82,7 @@ function Payment({ auth, countries, regions }) {
       />
 
       <PaymentStepper activeStep={activeStep} />
-      <div className="mx-auto px-10 py-5 bg-white w-[800px] rounded-xl">
+      <div className="mx-auto mb-36 px-10 py-5 bg-white w-[800px] rounded-xl">
         {activeStep === 0 && (
           <div>
             <h2 className="text-2xl font-bold mb-4">Personal Information</h2>

@@ -1,4 +1,5 @@
 import TextInput from '@/Components/TextInput';
+import { Link } from '@inertiajs/inertia-react';
 export default function Show({ product,colors,materials }) {
 
   const categories = product.categories;
@@ -6,7 +7,7 @@ export default function Show({ product,colors,materials }) {
   console.log(colors);
 
   return (
-    <main>
+    <main className='h-screen bg-white'>
       <header className="bg-blue-400 w-full">
         <h1 className="text-4xl">PRINTHUB</h1>
       </header>
@@ -46,7 +47,7 @@ export default function Show({ product,colors,materials }) {
                 ))}
             </select>
             </div>
-            <button className="bg-blue-950 font-semibold text-lg text-white py-4 w-full rounded-full mt-4 hover:bg-blue-800 "> Buy now </button>
+            <button className="bg-blue-950 font-semibold text-lg text-white py-4 w-full rounded-full mt-4 hover:bg-blue-800 "> <Link href="/payment">Buy now</Link> </button>
             <button className="py-4 w-full font-semibold text-lg text-blue-950 border border-gray-400 rounded-full hover:border-black">
                 Add to Bag
             </button>
