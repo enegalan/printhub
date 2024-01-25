@@ -154,7 +154,8 @@ class AdminController extends Controller
         return Inertia::render('Admin/User/Edit', ['user' => $user, 'roles' => $roles]);
     }
 
-    public function updateUser(Request $request, User $user) {
+    public function updateUser(Request $request, $id, $withTrashed = false) {
+        $user = $withTrashed ? User::withTrashed()->findOrFail($id) : User::findOrFail($id);
         $validatedData = $request->validate([
             'name' => 'string|required',
             'lastname' => 'string|required',
