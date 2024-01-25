@@ -23,7 +23,7 @@ function Index({ auth }) {
         <div className="w-full bg-gradient-to-r h-screen from-blue-900 to-blue-700 ">
           <div className='dotted_bg flex relative flex-col justify-center items-center'>
             <div className='flex flex-col items-center lg:flex-row content-center justify-evenly w-full'>
-              <div className='flex flex-col items-center self-center text-center mt-[300px] lg:mt-0'>
+              <div className='flex flex-col items-center self-center text-center mt-[70vh] lg:mt-0'>
                 <p className='text-white animate-heartbeat text-2xl lg:text-5xl mb-2 lg:mb-4 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]'>
                   SCAN AND PRINT ANYTHING <strong className="text-4xl lg:text-7xl inline"><br></br>RIGHT NOW</strong>
                 </p>
