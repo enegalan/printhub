@@ -14,4 +14,12 @@ class Stock_cart extends Model
         'prod_combination_id',
         'quantity'
     ];
+
+    public function cart(){
+        return $this->belongsTo(Cart::class);
+    }
+
+    public function prod_comb(){
+        return $this->belongsTo(Prod_comb::class);
+    }
 }
