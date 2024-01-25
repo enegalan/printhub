@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProviderController;
@@ -76,6 +77,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         app()->call([UserController::class, 'getRoles']);
         return Inertia::render('PaymentComplete');
     })->name('paymentcomplete');
+
+    Route::get('/cart', [CartController::class, 'show'])->name('user.cart');
 });
 
 Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin.dashboard');
@@ -115,6 +118,7 @@ Route::delete('/admin/color/{color}/delete', [AdminController::class, 'deletecol
 Route::delete('/admin/country/{country}/delete', [AdminController::class, 'deletecountry'])->name('admin.country.delete');
 Route::delete('/admin/region/{region}/delete', [AdminController::class, 'deleteregion'])->name('admin.region.delete');
 Route::delete('/admin/category/{category}/delete', [AdminController::class, 'deletecategory'])->name('admin.category.delete');
+
 
 //PRODUCTS
 Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('product.destroy');
