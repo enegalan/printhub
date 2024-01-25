@@ -63,6 +63,12 @@ function About({ auth }) {
               </article>
             </div>
           </section>
+          <section className='my-6' id="location">
+          <div className='w-full'>
+            <h3 className='font-bold text-4xl mb-6'>Find us</h3>
+            <iframe width="100%" height="600" frameBorder="0" scrolling="no" marginHeight="0" marginWidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=C.%20Virgen%20del%20Carmen,%2034,%2020012%20Donostia-San%20Sebastian,%20Gipuzkoa+(PrintHub)&amp;t=&amp;z=15&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.maps.ie/population/">Calculate population in area</a></iframe>
+          </div>
+          </section>
            {/* FAQS */}
           <section className='my-6 mt-8' id='faqs'>
             <h3 className='font-bold text-2xl'>FAQS</h3>
