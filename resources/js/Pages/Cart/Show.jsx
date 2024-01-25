@@ -45,7 +45,7 @@ function Cart({ auth, cart, materials, colors }) {
           <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-3 bg-white p-5 rounded-xl shadow-lg'>
 
 {cartItems.map((stockItem) => (
-    <div className="flex-1" key={stockItem.id}>
+    <div className="flex justify-center" key={stockItem.id}>
         <ProductCard 
             image={stockItem.image} 
             name={stockItem.name} 
