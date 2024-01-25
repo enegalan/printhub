@@ -9,6 +9,7 @@ use App\Models\Region;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -118,6 +119,6 @@ Route::delete('/admin/category/{category}/delete', [AdminController::class, 'del
 
 //PRODUCTS
 Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('product.destroy');
-Route::put('/products/{product}', [ProductController::class, 'update'])->name('product.update');
+Route::post('/products/{product}', [ProductController::class, 'update'])->name('product.update');
 Route::post('/products', [ProductController::class, 'store'])->name('product.store');
 require __DIR__.'/auth.php';

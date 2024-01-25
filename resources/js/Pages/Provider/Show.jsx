@@ -8,7 +8,7 @@ export default function ProviderShow({ user, products }) {
   const { data, prev_page_url, next_page_url, current_page, last_page } = products;
   const { delete: handleDelete } = useForm();
   return (
-    <ProfileLayout user={user} pageName="provider" pageSubtitle="Provider dashboard">
+    <ProfileLayout user={user} pageName="Provider" pageSubtitle="Provider dashboard">
       <Link href={route('provider.add')} className="bg-[lightgrey] w-[40px] p-3 rounded-lg mb-5 self-end transition hover:bg-[#bbbbbb]">
           <FaPlus />
       </Link>
