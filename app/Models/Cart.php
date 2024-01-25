@@ -13,4 +13,8 @@ class Cart extends Model
         'user_id',
         'active',
     ];
+
+    public function stock_carts(){
+        return $this->hasMany(Stock_cart::class);
+    }
 }
