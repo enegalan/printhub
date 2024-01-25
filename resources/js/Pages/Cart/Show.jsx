@@ -42,10 +42,10 @@ function Cart({ auth, cart, materials, colors }) {
         <main className='my-12 mx-5 md:mx-24 mb-36 relative z-10'>
           <div className='flex flex-col md:flex-col lg:flex-row justify-between gap-6'>
             
-          <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-5 gap-3 bg-white p-5 rounded-xl shadow-lg'>
+          <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-3 bg-white p-5 rounded-xl shadow-lg'>
 
 {cartItems.map((stockItem) => (
-    <div key={stockItem.id}>
+    <div className="flex-1" key={stockItem.id}>
         <ProductCard 
             image={stockItem.image} 
             name={stockItem.name} 
