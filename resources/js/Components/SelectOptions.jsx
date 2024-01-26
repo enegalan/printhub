@@ -11,6 +11,7 @@ export default function SelectOptions({
   };
   return (
     <select
+      aria-label="State"
       {...props}
       className={
         `rounded-xl bg-gray-50 border text-gray-900 border-gray-400 ` +

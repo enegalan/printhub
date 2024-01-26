@@ -41,18 +41,18 @@ class CartController extends Controller
     /*
         Add product to cart from market
     */
-    public function defaultStore(Request $request, string $id) {
+    public function store(Request $request, string $id) {
         // Get user id
         $userId = auth()->user()->id;
         // Get default color
-        $defaultColor = Color::first();
+        $color = Color::findOrFail($request->input('color'));
         // Get default material
-        $defaultMaterial = Material::first();
+        $material = Color::findOrFail($request->input('material'));
         // Create a default prod_comb with default color and material
         $prodComb = Prod_comb::firstOrCreate([
             'product_id' => $id,
-            'color_id' => $defaultColor->id,
-            'material_id' => $defaultMaterial->id
+            'color_id' => $color->id,
+            'material_id' => $material->id
         ]);
         // Get the created prod_comb id
         $prodCombId = $prodComb->id;
@@ -75,6 +75,7 @@ class CartController extends Controller
                 'quantity' => 1
             ]);
         }
+        return redirect()->back();
     }
 
 }

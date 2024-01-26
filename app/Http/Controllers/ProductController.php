@@ -105,9 +105,9 @@ class ProductController extends Controller
         $colors = Color::all();
         $materials = Material::all();
         $product->categories;
-        
+        $user = auth()->user();
         $randomProducts = Product::inRandomOrder()->take(10)->get();
-        return Inertia::render('Product/Show', compact('product','colors','materials','randomProducts'));
+        return Inertia::render('Product/Show', compact('user','product','colors','materials','randomProducts'));
     }
     public function destroy(Product $product)
     {
