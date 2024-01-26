@@ -79,7 +79,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('PaymentComplete');
     })->name('paymentcomplete');
 
-    Route::get('/cart', [CartController::class, 'show'])->name('user.cart');
+    Route::get('s/cart', [CartController::class, 'show'])->name('user.cart');
+    Route::post('/addcart/{id}', [CartController::class, 'defaultStore'])->name('cart.add');
 });
 
 Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin.dashboard');
@@ -102,7 +103,7 @@ Route::get('/admin/region/create-region', [AdminController::class, 'adduser'])->
 Route::get('/admin/category/create-category', [AdminController::class, 'addcategory'])->name('admin.category.add');
 
 Route::get('/admin/user/{user}/edit', [AdminController::class, 'editUser'])->name('admin.user.edit');
-Route::post('/admin/user/update/{id}/{withTrashed?}', [AdminController::class, 'updateUser'])->name('admin.user.update');
+Route::post('/admin/user/{user}/edited', [AdminController::class, 'updateUser'])->name('admin.user.update');
 Route::get('/admin/product/{product}/edit', [AdminController::class, 'editproduct'])->name('admin.product.edit');
 Route::get('/admin/order/{order}/view', [AdminController::class, 'vieworder'])->name('admin.order.view');
 Route::get('/admin/material/{material}/edit', [AdminController::class, 'editmaterial'])->name('admin.material.edit');

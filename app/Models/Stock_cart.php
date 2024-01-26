@@ -11,7 +11,7 @@ class Stock_cart extends Model
     protected $table = 'stock_carts';
     protected $fillable =[
         'cart_id',
-        'prod_combination_id',
+        'prod_comb_id',
         'quantity'
     ];
 
