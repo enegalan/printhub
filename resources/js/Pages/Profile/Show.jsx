@@ -28,7 +28,7 @@ export default function ({user, orders = [], wishlist = []}){
     const wishlistPagination = 1;
 
     return(
-        <ProfileLayout user={user}>
+        <ProfileLayout pageName="Dashboard" pageSubtitle="Welcome to your profile" user={user}>
             <div className="flex gap-4 flex-1 items-center justify-start flex-col">
                 <div className="flex gap-4 items-center w-full flex-1">
                     <div className="flex flex-col h-full w-96 gap-3 justify-content items-center row-span-2 bg-white rounded-xl p-4">

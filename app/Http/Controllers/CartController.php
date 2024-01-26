@@ -27,7 +27,7 @@ class CartController extends Controller
                 ->join('materials', 'prod_combs.material_id', '=', 'materials.id')
                 ->join('colors', 'prod_combs.color_id', '=', 'colors.id')
                 ->join('products', 'prod_combs.product_id', '=', 'products.id')
-                ->select('stock_carts.*', 'materials.name as material_name', 'colors.name as color_name', 'products.*');
+                ->select('stock_carts.*', 'stock_carts.id as stock_cart_id', 'materials.name as material_name', 'materials.id as material_id', 'colors.name as color_name', 'colors.id as color_id', 'products.*');
         }])
         ->first();
 

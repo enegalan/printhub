@@ -6,6 +6,8 @@ import { Footer } from '@/Components/Footer';
 import { Link } from '@inertiajs/inertia-react';
 import ProductCard from './ProductCard';
 import { useState } from "react";
+import PrimaryButton from '@/Components/PrimaryButton';
+import SecondaryButton from '@/Components/SecondaryButton';
 
 function Cart({ auth, cart, materials, colors }) {
 
@@ -13,8 +15,9 @@ function Cart({ auth, cart, materials, colors }) {
     const [cartItems, setCartItems] = useState(cart.stock_carts);
 
     const handleProductChange = (productId, updatedData) => {
+      
         const updatedCartItems = cartItems.map((item) =>
-          item.id === productId ? { ...item, ...updatedData } : item
+          item.stock_cart_id === productId ? { ...item, ...updatedData } : item
         );
         setCartItems(updatedCartItems);
       };
@@ -26,6 +29,28 @@ function Cart({ auth, cart, materials, colors }) {
     const shipping_cost = 9.99;
 
     const total = orderTotal + iva + shipping_cost;
+
+    const handleDelete = () => {
+      // Call the onDeleteProduct function passed as a prop
+      openModal()
+    };
+  
+    const openModal = () => {
+      document.getElementById('confirmModal').classList.remove('hidden');
+  };
+  
+  const closeModal = () => {
+      document.getElementById('confirmModal').classList.add('hidden');
+  };
+  
+  const confirmModal = (productId) => {
+      closeModal();
+      onDeleteProduct(productId);
+  };
+
+  const onDeleteProduct = (productId) => {
+    console.log(productId);
+  }
 
   return (
     <>
@@ -42,28 +67,42 @@ function Cart({ auth, cart, materials, colors }) {
         <main className='my-12 mx-5 md:mx-24 mb-36 relative z-10'>
           <div className='flex flex-col md:flex-col lg:flex-row justify-between gap-6'>
             
-          <div className='grid grid-cols-1 overflow-y-auto max-h-[800px] w-full sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-3 bg-white p-5 rounded-xl shadow-lg'>
+          <div className='grid grid-cols-1 overflow-y-auto max-h-[800px] w-full sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-5 bg-white p-5 rounded-xl shadow-lg'>
   {cartItems.length === 0 ? (
     <p className="font-bold text-2xl">The cart is empty.</p>
   ) : (
     cartItems.map((stockItem) => (
-      <div className="flex justify-center" key={stockItem.id}>
+      <div className="flex justify-center" key={stockItem.stock_cart_id}>
         <ProductCard 
           image={stockItem.image} 
           name={stockItem.name} 
           price={stockItem.price} 
           allcolors={colors} 
-          color={stockItem.color_name} 
+          color_name={stockItem.color_name}
+          color_id={stockItem.color_id} 
           allmaterials={materials} 
-          material={stockItem.material_name} 
+          material_name={stockItem.material_name} 
+          material_id={stockItem.material_id} 
           quantity={stockItem.quantity} 
           stockItem={stockItem}
-          onUpdateProduct={(updatedData) => handleProductChange(stockItem.id, updatedData)}
+          handleDelete={confirmModal} 
+          
+          onUpdateProduct={(updatedData) => handleProductChange(stockItem.stock_cart_id, updatedData)}
         />
       </div>
     ))
   )}
 </div>
+
+<div id="confirmModal" className="fixed inset-0 z-40 bg-gray-500 bg-opacity-75 flex items-center justify-center hidden">
+                <div className="bg-white p-8 rounded shadow-md">
+                    <p className="text-lg font-semibold mb-4">Are you sure you want delete this from your cart?</p>
+                    <div className="flex justify-center">
+                        <PrimaryButton className="mr-2 bg-red-500" onClick={confirmModal}>Yes</PrimaryButton>
+                        <SecondaryButton onClick={closeModal}>Cancel</SecondaryButton>
+                    </div>
+                </div>
+            </div>
 
             <div className='border border-slate-500 w-full md:w-full lg:w-1/3 p-6 rounded-xl shadow-lg bg-white'>
                 <h1 className='text-3xl font-bold mb-4'>Order summary</h1>
