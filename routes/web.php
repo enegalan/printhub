@@ -59,6 +59,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [UserController::class, 'dashboard'])->name('profile.dashboard');
     Route::patch('/profile', [UserController::class, 'update'])->name('profile.update');
     Route::get('/profile/orders', [UserController::class, 'orders'])->name('profile.orders');
+    Route::get('/profile/orders/{order}', [UserController::class, 'viewOrder'])->name('user.order.view');
     //PROVIDERS
     Route::get('/profile/provider', [ProviderController::class, 'dashboard'])->name('profile.provider');
     Route::get('/profile/provider/add-product', [ProviderController::class, 'add'])->name('provider.add');
@@ -79,7 +80,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('PaymentComplete');
     })->name('paymentcomplete');
 
-    Route::get('s/cart', [CartController::class, 'show'])->name('user.cart');
+    Route::get('/cart', [CartController::class, 'show'])->name('user.cart');
     Route::post('/addcart/{id}', [CartController::class, 'defaultStore'])->name('cart.add');
 });
 
