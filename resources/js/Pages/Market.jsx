@@ -12,6 +12,8 @@ import OrderBy from '@/Components/OrderBy';
 
 import ProductsSection from '@/Components/sections/ProductsSection';
 
+import toast, { Toaster } from 'react-hot-toast';
+
 function Market({ auth, products = [] }) {
     const [categoriesFilter, setCategories] = useState([]);
     const [priceFilter, setPrice] = useState([]);
@@ -94,6 +96,13 @@ function Market({ auth, products = [] }) {
         }
     }
 
+    const onSuccess = () => {
+        toast.success('Product added to cart successfully');
+    }
+    const onError = () => {
+        toast.error('Cannot add product to cart');
+    }
+
     return (
         <>
             <NavBar
@@ -102,6 +111,7 @@ function Market({ auth, products = [] }) {
                 defaultBackgroundColor='var(--main-blue)'
                 defaultTextColor='white'
             />
+            <Toaster />
 
             <header className='-mt-24 h-[550px] relative overflow-hidden'>
                 <Carousel
@@ -172,7 +182,7 @@ function Market({ auth, products = [] }) {
                             <OrderBy options={{ 'lowhigh' : 'Price: Low to High', 'highlow' : 'Price: High to Low' }} onChange={onOrderByChange} />
                         </section>
                     </div>
-                    <ProductsSection products={products} />
+                    <ProductsSection onSuccess={onSuccess} onError={onError} products={products} />
                 </div>
             </main>
 

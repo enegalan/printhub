@@ -4,14 +4,24 @@ import { Button } from "./Buttons.jsx";
 import PropTypes from "prop-types";
 import { Link } from "@inertiajs/react";
 import { FaRegHeart, FaHeart, FaCartPlus } from "react-icons/fa";
+import toast, { Toaster } from 'react-hot-toast';
 
 
-export default function ProductCard({id, image, name, price, href}){
+export default function ProductCard({id, image, name, price, href, onSuccess, onError}){
     function onAddCart(e) {
-        router.post('/addcart/'+id);
+        try {
+            router.post('/addcart/'+id);
+        } catch (error) {
+            onError();
+        } finally {
+            onSuccess();
+        }
+        
     }
     return (
-        <div className="border relative z-10 max-w-sm rounded-lg overflow-hidden shadow-lg bg-gray-100 flex flex-col hover:[&>img]:scale-105">
+        <>
+            <div className="border relative z-10 max-w-sm rounded-lg overflow-hidden shadow-lg bg-gray-100 flex flex-col hover:[&>img]:scale-105">
+            
             <div className="flex  justify-end pr-5 pt-5">
                 <Link href="">
                     <FaRegHeart className="text-xl fas fa-heart transition duration-500 text-[var(--main-blue)] hover:text-blue-900"/>
@@ -39,6 +49,8 @@ export default function ProductCard({id, image, name, price, href}){
                 <Button href={href} value="See more" hoverBackgroundColor="var(--main-blue)" hoverTextColor="var(--white)" textColor="var(--main-blue)" borderColor="var(--main-blue)"/>
             </div>
         </div>
+        </>
+        
     );
 }
 ProductCard.propTypes = {

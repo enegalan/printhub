@@ -3,14 +3,17 @@ import React from "react";
 import ProductCard from "@/Components/ProductCard";
 import Pagination from "@/Components/Pagination";
 
-function ProductsSection({ products = [] }) {
-    const { data, prev_page_url, next_page_url, current_page, last_page } = products;
+import toast, { Toaster } from 'react-hot-toast';
 
+
+function ProductsSection({ products = [], onSuccess, onError }) {
+    const { data, prev_page_url, next_page_url, current_page, last_page } = products;
+    
     return (
         <section id="products_section" className="relative z-10 bg-[var(--light-grey)]">
             <div className="mt-10 pb-10 flex flex-wrap justify-center gap-4">
                 {data.map((product) => (
-                    <ProductCard key={product.id} image="/images/imagen1.png" id={product.id} name={product.name} price={product.price} href={"/market/product/"+product.id} />
+                    <ProductCard key={product.id} onSuccess={onSuccess} onError={onError} image="/images/imagen1.png" id={product.id} name={product.name} price={product.price} href={"/market/product/"+product.id} />
                 ))}
             </div>
             <Pagination

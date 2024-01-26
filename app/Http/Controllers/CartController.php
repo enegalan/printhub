@@ -49,7 +49,7 @@ class CartController extends Controller
         // Get default material
         $defaultMaterial = Material::first();
         // Create a default prod_comb with default color and material
-        $prodComb = Prod_comb::create([
+        $prodComb = Prod_comb::firstOrCreate([
             'product_id' => $id,
             'color_id' => $defaultColor->id,
             'material_id' => $defaultMaterial->id
@@ -57,13 +57,24 @@ class CartController extends Controller
         // Get the created prod_comb id
         $prodCombId = $prodComb->id;
         // Get user cart id if it is active, if is not active, create a new cart
-        $cart = Cart::where('user_id', $userId)->where('active', '=', 1)->first();
-        // Create a stock_cart with the cart_id and prod_comb_id and quantity 1 for default
-        Stock_cart::create([
-            'cart_id' => $cart->id,
-            'prod_comb_id' => $prodComb->id,
-            'quantity' => 1
-        ]);
+        $cart = Cart::where('user_id', $userId)->where('active', '=', 1)->firstOrFail();
+        
+        // Check if the Stock_cart already exists for the current combination
+        $existingStockCart = Stock_cart::where('cart_id', $cart->id)
+        ->where('prod_comb_id', $prodCombId)
+        ->first();
+
+        if ($existingStockCart) {
+            // If it exists, update the quantity
+            $existingStockCart->increment('quantity');
+        } else {
+            // If it doesn't exist, create a new Stock_cart with quantity 1
+            Stock_cart::create([
+                'cart_id' => $cart->id,
+                'prod_comb_id' => $prodCombId,
+                'quantity' => 1
+            ]);
+        }
     }
 
 }
