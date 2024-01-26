@@ -22,7 +22,7 @@ export default function SelectOptions({
         Select a option
       </option>
       {options.map((opt, index) => (
-        <option key={index} value={usingObject ? opt.name : opt}>
+        <option key={index} value={usingObject ? opt.id : opt}>
           {usingObject ? opt.name : opt}
         </option>
       ))}
