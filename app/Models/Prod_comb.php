@@ -16,13 +16,13 @@ class Prod_comb extends Model
     }
 
     public function color(){
-       return $this->hasOne(Color::class);
+        return $this->belongsTo(Color::class, 'color_id');
     }
     public function material(){
-        return $this->hasOne(Material::class);
+        return $this->belongsTo(Material::class, 'material_id');
     }
     public function product(){
-        return $this->hasOne(Product::class);
+        return $this->belongsTo(Product::class, 'product_id');
     }
 
 }
