@@ -32,7 +32,7 @@ export default function ProductCard({image, name, price, allcolors, allmaterials
     return (
         <div className="border relative z-10 max-w-sm rounded-lg overflow-hidden shadow-lg bg-gray-100 flex flex-col hover:[&>img]:scale-105">
             <Link href={href}>
-                <img className="w-full cursor-pointer transition ease-in delay-400" src={image} alt={name} />
+                <img className="w-full cursor-pointer transition ease-in delay-400" src={`/storage/products/${image}`} alt={name} />
             </Link>
             <div className="px-6 pt-4">
                 <div className="flex justify-between font-bold text-xl mb-2 gap-2">

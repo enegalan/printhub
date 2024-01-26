@@ -42,63 +42,68 @@ function Cart({ auth, cart, materials, colors }) {
         <main className='my-12 mx-5 md:mx-24 mb-36 relative z-10'>
           <div className='flex flex-col md:flex-col lg:flex-row justify-between gap-6'>
             
-          <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-3 bg-white p-5 rounded-xl shadow-lg'>
-
-{cartItems.map((stockItem) => (
-    <div className="flex justify-center" key={stockItem.id}>
+          <div className='grid grid-cols-1 overflow-y-auto max-h-[800px] w-full sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-3 bg-white p-5 rounded-xl shadow-lg'>
+  {cartItems.length === 0 ? (
+    <p className="font-bold text-2xl">The cart is empty.</p>
+  ) : (
+    cartItems.map((stockItem) => (
+      <div className="flex justify-center" key={stockItem.id}>
         <ProductCard 
-            image={stockItem.image} 
-            name={stockItem.name} 
-            price={stockItem.price} 
-            allcolors={colors} 
-            color={stockItem.color_name} 
-            allmaterials={materials} 
-            material={stockItem.material_name} 
-            quantity={stockItem.quantity} 
-            stockItem={stockItem}
-            onUpdateProduct={(updatedData) => handleProductChange(stockItem.id, updatedData)}
+          image={stockItem.image} 
+          name={stockItem.name} 
+          price={stockItem.price} 
+          allcolors={colors} 
+          color={stockItem.color_name} 
+          allmaterials={materials} 
+          material={stockItem.material_name} 
+          quantity={stockItem.quantity} 
+          stockItem={stockItem}
+          onUpdateProduct={(updatedData) => handleProductChange(stockItem.id, updatedData)}
         />
-    </div>
-))}
+      </div>
+    ))
+  )}
 </div>
-
 
             <div className='border border-slate-500 w-full md:w-full lg:w-1/3 p-6 rounded-xl shadow-lg bg-white'>
                 <h1 className='text-3xl font-bold mb-4'>Order summary</h1>
-                <div className='overflow-x-auto'>
-    <table className='w-full rounded p-4 bg-gray-200'>
-        <thead>
-            <tr>
-                <th className='border border-slate-500 p-2 bg-gray-400'>Title</th>
-                <th className='border border-slate-500 p-2 bg-gray-400'>Material</th>
-                <th className='border border-slate-500 p-2 bg-gray-400'>Color</th>
-                <th className='border border-slate-500 p-2 bg-gray-400'>Quantity</th>
-                <th className='border border-slate-500 p-2 bg-gray-400'>Price</th>
-            </tr>
-        </thead>
-        <tbody>
-            {cartItems.map((stockItem, index) => (
-                <tr key={index}>
-                    <td className='p-2'>{stockItem.name}</td>
-                    <td className='p-2'>{stockItem.material_name}</td>
-                    <td className='p-2'>
-                        <div className={`w-[30px] h-[30px] rounded-full flex items-center content-center justify-center bg-${stockItem.color_name}-500`}></div>
-                    </td>
-                    <td className='p-2'>{stockItem.quantity}</td>
-                    <td className='p-2'>{(stockItem.quantity * stockItem.price).toFixed(2)}€</td>
-                </tr>
-            ))}
-        </tbody>
-    </table>
-</div>
+                <div className='flex flex-col content-between'>
+                <div className='overflow-x-auto max-h-[310px] overflow-y-auto'>
+                  <table className='w-full rounded p-4 bg-gray-200'>
+                    <thead>
+                      <tr>
+                        <th className='border border-slate-500 p-2 bg-gray-400'>Title</th>
+                        <th className='border border-slate-500 p-2 bg-gray-400'>Material</th>
+                        <th className='border border-slate-500 p-2 bg-gray-400'>Color</th>
+                        <th className='border border-slate-500 p-2 bg-gray-400'>Quantity</th>
+                        <th className='border border-slate-500 p-2 bg-gray-400'>Price</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {cartItems.map((stockItem, index) => (
+                        <tr key={index} className='border-b-2 border-gray-300'>
+                          <td className='p-2'>{stockItem.name}</td>
+                          <td className='p-2'>{stockItem.material_name}</td>
+                          <td className='p-2'>
+                            <div className={`w-[30px] h-[30px] rounded-full flex items-center content-center justify-center bg-${stockItem.color_name}-500`}></div>
+                          </td>
+                          <td className='p-2'>{stockItem.quantity}</td>
+                          <td className='p-2'>{(stockItem.quantity * stockItem.price).toFixed(2)}€</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
 
-
+                <div className='mt-[100px]'>
                 <p className='text-2xl mt-5 flex justify-between'><strong>Subtotal:</strong>{orderTotal.toFixed(2)}€</p>
                 <p className='text-2xl mt-5 flex justify-between'><strong>IVA <small>(%21)</small>:</strong> {iva.toFixed(2)}€</p>
                 <p className='text-2xl mt-5 flex justify-between'><strong>Shipping:</strong> {shipping_cost}€</p>
                 <p className='text-2xl mt-5 flex justify-between text-red-500 font-bold'><strong className='text-black'>Total:</strong> {total.toFixed(2)}€</p>
 
                 <button className="bg-blue-950 font-semibold text-lg text-white py-4 w-full rounded-full mt-4 hover:bg-blue-800 "> <Link href="/payment">Buy now</Link> </button>
+                </div>
+                </div>
             </div>
           </div>
         </main>
