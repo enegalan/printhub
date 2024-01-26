@@ -46,7 +46,7 @@ export default function Edit({ user = [], roles = [] }) {
             }
         };
     }, [previewUrl]);
-
+    console.log(user);
     const submit = (e) => {
         e.preventDefault();
         const formData = new FormData();
@@ -56,7 +56,7 @@ export default function Edit({ user = [], roles = [] }) {
         formData.append("password", data.password);
         formData.append("roles", JSON.stringify(data.roles));
         try {
-            post(route("admin.user.update", user), formData); // Usar await para esperar la respuesta
+            post(route("admin.user.update", { id: user.id, withTrashed: true }), formData);
             onAdd();
         } catch (e) {
             console.log(e);

@@ -12,4 +12,8 @@ class Material extends Model
     protected $fillable =[
         'name'
     ];
+
+    public function prod_combs(){
+        return $this->hasMany(Prod_comb::class);
+    }
 }

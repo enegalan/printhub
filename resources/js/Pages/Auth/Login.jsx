@@ -33,19 +33,20 @@ export default function Login({ status, canResetPassword }) {
     };
 
     return (
-        <div className="bg-gray-100">
+        <div className="bg-gray-100 h-screen">
             {/*Go back button*/}
             <BackButtonArrow/>
             {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
-            <form onSubmit={submit}>
-                <div className="flex justify-center items-center h-screen">
-                    <div className="w-1/2 max-w-[500px]">
-                        <div className="flex justify-center items-center">
-                            <a href="/">
-                                <img src="/logoWhite.svg" className='w-40' alt="Logo PrintHub" />
-                            </a>
-                        </div>
-                        <div className="mt-8 border bg-[var(--main-blue)] border-gray-500 rounded-xl p-12 px-26 shadow-2xl">
+            <div className="flex justify-center items-center pt-9">
+                <Link href="/">
+                    <img src="/logoWhite.svg" className='w-40' alt="Logo PrintHub" />
+                </Link>
+            </div>
+            <form className='w-full' onSubmit={submit}>
+                <div className="sm:flex sm:justify-center block">
+                    <div className="w-full sm:w-1/2 sm:max-w-[500px]">
+                        
+                        <div className="mt-8 border bg-[var(--main-blue)] border-gray-500 sm:rounded-xl p-12 px-26 shadow-2xl">
                             <h2 className="text-white text-3xl font-bold mb-4">Log In</h2>
                             <div className="mb-4">
                                 <input

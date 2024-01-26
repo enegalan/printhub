@@ -3,18 +3,18 @@ import ProfileLayout from "@/Layouts/ProfileLayout";
 import InputLabel from "@/Components/InputLabel";
 import TextInput from "@/Components/TextInput";
 import InputError from "@/Components/InputError";
-import { useForm, put } from "@inertiajs/inertia-react";
+import { useForm } from "@inertiajs/inertia-react";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { Link } from "@inertiajs/react";
 import { Toaster } from "react-hot-toast";
 
 export default function ProviderDashboard({ user, product, categories = [] }) {
-  const { data, setData, put, processing, errors, reset } = useForm({
+  const { data, setData, post, processing, errors, reset } = useForm({
     name: product.name,
     description: product.description,
     image: null,
     price: product.price,
-    categories: [],
+    categories: product.categories.map((category) => category.id),
     user_id: user.id,
   });
   const [previewUrl, setPreviewUrl] = useState(
@@ -41,29 +41,23 @@ export default function ProviderDashboard({ user, product, categories = [] }) {
     const formData = new FormData();
     formData.append("name", data.name);
     formData.append("description", data.description);
-    formData.append(
-      "image",
-      data.image !== "" || data.image !== null ? data.image : image
-    );
+    formData.append("image", data.image);
     formData.append("price", data.price);
     formData.append("categories", data.categories);
     formData.append("user_id", data.user_id);
     formData.append("product_id", data.product_id);
-
-    put(route("product.update", product));
+    
+    console.log(data.image ? data.image : image);
+    console.log([...formData.entries()]);
+    post(route("product.update", product));
   };
 
   const handleCheck = (categoryId)=>{
-    for (const categoryP of product.categories) {
-        if (categoryId === categoryP.id) {
-          return true
-        }
-      }
-      return false
+    return data.categories.includes(categoryId);
   }
 
   return (
-    <ProfileLayout user={user} pageName="provider">
+    <ProfileLayout user={user} pageName="Provider" pageSubtitle="Edit your product">
       <Link
         href={route("profile.provider")}
         className="bg-[lightgrey] w-[40px] p-3 rounded-lg mb-5 self-start transition hover:bg-[#bbbbbb]"
@@ -173,14 +167,26 @@ export default function ProviderDashboard({ user, product, categories = [] }) {
                     className="mt-1"
                     autoComplete={`categories-${category.id}`}
                     isFocused={true}
-                    //checked={}
-                    onChange={() => {
-                      setData(
-                        "categories",
-                        data.categories.includes(category.id)
-                          ? data.categories.filter((id) => id !== category.id)
-                          : [...data.categories, category.id]
-                      );
+                    checked={handleCheck(category.id)}
+                    onChange={(e) => {
+                      const isChecked = e.target.checked;
+                      setData((prevData) => {
+                        let updatedCategories;
+                        if (isChecked) {
+                          // Agregar la categoría si no está presente
+                          updatedCategories = [...prevData.categories, category.id];
+                        } else {
+                          // Filtrar la categoría si ya está presente
+                          updatedCategories = prevData.categories.filter(
+                            (categoryId) => categoryId !== category.id
+                          );
+                        }
+        
+                        return {
+                          ...prevData,
+                          categories: updatedCategories,
+                        };
+                      });
                     }}
                   />
                   <label htmlFor={`category-${category.id}`}>

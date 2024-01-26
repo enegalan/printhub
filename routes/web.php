@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProviderController;
@@ -9,6 +10,7 @@ use App\Models\Region;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,6 +78,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         app()->call([UserController::class, 'getRoles']);
         return Inertia::render('PaymentComplete');
     })->name('paymentcomplete');
+
+    Route::get('/cart', [CartController::class, 'show'])->name('user.cart');
 });
 
 Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin.dashboard');
@@ -98,7 +102,7 @@ Route::get('/admin/region/create-region', [AdminController::class, 'adduser'])->
 Route::get('/admin/category/create-category', [AdminController::class, 'addcategory'])->name('admin.category.add');
 
 Route::get('/admin/user/{user}/edit', [AdminController::class, 'editUser'])->name('admin.user.edit');
-Route::post('/admin/user/{user}/edited', [AdminController::class, 'updateUser'])->name('admin.user.update');
+Route::post('/admin/user/update/{id}/{withTrashed?}', [AdminController::class, 'updateUser'])->name('admin.user.update');
 Route::get('/admin/product/{product}/edit', [AdminController::class, 'editproduct'])->name('admin.product.edit');
 Route::get('/admin/order/{order}/view', [AdminController::class, 'vieworder'])->name('admin.order.view');
 Route::get('/admin/material/{material}/edit', [AdminController::class, 'editmaterial'])->name('admin.material.edit');
@@ -116,8 +120,9 @@ Route::delete('/admin/country/{country}/delete', [AdminController::class, 'delet
 Route::delete('/admin/region/{region}/delete', [AdminController::class, 'deleteregion'])->name('admin.region.delete');
 Route::delete('/admin/category/{category}/delete', [AdminController::class, 'deletecategory'])->name('admin.category.delete');
 
+
 //PRODUCTS
 Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('product.destroy');
-Route::put('/products/{product}', [ProductController::class, 'update'])->name('product.update');
+Route::post('/products/{product}', [ProductController::class, 'update'])->name('product.update');
 Route::post('/products', [ProductController::class, 'store'])->name('product.store');
 require __DIR__.'/auth.php';

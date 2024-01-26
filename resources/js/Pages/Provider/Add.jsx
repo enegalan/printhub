@@ -58,7 +58,7 @@ export default function ProviderDashboard({ user, categories = [] }) {
   };
 
   return (
-    <ProfileLayout user={user} pageName="provider">
+    <ProfileLayout user={user} pageName="Provider" pageSubtitle="Add new product">
       <Link href={route('profile.provider')} className="bg-[lightgrey] w-[40px] p-3 rounded-lg mb-5 self-start transition hover:bg-[#bbbbbb]">
           <IoMdArrowRoundBack />
       </Link>

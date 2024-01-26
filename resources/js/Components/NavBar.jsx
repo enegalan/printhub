@@ -215,7 +215,7 @@ const Navbar = ({
                       Profile
                     </Dropdown.Link>
                     
-                    <Dropdown.Link href="#">Cart</Dropdown.Link>
+                    <Dropdown.Link href={route("user.cart")}>Cart</Dropdown.Link>
                     <Dropdown.Link href="#">Wishlist</Dropdown.Link>
                     <hr></hr>
                     {isAdmin && (<Dropdown.Link href={route('admin.dashboard')}>Admin Dashboard</Dropdown.Link>)}

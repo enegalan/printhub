@@ -11,4 +11,8 @@ class Color extends Model
     protected $fillable = ['name'];
     
     use HasFactory;
+
+    public function prod_combs(){
+        return $this->hasMany(Prod_comb::class);
+    }
 }
