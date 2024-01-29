@@ -10,8 +10,6 @@ import { useState, useEffect } from 'react';
 
 export default function ProductCard({id, image, name, price, href, onSuccess, onError, isWishlistItem, onAddWishlist}){
     const [isInWishlist, setIsInWishlist] = useState(isWishlistItem);
-    const [isLoading, setIsLoading] = useState(false);
-    console.log('isWishlistItem?', isWishlistItem);
     function onAddWishlist (e) {
         try {
             router.post('/add/wishlist/'+id);
@@ -24,7 +22,6 @@ export default function ProductCard({id, image, name, price, href, onSuccess, on
     }
     
     function onAddCart(e) {
-        console.log("add cart")
         try {
             router.post('/addcart/'+id);
         } catch (error) {
@@ -39,15 +36,11 @@ export default function ProductCard({id, image, name, price, href, onSuccess, on
             
             <div className="flex  justify-end pr-5 pt-5">
             <div value={id} className="hover:cursor-pointer" onClick={onAddWishlist}>
-                    {isLoading ? (
-                        <div>Loading...</div>
+                    {(isWishlistItem ? (
+                        <FaHeart className="text-xl fas fa-heart transition duration-500 text-[var(--main-blue)] hover:text-blue-900" />
                     ) : (
-                        (isInWishlist ? (
-                            <FaHeart className="text-xl fas fa-heart transition duration-500 text-[var(--main-blue)] hover:text-blue-900" />
-                        ) : (
-                            <FaRegHeart className="text-xl fas fa-heart transition duration-500 text-[var(--main-blue)] hover:text-blue-900" />
-                        ))
-                    )}
+                        <FaRegHeart className="text-xl fas fa-heart transition duration-500 text-[var(--main-blue)] hover:text-blue-900" />
+                    ))}
                 </div>
             </div>
             <div className="overflow-hidden">

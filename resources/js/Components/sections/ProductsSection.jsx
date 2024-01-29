@@ -31,7 +31,6 @@ function ProductsSection({ products = [], onSuccess, onError }) {
 
         fetchData();
     }, [data]);
-    console.log(wishlistStatuses);
 
     const onAddWishlist = async (productId) => {
         try {
@@ -63,7 +62,6 @@ function ProductsSection({ products = [], onSuccess, onError }) {
                 {data.map((product) => {
                     const wishlistStatus = wishlistStatuses.find(status => status.productId === product.id);
                     const isWishlistItem = wishlistStatus ? wishlistStatus.isWishlistItem : false;
-                    console.log('isWishlist from product section', isWishlistItem);
                     return (
                         <ProductCard
                             key={product.id}
