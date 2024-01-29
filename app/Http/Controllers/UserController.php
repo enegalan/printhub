@@ -245,6 +245,16 @@ class UserController extends Controller
         }
     }
 
+    function deleteProductFromWishlist(Request $request, Product $product) {
+        $user = auth()->user();
+        // Get user's wishlist
+        $wishlist = Wishlist::where('user_id', $user->id)->first();
+
+        if ($wishlist) {
+            $wishlist->products()->detach($product->id);
+        }
+    }
+
     /*
     Function to get if a product is in the user's wishlist or not
     */
