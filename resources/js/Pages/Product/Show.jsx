@@ -64,7 +64,7 @@ export default function Show({
         dynamicBackground={false}
       ></NavBar>
       <section className="flex justify-center mt-16">
-        <div className="w-[1200px] mt-8 mx-4 pb-4">
+        <div className="max-w-[1200px] mt-8 mx-4 pb-4">
           <div className="flex flex-col flex-wrap md:flex-row md:flex-nowrap">
             <div className="w-full md:w-1/3 lg:w-1/2 max-w-full relative flex justify-center items-center bg-gray-200 rounded-xl">
               {/* This need to be remobed on deply to if image != null */}
@@ -130,7 +130,7 @@ export default function Show({
           </div>
         </div>
       </section>
-      <hr className="w-[1200px] m-auto rounded border-2 bg-gray-200" />
+      <hr className="m-auto rounded border-2 bg-gray-200" />
       <section className="max-w-[1200px] xl:p-0 px-4 m-auto">
         <h1 className="text-2xl py-10 font-bold">Related products</h1>
         <div className="flex items-center gap-2">
