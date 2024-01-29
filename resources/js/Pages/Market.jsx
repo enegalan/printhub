@@ -96,11 +96,11 @@ function Market({ auth, products = [] }) {
         }
     }
 
-    const onSuccess = () => {
-        toast.success('Product added to cart successfully');
+    const onSuccess = (message) => {
+        toast.success(message);
     }
-    const onError = () => {
-        toast.error('Cannot add product to cart');
+    const onError = (message) => {
+        toast.error(message);
     }
 
     return (

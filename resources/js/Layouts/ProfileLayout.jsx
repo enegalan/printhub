@@ -65,7 +65,7 @@ export default function ProfileLayout({ children, pageName = "Dashboard", pageSu
             </li>
             <li className="hover:bg-blue-100 py-2">
               <Link
-                href={route("index")}
+                href={route("profile.wishlist")}
                 className="flex gap-2 items-center px-5"
               >
                 <FaHeart className="text-blue-700" />

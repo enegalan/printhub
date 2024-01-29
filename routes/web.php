@@ -60,6 +60,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::patch('/profile', [UserController::class, 'update'])->name('profile.update');
     Route::get('/profile/orders', [UserController::class, 'orders'])->name('profile.orders');
     Route::get('/profile/orders/{order}', [UserController::class, 'viewOrder'])->name('user.order.view');
+    Route::get('/profile/wishlist', [UserController::class, 'wishlist'])->name('profile.wishlist');
+    Route::post('/add/wishlist/{product}', [UserController::class, 'addProductToWishlist'])->name('add.product.wishlist');
     //PROVIDERS
     Route::get('/profile/provider', [ProviderController::class, 'dashboard'])->name('profile.provider');
     Route::get('/profile/provider/add-product', [ProviderController::class, 'add'])->name('provider.add');
@@ -81,7 +83,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('paymentcomplete');
 
     Route::get('/cart', [CartController::class, 'show'])->name('user.cart');
-    Route::post('/addcart/{id}', [CartController::class, 'defaultStore'])->name('cart.add');
+    Route::post('/addcart/{id}', [CartController::class, 'store'])->name('cart.add');
+    Route::post('/wishlist/product/{product}/status', [UserController::class, 'getProductWishlistStatus'])->name('product.wishlist.status');
 });
 
 Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin.dashboard');
