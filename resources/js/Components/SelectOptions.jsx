@@ -18,8 +18,9 @@ export default function SelectOptions({
         className
       }
       onChange={handleChange}
+      defaultValue="-1"
     >
-      <option selected disabled>
+      <option value="-1" disabled>
         Select a option
       </option>
       {options.map((opt, index) => (
