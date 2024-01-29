@@ -30,7 +30,7 @@ export default function ({user, orders = [], wishlist = []}){
     return(
         <ProfileLayout pageName="Dashboard" pageSubtitle="Welcome to your profile" user={user}>
             <div className="flex gap-4 flex-1 items-center justify-start flex-col">
-                <div className="flex gap-4 items-center w-full flex-1">
+                <div className="flex gap-4 items-center w-full flex-1 flex-col lg:flex-row">
                     <div className="flex flex-col h-full w-96 gap-3 justify-content items-center row-span-2 bg-white rounded-xl p-4">
                         {user.avatar ? (
                             <img className="rounded-full" src={`/storage/avatars/${user.avatar}`} />
@@ -54,7 +54,7 @@ export default function ({user, orders = [], wishlist = []}){
                         </div>
 
                     </div>
-                    <div className="flex-1 h-full flex flex-col divide-y col-span-2 bg-white rounded-xl p-4 overflow-y-scroll max-h-[25rem]">
+                    <div className="flex-1 h-full flex flex-col divide-y col-span-2 bg-white rounded-xl p-4 overflow-y-scroll max-h-[25rem] min-h-[10rem]">
                         <h2 className="text-xl font-bold mb-5">Orders</h2>
                         {orders.length > 0 ? orders.slice(0, orderPagination).map((order, index) => (
                             <div key={index}>
@@ -70,7 +70,7 @@ export default function ({user, orders = [], wishlist = []}){
                             </div>
                         )) : <span className="pt-5">No orders found. Click <Link className="text-[#1e40af]" href="/market">here</Link> to check out the market.</span>}
                         {orders.length > orderPagination && (
-                                <Link className="float-right mt-6" href="/orders">
+                            <Link className="float-right mt-6" href={route("profile.orders")}>
                                 <span className="cursor-pointer text-[white] mt-6 bg-[#1e40af] p-2 rounded-lg transition hover:bg-[#1536a1]">
                                     View more
                                 </span>
@@ -80,32 +80,34 @@ export default function ({user, orders = [], wishlist = []}){
                 </div>
                 <div className="flex-1 w-full row-span-2 bg-white rounded-xl p-4 divide-y">
                     <h2 className="text-xl font-bold mb-5">Wishlist</h2>
-                    {wishlist.length > 0 ? wishlist.slice(0, wishlistPagination).map((product, index) => (
-                        <div key={index}>
-                            <Link href={"/market/product/"+product.id}>
-                                <div className="flex items-center my-2 justify-between gap-1 w-full cursor-pointer rounded-md hover:bg-[#ededed]" key={product.id}>
-                                    <div className="flex gap-28 items-center py-5 px-3">
-                                        <div className="flex gap-5 items-center flex-wrap text-center">
-                                            <img className="w-[120px] h-[100px]" src="images/imagen1.png" />
-                                            {product.name}
+                    <div className="overflow-x-scroll">
+                        {wishlist.length > 0 ? wishlist.slice(0, wishlistPagination).map((product, index) => (
+                            <div key={index}>
+                                <Link href={"/market/product/"+product.id}>
+                                    <div className="flex items-center my-2 justify-between gap-1 w-full cursor-pointer rounded-md hover:bg-[#ededed]" key={product.id}>
+                                        <div className="flex gap-28 items-center py-5 px-3">
+                                            <div className="flex gap-5 items-center flex-wrap text-center">
+                                                <img className="w-[120px] h-[100px]" src="images/imagen1.png" />
+                                                {product.name}
+                                            </div>
+                                            <div className="flex gap-12 items-center flex-nowrap text-center">
+                                                <span>{product.price}€</span>
+                                                <span className="text-justify px-3">{product.description}</span>
+                                            </div>
                                         </div>
-                                        <div className="flex gap-12 items-center flex-nowrap text-center">
-                                            <span>{product.price}€</span>
-                                            <span className="text-justify px-3">{product.description}</span>
-                                        </div>
+                                        <FaAngleRight />
                                     </div>
-                                    <FaAngleRight />
-                                </div>
+                                </Link>
+                            </div>
+                        )) : <span className="pt-5">Add your first product to your wishlist. Click <Link className="text-[#1e40af]" href="/market">here</Link> to check out the market.</span>}
+                        {wishlist.length > wishlistPagination && (
+                            <Link className="float-right mt-6" href={route('profile.wishlist')}>
+                                <span className="cursor-pointer text-[white] mt-6 bg-[#1e40af] p-2 rounded-lg transition hover:bg-[#1536a1]">
+                                    View more
+                                </span>
                             </Link>
-                        </div>
-                    )) : <span className="pt-5">Add your first product to your wishlist. Click <Link className="text-[#1e40af]" href="/market">here</Link> to check out the market.</span>}
-                    {wishlist.length > wishlistPagination && (
-                        <Link className="float-right mt-6" href="/wishlist">
-                            <span className="cursor-pointer text-[white] mt-6 bg-[#1e40af] p-2 rounded-lg transition hover:bg-[#1536a1]">
-                                View more
-                            </span>
-                        </Link>
-                    )}
+                        )}
+                    </div>
                 </div>
             </div>
         </ProfileLayout>
