@@ -10,13 +10,7 @@ function ProductsSection({ products = [], onSuccess, onError }) {
     const getWishlistStatus = async (productId) => {
         try {
             const response = await axios.post(`/wishlist/product/${productId}/status`);
-            const data = response.data;
-            if (data === 1) {
-                console.log("true");
-            } else {
-                console.log("false")
-                data = 0;
-            }
+            const data = response.data === 1 ? 1 : 0;
             return data;
         } catch (error) {
             console.error(error);
@@ -37,6 +31,7 @@ function ProductsSection({ products = [], onSuccess, onError }) {
 
         fetchData();
     }, [data]);
+    console.log(wishlistStatuses);
 
     const onAddWishlist = async (productId) => {
         try {
@@ -66,14 +61,16 @@ function ProductsSection({ products = [], onSuccess, onError }) {
         <section id="products_section" className="relative z-10 bg-[var(--light-grey)]">
             <div className="mt-10 pb-10 flex flex-wrap justify-center gap-4">
                 {data.map((product) => {
-                    const { isWishlistItem } = wishlistStatuses.find(status => status.productId === product.id) || {};
+                    const wishlistStatus = wishlistStatuses.find(status => status.productId === product.id);
+                    const isWishlistItem = wishlistStatus ? wishlistStatus.isWishlistItem : false;
+                    console.log('isWishlist from product section', isWishlistItem);
                     return (
                         <ProductCard
                             key={product.id}
                             onSuccess={onSuccess}
                             onError={onError}
                             isWishlistItem={isWishlistItem}
-                            onAddWishlist={onAddWishlist}  // Asegúrate de pasar la función correctamente
+                            onAddWishlist={() => onAddWishlist(product.id)}
                             image="/images/imagen1.png"
                             id={product.id}
                             name={product.name}

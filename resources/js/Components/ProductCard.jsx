@@ -11,20 +11,20 @@ import { useState, useEffect } from 'react';
 export default function ProductCard({id, image, name, price, href, onSuccess, onError, isWishlistItem, onAddWishlist}){
     const [isInWishlist, setIsInWishlist] = useState(isWishlistItem);
     const [isLoading, setIsLoading] = useState(false);
-
-    async function handleAddWishlist() {
+    console.log('isWishlistItem?', isWishlistItem);
+    function onAddWishlist (e) {
         try {
-            setIsLoading(true);
-            const response = router.post(`/add/wishlist/${id}`);
+            router.post('/add/wishlist/'+id);
             setIsInWishlist(!isInWishlist);
-            onSuccess(response.message); // Ajusta esto según la estructura de tu respuesta del servidor
         } catch (error) {
-            onError('Cannot update wishlist');
+            onError('Cannot add product to cart');
         } finally {
-            setIsLoading(false);
+            onSuccess('Product added successfully to cart');
         }
     }
+    
     function onAddCart(e) {
+        console.log("add cart")
         try {
             router.post('/addcart/'+id);
         } catch (error) {
