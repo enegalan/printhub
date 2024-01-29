@@ -104,7 +104,7 @@ function Market({ auth, products = [] }) {
     }
 
     return (
-        <>
+        <div className='bg-[var(--light-grey)]'>
             <NavBar
                 user={auth.user}
                 dynamicBackground={false}
@@ -187,7 +187,7 @@ function Market({ auth, products = [] }) {
             </main>
 
             <Footer />
-        </>
+        </div>
     );
 }
 
