@@ -45,9 +45,17 @@ class CartController extends Controller
         // Get user id
         $userId = auth()->user()->id;
         // Get default color
-        $color = Color::findOrFail($request->input('color'));
+        if ($request->input('color')) {
+            $color = Color::findOrFail($request->input('color'));
+        } else {
+            $color = Color::first();
+        }
         // Get default material
-        $material = Color::findOrFail($request->input('material'));
+        if ($request->input('material')) {
+            $material = Material::findOrFail($request->input('material'));
+        } else {
+            $material = Material::first();
+        }
         // Create a default prod_comb with default color and material
         $prodComb = Prod_comb::firstOrCreate([
             'product_id' => $id,
