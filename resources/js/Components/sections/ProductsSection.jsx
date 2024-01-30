@@ -4,17 +4,19 @@ import Pagination from "@/Components/Pagination";
 import toast, { Toaster } from 'react-hot-toast';
 import { router } from '@inertiajs/react'
 
-function ProductsSection({ products = [], onSuccess, onError }) {
+function ProductsSection({ user = null, products = [], onSuccess, onError }) {
     const { data, prev_page_url, next_page_url, current_page, last_page } = products;
 
     const getWishlistStatus = async (productId) => {
-        try {
-            const response = await axios.post(`/wishlist/product/${productId}/status`);
-            const data = response.data === 1 ? 1 : 0;
-            return data;
-        } catch (error) {
-            console.error(error);
-            return false;
+        if (user) {
+            try {
+                const response = await axios.post(`/wishlist/product/${productId}/status`);
+                const data = response.data === 1 ? 1 : 0;
+                return data;
+            } catch (error) {
+                console.error(error);
+                return false;
+            }
         }
     };
 
