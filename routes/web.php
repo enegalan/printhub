@@ -86,6 +86,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/cart', [CartController::class, 'show'])->name('user.cart');
     Route::post('/addcart/{id}', [CartController::class, 'store'])->name('cart.add');
     Route::post('/wishlist/product/{product}/status', [UserController::class, 'getProductWishlistStatus'])->name('product.wishlist.status');
+
+    // PAYMENTS
+    Route::get('/profile/payments', [UserController::class, 'payments'])->name('profile.payments');
+    Route::get('/profile/payment/create', [UserController::class, 'createPayment'])->name('profile.create.payment');
+    Route::get('/profile/payment/edit/{payment}', [UserController::class, 'editPayment'])->name('profile.edit.payment');
 });
 
 Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin.dashboard');

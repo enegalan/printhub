@@ -74,20 +74,11 @@ export default function ProfileLayout({ children, pageName = "Dashboard", pageSu
             </li>
             <li className="hover:bg-blue-100 py-2">
               <Link
-                href={route("index")}
+                href={route("profile.payments")}
                 className="flex gap-2 items-center px-5"
               >
-                <FaAddressCard className="text-blue-700 hidden md:block" />
-                <p>Address</p>
-              </Link>
-            </li>
-            <li className="hover:bg-blue-100 py-2">
-              <Link
-                href={route("index")}
-                className="flex gap-2 items-center px-5"
-              >
-                <FaWallet className="text-blue-700 hidden md:block" />
-                <p>Payment</p>
+                <FaWallet className="text-blue-700" />
+                <p>Payments</p>
               </Link>
             </li>
             {isProvider && (

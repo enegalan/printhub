@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\Cart;
 use App\Models\Prod_comb;
 use App\Models\Wishlist;
+use App\Models\Payment_method;
 use Inertia\Inertia;
 use Inertia\Response;
 use Illuminate\Http\Request;
@@ -334,5 +335,19 @@ class UserController extends Controller
         $existingProducts = array_merge($existingProducts, $products);
     
         return Inertia::render('Profile/viewOrder', ['products' => $existingProducts]);
+    }
+
+    function payments () {
+        $user = auth()->user();
+        $payments = Payment_method::where('user_id', $user->id)->get();
+        return Inertia::render('Profile/Payments/Show', compact('payments', 'user'));
+    }
+
+    function createPayment (Payment_method $payment) {
+        return Inertia::render('Profile/Payments/Create', compact('payment'));
+    }
+
+    function editPayment (Payment_method $payment) {
+        return Inertia::render('Profile/Payments/Edit', compact('payment'));
     }
 }
