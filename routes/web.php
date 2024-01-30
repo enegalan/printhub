@@ -134,6 +134,6 @@ Route::post('/products/{product}', [ProductController::class, 'update'])->name('
 Route::post('/products', [ProductController::class, 'store'])->name('product.store');
 
 //PRICING
-Route::get('/pricing',[PricingController::class,'index'])->name('prcing');
+Route::get('/pricing',[PricingController::class,'index'])->name('pricing');
 
 require __DIR__.'/auth.php';

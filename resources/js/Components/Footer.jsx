@@ -2,9 +2,14 @@ import logo from '../../../public/logoBlue.svg';
 
 import { ContactUsSection } from './sections/ContactUsSection';
 
-export const Footer = () => {
+export const Footer = ({className, ...props}) => {
     return (
-        <footer className="relative z-10 bg-[--dark] text-white mt-16 pb-10">
+        <footer
+        {...props}
+        className={
+            `relative z-10 bg-[--dark] text-white mt-16 pb-10 ` +
+            className
+          }>
             {/* Wave SVG */}
             <div className="transform -translate-y-full w-full">
                 <svg className="rotate-180 w-[inherit] h-[100px] fill-[var(--dark)]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
