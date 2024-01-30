@@ -1,16 +1,16 @@
-import { Button } from "../Buttons"
+import { InertiaLink } from "@inertiajs/inertia-react"
 
-export const PricingSection = () => {
+export const PricingSection = () => {    
     return (
-        <section id="pricing" className="bg-gradient-to-b my-24 from-blue-600 to-blue-900 rounded-lg mx-5 p-10 md:p-20 2xl:mx-72 xl:mx-52 lg:mx-10">
+        <section id="pricing" className="bg-gradient-to-b my-24 from-blue-600 to-blue-900 rounded-lg mx-5 p-5 md:p-20 2xl:mx-72 xl:mx-52 lg:mx-10">
             <h1 className="relative z-10 mb-5 text-4xl md:text-5xl text-white font-bold">Plans & Pricing</h1>
-            <div className="bg-gradient-to-b from-white to-blue-50 rounded-xl p-8 md:p-10 flex flex-col md:flex-row text-blue-950">
+            <div className="bg-gradient-to-b from-white to-blue-50 rounded-xl p-4 md:p-10 flex flex-col md:flex-row text-blue-950">
                 <div className="mb-8 md:mb-0 md:mr-8 w-full md:w-1/2">
                     <h1 className="relative z-10 text-3xl md:text-4xl mb-4 font-bold">FREE</h1>
                     <p className="relative z-10 font-semibold">Free plan</p>
                     <p className="relative z-10 mt-4 md:mt-6">Take your printings to another level with us.</p>
                     <div className="mt-6 md:mt-10">
-                        <Button href="#" value="Join us" hoverBackgroundColor="var(--main-blue)" hoverTextColor="var(--white)" textColor="var(--main-blue)" borderColor="var(--main-blue)"/>
+                        <InertiaLink href={route('pricing')} className="bg-blue-800 px-8 py-4 text-white rounded-xl" >Join us</InertiaLink>
                     </div>
                 </div>
                 <div className="relative md:-top-20 w-full md:w-1/2 px-8 md:px-10 bg-blue-800 text-white flex flex-col rounded-xl py-4">
@@ -36,7 +36,8 @@ export const PricingSection = () => {
                             </div>
                         </div>
                         <div className="mb-4 mt-6 md:mt-8">
-                            <Button href="#" value="Join us" hoverBackgroundColor="var(--white)" hoverTextColor="var(--main-blue)" textColor="var(--white)" borderColor="var(--white)"/>
+                        
+                            <InertiaLink href={route('pricing')} className="rounded-xl border-2 border-white px-8 py-3 hover:bg-white hover:text-blue-800">Join us</InertiaLink>
                         </div>
                     </div>
                 </div>
