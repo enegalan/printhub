@@ -20,7 +20,7 @@ export default function ProfileLayout({ children, pageName = "Dashboard", pageSu
   return (
     <main className={`bg-[url('${gbBlue}')] bg-cover`}>
       <div className="h-screen flex bg-white/30">
-        <nav className="w-[30%] flex flex-col justify-center">
+        <nav className="w-[30%] max-w-52 flex flex-col justify-center">
           <div className="mt-4 flex justify-center">
             <Link href={route("index")}>
               <img src={logoBlue} alt="Logo" />

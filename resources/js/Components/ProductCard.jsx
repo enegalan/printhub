@@ -30,13 +30,14 @@ export default function ProductCard({id, image, name, price, href, onSuccess, on
             onSuccess('Product added successfully to cart');
         }
     }
+    console.log('isWishlistItem',isWishlistItem)
     return (
         <>
             <div className="border relative z-10 max-w-sm rounded-lg overflow-hidden shadow-lg bg-gray-100 flex flex-col hover:[&>img]:scale-105">
             
             <div className="flex  justify-end pr-5 pt-5">
             <div value={id} className="hover:cursor-pointer" onClick={onAddWishlist}>
-                    {(isWishlistItem ? (
+                    {(isWishlistItem || isInWishlist ? (
                         <FaHeart className="text-xl fas fa-heart transition duration-500 text-[var(--main-blue)] hover:text-blue-900" />
                     ) : (
                         <FaRegHeart className="text-xl fas fa-heart transition duration-500 text-[var(--main-blue)] hover:text-blue-900" />

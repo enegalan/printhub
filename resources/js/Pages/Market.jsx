@@ -184,7 +184,7 @@ function Market({ auth, products = [] }) {
                             <OrderBy options={{ 'lowhigh' : 'Price: Low to High', 'highlow' : 'Price: High to Low' }} onChange={onOrderByChange} />
                         </section>
                     </div>
-                    <ProductsSection onSuccess={onSuccess} onError={onError} products={products} />
+                    <ProductsSection user={auth.user} onSuccess={onSuccess} onError={onError} products={products} />
                 </div>
             </main>
 
