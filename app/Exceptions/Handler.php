@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Inertia\Inertia;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -27,4 +28,20 @@ class Handler extends ExceptionHandler
             //
         });
     }
+    public function render($request, Throwable $exception)
+{
+    if ($this->isHttpException($exception)) {
+        $statusCode = $exception->getStatusCode();
+        return Inertia::render('error', ['status' => $statusCode, 'message' => $exception->getMessage()])
+            ->toResponse($request)
+            ->setStatusCode($statusCode);
+    } else {
+        // Manejar excepciones no HTTP
+        return Inertia::render('UnhandledError')
+            ->toResponse($request)
+            ->setStatusCode(500);
+    }
+
+    return parent::render($request, $exception);
+}
 }
