@@ -1,118 +1,144 @@
-import React from 'react'
+import { useState, useEffect } from 'react';
+import { useForm } from '@inertiajs/inertia-react';
 import ProfileLayout from "@/Layouts/ProfileLayout";
-import Pagination from "@/Components/Pagination";
 import { Link } from '@inertiajs/react';
-import { FaPlus } from 'react-icons/fa';
 import { IoMdArrowRoundBack } from "react-icons/io";
-import creditCardType from 'credit-card-type';
 import toast, { Toaster } from 'react-hot-toast';
 import InputLabel from '@/Components/InputLabel';
 import TextInput from '@/Components/TextInput';
 import InputError from '@/Components/InputError';
-export default function ({ payment = [], user = [] }) {
-    const getCardType = (cardNumber) => {
-        const cardTypeInfo = creditCardType(cardNumber);
-        if (cardTypeInfo.length > 0) {
-            return cardTypeInfo[0].niceType;
-        }
+import SelectOptions from '@/Components/SelectOptions';
+import Checkbox from '@/Components/Checkbox';
+import { router } from '@inertiajs/react';
 
-        return 'Unknown';
+export default function ({ payment = [], user = [], errors }) {
+    const { data, setData, post } = useForm({
+        owner_name: payment.owner_name || "",
+        expire_month: payment.expire_date ? payment.expire_date.split('/')[0] : "01",
+        expire_year: payment.expire_date ? new Date().getFullYear().toString().slice(0, 2) + payment.expire_date.split('/')[1] : "",
+        default: payment.default,
+    });
+
+    const generateMonths = () => {
+        const months = [];
+        for (let i = 1; i <= 12; i++) {
+            const monthValue = i < 10 ? `0${i}` : `${i}`;
+            months.push(monthValue);
+        }
+        return months;
     };
 
-    function submit () {
+    const generateYears = () => {
+        const currentYear = new Date().getFullYear();
+        const years = [];
+        for (let i = currentYear; i <= currentYear + 20; i++) {
+            years.push(i);
+        }
+        return years;
+    };
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        var formData = new FormData();
+        formData.append('owner_name', data.owner_name);
+
+        const formattedMonth = data.expire_month.padStart(2, '0');
+        const formattedYear = data.expire_year.slice(-2);
+        const expireDate = `${formattedMonth}/${formattedYear}`;
+
+        formData.append('expire_date', expireDate);
+
+        const defaultValue = data.default ? 1 : 0;
+        formData.append('default', defaultValue);
+
+        router.post('/profile/payment/edit/' + payment.id, formData, {
+            preserveState: true,
+            onSuccess: () => { toast.success('Payment method successfully updated'); },
+            onError: (error) => {
+                toast.error('Cannot save this payment method. Error: ' + error.message);
+            }
+        });
+    };
+
+    useEffect(() => {
+        generateMonths();
+        generateYears();
+    }, [payment]);
+
+    function handleDelete(e) {
+        e.preventDefault();
+        console.log('deleting...');
+        router.delete('/profile/payment/delete/' + payment.id, { preserveState: true, onSuccess: () => { toast.success('Payment method successfully removed'); }, onError: () => { toast.error('Cannot remove this payment method'); } });
     }
+
     return (
-        <ProfileLayout pageName='Edit Payment' pageSubtitle='Manage your cards and accounts' user={user}>
-            <Link href={route('admin.users')} className="bg-[lightgrey] w-[40px] p-3 rounded-lg mb-5 self-start transition hover:bg-[#bbbbbb]">
+        <ProfileLayout pageName='Edit Payment Method' pageSubtitle='Manage your cards and accounts' user={user}>
+            <Link href={route('profile.payments')} className="bg-[lightgrey] w-[40px] p-3 rounded-lg mb-5 self-start transition hover:bg-[#bbbbbb]">
                 <IoMdArrowRoundBack />
             </Link>
             <Toaster />
-            <h1 className="text-2xl mb-5 text-center">Edit payment</h1>
+            <h1 className="text-2xl mb-5 text-center">Edit payment method</h1>
             <div className="row-span-4 bg-white rounded-xl p-4 lg:mx-20">
                 <form
                     className="px-10 py-5 flex flex-col gap-5"
-                    onSubmit={submit}
-                    encType="multipart/form-data"
+                    onSubmit={handleSubmit}
                 >
                     <div>
-                        <InputLabel forInput="name" value="Name*" className="" />
+                        <InputLabel value="Owner name*" className="text-black" />
                         <TextInput
-                            id="name"
-                            name="name"
-                            value={""}
+                            id="owner_name"
+                            name="owner_name"
+                            value={data.owner_name}
                             className="mt-1 block w-full"
-                            autoComplete="name"
                             isFocused={true}
-                            onChange={(e) => setData("name", e.target.value)}
-                            required
+                            onChange={(e) => setData('owner_name', e.target.value)}
                         />
-                        <InputError message={"errors.name"} className="mt-2" />
+                        {errors.owner_name && <InputError message={errors.owner_name[0]} className="mt-2" />}
                     </div>
                     <div>
-                        <InputLabel forInput="lastname" value="Last name*" className="" />
-                        <TextInput
-                            id="lastname"
-                            name="lastname"
-                            value={"data.lastname"}
-                            className="mt-1 block w-full"
-                            autoComplete="lastname"
-                            isFocused={true}
-                            onChange={(e) => setData("lastname", e.target.value)}
-                            required
-                        />
-                        <InputError message={"errors.lastname"} className="mt-2" />
+                        <InputLabel value="Expire date" className='text-black' />
+                        <div className='flex gap-5 items-center mt-2'>
+                            <SelectOptions
+                                name="expire_month"
+                                options={generateMonths()}
+                                onChangeOption={(month) => setData('expire_month', month)}
+                                className="w-64 h-12"
+                                usingObject={false}
+                                defaultOption={false}
+                                defaultValue={data.expire_month}
+                            />
+                            <SelectOptions
+                                name="expire_year"
+                                options={generateYears()}
+                                onChangeOption={(year) => setData('expire_year', year)}
+                                className="w-64 h-12"
+                                usingObject={false}
+                                defaultOption={false}
+                                defaultValue={data.expire_year}
+                            />
+                        </div>
+                        {errors && errors.error && <InputError message={errors.error[0]} className="mt-2" />}
                     </div>
+
                     <div>
-                        <InputLabel forInput="birthdate" value="Birthdate*" className="" />
-                        <TextInput
-                            id="birthdate"
-                            type="date"
-                            name="birthdate"
-                            value={"data.birthdate"}
-                            className="mt-1 block w-full"
-                            autoComplete="birthdate"
-                            isFocused={true}
-                            onChange={(e) => setData("birthdate", e.target.value)}
-                            required
+                        <Checkbox
+                            name="default"
+                            checked={data.default}
+                            onChange={(e) => setData('default', e.target.checked)}
                         />
-                        <InputError message={"errors.birthdate"} className="mt-2" />
+                        <span className="ms-2 text-sm text-gray-600">Set default payment method</span>
                     </div>
+
                     <div>
-                        <InputLabel forInput="email" value="E-mail*" className="" />
-                        <TextInput
-                            id="email"
-                            name="email"
-                            type="email"
-                            value={"data.email"}
-                            className="mt-1 block w-full"
-                            autoComplete="email"
-                            isFocused={true}
-                            onChange={(e) => setData("email", e.target.value)}
-                            required
-                        />
-                        <InputError message={"errors.email"} className="mt-2" />
-                    </div>
-                    <div>
-                        <InputLabel forInput="password" value="Password" className="" />
-                        <TextInput
-                            id="password"
-                            name="password"
-                            type="password"
-                            value={"data.password"}
-                            className="mt-1 block w-full"
-                            autoComplete="password"
-                            isFocused={true}
-                        />
-                        <InputError message={"errors.password"} className="mt-2" />
-                    </div>
-                    <div>
-                        <button className="rounded bg-blue-500 text-white px-5 py-2 font-medium">
-                            Submit user
+                        <button type="submit" className="rounded bg-blue-500 text-white px-5 py-2 font-medium">
+                            Save
+                        </button>
+                        <button onClick={handleDelete} className="text-red-700 px-5 py-2 font-medium hover:underline">
+                            Delete
                         </button>
                     </div>
                 </form>
             </div>
         </ProfileLayout>
-    )
+    );
 }

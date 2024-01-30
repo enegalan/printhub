@@ -90,7 +90,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // PAYMENTS
     Route::get('/profile/payments', [UserController::class, 'payments'])->name('profile.payments');
     Route::get('/profile/payment/create', [UserController::class, 'createPayment'])->name('profile.create.payment');
+    Route::post('/profile/payment/store', [UserController::class, 'storePayment'])->name('profile.store.payment');
     Route::get('/profile/payment/edit/{payment}', [UserController::class, 'editPayment'])->name('profile.edit.payment');
+    Route::post('/profile/payment/edit/{payment}', [UserController::class, 'updatePayment'])->name('profile.update.payment');
+    Route::delete('/profile/payment/delete/{payment}', [UserController::class, 'deletePayment'])->name('profile.delete.payment');
 });
 
 Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin.dashboard');

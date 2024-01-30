@@ -3,6 +3,9 @@ export default function SelectOptions({
   options,
   onChangeOption,
   usingObject = false,
+  name = "select_option",
+  defaultOption = true,
+  defaultValue = defaultOption ? "-1" : usingObject ? options[0].name : options[0],
   ...props
 }) {
   const handleChange = (e) => {
@@ -12,17 +15,18 @@ export default function SelectOptions({
   return (
     <select
       aria-label="State"
+      name={name}
       {...props}
       className={
         `rounded-xl bg-gray-50 border text-gray-900 border-gray-400 ` +
         className
       }
       onChange={handleChange}
-      defaultValue="-1"
+      value={defaultValue}
     >
-      <option value="-1" disabled>
+      {defaultOption && (<option value="-1" disabled>
         Select a option
-      </option>
+      </option>)}
       {options.map((opt, index) => (
         <option key={index} value={usingObject ? opt.id : opt}>
           {usingObject ? opt.name : opt}
