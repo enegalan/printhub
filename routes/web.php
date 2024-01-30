@@ -49,9 +49,8 @@ Route::get('/market/search', [ProductController::class, 'search'])->name('produc
 Route::get('/market/product/{id}',[ProductController::class, 'show'])->name('product.show');
 Route::post('/market/filter', [ProductController::class, 'filter'])->name('products.filter');
 // Avoid page reload in filters
-Route::get('/market/filter', function () {
-    return redirect()->route('market');
-});
+Route::get('/market/filter', [ProductController::class, 'filter'])->name('products.filter');
+
 
 Route::middleware(['auth', 'verified'])->group(function () {
     //USERS

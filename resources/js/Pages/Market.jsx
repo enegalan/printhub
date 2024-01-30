@@ -78,7 +78,8 @@ function Market({ auth, products = [] }) {
         setSearch(search);
     }
 
-    function sendFilters() {
+    function sendFilters($page = []) {
+        let currentPage = products.current_page;
         const newFilters = {
             categories: categoriesFilter,
             price: priceFilter,
@@ -92,7 +93,7 @@ function Market({ auth, products = [] }) {
         );
 
         if (Object.keys(filteredFilters).length > 0) {
-            router.post('/market/filter', { filters: newFilters }, { preserveState: true });
+            router.post('/market/filter?page='+currentPage, { filters: newFilters }, { preserveState: true });
         }
     }
 
