@@ -129,8 +129,8 @@ function Market({ auth, products = [] }) {
                 </Carousel>
             </header>
 
-            <main id='market' className='flex mb-64 mt-16 mx-5 gap-10'>
-                <div className='w-[235px] flex flex-col gap-5'>
+            <main id='market' className='flex flex-col xl:flex-row mb-64 xl:mt-16 mt-4 xl:mx-5 xl:gap-10'>
+                <div className='max-xl:bg-white max-xl:p-2 max-xl:rounded xl:w-[235px] flex xl:flex-col mb-5 max-xl:justify-around gap-5 mx-2'>
                     <section className='flex flex-col gap-3'>
                         <h4 className='font-bold text-lg'>Category</h4>
                         <form className='flex' method="POST" action="">
@@ -174,9 +174,8 @@ function Market({ auth, products = [] }) {
                         </form>
                     </section>
                 </div>
-
-                <div className='flex flex-col w-full px-6'>
-                    <div className='flex gap-10 items-center'>
+                <div className='flex flex-col w-full xl:px-6 px-2'>
+                    <div className='flex xl:gap-10 gap-4 items-center'>
                         <section className='w-full' onInput={onSearchChange}>
                             <SearchInput action="" placeholder='Search...' onChange={onSearchChange} />
                         </section>
