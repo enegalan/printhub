@@ -16,6 +16,7 @@ const Navbar = ({
   dynamicBackground = true,
   defaultBackgroundColor = "transparent",
   defaultTextColor = "white",
+  className,
 }) => {
   
   var isAdmin = false;
@@ -93,7 +94,7 @@ const Navbar = ({
   return (
     <>
       <header
-        className={`items-center flex flex-wrap py-2 px-10 w-full justify-between text-[${headerTextColor}] fixed top-0 z-30 bg-[${headerBgColor}] transition ease-in-out duration-500`}
+        className={`items-center flex flex-wrap py-2 px-10 w-full justify-between text-[${headerTextColor}] fixed top-0 z-30 bg-[${headerBgColor}] transition ease-in-out duration-500 ` + className}
       >
         <div className="flex flex-1 gap-5 items-center justify-start">
           {/* Hamburger */}
