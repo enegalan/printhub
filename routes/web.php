@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\PricingController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProviderController;
@@ -81,7 +82,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('paymentcomplete');
 
     Route::get('/cart', [CartController::class, 'show'])->name('user.cart');
-    Route::post('/addcart/{id}', [CartController::class, 'defaultStore'])->name('cart.add');
+    Route::post('/addcart/{id}', [CartController::class, 'store'])->name('cart.add');
 });
 
 Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin.dashboard');
@@ -127,4 +128,8 @@ Route::delete('/admin/category/{category}/delete', [AdminController::class, 'del
 Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('product.destroy');
 Route::post('/products/{product}', [ProductController::class, 'update'])->name('product.update');
 Route::post('/products', [ProductController::class, 'store'])->name('product.store');
+
+//PRICING
+Route::get('/pricing',[PricingController::class,'index'])->name('prcing');
+
 require __DIR__.'/auth.php';
