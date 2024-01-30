@@ -40,18 +40,28 @@ export default function Show({
   };
   const submit = (e) => {
     e.preventDefault();
-    if (!data.color || !data.material) {
-      errors.color = !data.color ? "Color is required" : null;
-      errors.material = !data.material ? "Material is required" : null;
-    } else {
+  
+    // Reset errors before each submission
+    reset("color", "material");
+  
+    if (!data.color) {
+      setData("color", "");
+      errors.color = "Color is required";
+    }
+  
+    if (!data.material) {
+      setData("material", "");
+      errors.material = "Material is required";
+    }
+  
+    if (data.color && data.material) {
       try {
         post(route("cart.add", product.id), { preserveState: true });
         toast.success("Product Successfully added to cart", {
           duration: 3000,
         });
       } catch (error) {
-        toast.error("Error: Can not add this produt to the cart");
-        //handle error post
+        toast.error("Error: Can not add this product to the cart");
       }
     }
   };
@@ -67,7 +77,7 @@ export default function Show({
         <div className="max-w-[1200px] mt-8 mx-4 pb-4">
           <div className="flex flex-col flex-wrap md:flex-row md:flex-nowrap">
             <div className="w-full md:w-1/3 lg:w-1/2 max-w-full relative flex justify-center items-center bg-gray-200 rounded-xl">
-              {/* This need to be remobed on deply to if image != null */}
+              {/* This need to be removed on deploy to if image != null */}
               <img
                 src={
                   product.image.includes("/tmp/")
@@ -114,7 +124,7 @@ export default function Show({
                     name="material"
                     onChangeOption={(o) => setData("material", o)}
                   />
-                  <InputError message={errors.color} className="mt-2" />
+                  <InputError message={errors.material} className="mt-2" />
                 </div>
               </div>
               <div className="flex flex-col gap-2 h-full justify-end">
@@ -150,7 +160,7 @@ export default function Show({
             className="py-2"
           >
             {randomProducts.map((prod, index) => (
-              <SwiperSlide>
+              <SwiperSlide key={index}>
                 <ProductCardMini key={index} product={prod}></ProductCardMini>
               </SwiperSlide>
             ))}

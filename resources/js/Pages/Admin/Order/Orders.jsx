@@ -25,23 +25,26 @@ export default function({orders}){
           </tr>
         </thead>
         <tbody className=''>
-          {data.map((order) => (
-            <tr key={order.id} className="hover:bg-gray-50 text-center divide-x">
-              <td className="py-2 px-4 border-b">{order.id}</td>
-              <td className="py-2 px-4 border-b">{order.invoice.name}</td>
-              <td className="py-2 px-4 border-b">{order.invoice.lastname}</td>
-              <td className="py-2 px-4 border-b">{order.invoice.email}</td>
-              <td className="py-2 px-4 border-b">{order.status}</td>
-              <td className="py-2 px-4 border-b">
-                <Link
-                  href={route('admin.order.view', order.id)}
-                  className="text-blue-500 hover:underline mr-2"
-                >
-                  View
-                </Link></td>
-              <td className="py-2 px-4 border-b">{order.created_at}</td>
-            </tr>
-          ))}
+          {data.map((order) => {
+            if (!order.invoice) return false;
+            return (
+              <tr key={order.id} className="hover:bg-gray-50 text-center divide-x">
+                <td className="py-2 px-4 border-b">{order.id}</td>
+                <td className="py-2 px-4 border-b">{order.invoice.name}</td>
+                <td className="py-2 px-4 border-b">{order.invoice.lastname}</td>
+                <td className="py-2 px-4 border-b">{order.invoice.email}</td>
+                <td className="py-2 px-4 border-b">{order.status}</td>
+                <td className="py-2 px-4 border-b">
+                  <Link
+                    href={route('admin.order.view', order.id)}
+                    className="text-blue-500 hover:underline mr-2"
+                  >
+                    View
+                  </Link></td>
+                <td className="py-2 px-4 border-b">{order.created_at}</td>
+              </tr>
+            )
+          })}
         </tbody>
       </table>
       </div>

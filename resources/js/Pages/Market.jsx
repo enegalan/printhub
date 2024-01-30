@@ -96,15 +96,15 @@ function Market({ auth, products = [] }) {
         }
     }
 
-    const onSuccess = () => {
-        toast.success('Product added to cart successfully');
+    const onSuccess = (message) => {
+        toast.success(message);
     }
-    const onError = () => {
-        toast.error('Cannot add product to cart');
+    const onError = (message) => {
+        toast.error(message);
     }
 
     return (
-        <>
+        <div className='bg-[var(--light-grey)]'>
             <NavBar
                 user={auth.user}
                 dynamicBackground={false}
@@ -123,6 +123,7 @@ function Market({ auth, products = [] }) {
                     renderCenterLeftControls={({ previousSlide }) => <></>}
                     renderCenterRightControls={({ nextSlide }) => <></>}
                 >
+                    <img src='/images/banners/bestproducts.png' style={{ width: '100%', height: '650px', display: 'block', marginTop: '80px', objectFit: 'cover' }} />
                     <img src='/images/impresion1.jpg' style={{ width: '100%', height: '650px', display: 'block', marginTop: '80px', objectFit: 'cover' }} />
                 </Carousel>
             </header>
@@ -187,7 +188,7 @@ function Market({ auth, products = [] }) {
             </main>
 
             <Footer />
-        </>
+        </div>
     );
 }
 

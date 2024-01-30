@@ -219,6 +219,62 @@ class UserController extends Controller
         return [];
     }
 
+    function wishlist () {
+        $wishlist = $this->getWishlistProducts();
+        return Inertia::render('Profile/Wishlist', ['user' => auth()->user(), 'products' => $wishlist]);
+    }
+
+    function addProductToWishlist (Request $request, Product $product) {
+        // Get user_id
+        $userId = auth()->user()->id;
+
+        // Create a wishlist if the user does not have one yet
+        $wishlist = Wishlist::where('user_id', $userId)->first();
+        if (!$wishlist) {
+            $wishlist = new Wishlist();
+            $wishlist->user_id = $userId;
+            $wishlist->save();
+        }
+
+        if ($this->getProductWishlistStatus($product->id)) {
+            // If the product is already in the wishlist, remove it
+            $wishlist->products()->detach($product->id);
+        } else {
+            // If the product is not in the wishlist, add it
+            $wishlist->products()->attach($product->id);
+        }
+    }
+
+    function deleteProductFromWishlist(Request $request, Product $product) {
+        $user = auth()->user();
+        // Get user's wishlist
+        $wishlist = Wishlist::where('user_id', $user->id)->first();
+
+        if ($wishlist) {
+            $wishlist->products()->detach($product->id);
+        }
+    }
+
+    /*
+    Function to get if a product is in the user's wishlist or not
+    */
+    function getProductWishlistStatus($productId) {
+        $user = auth()->user();
+
+        // Check if the user has a wishlist
+        $wishlist = Wishlist::where('user_id', $user->id)->first();
+
+        if ($wishlist) {
+            // Check if the product is in the wishlist
+            $isInWishlist = $wishlist->products()->where('product_id', $productId)->exists() ? true : false;
+        } else {
+            // If the user doesn't have a wishlist, the product is not in the wishlist
+            $isInWishlist = false;
+        }
+
+        return $isInWishlist;
+    }
+
     function viewOrder(Request $request, Order $order) {
         // Get the cart_id
         $cartId = $order->cart_id;
@@ -227,7 +283,6 @@ class UserController extends Controller
         $stockCart = Stock_cart::where('cart_id', $cartId)->get();
     
         if ($stockCart->isEmpty()) {
-            // Handle the case when stock_cart is not found
             return response()->json(['error' => 'Stock_cart not found'], 404);
         }
     
@@ -246,7 +301,6 @@ class UserController extends Controller
                 return response()->json(['error' => 'Prod_comb not found'], 404);
             }
     
-            // Assuming 'product_id' is the foreign key in Prod_comb table pointing to Product model
             $productId = $prodCombination->product_id;
 
             // Get the product
@@ -274,8 +328,7 @@ class UserController extends Controller
             ];
         }
     
-        // Assuming $existingProducts is the array you want to add to
-        $existingProducts = []; // Replace this with your existing array of products
+        $existingProducts = [];
     
         // Add the new products to the existing array
         $existingProducts = array_merge($existingProducts, $products);

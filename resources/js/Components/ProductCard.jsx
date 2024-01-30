@@ -5,27 +5,43 @@ import PropTypes from "prop-types";
 import { Link } from "@inertiajs/react";
 import { FaRegHeart, FaHeart, FaCartPlus } from "react-icons/fa";
 import toast, { Toaster } from 'react-hot-toast';
+import { useState, useEffect } from 'react';
 
 
-export default function ProductCard({id, image, name, price, href, onSuccess, onError}){
+export default function ProductCard({id, image, name, price, href, onSuccess, onError, isWishlistItem, onAddWishlist}){
+    const [isInWishlist, setIsInWishlist] = useState(isWishlistItem);
+    function onAddWishlist (e) {
+        try {
+            router.post('/add/wishlist/'+id);
+            setIsInWishlist(!isInWishlist);
+        } catch (error) {
+            onError('Cannot add product to cart');
+        } finally {
+            onSuccess('Product added successfully to cart');
+        }
+    }
+    
     function onAddCart(e) {
         try {
             router.post('/addcart/'+id);
         } catch (error) {
-            onError();
+            onError('Cannot add product to cart');
         } finally {
-            onSuccess();
+            onSuccess('Product added successfully to cart');
         }
-        
     }
     return (
         <>
             <div className="border relative z-10 max-w-sm rounded-lg overflow-hidden shadow-lg bg-gray-100 flex flex-col hover:[&>img]:scale-105">
             
             <div className="flex  justify-end pr-5 pt-5">
-                <Link href="">
-                    <FaRegHeart className="text-xl fas fa-heart transition duration-500 text-[var(--main-blue)] hover:text-blue-900"/>
-                </Link>
+            <div value={id} className="hover:cursor-pointer" onClick={onAddWishlist}>
+                    {(isWishlistItem ? (
+                        <FaHeart className="text-xl fas fa-heart transition duration-500 text-[var(--main-blue)] hover:text-blue-900" />
+                    ) : (
+                        <FaRegHeart className="text-xl fas fa-heart transition duration-500 text-[var(--main-blue)] hover:text-blue-900" />
+                    ))}
+                </div>
             </div>
             <div className="overflow-hidden">
                 <Link href={href}>
