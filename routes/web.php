@@ -132,6 +132,10 @@ Route::get('/admin/users', [AdminController::class, 'users'])->name('admin.users
 Route::get('/admin/products', [AdminController::class, 'products'])->name('admin.products');
 Route::get('/admin/orders', [AdminController::class, 'orders'])->name('admin.orders');
 Route::get('/admin/materials', [AdminController::class, 'materials'])->name('admin.materials');
+Route::get('/admin/material/add', [AdminController::class, 'addMaterial'])->name('admin.add.material');
+Route::post('/admin/material/store', [AdminController::class, 'storeMaterial'])->name('admin.store.material');
+Route::get('/admin/material/edit/{material}', [AdminController::class, 'editMaterial'])->name('admin.edit.material');
+Route::post('/admin/material/update/{material}', [AdminController::class, 'updateMaterial'])->name('admin.update.material');
 Route::get('/admin/colors', [AdminController::class, 'colors'])->name('admin.colors');
 Route::get('/admin/countries', [AdminController::class, 'countries'])->name('admin.countries');
 Route::get('/admin/regions', [AdminController::class, 'regions'])->name('admin.regions');

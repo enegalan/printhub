@@ -75,7 +75,7 @@ export default function ({ users }) {
                     </span>
                   )}
                   </td>
-                  <td className="py-2 px-4 border-b flex justify-center">{user.avatar ? (
+                  <td className="py-2 px-4 border-b">{user.avatar ? (
                     <img className="w-[50px] self-center h-[50px] rounded-full border-2 border-slate-200" src={`/storage/avatars/${user.avatar}`} alt="Avatar" />
                   ) : (
                     <div className="w-[50px] h-[50px] bg-blue-500 rounded-full flex items-center content-center justify-center text-white text-2xl font-bold">

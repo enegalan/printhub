@@ -324,6 +324,30 @@ class AdminController extends Controller
         );
     }
 
+    public function addMaterial () {
+        return Inertia::render('Admin/Material/Add');
+    }
+    
+    public function storeMaterial (Request $request) {
+        $validatedData = $request->validate([
+            'name' => 'required|min:1',
+        ]);
+        Material::create($validatedData);
+
+        return redirect()->route('admin.materials');
+    }
+
+    public function editMaterial (Material $material) {
+        return Inertia::render('Admin/Material/Edit', compact('material'));
+    }
+
+    public function updateMaterial (Request $request, Material $material) {
+        $validatedData = $request->validate([
+            'name' => 'required|min:1',
+        ]);
+        $material->update($validatedData);
+    }
+
     public function deletematerial(Material $material)
     {
         try {
