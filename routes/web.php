@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProviderController;
 use App\Models\Country;
 use App\Models\Region;
+use App\Models\Stock_cart;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -74,7 +75,31 @@ Route::middleware(['auth', 'verified'])->group(function () {
         app()->call([UserController::class, 'getRoles']);
         $countries = Country::all();
         $regions = Region::all();
-        return Inertia::render('Payment', ['countries' => $countries, 'regions' => $regions]);
+
+        $cart = DB::table('carts')->where('user_id', auth()->user()->id)->where('active', 1)->first();
+
+            // Obtener los stock_carts relacionados con el carrito
+            $stockCarts = DB::table('stock_carts')
+                ->join('prod_combs', 'stock_carts.prod_comb_id', '=', 'prod_combs.id')
+                ->join('products', 'prod_combs.product_id', '=', 'products.id')
+                ->select('stock_carts.quantity', 'products.price')
+                ->where('stock_carts.cart_id', $cart->id)
+                ->get();
+        
+            // Calcular el total
+            $total = 0;
+        
+            foreach ($stockCarts as $stockCart) {
+                $total += $stockCart->price * $stockCart->quantity;
+            }
+
+            $total += $total * 0.21;
+            //falta los gastos de envios
+        
+        
+        
+        return Inertia::render('Payment', ['countries' => $countries,
+        'regions' => $regions, 'total' => $total]);
     })->name('payment');
 
     Route::get('/payment/complete', function () {

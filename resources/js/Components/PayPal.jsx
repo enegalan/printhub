@@ -6,7 +6,7 @@ function Message({ content }) {
   return <p>{content}</p>;
 }
 
-function PayPal({ onSuccess }) {
+function PayPal({ onSuccess, total }) {
   const initialOptions = {
     "client-id": "ATeuGPvcUnYEebvbZA5LDeTWvIr-bBYyB00E-4NrdspWkPzQ7048_U4MmOF2UuKJGzmPXjSqhrUoUSta", // Replace with your actual PayPal Sandbox client ID
     "enable-funding": "card",
@@ -34,7 +34,7 @@ function PayPal({ onSuccess }) {
               {
                 amount: {
                   currency_code: "USD",
-                  value: "10.00", // Replace with the desired amount
+                  value: total.toFixed(2), // Replace with the desired amount
                 },
               },
             ],

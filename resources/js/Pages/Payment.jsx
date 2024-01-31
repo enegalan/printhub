@@ -4,7 +4,7 @@ import NavBar from "@/Components/NavBar";
 import { Footer } from "@/Components/Footer";
 import PayPalPayment from "@/Components/PayPal";
 
-function Payment({ auth, countries, regions }) {
+function Payment({ auth, countries, regions, total }) {
   const [activeStep, setActiveStep] = useState(0);
 
   const [selectedCountry, setSelectedCountry] = useState("");
@@ -333,6 +333,7 @@ function Payment({ auth, countries, regions }) {
                     console.error("Error al enviar formularios:", error);
                   });
               }}
+              total={total}
             />
           </div>
         )}
