@@ -10,10 +10,12 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\Region;
 use App\Models\Role;
+use App\Models\Ship_address;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -24,9 +26,83 @@ class AdminController extends Controller
     public function dashboard()
     {
         app()->call([UserController::class, 'getRoles']);
+        // Get reports
+        $ordersYear = $this->getOrdersThisYear();
+        $usersMonth = $this->getUsersThisMonth();
+        $ordersZone = $this->getOrdersByZoneThisYear();
         return (
-            Inertia::render('Admin/Dashboard')
+            Inertia::render('Admin/Reports', compact('ordersYear',  'usersMonth', 'ordersZone'))
         );
+    }
+
+    public function getOrdersThisYear() {
+        $currentYear = date('Y');
+        $months = range(1, 12);
+
+        $ordersData = Order::select(DB::raw('MONTH(created_at) as month'), DB::raw('COUNT(*) as count'))
+            ->whereYear('created_at', $currentYear)
+            ->groupBy('month')
+            ->pluck('count', 'month')
+            ->toArray();
+
+        $result = [];
+        foreach ($months as $month) {
+            $result[$month] = $ordersData[$month] ?? 0;
+        }
+
+        return $result;
+    }
+
+    public function getUsersThisMonth () {
+        $currentMonth = date('m');
+        $daysInMonth = cal_days_in_month(CAL_GREGORIAN, $currentMonth, date('Y'));
+        $days = range(1, $daysInMonth);
+
+        // Obtener todos los días del mes con la cantidad de usuarios registrados
+        $usersData = User::select(DB::raw('DAY(created_at) as day'), DB::raw('COUNT(*) as count'))
+            ->whereMonth('created_at', $currentMonth)
+            ->groupBy('day')
+            ->pluck('count', 'day')
+            ->toArray();
+
+        // Llenar el array asociativo con todos los días del mes
+        $result = [];
+        foreach ($days as $day) {
+            $result[$day] = $usersData[$day] ?? 0;
+        }
+
+        return $result;
+    }
+
+    public function getOrdersByZoneThisYear () {
+        // Get all orders this year
+        $currentYear = date('Y');
+        $orders = Order::whereYear('created_at', $currentYear)->get();
+
+        // Get all ship_addresse_id of orders
+        $ordersByZone = [];
+
+        foreach ($orders as $order) {
+            // Obtener la dirección de envío asociada al pedido
+            $shipAddressId = $order->ship_addresse_id;
+            $address = Ship_address::find($shipAddressId);
+            if ($address) {
+                // Obtener el ID del país desde la dirección
+                $countryId = $address->country_id;
+
+                // Obtener el nombre del país
+                $countryName = DB::table('countries')->where('id', $countryId)->value('name');
+
+                // Incrementar el contador de pedidos para ese país
+                if (!isset($ordersByZone[$countryName])) {
+                    $ordersByZone[$countryName] = 1;
+                } else {
+                    $ordersByZone[$countryName]++;
+                }
+            }
+        }
+
+        return ['ordersLabels' => array_keys($ordersByZone), 'ordersValues' => array_values($ordersByZone)];
     }
 
     public function countries()
