@@ -35,11 +35,6 @@ class Handler extends ExceptionHandler
         return Inertia::render('error', ['status' => $statusCode, 'message' => $exception->getMessage()])
             ->toResponse($request)
             ->setStatusCode($statusCode);
-    } else {
-        // Manejar excepciones no HTTP
-        return Inertia::render('UnhandledError')
-            ->toResponse($request)
-            ->setStatusCode(500);
     }
 
     return parent::render($request, $exception);
