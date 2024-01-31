@@ -18,21 +18,21 @@ export default function ProfileLayout({ children, pageName = "Dashboard", pageSu
     isProvider = user.roles.some((role) => role.name === "provider");
 
   return (
-    <main className={`bg-[url('${gbBlue}')] bg-cover`}>
-      <div className="h-screen flex bg-white/30">
-        <nav className="w-52 flex flex-col justify-center">
+    <main className={`bg-[url('${gbBlue}')] bg-cover h-full`}>
+      <div className="md:h-screen flex md:flex-row flex-col bg-white/30">
+        <nav className="md:w-52 flex flex-col justify-center">
           <div className="mt-4 flex justify-center">
             <Link href={route("index")}>
               <img src={logoBlue} alt="Logo" />
             </Link>
           </div>
-          <ul className="flex flex-col gap-2 mt-10 text-xl flex-1">
+          <ul className="flex flex-row max-md:justify-center max-md:items-center md:flex-col gap-2 md:mt-10 my-5 text-xl md:flex-1 flex-wrap">
             <li className="hover:bg-blue-100 py-2">
               <Link
                 href={route("index")}
                 className="flex gap-2 items-center px-5"
               >
-                <FaHome className="text-blue-700" />
+                <FaHome className="text-blue-700 hidden md:block" />
                 <p className="">Home</p>
               </Link>
             </li>
@@ -41,16 +41,16 @@ export default function ProfileLayout({ children, pageName = "Dashboard", pageSu
                 href={route("profile.dashboard")}
                 className="flex gap-2 items-center px-5"
               >
-                <AiFillDashboard className="text-blue-700" />
+                <AiFillDashboard className="text-blue-700 hidden md:block" />
                 <p className="">Dashboard</p>
               </Link>
             </li>
-            <li className="hover:bg-blue-100 py-2">
+            <li className="hover:bg-blue-100 py-2 hidden md:block">
               <Link
                 href={route("profile.edit")}
                 className="flex gap-2 items-center px-5"
               >
-                <FaUser className="text-blue-700" />
+                <FaUser className="text-blue-700 hidden md:block" />
                 <p className="">Account</p>
               </Link>
             </li>
@@ -59,7 +59,7 @@ export default function ProfileLayout({ children, pageName = "Dashboard", pageSu
                 href={route("profile.orders")}
                 className="flex gap-2 items-center px-5"
               >
-                <FaCartShopping className="text-blue-700" />
+                <FaCartShopping className="text-blue-700 hidden md:block" />
                 <p>Orders</p>
               </Link>
             </li>
@@ -68,26 +68,17 @@ export default function ProfileLayout({ children, pageName = "Dashboard", pageSu
                 href={route("profile.wishlist")}
                 className="flex gap-2 items-center px-5"
               >
-                <FaHeart className="text-blue-700" />
+                <FaHeart className="text-blue-700 hidden md:block" />
                 <p>Wishlist</p>
               </Link>
             </li>
             <li className="hover:bg-blue-100 py-2">
               <Link
-                href={route("index")}
-                className="flex gap-2 items-center px-5"
-              >
-                <FaAddressCard className="text-blue-700" />
-                <p>Address</p>
-              </Link>
-            </li>
-            <li className="hover:bg-blue-100 py-2">
-              <Link
-                href={route("index")}
+                href={route("profile.payments")}
                 className="flex gap-2 items-center px-5"
               >
                 <FaWallet className="text-blue-700" />
-                <p>Payment</p>
+                <p>Payments</p>
               </Link>
             </li>
             {isProvider && (
@@ -96,7 +87,7 @@ export default function ProfileLayout({ children, pageName = "Dashboard", pageSu
                   href={route("profile.provider")}
                   className="flex gap-2 items-center px-5 "
                 >
-                  <FaHandshake className="text-blue-700" />
+                  <FaHandshake className="text-blue-700 hidden md:block" />
                   <p>Provider</p>
                 </Link>
               </li>
@@ -113,12 +104,12 @@ export default function ProfileLayout({ children, pageName = "Dashboard", pageSu
             </Link>
           </div>
         </nav>
-        <div className="flex flex-col flex-1">
+        <div className="flex flex-col flex-1 w-full">
           <div className="my-4">
-            <h1 className="text-4xl">{pageName}</h1>
-            <p className="text-gray-700">{pageSubtitle}</p>
+            <h1 className="text-4xl md:text-left text-center">{pageName}</h1>
+            <p className="text-gray-700 md:text-left text-center">{pageSubtitle}</p>
           </div>
-          <div className="bg-gray-200/60 overflow-auto rounded-xl px-10 py-10 flex-1 mb-14 flex flex-col mr-5">
+          <div className="bg-gray-200/60 overflow-auto rounded-xl md:px-10 px-5 py-3 md:py-10 flex-1 md:mb-14 flex flex-col md:mr-5">
             {children}
           </div>
         </div>

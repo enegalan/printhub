@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\PricingController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProviderController;
@@ -49,9 +50,8 @@ Route::get('/market/search', [ProductController::class, 'search'])->name('produc
 Route::get('/market/product/{id}',[ProductController::class, 'show'])->name('product.show');
 Route::post('/market/filter', [ProductController::class, 'filter'])->name('products.filter');
 // Avoid page reload in filters
-Route::get('/market/filter', function () {
-    return redirect()->route('market');
-});
+Route::get('/market/filter', [ProductController::class, 'filter'])->name('products.filter');
+
 
 Route::middleware(['auth', 'verified'])->group(function () {
     //USERS
@@ -63,6 +63,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile/orders/{order}', [UserController::class, 'viewOrder'])->name('user.order.view');
     Route::get('/profile/wishlist', [UserController::class, 'wishlist'])->name('profile.wishlist');
     Route::post('/add/wishlist/{product}', [UserController::class, 'addProductToWishlist'])->name('add.product.wishlist');
+    Route::delete('/profile/wishlist/delete/{product}', [UserController::class, 'deleteProductFromWishlist'])->name('delete.product.wishlist');
     //PROVIDERS
     Route::get('/profile/provider', [ProviderController::class, 'dashboard'])->name('profile.provider');
     Route::get('/profile/provider/add-product', [ProviderController::class, 'add'])->name('provider.add');
@@ -110,6 +111,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/cart', [CartController::class, 'show'])->name('user.cart');
     Route::post('/addcart/{id}', [CartController::class, 'store'])->name('cart.add');
     Route::post('/wishlist/product/{product}/status', [UserController::class, 'getProductWishlistStatus'])->name('product.wishlist.status');
+
+    // PAYMENTS
+    Route::get('/profile/payments', [UserController::class, 'payments'])->name('profile.payments');
+    Route::get('/profile/payment/create', [UserController::class, 'createPayment'])->name('profile.create.payment');
+    Route::post('/profile/payment/store', [UserController::class, 'storePayment'])->name('profile.store.payment');
+    Route::get('/profile/payment/edit/{payment}', [UserController::class, 'editPayment'])->name('profile.edit.payment');
+    Route::post('/profile/payment/edit/{payment}', [UserController::class, 'updatePayment'])->name('profile.update.payment');
+    Route::delete('/profile/payment/delete/{payment}', [UserController::class, 'deletePayment'])->name('profile.delete.payment');
 });
 
 Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin.dashboard');
@@ -155,4 +164,8 @@ Route::delete('/admin/category/{category}/delete', [AdminController::class, 'del
 Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('product.destroy');
 Route::post('/products/{product}', [ProductController::class, 'update'])->name('product.update');
 Route::post('/products', [ProductController::class, 'store'])->name('product.store');
+
+//PRICING
+Route::get('/pricing',[PricingController::class,'index'])->name('pricing');
+
 require __DIR__.'/auth.php';

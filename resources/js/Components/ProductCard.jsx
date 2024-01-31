@@ -10,20 +10,17 @@ import { useState, useEffect } from 'react';
 
 export default function ProductCard({id, image, name, price, href, onSuccess, onError, isWishlistItem, onAddWishlist}){
     const [isInWishlist, setIsInWishlist] = useState(isWishlistItem);
-    const [isLoading, setIsLoading] = useState(false);
-
-    async function handleAddWishlist() {
+    function onAddWishlist (e) {
         try {
-            setIsLoading(true);
-            const response = router.post(`/add/wishlist/${id}`);
+            router.post('/add/wishlist/'+id);
             setIsInWishlist(!isInWishlist);
-            onSuccess(response.message); // Ajusta esto según la estructura de tu respuesta del servidor
         } catch (error) {
-            onError('Cannot update wishlist');
+            onError('Cannot add product to cart');
         } finally {
-            setIsLoading(false);
+            onSuccess('Product added successfully to cart');
         }
     }
+    
     function onAddCart(e) {
         try {
             router.post('/addcart/'+id);
@@ -33,21 +30,18 @@ export default function ProductCard({id, image, name, price, href, onSuccess, on
             onSuccess('Product added successfully to cart');
         }
     }
+    console.log('isWishlistItem',isWishlistItem)
     return (
         <>
             <div className="border relative z-10 max-w-sm rounded-lg overflow-hidden shadow-lg bg-gray-100 flex flex-col hover:[&>img]:scale-105">
             
             <div className="flex  justify-end pr-5 pt-5">
             <div value={id} className="hover:cursor-pointer" onClick={onAddWishlist}>
-                    {isLoading ? (
-                        <div>Loading...</div>
+                    {(isWishlistItem || isInWishlist ? (
+                        <FaHeart className="text-xl fas fa-heart transition duration-500 text-[var(--main-blue)] hover:text-blue-900" />
                     ) : (
-                        (isInWishlist ? (
-                            <FaHeart className="text-xl fas fa-heart transition duration-500 text-[var(--main-blue)] hover:text-blue-900" />
-                        ) : (
-                            <FaRegHeart className="text-xl fas fa-heart transition duration-500 text-[var(--main-blue)] hover:text-blue-900" />
-                        ))
-                    )}
+                        <FaRegHeart className="text-xl fas fa-heart transition duration-500 text-[var(--main-blue)] hover:text-blue-900" />
+                    ))}
                 </div>
             </div>
             <div className="overflow-hidden">

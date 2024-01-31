@@ -5,7 +5,7 @@ import { Link } from '@inertiajs/react';
 import { FaPlus } from 'react-icons/fa';
 
 export default function ({ orders = [], user = [] }) {
-
+  console.log(user);
   const { data, prev_page_url, next_page_url, current_page, last_page } = orders;
   return (
     <ProfileLayout pageName='Dashboard' pageSubtitle='Checkout your orders status' user={user}>

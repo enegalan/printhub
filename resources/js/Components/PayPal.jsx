@@ -6,7 +6,7 @@ function Message({ content }) {
   return <p>{content}</p>;
 }
 
-function PayPal({ onSuccess, total }) {
+function PayPal({ onSuccess, className, total }) {
   const initialOptions = {
     "client-id": "ATeuGPvcUnYEebvbZA5LDeTWvIr-bBYyB00E-4NrdspWkPzQ7048_U4MmOF2UuKJGzmPXjSqhrUoUSta", // Replace with your actual PayPal Sandbox client ID
     "enable-funding": "card",
@@ -59,7 +59,7 @@ function PayPal({ onSuccess, total }) {
   }, [onSuccess]); // Include onSuccess in the dependency array to re-run the effect when it changes
 
   return (
-    <div className="App">
+    <div className={`App `+ className}>
       <div id="paypal-button-container"></div>
       <Message content={message} />
     </div>

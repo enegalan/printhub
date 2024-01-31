@@ -9,7 +9,7 @@ const PaymentStepper = ({ activeStep }) => {
         <div key={index} className="flex flex-col items-center">
           <div className="flex items-center">
             <div
-              className={`w-12 h-12 flex items-center justify-center rounded-full ${index === activeStep ? 'font-bold bg-blue-300' : ''} ${
+              className={`md:w-12 md:h-12 px-3 py-1 flex items-center justify-center rounded-full ${index === activeStep ? 'font-bold bg-blue-300' : ''} ${
                 index < activeStep ? 'bg-green-500' : 'bg-gray-300'
               }`}
             >
