@@ -1,6 +1,7 @@
+import { Link } from "@inertiajs/react";
 import { FaCheckCircle } from "react-icons/fa";
 
-export default function PricingCard({plan, price, description, advantagesArray,popular}) {
+export default function PricingCard({plan, price, description, advantagesArray, popular, href}) {
   function isFloat(n){
     if (Number.isInteger(n)) {
       return true
@@ -29,9 +30,9 @@ export default function PricingCard({plan, price, description, advantagesArray,p
         ))}
       </div>
       <div className="flex items-end h-full">
-        <button className="bg-white text-black rounded-full px-8 py-2 hover:bg-neutral-300 transition-colors ease-in-out duration-300">
+        <Link href={href} className="bg-white text-black rounded-full px-8 py-2 hover:bg-neutral-300 transition-colors ease-in-out duration-300">
           Get Started
-        </button>
+        </Link>
       </div>
     </div>
   );

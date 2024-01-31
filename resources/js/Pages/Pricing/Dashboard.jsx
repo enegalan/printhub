@@ -3,10 +3,11 @@ import { Footer } from '@/Components/Footer';
 import PricingCard from '@/Components/PricingCard';
 
 function Dashboard ({user}) {
+    const VIP_PRICE = 9.99
     return (
         <>
             <NavBar user={user} className="lg:backdrop-blur-md border-b max-lg:bg-blue-900/50 border-blue-950/50" defaultBackgroundColor="transparent" defaultTextColor="var(--white)" dynamicBackground={false} />
-                <main className='py-32 px-10 bg-[url(/images/dark-blue-blur-background-vector.webp)] bg-cover bg-no-repeat space-y-10 gap-10'>
+                <main className='py-44 px-10 bg-[url(/images/dark-blue-blur-background-vector.webp)] bg-cover bg-no-repeat space-y-10 gap-10 -mb-16'>
                     
                     <header className='text-white text-center'>
                         <h1 className='text-6xl font-bold'>Pricing</h1>
@@ -21,10 +22,11 @@ function Dashboard ({user}) {
                         />
                         <PricingCard 
                         plan="Vip" 
-                        price={9.99}
+                        price={VIP_PRICE}
                         description="Deno Deploy is a distributed system that runs JavaScript, TypeScript, and WebAssembly at the edge, worldwide."
                         advantagesArray={["Higer priority orders","Order discounts","No shiping cost"]}
                         popular={true}
+                        href={route('pricing.payment',9.99)}
                         />
                         <PricingCard 
                         plan="Enterprice" 
@@ -33,7 +35,7 @@ function Dashboard ({user}) {
                         />
                     </section>
                 </main>
-            <Footer className="mt-0"/>
+            <Footer />
         </>
     );
 }

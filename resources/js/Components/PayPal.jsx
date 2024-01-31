@@ -6,7 +6,7 @@ function Message({ content }) {
   return <p>{content}</p>;
 }
 
-function PayPal({ onSuccess, className, total }) {
+function PayPal({ onSuccess, className, total, buttonColor="" }) {
   const initialOptions = {
     "client-id": "ATeuGPvcUnYEebvbZA5LDeTWvIr-bBYyB00E-4NrdspWkPzQ7048_U4MmOF2UuKJGzmPXjSqhrUoUSta", // Replace with your actual PayPal Sandbox client ID
     "enable-funding": "card",
@@ -26,6 +26,7 @@ function PayPal({ onSuccess, className, total }) {
         style: {
           shape: "rect",
           layout: "horizontal",
+          color: buttonColor.toString(),
         },
         createOrder: (data, actions) => {
           // Manually initiate the PayPal popup

@@ -158,6 +158,14 @@ const Navbar = ({
                 About
               </Link>
             </li>
+            <li>
+              <Link
+                href={route("pricing")}
+                className="block p-4 text-lg hover:text-[#a2c0f8]"
+              >
+                Pricing
+              </Link>
+            </li>
           </ul>
           <div id="burger" className="md:hidden cursor-pointer">
             <div className={`bg-${headerTextColor}`}></div>
@@ -305,6 +313,14 @@ const Navbar = ({
                       href={route("scan")}
                     >
                       Scan
+                    </Link>
+                  </li>
+                  <li className="mb-1">
+                    <Link
+                      href={route("pricing")}
+                      className="block p-4 text-lg font-semibold text-gray-400 hover:bg-blue-50 hover:text-[--blue-1] rounded"
+                    >
+                      Pricing
                     </Link>
                   </li>
                   <li className="mb-1">
