@@ -167,5 +167,6 @@ Route::post('/products', [ProductController::class, 'store'])->name('product.sto
 
 //PRICING
 Route::get('/pricing',[PricingController::class,'index'])->name('pricing');
+Route::get('/pricing/payment/{price}',[PricingController::class,'payment'])->name('pricing.payment');
 
 require __DIR__.'/auth.php';
