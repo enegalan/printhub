@@ -11,8 +11,8 @@ import SelectOptions from '@/Components/SelectOptions';
 import Checkbox from '@/Components/Checkbox';
 import { router } from '@inertiajs/react';
 
-export default function ({ payment = [], user = [], errors }) {
-    const { data, setData, post } = useForm({
+export default function ({ payment = [], user = [] }) {
+    const { data, setData, post, errors } = useForm({
         owner_name: payment.owner_name || "",
         expire_month: payment.expire_date ? payment.expire_date.split('/')[0] : "01",
         expire_year: payment.expire_date ? new Date().getFullYear().toString().slice(0, 2) + payment.expire_date.split('/')[1] : "",
@@ -51,13 +51,13 @@ export default function ({ payment = [], user = [], errors }) {
         const defaultValue = data.default ? 1 : 0;
         formData.append('default', defaultValue);
 
-        router.post('/profile/payment/edit/' + payment.id, formData, {
-            preserveState: true,
-            onSuccess: () => { toast.success('Payment method successfully updated'); },
-            onError: (error) => {
-                toast.error('Cannot save this payment method. Error: ' + error.message);
-            }
-        });
+        try {
+            post(route('profile.update.payment', payment.id), formData);
+            toast.success('Payment method successfully updated');
+            
+        } catch (error) {
+            toast.error('Cannot save this payment method. Error: ' + error.message);
+        }
     };
 
     useEffect(() => {
