@@ -421,8 +421,9 @@ class UserController extends Controller
             $validatedData = [
                 'owner_name' => $request->input('owner_name'),
                 'default' => $request->input('default'),
-                'expire_date' => $request->input('expire_date'),
             ];
+
+            $validatedData["expire_date"] = $request->input('expire_month') . "/" . substr($request->input('expire_year'), -2);
 
             if ($validatedData['default'] == 1) {
                 // Set all payment methods as not defaul
@@ -438,7 +439,7 @@ class UserController extends Controller
             // Update the payment method with los datos forzados
             $paymentMethod->update($validatedData);
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Cannot save this payment method'], 500);
+            //return response()->json(['error' => 'Cannot save this payment method'], 500);
         }
     }
 

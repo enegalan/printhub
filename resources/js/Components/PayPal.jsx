@@ -25,7 +25,7 @@ function PayPal({ onSuccess, className, total }) {
       window.paypal.Buttons({
         style: {
           shape: "rect",
-          layout: "vertical",
+          layout: "horizontal",
         },
         createOrder: (data, actions) => {
           // Manually initiate the PayPal popup

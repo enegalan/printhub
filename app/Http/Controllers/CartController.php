@@ -33,8 +33,12 @@ class CartController extends Controller
 
         $materials = Material::all();
         $colors = Color::all();
+
+        $user = auth()->user();
+
+        $isVip = $user->roles->contains('name', 'vip');
         
-        return Inertia::render('Cart/Show', ['cart' => $cart, 'materials' => $materials, 'colors' => $colors]);
+        return Inertia::render('Cart/Show', ['cart' => $cart, 'materials' => $materials, 'colors' => $colors, 'isVip' => $isVip]);
         
     }
 
