@@ -93,3 +93,8 @@ body {
   border-radius: 32px;
   height: 100vh;
 }
+
+#buttons-container {
+  display: flex;
+  justify-content: center;
+}
