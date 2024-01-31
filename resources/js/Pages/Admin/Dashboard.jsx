@@ -1,10 +1,14 @@
 import { Link } from "@inertiajs/react";
 import logoBlue from "../../../../public/logoWhite.svg";
 import gbBlue from "../../../../public/images/Blue-dotted-Background-images.jpg"
-import { FaUser, FaHeart, FaWallet, FaAddressCard, FaHome } from "react-icons/fa";
-import { FaCartShopping, FaGear } from "react-icons/fa6";
+import { FaBox, FaWallet, FaHome, FaUsers } from "react-icons/fa";
+import { FaCartShopping, FaLocationDot } from "react-icons/fa6";
+import { AiFillDashboard } from "react-icons/ai";
+import { IoIosColorPalette } from "react-icons/io";
+import { TbWorld } from "react-icons/tb";
+import { BiSolidCategory } from "react-icons/bi";
 
-import React, { useEffect } from 'react';
+import React from 'react';
 
 export default function AdminLayout({ children, pageName = 'Admin Dashboard', pageSubtitle = 'Welcome to admin section' }) {
 
@@ -32,7 +36,7 @@ export default function AdminLayout({ children, pageName = 'Admin Dashboard', pa
                 href={route("admin.dashboard")}
                 className="flex gap-2 items-center pl-5"
               >
-                <FaUser className="text-blue-700" />
+                <AiFillDashboard className="text-blue-700" />
                 <p className="">Dashboard</p>
               </Link>
             </li>
@@ -41,7 +45,7 @@ export default function AdminLayout({ children, pageName = 'Admin Dashboard', pa
                 href={route("admin.products")}
                 className="flex gap-2 items-center pl-5"
               >
-                <FaCartShopping className="text-blue-700" />
+                <FaBox className="text-blue-700 text-base" />
                 <p>Products</p>
               </Link>
             </li>
@@ -50,7 +54,7 @@ export default function AdminLayout({ children, pageName = 'Admin Dashboard', pa
                 href={route("admin.users")}
                 className="flex gap-2 items-center pl-5"
               >
-                <FaHeart className="text-blue-700" />
+                <FaUsers className="text-blue-700" />
                 <p>Users</p>
               </Link>
             </li>
@@ -59,7 +63,7 @@ export default function AdminLayout({ children, pageName = 'Admin Dashboard', pa
                 href={route("admin.orders")}
                 className="flex gap-2 items-center pl-5"
               >
-                <FaAddressCard className="text-blue-700" />
+                <FaCartShopping className="text-blue-700" />
                 <p>Orders</p>
               </Link>
             </li>
@@ -68,7 +72,7 @@ export default function AdminLayout({ children, pageName = 'Admin Dashboard', pa
                 href={route("admin.materials")}
                 className="flex gap-2 items-center pl-5"
               >
-                <FaWallet className="text-blue-700" />
+                <FaWallet className="text-blue-700 text-base" />
                 <p>Materials</p>
               </Link>
             </li>
@@ -77,7 +81,7 @@ export default function AdminLayout({ children, pageName = 'Admin Dashboard', pa
                 href={route("admin.colors")}
                 className="flex gap-2 items-center pl-5"
               >
-                <FaWallet className="text-blue-700" />
+                <IoIosColorPalette className="text-blue-700 text-2xl" />
                 <p>Colors</p>
               </Link>
             </li>
@@ -86,7 +90,7 @@ export default function AdminLayout({ children, pageName = 'Admin Dashboard', pa
                 href={route("admin.countries")}
                 className="flex gap-2 items-center pl-5"
               >
-                <FaWallet className="text-blue-700" />
+                <TbWorld className="text-blue-700" />
                 <p>Countries</p>
               </Link>
             </li>
@@ -95,7 +99,7 @@ export default function AdminLayout({ children, pageName = 'Admin Dashboard', pa
                 href={route("admin.regions")}
                 className="flex gap-2 items-center pl-5"
               >
-                <FaWallet className="text-blue-700" />
+                <FaLocationDot className="text-blue-700" />
                 <p>Regions</p>
               </Link>
             </li>
@@ -104,7 +108,7 @@ export default function AdminLayout({ children, pageName = 'Admin Dashboard', pa
                 href={route("admin.categories")}
                 className="flex gap-2 items-center pl-5"
               >
-                <FaWallet className="text-blue-700" />
+                <BiSolidCategory className="text-blue-700" />
                 <p>Categories</p>
               </Link>
             </li>
