@@ -12,7 +12,7 @@ export default function ({ user, products = [] }) {
                                 <div className="flex justify-center items-center flex-col gap-5 bg-white rounded-lg shadow-md py-5 overflow-hidden">
                                     <img className="w-full h-full transition hover:scale-110" src={/* product.image */ "/images/imagen1.png"} />
                                     <p className="font-bold">{product.name}</p>
-                                    <p className="text-gray-600">{product.price}€</p>
+                                    <p className="text-gray-600">{product.price}$</p>
                                 </div>
                             </Link>                        
                         </>

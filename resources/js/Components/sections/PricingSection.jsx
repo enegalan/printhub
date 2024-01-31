@@ -16,7 +16,7 @@ export const PricingSection = () => {
                 <div className="relative md:-top-20 w-full md:w-1/2 px-8 md:px-10 bg-blue-800 text-white flex flex-col rounded-xl py-4">
                     <div className="text-blue-950 font-bold bg-white py-2 px-6 rounded-full self-end text-xs">MOST POPULAR</div>
                     <div className="">
-                        <h1 className="text-3xl md:text-4xl font-bold mt-4">9,99€ <small className="text-2xl md:text-3xl font-light">/month</small></h1>
+                        <h1 className="text-3xl md:text-4xl font-bold mt-4">9,99$ <small className="text-2xl md:text-3xl font-light">/month</small></h1>
                         <h1 className="text-lg md:text-xl mt-2 md:mt-4 font-semibold">VIP plan</h1>
                         <p className="mt-2 md:mt-4">Join the VIP team and acquire the benefits that come with it.</p>
                         <div className="mt-2 md:mt-4">

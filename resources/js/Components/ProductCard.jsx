@@ -65,7 +65,7 @@ export default function ProductCard({id, image, name, price, href, onSuccess, on
                 <hr />
             </div>
             <div className="px-6 pb-4 pt-2">
-                <div className="text-[var(--main-blue)] font-bold text-xl mb-2">{price}€</div>
+                <div className="text-[var(--main-blue)] font-bold text-xl mb-2">{price}$</div>
             </div>
             {/* TODO: If there is an offer show the discount amount */}
             <div className="px-6 pt-4 pb-4 flex-grow flex justify-center items-center">

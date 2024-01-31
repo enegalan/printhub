@@ -90,7 +90,7 @@ export default function ({user, orders = [], wishlist = []}){
                                             {product.name}
                                         </div>
                                         <div className="flex gap-12 items-center flex-nowrap text-center">
-                                            <span>{product.price}€</span>
+                                            <span>{product.price}$</span>
                                             <span className="text-justify px-3">{product.description}</span>
                                         </div>
                                     </div>

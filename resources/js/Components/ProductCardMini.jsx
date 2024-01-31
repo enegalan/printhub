@@ -8,7 +8,7 @@ export default function ProductCardMini({product, ...props}) {
             <img src={'/images/imagen1.webp'} alt="Product"/>
         </div>
         <Link href={route('product.show',id)} className="text-blue-950 font-semibold hover:underline hover:text-black">{name}</Link>
-        <h1 className="font-bold">{price}€</h1>
+        <h1 className="font-bold">{price}$</h1>
     </div>
   )
 }

@@ -143,15 +143,15 @@ function Market({ auth, products = [] }) {
                             <ul className='flex flex-col gap-2' onChange={onPriceChange}>
                                 <li className='flex gap-3 items-center'>
                                     <input className='rounded text-[var(--main-blue)]' type="checkbox" name="price" value="0" />
-                                    <label className='text-sm' htmlFor="price">0 - 20 EUR</label>
+                                    <label className='text-sm' htmlFor="price">0 - 20 USD</label>
                                 </li>
                                 <li className='flex gap-3 items-center'>
                                     <input className='rounded text-[var(--main-blue)]' type="checkbox" name="price" value="20" />
-                                    <label className='text-sm' htmlFor="price">20 - 50 EUR</label>
+                                    <label className='text-sm' htmlFor="price">20 - 50 USD</label>
                                 </li>
                                 <li className='flex gap-3 items-center'>
                                     <input className='rounded text-[var(--main-blue)]' type="checkbox" name="price" value="50" />
-                                    <label className='text-sm' htmlFor="price">More than 50 EUR</label>
+                                    <label className='text-sm' htmlFor="price">More than 50 USD</label>
                                 </li>
                             </ul>
                         </form>

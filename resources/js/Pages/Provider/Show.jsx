@@ -51,7 +51,7 @@ export default function ProviderShow({ user, products }) {
                       alt={"default"}
                     />
                   </td>
-                  <td className="py-2 px-4 border-b">{product.price}€</td>
+                  <td className="py-2 px-4 border-b">{product.price}$</td>
                   <td className="py-2 px-4 border-b">
                     <Link
                       href={route('provider.edit', product)}

@@ -82,7 +82,7 @@ export default function Show({
             <div className="w-full md:w-2/3 lg:w-1/2 lg:flex-1 max-w-full py-4 px-6 flex flex-col gap-2 ">
               <h1 className="text-xl ">{product.name}</h1>
               <h1 className="text-red-600  text-2xl font-bold">
-                {product.price} €
+                {product.price}$
               </h1>
               <p className="text-gray-500">{product.description}</p>
               <div className="pt-4 pb-2">

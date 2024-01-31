@@ -32,18 +32,18 @@ export default function ProductCard({image, name, price, allcolors, allmaterials
     return (
         <div className="border relative z-10 max-w-sm rounded-lg shadow-lg bg-gray-100 flex flex-col">
             <button
-        className="absolute top-[-10px] right-[-10px] px-4 py-2 z-100 text-white cursor-pointer bg-red-500 rounded-lg p-1 transition ease-in delay-400 hover:scale-105"
-        onClick={() => handleDelete(stockItem.stock_cart_id)}
-      >
-        X
-      </button>
+              className="absolute top-[-10px] right-[-10px] px-4 py-2 z-100 text-white cursor-pointer bg-red-500 rounded-lg p-1 transition ease-in delay-400 hover:scale-105"
+              onClick={() => handleDelete(stockItem.stock_cart_id)}
+            >
+            X
+            </button>
             
             <img className="w-full" src={`/storage/products/${image}`} alt={name} />
             
             <div className="px-6 pt-4">
                 <div className="flex justify-between font-bold text-xl mb-2 gap-2">
                     <span>{name}</span>
-                    <div className="text-red-500 font-bold text-xl mb-2">{price}€</div>
+                    <div className="text-red-500 font-bold text-xl mb-2">{price}$</div>
                 </div>
                 <hr />
             </div>
@@ -79,14 +79,3 @@ export default function ProductCard({image, name, price, allcolors, allmaterials
         </div>
     );
 }
-ProductCard.propTypes = {
-    image: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    allcolors: PropTypes.array.isRequired,
-    allmaterials: PropTypes.array.isRequired,
-    href: PropTypes.string.isRequired,
-    color: PropTypes.string.isRequired,
-    material: PropTypes.string.isRequired,
-    quantity: PropTypes.number.isRequired,
-  };

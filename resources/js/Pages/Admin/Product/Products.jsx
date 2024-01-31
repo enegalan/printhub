@@ -43,7 +43,7 @@ export default function({products}){
               <td className="py-2 px-4 border-b">{product.description}</td>
               <td className="py-2 px-4 border-b">{product.categories.map((category) => (category.name)+',')}</td>
               <td className="py-2 px-4 border-b"><img src={`/storage/products/${product.image}`}></img></td>
-              <td className="py-2 px-4 border-b">{product.price}€</td>
+              <td className="py-2 px-4 border-b">{product.price}$</td>
               <td className="py-2 px-4 border-b">
                 <Link
                   href={route('admin.product.edit', product.id)}
