@@ -17,7 +17,6 @@ export default function SelectOptions({
     const option = e.target.value;
     setSelectedOption(option);
     onChangeOption(option);
-    console.log(option)
   };
   return (
     <select
