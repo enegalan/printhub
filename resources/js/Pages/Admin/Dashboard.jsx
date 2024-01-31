@@ -124,12 +124,12 @@ export default function AdminLayout({ children, pageName = 'Admin Dashboard', pa
             </Link>
           </div>
         </nav>
-        <div className="flex flex-col flex-1">
+        <div className="flex flex-col flex-1 overflow-x-scroll">
           <div className="my-4">
             <h1 className="text-4xl">{pageName}</h1>
             <p className="text-gray-700">{pageSubtitle}</p>
           </div>
-          <div className="bg-gray-200/60 overflow-auto rounded-xl px-10 py-10 flex-1 mb-14 flex flex-col mr-5">
+          <div className="bg-gray-200/60 rounded-xl px-10 py-10 flex-1 mb-14 flex flex-col">
             {children}
           </div>
         </div>

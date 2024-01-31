@@ -167,7 +167,7 @@ export default function ({ ordersYear, usersMonth, ordersZone }) {
 
     return (
         <Dashboard pageName='Users' pageSubtitle='Manage PrintHub users'>
-            <div className='flex flex-col min-h-full '>
+            <div className='flex flex-col min-h-full overflow-x-scroll'>
                 <h3 className="text-2xl font-bold">Reports</h3>
                 <div className="flex gap-5 flex-wrap justify-around">
                     <div className="w-[30vw]">
