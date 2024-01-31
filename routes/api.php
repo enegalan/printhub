@@ -5,6 +5,7 @@ use App\Models\Fact_address;
 use App\Models\Order;
 use App\Models\Ship_address;
 use App\Models\Invoice;
+use App\Models\Stock_cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -76,4 +77,10 @@ Route::post('/complete-payment', function (Request $request) {
     $newCart->save();
 
     return response()->json(['redirect' => route('paymentcomplete')]);
+});
+
+
+Route::delete('/delete-cart-product/{stock}', function (Stock_cart $stock){
+    $stock->delete();
+    return response()->json(['redirect' => route('user.cart')]);
 });
