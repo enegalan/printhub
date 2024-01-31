@@ -12,11 +12,4 @@ class AdminController extends Controller
     public function __construct() {
         $this->middleware('vip');
     }
-    public function dashboard() {
-        app()->call([UserController::class, 'getRoles']);
-        return (
-            //TODO: Change the route to VIP dashboard
-            Inertia::render('Index')
-        );
-    }
 }
