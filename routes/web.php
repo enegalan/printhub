@@ -95,8 +95,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
             }
 
             $total += $total * 0.21;
-            //falta los gastos de envios
-        
+            
+            $user = auth()->user();
+
+            $isVip = $user->roles->contains('name', 'vip');
+
+            if(!$isVip){
+                $total += 9.99;
+            }
         
         
         return Inertia::render('Payment', ['countries' => $countries,

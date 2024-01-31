@@ -12,7 +12,7 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import SecondaryButton from '@/Components/SecondaryButton';
 import toast, { Toaster } from 'react-hot-toast';
 
-function Cart({ auth, cart, materials, colors }) {
+function Cart({ auth, cart, materials, colors, isVip }) {
 
 
     const [cartItems, setCartItems] = useState(cart.stock_carts);
@@ -33,7 +33,7 @@ function Cart({ auth, cart, materials, colors }) {
 
     const shipping_cost = 9.99;
 
-    const total = orderTotal + iva + shipping_cost;
+    const total = orderTotal + iva + (isVip ? 0 : shipping_cost);
 
     const [selectedProductId, setSelectedProductId] = useState(null);
     
@@ -180,7 +180,13 @@ function Cart({ auth, cart, materials, colors }) {
                 <div className='mt-[100px]'>
                 <p className='text-2xl mt-5 flex justify-between'><strong>Subtotal:</strong>{orderTotal.toFixed(2)}$</p>
                 <p className='text-2xl mt-5 flex justify-between'><strong>IVA <small>(%21)</small>:</strong> {iva.toFixed(2)}$</p>
-                <p className='text-2xl mt-5 flex justify-between'><strong>Shipping:</strong> {shipping_cost}$</p>
+                <p className='text-2xl mt-5 flex justify-between'><strong>Shipping:</strong>{isVip ? (
+        <span>0$ <del className='text-lg'>{shipping_cost}$</del></span>
+    ) : (
+        <span>
+            {shipping_cost}$
+        </span>
+    )}</p>
                 <p className='text-2xl mt-5 flex justify-between text-red-500 font-bold'><strong className='text-black'>Total:</strong> {total.toFixed(2)}$</p>
 
                 <Link href="/payment" as="button" className="bg-blue-950 font-semibold text-lg text-white py-4 w-full rounded-full mt-4 hover:bg-blue-800" type="button">Buy Now</Link>
