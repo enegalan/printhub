@@ -1,4 +1,4 @@
-# 👋 Welcome to <b>PrintHub!!</b>
+# 👋 Welcome to <b>PrintHub!!!</b>
 
 ## Set up the development environment
 Make sure you have <b>Node.js</b> & <b>npm</b> (Node Package Manager) v18.18.0 and <b>Composer</b> installed on your system.
