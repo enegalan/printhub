@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import ProfileLayout from "@/Layouts/ProfileLayout";
+import Dashboard from "../Dashboard"
 import InputLabel from "@/Components/InputLabel";
 import TextInput from "@/Components/TextInput";
 import InputError from "@/Components/InputError";
@@ -69,7 +69,7 @@ export default function Edit({ user = [], roles = [] }) {
     }
 
     return (
-        <ProfileLayout user={user} pageName="Users" pageSubtitle="Manage PrintHub users">
+        <Dashboard pageName="Users" pageSubtitle="Manage PrintHub users">
             <Link href={route('admin.users')} className="bg-[lightgrey] w-[40px] p-3 rounded-lg mb-5 self-start transition hover:bg-[#bbbbbb]">
                 <IoMdArrowRoundBack />
             </Link>
@@ -230,6 +230,6 @@ export default function Edit({ user = [], roles = [] }) {
                     </div>
                 </form>
             </div>
-        </ProfileLayout>
+        </Dashboard>
     );
 }
