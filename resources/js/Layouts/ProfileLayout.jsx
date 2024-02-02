@@ -11,12 +11,16 @@ import {
 } from "react-icons/fa";
 import { AiFillDashboard } from "react-icons/ai";
 import { FaCartShopping, FaGear, FaHandshake } from "react-icons/fa6";
-
+import { useEffect } from "react";
 export default function ProfileLayout({ children, pageName = "Dashboard", pageSubtitle = "Welcome to the admin section", user }) {
   var isProvider = false;
   if (user && user.hasOwnProperty("roles"))
     isProvider = user.roles.some((role) => role.name === "provider");
 
+  useEffect( () => {
+    var parent = document.querySelector('#parent');
+    parent.scrollTo(0, 0);
+  }, [])
   return (
     <main className={`bg-[url('${gbBlue}')] bg-cover h-full`}>
       <div className="md:h-screen flex md:flex-row flex-col bg-white/30">
@@ -109,7 +113,7 @@ export default function ProfileLayout({ children, pageName = "Dashboard", pageSu
             <h1 className="text-4xl md:text-left text-center">{pageName}</h1>
             <p className="text-gray-700 md:text-left text-center">{pageSubtitle}</p>
           </div>
-          <div className="bg-gray-200/60 overflow-auto rounded-xl md:px-10 px-5 py-3 md:py-10 flex-1 md:mb-14 flex flex-col md:mr-5">
+          <div id="parent" className="bg-gray-200/60 overflow-auto rounded-xl md:px-10 px-5 py-3 md:py-10 flex-1 md:mb-14 flex flex-col md:mr-5">
             {children}
           </div>
         </div>

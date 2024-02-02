@@ -8,10 +8,13 @@ import { IoIosColorPalette } from "react-icons/io";
 import { TbWorld } from "react-icons/tb";
 import { BiSolidCategory } from "react-icons/bi";
 
-import React from 'react';
+import React, { useEffect } from 'react';
 
 export default function AdminLayout({ children, pageName = 'Admin Dashboard', pageSubtitle = 'Welcome to admin section' }) {
-
+  useEffect( () => {
+    var parent = document.querySelector('#parent');
+    parent.scrollTo(0, 0);
+  }, [])
   return (
     <main className={`bg-[url('${gbBlue}')] bg-cover`}>
       <div className="h-screen flex bg-white/30">
@@ -129,7 +132,7 @@ export default function AdminLayout({ children, pageName = 'Admin Dashboard', pa
             <h1 className="text-4xl">{pageName}</h1>
             <p className="text-gray-700">{pageSubtitle}</p>
           </div>
-          <div className="bg-gray-200/60 rounded-xl px-10 py-10 flex-1 mb-14 flex flex-col">
+          <div id="parent" className="bg-gray-200/60 rounded-xl px-10 py-10 flex-1 mb-14 flex flex-col">
             {children}
           </div>
         </div>
