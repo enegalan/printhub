@@ -103,6 +103,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
             if(!$isVip){
                 $total += 9.99;
             }
+
+            if($total == 0 || $total == 9.99){
+                return redirect()->route('user.cart');
+            }
         
         
         return Inertia::render('Payment', ['countries' => $countries,
