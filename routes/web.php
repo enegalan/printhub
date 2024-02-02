@@ -131,46 +131,65 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/profile/payment/delete/{payment}', [UserController::class, 'deletePayment'])->name('profile.delete.payment');
 });
 
+//ADMIN
 Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+
+
+//USERS
 Route::get('/admin/users', [AdminController::class, 'users'])->name('admin.users');
+Route::get('/admin/add-user', [AdminController::class, 'createUser'])->name('admin.user.add');
+Route::post('/admin/add-user', [AdminController::class, 'storeUser'])->name('admin.user.store');
+Route::get('/admin/user/{user}/edit', [AdminController::class, 'editUser'])->name('admin.user.edit');
+Route::post('/admin/user/{user}/edited', [AdminController::class, 'updateUser'])->name('admin.user.update');
+Route::post('/admin/user/{user}/toggle', [AdminController::class, 'toggleStatus'])->name('admin.user.toggle');
+
+
+//PRODUCTS
 Route::get('/admin/products', [AdminController::class, 'products'])->name('admin.products');
-Route::get('/admin/orders', [AdminController::class, 'orders'])->name('admin.orders');
+Route::get('/admin/product/add-product', [AdminController::class, 'addproduct'])->name('admin.product.edit');
+Route::get('/admin/product/{product}/edit', [AdminController::class, 'editproduct'])->name('admin.product.edit');
+Route::delete('/admin/product/{product}/delete', [AdminController::class, 'deleteproduct'])->name('admin.product.delete');
+
+
+//MATERIALS
 Route::get('/admin/materials', [AdminController::class, 'materials'])->name('admin.materials');
 Route::get('/admin/material/add', [AdminController::class, 'addMaterial'])->name('admin.add.material');
 Route::post('/admin/material/store', [AdminController::class, 'storeMaterial'])->name('admin.store.material');
 Route::get('/admin/material/edit/{material}', [AdminController::class, 'editMaterial'])->name('admin.edit.material');
 Route::post('/admin/material/update/{material}', [AdminController::class, 'updateMaterial'])->name('admin.update.material');
-Route::get('/admin/colors', [AdminController::class, 'colors'])->name('admin.colors');
-Route::get('/admin/countries', [AdminController::class, 'countries'])->name('admin.countries');
-Route::get('/admin/regions', [AdminController::class, 'regions'])->name('admin.regions');
-Route::get('/admin/categories', [AdminController::class, 'categories'])->name('admin.categories');
-
-Route::get('/admin/add-user', [AdminController::class, 'createUser'])->name('admin.user.add');
-Route::post('/admin/add-user', [AdminController::class, 'storeUser'])->name('admin.user.store');
-Route::get('/admin/product/add-product', [AdminController::class, 'addproduct'])->name('admin.product.edit');
-Route::get('/admin/material/create-material', [AdminController::class, 'addmaterial'])->name('admin.material.add');
-Route::get('/admin/color/create-color', [AdminController::class, 'adduser'])->name('admin.color.add');
-Route::get('/admin/country/create-country', [AdminController::class, 'adduser'])->name('admin.country.add');
-Route::get('/admin/region/create-region', [AdminController::class, 'adduser'])->name('admin.region.add');
-Route::get('/admin/category/create-category', [AdminController::class, 'addcategory'])->name('admin.category.add');
-
-Route::get('/admin/user/{user}/edit', [AdminController::class, 'editUser'])->name('admin.user.edit');
-Route::post('/admin/user/{user}/edited', [AdminController::class, 'updateUser'])->name('admin.user.update');
-Route::get('/admin/product/{product}/edit', [AdminController::class, 'editproduct'])->name('admin.product.edit');
-Route::get('/admin/order/{order}/view', [AdminController::class, 'vieworder'])->name('admin.order.view');
-Route::get('/admin/material/{material}/edit', [AdminController::class, 'editmaterial'])->name('admin.material.edit');
-Route::get('/admin/color/{color}/edit', [AdminController::class, 'edituser'])->name('admin.color.edit');
-Route::get('/admin/country/{country}/edit', [AdminController::class, 'edituser'])->name('admin.country.edit');
-Route::get('/admin/region/{region}/edit', [AdminController::class, 'edituser'])->name('admin.region.edit');
-Route::get('/admin/category/{category}/edit', [AdminController::class, 'editcategory'])->name('admin.category.edit');
-Route::get('/admin/country/{country}/regions', [AdminController::class, 'viewregionscountry'])->name('admin.country.viewregions');
-
-Route::post('/admin/user/{user}/toggle', [AdminController::class, 'toggleStatus'])->name('admin.user.toggle');
-Route::delete('/admin/product/{product}/delete', [AdminController::class, 'deleteproduct'])->name('admin.product.delete');
 Route::delete('/admin/material/{material}/delete', [AdminController::class, 'deletematerial'])->name('admin.material.delete');
+
+
+//ORDERS
+Route::get('/admin/orders', [AdminController::class, 'orders'])->name('admin.orders');
+Route::get('/admin/order/{order}/view', [AdminController::class, 'vieworder'])->name('admin.order.view');
+
+
+//COLORS
+Route::get('/admin/colors', [AdminController::class, 'colors'])->name('admin.colors');
+Route::get('/admin/color/add', [AdminController::class, 'adduser'])->name('admin.color.add');
+Route::get('/admin/color/{color}/edit', [AdminController::class, 'edituser'])->name('admin.color.edit');
 Route::delete('/admin/color/{color}/delete', [AdminController::class, 'deletecolor'])->name('admin.color.delete');
+
+
+//COUNTRIES
+Route::get('/admin/countries', [AdminController::class, 'countries'])->name('admin.countries');
+Route::get('/admin/country/create-country', [AdminController::class, 'adduser'])->name('admin.country.add');
+Route::get('/admin/country/{country}/edit', [AdminController::class, 'edituser'])->name('admin.country.edit');
+Route::get('/admin/country/{country}/regions', [AdminController::class, 'viewregionscountry'])->name('admin.country.viewregions');
 Route::delete('/admin/country/{country}/delete', [AdminController::class, 'deletecountry'])->name('admin.country.delete');
+
+
+//REGIONS
+Route::get('/admin/regions', [AdminController::class, 'regions'])->name('admin.regions');
+Route::get('/admin/region/create-region', [AdminController::class, 'adduser'])->name('admin.region.add');
+Route::get('/admin/region/{region}/edit', [AdminController::class, 'edituser'])->name('admin.region.edit');
 Route::delete('/admin/region/{region}/delete', [AdminController::class, 'deleteregion'])->name('admin.region.delete');
+
+//CATEGORIES
+Route::get('/admin/categories', [AdminController::class, 'categories'])->name('admin.categories');
+Route::get('/admin/category/create-category', [AdminController::class, 'addcategory'])->name('admin.category.add');
+Route::get('/admin/category/{category}/edit', [AdminController::class, 'editcategory'])->name('admin.category.edit');
 Route::delete('/admin/category/{category}/delete', [AdminController::class, 'deletecategory'])->name('admin.category.delete');
 
 
@@ -178,6 +197,7 @@ Route::delete('/admin/category/{category}/delete', [AdminController::class, 'del
 Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('product.destroy');
 Route::post('/products/{product}', [ProductController::class, 'update'])->name('product.update');
 Route::post('/products', [ProductController::class, 'store'])->name('product.store');
+
 
 //PRICING
 Route::get('/pricing',[PricingController::class,'index'])->name('pricing');
