@@ -112,44 +112,45 @@ function Cart({ auth, cart, materials, colors, isVip }) {
           <div className='flex flex-col md:flex-col lg:flex-row justify-between gap-6'>
             
           <div className='grid grid-cols-1 overflow-y-auto max-h-[800px] w-full sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-5 bg-white p-5 rounded-xl shadow-lg'>
-  {cartItems.length === 0 ? (
-    <p className="font-bold text-2xl">The cart is empty.</p>
-  ) : (
-    cartItems.map((stockItem) => (
-      <div className="flex justify-center" key={stockItem.stock_cart_id}>
-        <ProductCard 
-          image={stockItem.image} 
-          name={stockItem.name} 
-          price={stockItem.price} 
-          allcolors={colors} 
-          color_name={stockItem.color_name}
-          color_id={stockItem.color_id} 
-          allmaterials={materials} 
-          material_name={stockItem.material_name} 
-          material_id={stockItem.material_id} 
-          quantity={stockItem.quantity} 
-          stockItem={stockItem}
-          handleDelete={handleDelete} 
-          onUpdateProduct={(updatedData) => handleProductChange(stockItem.stock_cart_id, updatedData)}
-        />
-      </div>
-    ))
-  )}
-</div>
-
-            <div id="confirmModal" className="fixed inset-0 z-40 bg-gray-500 bg-opacity-75 flex items-center justify-center hidden">
-                <div className="bg-white p-8 rounded shadow-md">
-                    <p className="text-lg font-semibold mb-4">Are you sure you want delete this from your cart?</p>
-                    <div className="flex justify-center">
-                      <PrimaryButton className="mr-2 bg-red-500" onClick={confirmModal}>Yes</PrimaryButton>
-                      <SecondaryButton onClick={closeModal}>Cancel</SecondaryButton>
-                    </div>
+            {cartItems.length === 0 ? (
+              <p className="font-bold text-2xl">The cart is empty.</p>
+            ) : (
+              cartItems.map((stockItem) => (
+                <div className="flex justify-center" key={stockItem.stock_cart_id}>
+                  <ProductCard 
+                    image={stockItem.image} 
+                    name={stockItem.name} 
+                    price={stockItem.price} 
+                    allcolors={colors} 
+                    color_name={stockItem.color_name}
+                    color_id={stockItem.color_id} 
+                    allmaterials={materials} 
+                    material_name={stockItem.material_name} 
+                    material_id={stockItem.material_id} 
+                    quantity={stockItem.quantity} 
+                    stockItem={stockItem}
+                    handleDelete={handleDelete} 
+                    onUpdateProduct={(updatedData) => handleProductChange(stockItem.stock_cart_id, updatedData)}
+                  />
                 </div>
-            </div>
+              ))
+            )}
+          </div>
 
+          <div id="confirmModal" className="fixed inset-0 z-40 bg-gray-500 bg-opacity-75 flex items-center justify-center hidden">
+            <div className="bg-white p-8 rounded shadow-md">
+              <p className="text-lg font-semibold mb-4">Are you sure you want delete this from your cart?</p>
+              <div className="flex justify-center">
+                <PrimaryButton className="mr-2 bg-red-500" onClick={confirmModal}>Yes</PrimaryButton>
+                <SecondaryButton onClick={closeModal}>Cancel</SecondaryButton>
+              </div>
+            </div>
+          </div>
+      
+          {cartItems.length > 0 && (
             <div className='border border-slate-500 w-full md:w-full lg:w-1/3 p-6 rounded-xl shadow-lg bg-white'>
-                <h1 className='text-3xl font-bold mb-4'>Order summary</h1>
-                <div className='flex flex-col content-between'>
+            <h1 className='text-3xl font-bold mb-4'>Order summary</h1>
+              <div className='flex flex-col content-between'>
                 <div className='overflow-x-auto max-h-[310px] overflow-y-auto'>
                   <table className='w-full rounded p-4 bg-gray-200'>
                     <thead>
@@ -178,21 +179,22 @@ function Cart({ auth, cart, materials, colors, isVip }) {
                 </div>
 
                 <div className='mt-[100px]'>
-                <p className='text-2xl mt-5 flex justify-between'><strong>Subtotal:</strong>{orderTotal.toFixed(2)}$</p>
-                <p className='text-2xl mt-5 flex justify-between'><strong>IVA <small>(%21)</small>:</strong> {iva.toFixed(2)}$</p>
-                <p className='text-2xl mt-5 flex justify-between'><strong>Shipping:</strong>{isVip ? (
-        <span>0$ <del className='text-lg'>{shipping_cost}$</del></span>
-    ) : (
-        <span>
-            {shipping_cost}$
-        </span>
-    )}</p>
+                  <p className='text-2xl mt-5 flex justify-between'><strong>Subtotal:</strong>{orderTotal.toFixed(2)}$</p>
+                  <p className='text-2xl mt-5 flex justify-between'><strong>IVA <small>(%21)</small>:</strong> {iva.toFixed(2)}$</p>
+                  <p className='text-2xl mt-5 flex justify-between'><strong>Shipping:</strong>{isVip ? (
+                  <span>0$ <del className='text-lg'>{shipping_cost}$</del></span>
+                ) : (
+                  <span>
+                    {shipping_cost}$
+                  </span>
+                )}</p>
                 <p className='text-2xl mt-5 flex justify-between text-red-500 font-bold'><strong className='text-black'>Total:</strong> {total.toFixed(2)}$</p>
-
                 <Link href="/payment" as="button" className="bg-blue-950 font-semibold text-lg text-white py-4 w-full rounded-full mt-4 hover:bg-blue-800" type="button">Buy Now</Link>
                 </div>
                 </div>
             </div>
+            )}
+          
           </div>
         </main>
 
