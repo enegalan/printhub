@@ -240,9 +240,7 @@ class AdminController extends Controller
             'roles' => 'array',
         ]);
     
-        // Find the user by ID
-        $user = User::withTrashed()->findOrFail($user->id);
-
+        
         // Prepare the update array with fields that should always be updated
         $updateData = [
             'name' => $validatedData['name'],
@@ -259,14 +257,18 @@ class AdminController extends Controller
         // Update user attributes
         $user->update($updateData);
 
-        $roles = $request->input('roles');
-
-        $user->roles()->detach();
-        if (count($roles) > 0) {
-            $roleIds = array_map(function ($role) {
-                return $role['id'];
-            }, $roles);
-            $user->roles()->attach($roleIds);
+        if ($request->input('roles')) {
+            $roles = $request->input('roles');
+    
+            $user->roles()->detach();
+            if (count($roles) > 0) {
+                $roleIds = array_map(function ($role) {
+                    return $role['id'];
+                }, $roles);
+                $user->roles()->attach($roleIds);
+            }
+        } else {
+            $user->roles()->detach();
         }
     
         if ($request->hasFile('avatar')) {
@@ -282,6 +284,7 @@ class AdminController extends Controller
     
             // Update user avatar
             $user->update(['avatar' => $avatarName]);
+            return "Avatar updated";
         }
     
         return redirect()->route('admin.users');
