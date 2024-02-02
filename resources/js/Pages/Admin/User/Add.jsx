@@ -72,7 +72,7 @@ export default function Add({ user, roles = [] }) {
           encType="multipart/form-data"
         >
           <div>
-            <InputLabel forInput="name" value="Name*" className="" />
+            <InputLabel forInput="name" value="Name*" className="text-gray-900" />
             <TextInput
               id="name"
               name="name"
@@ -86,7 +86,7 @@ export default function Add({ user, roles = [] }) {
             <InputError message={errors.name} className="mt-2" />
           </div>
           <div>
-            <InputLabel forInput="lastname" value="Last name*" className="" />
+            <InputLabel forInput="lastname" value="Last name*" className="text-gray-900" />
             <TextInput
               id="lastname"
               name="lastname"
@@ -100,7 +100,7 @@ export default function Add({ user, roles = [] }) {
             <InputError message={errors.lastname} className="mt-2" />
           </div>
           <div>
-            <InputLabel forInput="birthdate" value="Birthdate*" className="" />
+            <InputLabel forInput="birthdate" value="Birthdate*" className="text-gray-900" />
             <TextInput
               id="birthdate"
               type="date"
@@ -144,7 +144,7 @@ export default function Add({ user, roles = [] }) {
             <InputError message={errors.avatar} className="mt-2" />
           </div>
           <div>
-            <InputLabel forInput="email" value="E-mail*" className="" />
+            <InputLabel forInput="email" value="E-mail*" className="text-gray-900" />
             <TextInput
               id="email"
               name="email"
@@ -159,7 +159,7 @@ export default function Add({ user, roles = [] }) {
             <InputError message={errors.email} className="mt-2" />
           </div>
           <div>
-            <InputLabel forInput="password" value="Password*" className="" />
+            <InputLabel forInput="password" value="Password*" className="text-gray-900" />
             <TextInput
               id="password"
               name="password"
