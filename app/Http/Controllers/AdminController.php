@@ -421,6 +421,33 @@ class AdminController extends Controller
         );
     }
 
+    public function addCategory () {
+        return Inertia::render('Admin/Category/Add');
+    }
+    
+    public function storeCategory (Request $request) {
+        $validatedData = $request->validate([
+            'name' => 'required|min:1',
+        ]);
+        Category::create($validatedData);
+
+        return redirect()->route('admin.categories');
+    }
+
+    public function editCategory (Category $category) {
+        return Inertia::render('Admin/Category/Edit', compact('category'));
+    }
+
+    public function updateCategory (Request $request, Category $category) {
+        $validatedData = $request->validate([
+            'name' => 'required|min:1',
+        ]);
+        
+        $category->update($validatedData);
+        
+        return redirect()->route('admin.categories');
+    }
+
     public function deletecategory(Category $category)
     {
         try {

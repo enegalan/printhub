@@ -26,7 +26,6 @@ export default function ({ regions }) {
                 <th className="py-2 px-4 border-b">ID</th>
                 <th className="py-2 px-4 border-b">Name</th>
                 <th className="py-2 px-4 border-b">Country</th>
-                <th className="py-2 px-4 border-b">Actions</th>
               </tr>
             </thead>
             <tbody className=''>
@@ -35,25 +34,6 @@ export default function ({ regions }) {
                   <td className="py-2 px-4 border-b">{region.id}</td>
                   <td className="py-2 px-4 border-b">{region.name}</td>
                   <td className="py-2 px-4 border-b">{region.country.name}</td>
-                  <td className="py-2 px-4 border-b">
-                    <Link
-                      href={route('admin.region.edit', region.id)}
-                      className="text-blue-500 hover:underline mr-2"
-                    >
-                      Edit
-                    </Link>
-                    <button
-                      onClick={() => handleDelete(route("admin.region.delete", region), {
-                        onSuccess: onDelete,
-                        onError: onError,
-                      }
-
-                      )}
-                      className="text-red-500 hover:underline"
-                    >
-                      Delete
-                    </button>
-                  </td>
                 </tr>
               ))}
             </tbody>

@@ -192,7 +192,9 @@ Route::delete('/admin/region/{region}/delete', [AdminController::class, 'deleter
 //CATEGORIES
 Route::get('/admin/categories', [AdminController::class, 'categories'])->name('admin.categories');
 Route::get('/admin/category/create', [AdminController::class, 'addcategory'])->name('admin.category.add');
+Route::post('/admin/category/store', [AdminController::class, 'storeCategory'])->name('admin.store.category');
 Route::get('/admin/category/{category}/edit', [AdminController::class, 'editcategory'])->name('admin.category.edit');
+Route::post('/admin/category/update/{category}', [AdminController::class, 'updateCategory'])->name('admin.update.category');
 Route::delete('/admin/category/{category}/delete', [AdminController::class, 'deletecategory'])->name('admin.category.delete');
 
 
