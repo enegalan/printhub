@@ -20,7 +20,7 @@ export default function ({ colors }) {
     <Dashboard>
       <div className='flex flex-col min-h-full '>
         <Toaster />
-        <Link href={route('provider.add')} className="bg-[lightgrey] w-[40px] p-3 rounded-lg mb-5 self-end transition hover:bg-[#bbbbbb]">
+        <Link href={route('admin.color.add')} className="bg-[lightgrey] w-[40px] p-3 rounded-lg mb-5 self-end transition hover:bg-[#bbbbbb]">
           <FaPlus />
         </Link>
         <div className='overflow-x-scroll'>
@@ -41,7 +41,7 @@ export default function ({ colors }) {
                   <td className="py-2 px-4 border-b">{color.name}</td>
                   <td className="py-2 px-4 border-b flex items-center content-center justify-center">
 
-                    <div className={`w-[50px] h-[50px] rounded-full flex items-center content-center justify-center bg-${color.name}-500`}></div>
+                    <div className={`w-[50px] h-[50px] rounded-full flex items-center content-center justify-center bg-[${color.hex}]`}></div>
 
 
                   </td>

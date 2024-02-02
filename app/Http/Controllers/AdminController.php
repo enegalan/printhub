@@ -349,6 +349,8 @@ class AdminController extends Controller
             'name' => 'required|min:1',
         ]);
         $material->update($validatedData);
+
+        return redirect()->route('admin.materials');
     }
 
     public function deletematerial(Material $material)
@@ -369,6 +371,34 @@ class AdminController extends Controller
         return (
             Inertia::render('Admin/Color/Colors', ['colors' => $colors])
         );
+    }
+
+    public function addColor () {
+        return Inertia::render('Admin/Color/Add');
+    }
+
+    public function editColor (Color $color) {
+        return Inertia::render('Admin/Color/Edit', compact('color'));
+    }
+
+    public function storeColor (Request $request) {
+        $validatedData = $request->validate([
+            'name' => 'required|min:1',
+            'hex' => 'required'
+        ]);
+        Color::create($validatedData);
+
+        return redirect()->route('admin.colors');
+    }
+
+    public function updateColor (Request $request, Color $color) {
+        $validatedData = $request->validate([
+            'name' => 'required|min:1',
+            'hex' => 'required'
+        ]);
+        $color->update($validatedData);
+
+        return redirect()->route('admin.colors');
     }
 
     public function deletecolor(Color $color)
