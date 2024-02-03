@@ -14,7 +14,7 @@ import ProductsSection from '@/Components/sections/ProductsSection';
 
 import toast, { Toaster } from 'react-hot-toast';
 
-function Market({ auth, products = [] }) {
+function Market({ auth, products = [], colors = [] }) {
     const [categoriesFilter, setCategories] = useState([]);
     const [priceFilter, setPrice] = useState([]);
     const [arrivalFilter, setArrival] = useState([]);
@@ -183,7 +183,7 @@ function Market({ auth, products = [] }) {
                             <OrderBy options={{ 'lowhigh' : 'Price: Low to High', 'highlow' : 'Price: High to Low' }} onChange={onOrderByChange} />
                         </section>
                     </div>
-                    <ProductsSection user={auth.user} onSuccess={onSuccess} onError={onError} products={products} />
+                    <ProductsSection user={auth.user} onSuccess={onSuccess} onError={onError} products={products} colors={colors} />
                 </div>
             </main>
 

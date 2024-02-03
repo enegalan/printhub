@@ -6,9 +6,9 @@ import { Link } from "@inertiajs/react";
 import { FaRegHeart, FaHeart, FaCartPlus } from "react-icons/fa";
 import toast, { Toaster } from 'react-hot-toast';
 import { useState, useEffect } from 'react';
+import { StlViewer } from 'react-stl-viewer';
 
-
-export default function ProductCard({id, image, name, price, href, onSuccess, onError, isWishlistItem, onAddWishlist}){
+export default function ProductCard({id, image, file, name, price, href, onSuccess, onError, isWishlistItem, onAddWishlist, colors}){
     const [isInWishlist, setIsInWishlist] = useState(isWishlistItem);
     function onAddWishlist (e) {
         try {
@@ -30,7 +30,7 @@ export default function ProductCard({id, image, name, price, href, onSuccess, on
             onSuccess('Product added successfully to cart');
         }
     }
-    console.log('isWishlistItem',isWishlistItem)
+    const colorNames = colors.map((color) => { return color.name })
     return (
         <>
             <div className="border relative z-10 max-w-sm rounded-lg overflow-hidden shadow-lg bg-gray-100 flex flex-col hover:[&>img]:scale-105">
@@ -45,9 +45,9 @@ export default function ProductCard({id, image, name, price, href, onSuccess, on
                 </div>
             </div>
             <div className="overflow-hidden">
-                <Link href={href}>
-                    <img className="w-full cursor-pointer transition ease-in delay-400 hover:scale-110" src={image} alt={name} />
-                </Link>
+                
+                {file ? (<StlViewer modelProps={{ color: colorNames[0] }} style={{top: 0,left: 0,width: '100%',height: '30vh',}} orbitControls shadows url={file} />) : 
+                (<Link href={href}><img className="w-full cursor-pointer transition ease-in delay-400 hover:scale-110" src={image} alt={name} /></Link>)}
             </div>
             <div className="px-6 pt-4">
                 <div className="flex justify-between font-bold text-xl mb-2 gap-2">

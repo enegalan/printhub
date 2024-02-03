@@ -19,7 +19,8 @@ class ProductController extends Controller
     {
         app()->call([UserController::class, 'getRoles']);
         $products = Product::where('visible', true)->paginate($this->productPerPagination);
-        return Inertia::render('Market', ['products' => $products]);
+        $colors = Color::all();
+        return Inertia::render('Market', ['products' => $products, 'colors' => $colors]);
     }
 
     public function search(Request $request)
