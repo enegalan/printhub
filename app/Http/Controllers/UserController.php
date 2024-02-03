@@ -21,6 +21,9 @@ use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Inertia\Response;
 use Intervention\Image\Image as Image;
+use App\Models\Color;
+use App\Models\Material;
+use phpseclib\Net\SSH2;
 
 class UserController extends Controller
 {
@@ -451,5 +454,87 @@ class UserController extends Controller
         } catch (\Exception $e) {
             return response()->json(['error' => 'Cannot delete this payment method'], 500);
         }
+    }
+
+    public function preview(Request $request) {
+        $user = auth()->user();
+        $file = $request->file('file');
+
+        // Get all colors
+        $colors = Color::all();
+        // Get all materials
+        $materials = Material::all();
+
+        if ($file) {
+            $filePath = $file->store('stl', 'public');
+    
+            $fileUrl = asset('storage/' . $filePath);
+    
+            return Inertia::render('Preview', compact('user', 'fileUrl', 'colors', 'materials'));
+        } else {
+            return redirect()->back()->with('error', 'File uploading failed.');
+        }
+    }
+
+    public function generateModelNumber() {
+        $length = 8;
+
+        $modelNumber = mt_rand(pow(10, $length - 1), pow(10, $length) - 1);
+
+        return $modelNumber;
+    }
+
+    public function addModelToCart(Request $request) {
+        $fileUrl = $request->input('file_url');
+        $color = $request->input('color');
+        $material = $request->input('material');
+        $user = auth()->user();
+        $modelNumber = $this->generateModelNumber();
+
+        // Get color id
+        $colorId = Color::where('name', $color)->first()->id;
+
+        // Get material id
+        $materialId = Material::where('name', $material)->first()->id;
+
+        // Create product
+        $product = Product::create([
+            'name' => $user->name . ' ' . $user->lastname . ' - Model ' . $modelNumber,
+            'description' => $user->name . ' ' . $user->lastname . ' created model No. ' . $modelNumber,
+            'price' => 9.99,
+            'user_id' => $user->id,
+            'image' => null,
+            'visible' => false,
+            'file' => $fileUrl,
+        ]);
+
+        // Create prod_comb
+        $prodComb = Prod_comb::create([
+            'product_id' => $product->id,
+            'color_id' => $colorId,
+            'material_id' => $materialId,
+        ]);
+
+        // Add to cart
+        $cart = Cart::where('user_id', $user->id)->where('active', '=', 1)->firstOrFail();
+        
+        // Check if the Stock_cart already exists for the current combination
+        $existingStockCart = Stock_cart::where('cart_id', $cart->id)
+        ->where('prod_comb_id', $prodComb->id)
+        ->first();
+
+        if ($existingStockCart) {
+            // If it exists, update the quantity
+            $existingStockCart->increment('quantity');
+        } else {
+            // If it doesn't exist, create a new Stock_cart with quantity 1
+            Stock_cart::create([
+                'cart_id' => $cart->id,
+                'prod_comb_id' => $prodComb->id,
+                'quantity' => 1
+            ]);
+        }
+
+        return redirect()->route('user.cart');
     }
 }

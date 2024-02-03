@@ -3,16 +3,13 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\PricingController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProviderController;
+use App\Http\Controllers\UserController;
 use App\Models\Country;
 use App\Models\Region;
-use App\Models\Stock_cart;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +20,7 @@ use Illuminate\Http\Request;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
 Route::get('/', function () {
     app()->call([UserController::class, 'getRoles']);
@@ -47,11 +44,10 @@ Route::get('/privacy', function () {
 
 Route::get('/market', [ProductController::class, 'getAll'])->name('market');
 Route::get('/market/search', [ProductController::class, 'search'])->name('products.search');
-Route::get('/market/product/{id}',[ProductController::class, 'show'])->name('product.show');
+Route::get('/market/product/{id}', [ProductController::class, 'show'])->name('product.show');
 Route::post('/market/filter', [ProductController::class, 'filter'])->name('products.filter');
 // Avoid page reload in filters
 Route::get('/market/filter', [ProductController::class, 'filter'])->name('products.filter');
-
 
 Route::middleware(['auth', 'verified'])->group(function () {
     //USERS
@@ -79,38 +75,37 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         $cart = DB::table('carts')->where('user_id', auth()->user()->id)->where('active', 1)->first();
 
-            // Obtener los stock_carts relacionados con el carrito
-            $stockCarts = DB::table('stock_carts')
-                ->join('prod_combs', 'stock_carts.prod_comb_id', '=', 'prod_combs.id')
-                ->join('products', 'prod_combs.product_id', '=', 'products.id')
-                ->select('stock_carts.quantity', 'products.price')
-                ->where('stock_carts.cart_id', $cart->id)
-                ->get();
-        
-            // Calcular el total
-            $total = 0;
-        
-            foreach ($stockCarts as $stockCart) {
-                $total += $stockCart->price * $stockCart->quantity;
-            }
+        // Obtener los stock_carts relacionados con el carrito
+        $stockCarts = DB::table('stock_carts')
+            ->join('prod_combs', 'stock_carts.prod_comb_id', '=', 'prod_combs.id')
+            ->join('products', 'prod_combs.product_id', '=', 'products.id')
+            ->select('stock_carts.quantity', 'products.price')
+            ->where('stock_carts.cart_id', $cart->id)
+            ->get();
 
-            $total += $total * 0.21;
-            
-            $user = auth()->user();
+        // Calcular el total
+        $total = 0;
 
-            $isVip = $user->roles->contains('name', 'vip');
+        foreach ($stockCarts as $stockCart) {
+            $total += $stockCart->price * $stockCart->quantity;
+        }
 
-            if(!$isVip){
-                $total += 9.99;
-            }
+        $total += $total * 0.21;
 
-            if($total == 0 || $total == 9.99){
-                return redirect()->route('user.cart');
-            }
-        
-        
+        $user = auth()->user();
+
+        $isVip = $user->roles->contains('name', 'vip');
+
+        if (!$isVip) {
+            $total += 9.99;
+        }
+
+        if ($total == 0 || $total == 9.99) {
+            return redirect()->route('user.cart');
+        }
+
         return Inertia::render('Payment', ['countries' => $countries,
-        'regions' => $regions, 'total' => $total]);
+            'regions' => $regions, 'total' => $total]);
     })->name('payment');
 
     Route::get('/payment/complete', function () {
@@ -129,11 +124,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile/payment/edit/{payment}', [UserController::class, 'editPayment'])->name('profile.edit.payment');
     Route::post('/profile/payment/edit/{payment}', [UserController::class, 'updatePayment'])->name('profile.update.payment');
     Route::delete('/profile/payment/delete/{payment}', [UserController::class, 'deletePayment'])->name('profile.delete.payment');
+
+    // MODEL PREVIEW
+    Route::get('/preview', function () {
+        return redirect()->route('scan');
+    });
+    Route::post('/preview', [UserController::class, 'preview'])->name('preview');
+    Route::post('/model/add', [UserController::class, 'addModelToCart'])->name('model.add.cart');
 });
 
 //ADMIN
 Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-
 
 //USERS
 Route::get('/admin/users', [AdminController::class, 'users'])->name('admin.users');
@@ -143,13 +144,11 @@ Route::get('/admin/user/{user}/edit', [AdminController::class, 'editUser'])->nam
 Route::post('/admin/user/{user}/edited', [AdminController::class, 'updateUser'])->name('admin.user.update');
 Route::post('/admin/user/{user}/toggle', [AdminController::class, 'toggleStatus'])->name('admin.user.toggle');
 
-
 //PRODUCTS
 Route::get('/admin/products', [AdminController::class, 'products'])->name('admin.products');
 Route::get('/admin/product/create', [AdminController::class, 'addproduct'])->name('admin.product.edit');
 Route::get('/admin/product/{product}/edit', [AdminController::class, 'editproduct'])->name('admin.product.edit');
 Route::delete('/admin/product/{product}/delete', [AdminController::class, 'deleteproduct'])->name('admin.product.delete');
-
 
 //MATERIALS
 Route::get('/admin/materials', [AdminController::class, 'materials'])->name('admin.materials');
@@ -159,11 +158,9 @@ Route::get('/admin/material/edit/{material}', [AdminController::class, 'editMate
 Route::post('/admin/material/update/{material}', [AdminController::class, 'updateMaterial'])->name('admin.update.material');
 Route::delete('/admin/material/{material}/delete', [AdminController::class, 'deletematerial'])->name('admin.material.delete');
 
-
 //ORDERS
 Route::get('/admin/orders', [AdminController::class, 'orders'])->name('admin.orders');
 Route::get('/admin/order/{order}/view', [AdminController::class, 'vieworder'])->name('admin.order.view');
-
 
 //COLORS
 Route::get('/admin/colors', [AdminController::class, 'colors'])->name('admin.colors');
@@ -173,7 +170,6 @@ Route::get('/admin/color/{color}/edit', [AdminController::class, 'editColor'])->
 Route::post('/admin/color/update/{color}', [AdminController::class, 'updateColor'])->name('admin.update.color');
 Route::delete('/admin/color/{color}/delete', [AdminController::class, 'deletecolor'])->name('admin.color.delete');
 
-
 //COUNTRIES
 Route::get('/admin/countries', [AdminController::class, 'countries'])->name('admin.countries');
 Route::get('/admin/country/create', [AdminController::class, 'adduser'])->name('admin.country.add');
@@ -181,13 +177,11 @@ Route::get('/admin/country/{country}/edit', [AdminController::class, 'edituser']
 Route::get('/admin/country/{country}/regions', [AdminController::class, 'viewregionscountry'])->name('admin.country.viewregions');
 Route::delete('/admin/country/{country}/delete', [AdminController::class, 'deletecountry'])->name('admin.country.delete');
 
-
 //REGIONS
 Route::get('/admin/regions', [AdminController::class, 'regions'])->name('admin.regions');
 Route::get('/admin/region/create', [AdminController::class, 'adduser'])->name('admin.region.add');
 Route::get('/admin/region/{region}/edit', [AdminController::class, 'edituser'])->name('admin.region.edit');
 Route::delete('/admin/region/{region}/delete', [AdminController::class, 'deleteregion'])->name('admin.region.delete');
-
 
 //CATEGORIES
 Route::get('/admin/categories', [AdminController::class, 'categories'])->name('admin.categories');
@@ -197,15 +191,13 @@ Route::get('/admin/category/{category}/edit', [AdminController::class, 'editcate
 Route::post('/admin/category/update/{category}', [AdminController::class, 'updateCategory'])->name('admin.update.category');
 Route::delete('/admin/category/{category}/delete', [AdminController::class, 'deletecategory'])->name('admin.category.delete');
 
-
 //PRODUCTS
 Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('product.destroy');
 Route::post('/products/{product}', [ProductController::class, 'update'])->name('product.update');
 Route::post('/products', [ProductController::class, 'store'])->name('product.store');
 
-
 //PRICING
-Route::get('/pricing',[PricingController::class,'index'])->name('pricing');
-Route::get('/pricing/payment',[PricingController::class,'payment'])->name('pricing.payment');
+Route::get('/pricing', [PricingController::class, 'index'])->name('pricing');
+Route::get('/pricing/payment', [PricingController::class, 'payment'])->name('pricing.payment');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

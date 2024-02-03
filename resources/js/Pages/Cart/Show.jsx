@@ -119,6 +119,7 @@ function Cart({ auth, cart, materials, colors, isVip }) {
                 <div className="flex justify-center" key={stockItem.stock_cart_id}>
                   <ProductCard 
                     image={stockItem.image} 
+                    file={stockItem.file}
                     name={stockItem.name} 
                     price={stockItem.price} 
                     allcolors={colors} 

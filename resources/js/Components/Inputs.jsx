@@ -91,6 +91,9 @@ const DragAndDropBox = () => {
             }
 
             // TODO: Send the files to the server
+            var formData = new FormData();
+            formData.append("file", files[0]);
+            router.post('/preview', formData);
         }
     
         function formatBytes(bytes) {
@@ -113,7 +116,7 @@ const DragAndDropBox = () => {
                     <span className="text-gray-600">Drag and drop your files here</span>
                     <span className="text-gray-500 text-sm">(or click to select)</span>
                 </label>
-                <input type="file" id="fileInput" className="hidden" multiple/>
+                <input type="file" id="fileInput" accept=".stl" className="hidden" multiple/>
             </div>
             <div className="mt-6 text-center" id="fileList"></div>
         </div>

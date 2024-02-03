@@ -1,8 +1,9 @@
 import PropTypes from "prop-types";
 import { Link } from "@inertiajs/react";
 import { useState } from "react";
+import { StlViewer } from 'react-stl-viewer';
 
-export default function ProductCard({image, name, price, allcolors, allmaterials, stockItem, color_name, color_id, material_name, material_id, handleDelete, quantity, onUpdateProduct}){
+export default function ProductCard({image, file, name, price, allcolors, allmaterials, stockItem, color_name, color_id, material_name, material_id, handleDelete, quantity, onUpdateProduct}){
     const [selectedColor, setSelectedColor] = useState(color_name);
     const [selectedMaterial, setSelectedMaterial] = useState(material_name);
     const [selectedQuantity, setSelectedQuantity] = useState(quantity);
@@ -11,6 +12,7 @@ export default function ProductCard({image, name, price, allcolors, allmaterials
     setSelectedQuantity(selectedQuantity + 1);
     onUpdateProduct({ quantity: selectedQuantity + 1 });
   };
+
 
   const handleDecrement = () => {
     if (selectedQuantity > 1) {
@@ -37,8 +39,8 @@ export default function ProductCard({image, name, price, allcolors, allmaterials
             >
             X
             </button>
-            
-            <img className="w-full" src={`/storage/products/${image}`} alt={name} />
+            {image ? (<img className="w-full" src={`/storage/products/${image}`} alt={name} />) 
+            : (<StlViewer modelProps={{ color: selectedColor }} style={{top: 0,left: 0,width: '100%',height: '30vh',}} shadows url={file} />)}
             
             <div className="px-6 pt-4">
                 <div className="flex justify-between font-bold text-xl mb-2 gap-2">

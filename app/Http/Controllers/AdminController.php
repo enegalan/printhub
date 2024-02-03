@@ -151,7 +151,7 @@ class AdminController extends Controller
     public function products()
     {
         app()->call([UserController::class, 'getRoles']);
-        $products = Product::paginate($this->productPerPagination);
+        $products = Product::where('visible', true)->paginate($this->productPerPagination);
         $products->load('user');
         $products->load('categories');
         return (

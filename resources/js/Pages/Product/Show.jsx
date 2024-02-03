@@ -14,6 +14,7 @@ import SelectOptions from "@/Components/SelectOptions";
 import InputError from "@/Components/InputError";
 import toast, { Toaster } from "react-hot-toast";
 import { useState } from "react";
+import { StlViewer } from "react-stl-viewer";
 
 export default function Show({
   user,
@@ -65,6 +66,7 @@ export default function Show({
       }
     }
   };
+  var colorNames = colors.map((color) => { return color.name });
   return (
     <main className="bg-white">
       <Toaster></Toaster>
@@ -78,7 +80,7 @@ export default function Show({
           <div className="flex flex-col flex-wrap md:flex-row md:flex-nowrap">
             <div className="w-full md:w-1/3 lg:w-1/2 max-w-full relative flex justify-center items-center bg-gray-200 rounded-xl">
               {/* This need to be removed on deploy to if image != null */}
-              <img
+              {product.image ? (<img
                 src={
                   product.image.includes("/tmp/")
                     ? "/images/imagen1.png"
@@ -87,7 +89,7 @@ export default function Show({
                 width="200px"
                 height="200px"
                 alt="product"
-              />
+              />) : (<StlViewer modelProps={{ color: data.color || colorNames[0] }} style={{top: 0,left: 0,width: '100%',height: '50vh',}} orbitControls shadows url={product.file} />)}
             </div>
             <div className="w-full md:w-2/3 lg:w-1/2 lg:flex-1 max-w-full py-4 px-6 flex flex-col gap-2 ">
               <h1 className="text-xl ">{product.name}</h1>
@@ -109,8 +111,8 @@ export default function Show({
                 <div className="space-y-2">
                   <h1 className="text-xl">Color</h1>
                   <SelectOptions
-                    options={colors}
-                    usingObject={true}
+                    options={colorNames}
+                    usingObject={false}
                     name="color"
                     onChangeOption={(o) => setData("color", o)}
                   />
