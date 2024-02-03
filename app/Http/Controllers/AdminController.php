@@ -114,6 +114,11 @@ class AdminController extends Controller
         );
     }
 
+    public function viewCountryRegions(Country $country) {
+        $regions = Region::where('country_id', $country->id)->paginate($this->productPerPagination);
+        return Inertia::render('Admin/Country/View', compact('regions'));
+    }
+
     public function deletecountry(Country $country)
     {
         try {
