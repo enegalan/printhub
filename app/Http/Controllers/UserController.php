@@ -24,6 +24,11 @@ use Intervention\Image\Image as Image;
 use App\Models\Color;
 use App\Models\Material;
 use phpseclib\Net\SSH2;
+use PHPSTL\Reader\STLReader;
+use PHPSTL\Handler\VolumeHandler;
+use PHPSTL\Model\STLModel;
+use PHPSTL\Model\Facet;
+use PHPSTL\Model\Vertex;
 
 class UserController extends Controller
 {
@@ -456,25 +461,71 @@ class UserController extends Controller
         }
     }
 
-    public function preview(Request $request) {
-        $user = auth()->user();
-        $file = $request->file('file');
+    public function preview(Request $request)
+{
+    $user = auth()->user();
+    $file = $request->file('file');
 
-        // Get all colors
-        $colors = Color::all();
-        // Get all materials
-        $materials = Material::all();
+    // Get all colors
+    $colors = Color::all();
+    // Get all materials
+    $materials = Material::all();
 
-        if ($file) {
-            $filePath = $file->store('stl', 'public');
-    
-            $fileUrl = asset('storage/' . $filePath);
-    
-            return Inertia::render('Preview', compact('user', 'fileUrl', 'colors', 'materials'));
-        } else {
-            return redirect()->back()->with('error', 'File uploading failed.');
+    if ($file) {
+        $filePath = $file->store('stl', 'public');
+        $fileUrl = asset('storage/' . $filePath);
+        $localFilePath = storage_path('app/public/' . $filePath);
+
+        try {            
+            $dimensions = $this->getModelDimensions($localFilePath);
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'Error uploading file.');
         }
+
+        return Inertia::render('Preview', compact('user', 'fileUrl', 'colors', 'materials', 'dimensions'));
+    } else {
+        return redirect()->back()->with('error', 'Error uploading file.');
     }
+}
+
+private function getModelDimensions($filePath)
+{
+    $reader = STLReader::forFile($filePath);
+    $reader->setHandler(new VolumeHandler());
+    $volume = $reader->readModel();
+
+    // Check if the volume is infinite or non-numeric
+    if (!is_numeric($volume) || is_infinite($volume) || is_nan($volume)) {
+        // Handle the invalid value, for example, assign a default value
+        $volume = 0;
+    }
+
+    $length = pow($volume, 1 / 3); 
+    $width = $length; 
+    $height = $length;
+
+    // Check if the calculated dimensions are infinite or non-numeric
+    if (!is_numeric($length) || is_infinite($length) || is_nan($length)) {
+        // Handle the invalid value, for example, assign a default value
+        $length = 0;
+    }
+
+    if (!is_numeric($width) || is_infinite($width) || is_nan($width)) {
+        // Handle the invalid value, for example, assign a default value
+        $width = 0;
+    }
+
+    if (!is_numeric($height) || is_infinite($height) || is_nan($height)) {
+        // Handle the invalid value, for example, assign a default value
+        $height = 0;
+    }
+
+    return [
+        'length' => $length,
+        'width' => $width,
+        'height' => $height,
+    ];
+}
 
     public function generateModelNumber() {
         $length = 8;
@@ -488,6 +539,12 @@ class UserController extends Controller
         $fileUrl = $request->input('file_url');
         $color = $request->input('color');
         $material = $request->input('material');
+        $price = $request->input('price');
+        $quantity = $request->input('quantity');
+        $width = $request->input('width');
+        $height = $request->input('height');
+        $length = $request->input('length');
+
         $user = auth()->user();
         $modelNumber = $this->generateModelNumber();
 
@@ -501,11 +558,14 @@ class UserController extends Controller
         $product = Product::create([
             'name' => $user->name . ' ' . $user->lastname . ' - Model ' . $modelNumber,
             'description' => $user->name . ' ' . $user->lastname . ' created model No. ' . $modelNumber,
-            'price' => 9.99,
+            'price' => $price,
             'user_id' => $user->id,
             'image' => null,
             'visible' => false,
             'file' => $fileUrl,
+            'width' => $width,
+            'height' => $height,
+            'length' => $length
         ]);
 
         // Create prod_comb
@@ -531,7 +591,7 @@ class UserController extends Controller
             Stock_cart::create([
                 'cart_id' => $cart->id,
                 'prod_comb_id' => $prodComb->id,
-                'quantity' => 1
+                'quantity' => $quantity
             ]);
         }
 

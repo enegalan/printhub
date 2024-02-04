@@ -3,9 +3,9 @@ import { Link } from "@inertiajs/react";
 import { useState } from "react";
 import { StlViewer } from 'react-stl-viewer';
 
-export default function ProductCard({image, file, name, price, allcolors, allmaterials, stockItem, color_name, color_id, material_name, material_id, handleDelete, quantity, onUpdateProduct}){
+export default function ProductCard({image, file, name, price, allcolors, allmaterials, stockItem, color_name, color_id, material_name, material_id, handleDelete, quantity, onUpdateProduct, width, heigth, length}){
     const [selectedColor, setSelectedColor] = useState(color_name);
-    const [selectedColorHex, setSelectedColorHex] = useState(allcolors[0].hex);
+    const [selectedColorHex, setSelectedColorHex] = useState(allcolors.find(c => c.name === selectedColor ).hex);
     const [selectedMaterial, setSelectedMaterial] = useState(material_name);
     const [selectedQuantity, setSelectedQuantity] = useState(quantity);
 
@@ -13,8 +13,14 @@ export default function ProductCard({image, file, name, price, allcolors, allmat
     setSelectedQuantity(selectedQuantity + 1);
     onUpdateProduct({ quantity: selectedQuantity + 1 });
   };
-  console.log(allcolors)
-
+  function getEstimatedPrice(width, height, length, quantity, color, material) {
+    const basePrice = 1;
+    const dimensionFactor = 0.00025;
+    const quantityFactor = 1.001;
+    // Calculate price based on dimensions and quantity
+    var price = basePrice + (width * height * length * dimensionFactor * quantity * quantityFactor * color.factor * material.factor);
+    return price.toFixed(2);
+  }
   const handleDecrement = () => {
     if (selectedQuantity > 1) {
       setSelectedQuantity(selectedQuantity - 1);
@@ -24,7 +30,13 @@ export default function ProductCard({image, file, name, price, allcolors, allmat
 
   const handleColorChange = (newColor) => {
     setSelectedColor(newColor);
-    var colorHex = allcolors.find(color => color.name === newColor)?.hex;
+  
+    // Use find method with a callback to get the color
+    const selectedColorObj = allcolors.find((color) => color.name === newColor);
+  
+    // Check if the color is found before accessing its properties
+    const colorHex = selectedColorObj ? selectedColorObj.hex : "#000000";
+  
     setSelectedColorHex(colorHex);
     onUpdateProduct({ color_name: newColor });
   };

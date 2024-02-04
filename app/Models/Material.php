@@ -10,7 +10,8 @@ class Material extends Model
     use HasFactory;
     protected $table = 'materials';
     protected $fillable =[
-        'name'
+        'name',
+        'factor',
     ];
 
     public function prod_combs(){

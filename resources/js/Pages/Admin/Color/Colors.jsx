@@ -30,6 +30,7 @@ export default function ({ colors }) {
                 <th className="py-2 px-4 border-b">ID</th>
                 <th className="py-2 px-4 border-b">Name</th>
                 <th className="py-2 px-4 border-b">Color</th>
+                <th className="py-2 px-4 border-b">Factor</th>
                 <th className="py-2 px-4 border-b">Created at</th>
                 <th className="py-2 px-4 border-b">Actions</th>
               </tr>
@@ -40,11 +41,9 @@ export default function ({ colors }) {
                   <td className="py-2 px-4 border-b">{color.id}</td>
                   <td className="py-2 px-4 border-b">{color.name}</td>
                   <td className="py-2 px-4 border-b flex items-center content-center justify-center">
-
                     <div className={`w-[50px] h-[50px] rounded-full flex items-center content-center justify-center bg-[${color.hex}]`}></div>
-
-
                   </td>
+                  <td className="py-2 px-4 border-b">{color.factor}</td>
                   <td className="py-2 px-4 border-b">{color.created_at}</td>
                   <td className="py-2 px-4 border-b">
                     <Link

@@ -389,7 +389,8 @@ class AdminController extends Controller
     public function storeColor (Request $request) {
         $validatedData = $request->validate([
             'name' => 'required|min:1',
-            'hex' => 'required'
+            'hex' => 'required',
+            'factor' => 'required',
         ]);
         Color::create($validatedData);
 
@@ -399,7 +400,8 @@ class AdminController extends Controller
     public function updateColor (Request $request, Color $color) {
         $validatedData = $request->validate([
             'name' => 'required|min:1',
-            'hex' => 'required'
+            'hex' => 'required',
+            'factor' => 'required',
         ]);
         $color->update($validatedData);
 

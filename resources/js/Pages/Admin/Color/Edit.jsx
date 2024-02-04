@@ -11,7 +11,8 @@ import toast, { Toaster } from 'react-hot-toast';
 export default function Edit({ color }) {
     const { data, setData, post, processing, errors, reset } = useForm({
         name: color.name,
-        hex: color.hex
+        hex: color.hex,
+        factor: color.factor,
     });
 
     const onAdd = () => {
@@ -27,6 +28,7 @@ export default function Edit({ color }) {
         const formData = new FormData();
         formData.append("name", data.name);
         formData.append("hex", data.hex);
+        formData.append("factor", data.factor);
         try {
             post(route("admin.update.color", color, formData));
             onAdd();
@@ -74,6 +76,22 @@ export default function Edit({ color }) {
                             required
                         />
                         <InputError message={errors.hex} className="mt-2" />
+
+                        <InputLabel forInput="factor" value="Factor*" className="text-gray-900" />
+                        <TextInput
+                            id="factor"
+                            name="factor"
+                            type="number"
+                            min="1"
+                            step="0.01"
+                            value={data.factor}
+                            className="mt-1 block w-full"
+                            autoComplete="factor"
+                            isFocused={true}
+                            onChange={(e) => setData("factor", e.target.value)}
+                            required
+                        />
+                        <InputError message={errors.factor} className="mt-2" />
                     </div>
                     <div>
                         <button className="rounded bg-blue-500 text-white px-5 py-2 font-medium">
