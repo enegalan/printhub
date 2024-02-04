@@ -26,9 +26,10 @@ export default function Show({
   const categories = product.categories;
   const { data, setData, post, processing, errors, reset } = useForm({
     color: "",
+    hex: colors[0].hex,
     material: "",
   });
-  const [swiper, setSwiper] = useState(null); 
+  const [swiper, setSwiper] = useState(null);
   const goNext = () => {
     if (swiper) {
       swiper.slideNext();
@@ -41,20 +42,20 @@ export default function Show({
   };
   const submit = (e) => {
     e.preventDefault();
-  
+
     // Reset errors before each submission
     reset("color", "material");
-  
+
     if (!data.color) {
       setData("color", "");
       errors.color = "Color is required";
     }
-  
+
     if (!data.material) {
       setData("material", "");
       errors.material = "Material is required";
     }
-  
+
     if (data.color && data.material) {
       try {
         post(route("cart.add", product.id), { preserveState: true });
@@ -67,6 +68,7 @@ export default function Show({
     }
   };
   var colorNames = colors.map((color) => { return color.name });
+  console.log(data.hex)
   return (
     <main className="bg-white">
       <Toaster></Toaster>
@@ -89,7 +91,7 @@ export default function Show({
                 width="200px"
                 height="200px"
                 alt="product"
-              />) : (<StlViewer modelProps={{ color: data.color || colorNames[0] }} style={{top: 0,left: 0,width: '100%',height: '50vh',}} orbitControls shadows url={product.file} />)}
+              />) : (<StlViewer modelProps={{ color: data.hex }} style={{ top: 0, left: 0, width: '100%', height: '50vh', }} orbitControls shadows url={product.file} />)}
             </div>
             <div className="w-full md:w-2/3 lg:w-1/2 lg:flex-1 max-w-full py-4 px-6 flex flex-col gap-2 ">
               <h1 className="text-xl ">{product.name}</h1>
@@ -114,7 +116,11 @@ export default function Show({
                     options={colorNames}
                     usingObject={false}
                     name="color"
-                    onChangeOption={(o) => setData("color", o)}
+                    onChangeOption={(o) => {
+                      var hexColor = colors.find((color) => o === color.name)?.hex;
+                      setData("color", o);
+                      setData("hex", hexColor);
+                    }}
                   />
                   <InputError message={errors.color} className="mt-2" />
                 </div>

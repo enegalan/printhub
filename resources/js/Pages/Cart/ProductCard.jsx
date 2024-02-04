@@ -5,6 +5,7 @@ import { StlViewer } from 'react-stl-viewer';
 
 export default function ProductCard({image, file, name, price, allcolors, allmaterials, stockItem, color_name, color_id, material_name, material_id, handleDelete, quantity, onUpdateProduct}){
     const [selectedColor, setSelectedColor] = useState(color_name);
+    const [selectedColorHex, setSelectedColorHex] = useState(allcolors[0].hex);
     const [selectedMaterial, setSelectedMaterial] = useState(material_name);
     const [selectedQuantity, setSelectedQuantity] = useState(quantity);
 
@@ -12,7 +13,7 @@ export default function ProductCard({image, file, name, price, allcolors, allmat
     setSelectedQuantity(selectedQuantity + 1);
     onUpdateProduct({ quantity: selectedQuantity + 1 });
   };
-
+  console.log(allcolors)
 
   const handleDecrement = () => {
     if (selectedQuantity > 1) {
@@ -23,6 +24,8 @@ export default function ProductCard({image, file, name, price, allcolors, allmat
 
   const handleColorChange = (newColor) => {
     setSelectedColor(newColor);
+    var colorHex = allcolors.find(color => color.name === newColor)?.hex;
+    setSelectedColorHex(colorHex);
     onUpdateProduct({ color_name: newColor });
   };
 
@@ -40,7 +43,7 @@ export default function ProductCard({image, file, name, price, allcolors, allmat
             X
             </button>
             {image ? (<img className="w-full" src={`/storage/products/${image}`} alt={name} />) 
-            : (<StlViewer modelProps={{ color: selectedColor }} style={{top: 0,left: 0,width: '100%',height: '30vh',}} shadows url={file} />)}
+            : (<StlViewer modelProps={{ color: selectedColorHex }} style={{top: 0,left: 0,width: '100%',height: '30vh',}} shadows url={file} />)}
             
             <div className="px-6 pt-4">
                 <div className="flex justify-between font-bold text-xl mb-2 gap-2">

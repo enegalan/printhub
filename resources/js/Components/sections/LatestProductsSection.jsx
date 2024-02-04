@@ -38,6 +38,7 @@ export default function LatestProductsSection(){
                         image={item.image}
                         title={item.title}
                         price={item.price}
+                        colors={[]}
                     />
                 ))}
             </div>

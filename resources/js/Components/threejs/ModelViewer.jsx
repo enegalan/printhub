@@ -13,7 +13,6 @@ export default function ModelViewer({ fileUrl = null, colors, materials }) {
     const colorNames = colors.map((color) => color.name);
     const materialNames = materials.map((material) => material.name);
 
-    // Declare formData outside the useEffect
     let formData = {
         file_url: fileUrl || "test",
         color: colorNames[0],
@@ -22,9 +21,6 @@ export default function ModelViewer({ fileUrl = null, colors, materials }) {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        console.log(e.target)
-
-        // Update formData with form values
         formData = {
             ...formData,
             color: data.color || colorNames[0],
@@ -35,7 +31,6 @@ export default function ModelViewer({ fileUrl = null, colors, materials }) {
     };
 
     useEffect(() => {
-        // Set default values for color and material
         setData('color', formData.color);
         setData('material', formData.material);
     }, []);
