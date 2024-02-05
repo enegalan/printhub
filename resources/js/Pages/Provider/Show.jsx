@@ -3,12 +3,19 @@ import TextInput from "@/Components/TextInput";
 import ProfileLayout from "@/Layouts/ProfileLayout";
 import { Link, useForm } from "@inertiajs/react";
 import { FaPlus } from "react-icons/fa6";
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 export default function ProviderShow({ user, products }) {
   const { data, prev_page_url, next_page_url, current_page, last_page } = products;
   const { delete: handleDelete } = useForm();
   return (
     <ProfileLayout user={user} pageName="Provider" pageSubtitle="Provider dashboard - Products list">
+      <Link
+        href={route("profile.provider.dashboard")}
+        className="bg-[lightgrey] w-[40px] p-3 rounded-lg mb-5 self-start transition hover:bg-[#bbbbbb]"
+      >
+        <IoMdArrowRoundBack />
+      </Link>
       <Link href={route('provider.add')} className="bg-[lightgrey] w-[40px] p-3 rounded-lg mb-5 self-end transition hover:bg-[#bbbbbb]">
           <FaPlus />
       </Link>

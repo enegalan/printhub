@@ -52,7 +52,7 @@ export default function ProviderDashboard({ user, categories = [] }) {
     formData.append("user_id", data.user_id);
     try {
       post(route("product.store"));
-      window.location.href = route('profile.provider')
+      window.location.href = route('profile.provider.products')
     } catch (e) {
       onError(e);
     }
@@ -60,7 +60,7 @@ export default function ProviderDashboard({ user, categories = [] }) {
 
   return (
     <ProfileLayout user={user} pageName="Provider" pageSubtitle="Add new product">
-      <Link href={route('profile.provider')} className="bg-[lightgrey] w-[40px] p-3 rounded-lg mb-5 self-start transition hover:bg-[#bbbbbb]">
+      <Link href={route('profile.provider.products')} className="bg-[lightgrey] w-[40px] p-3 rounded-lg mb-5 self-start transition hover:bg-[#bbbbbb]">
           <IoMdArrowRoundBack />
       </Link>
       <Toaster />
