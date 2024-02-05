@@ -20,7 +20,8 @@ export default function Add({ user, roles = [] }) {
   });
   
   const onAdd = () => {
-    toast.success('User created successfully');
+    const successMessage = 'User created successfully';
+    localStorage.setItem('successMessageUser', successMessage);
   }
 
   const onError = (e) => {
@@ -53,6 +54,7 @@ export default function Add({ user, roles = [] }) {
     formData.append("roles", JSON.stringify(data.roles));
     try {
       post(route("admin.user.store"));
+      onAdd();
     } catch (e) {
       onError(e);
     }

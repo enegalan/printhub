@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
 import Dashboard from '../Dashboard'
 import Pagination from "@/Components/Pagination";
 import { Link, usePage, useForm } from '@inertiajs/react';
@@ -37,6 +37,14 @@ export default function ({ users }) {
   const onError = () => {
     toast.error('Error deleting category');
   }
+
+  useEffect(() => {
+    const successMessage = localStorage.getItem('successMessageUser');
+    if (successMessage) {
+        toast.success(successMessage);
+        localStorage.removeItem('successMessageUser'); // Limpiar después de mostrar
+    }
+}, []);
 
   return (
     <Dashboard pageName='Users' pageSubtitle='Manage PrintHub users'>

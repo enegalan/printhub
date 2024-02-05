@@ -22,7 +22,8 @@ export default function Edit({ user = [], roles = [] }) {
 
 
     const onAdd = () => {
-        toast.success('User created successfully');
+        const successMessage = 'User edited successfully';
+        localStorage.setItem('successMessageUser', successMessage);
     }
 
     const onError = (e) => {
