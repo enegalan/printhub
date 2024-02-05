@@ -114,6 +114,11 @@ class AdminController extends Controller
         );
     }
 
+    public function viewCountryRegions(Country $country) {
+        $regions = Region::where('country_id', $country->id)->paginate($this->productPerPagination);
+        return Inertia::render('Admin/Country/View', compact('regions'));
+    }
+
     public function deletecountry(Country $country)
     {
         try {
@@ -151,7 +156,7 @@ class AdminController extends Controller
     public function products()
     {
         app()->call([UserController::class, 'getRoles']);
-        $products = Product::paginate($this->productPerPagination);
+        $products = Product::where('visible', true)->paginate($this->productPerPagination);
         $products->load('user');
         $products->load('categories');
         return (
@@ -360,6 +365,8 @@ class AdminController extends Controller
             'name' => 'required|min:1',
         ]);
         $material->update($validatedData);
+
+        return redirect()->route('admin.materials');
     }
 
     public function deletematerial(Material $material)
@@ -382,6 +389,36 @@ class AdminController extends Controller
         );
     }
 
+    public function addColor () {
+        return Inertia::render('Admin/Color/Add');
+    }
+
+    public function editColor (Color $color) {
+        return Inertia::render('Admin/Color/Edit', compact('color'));
+    }
+
+    public function storeColor (Request $request) {
+        $validatedData = $request->validate([
+            'name' => 'required|min:1',
+            'hex' => 'required',
+            'factor' => 'required',
+        ]);
+        Color::create($validatedData);
+
+        return redirect()->route('admin.colors');
+    }
+
+    public function updateColor (Request $request, Color $color) {
+        $validatedData = $request->validate([
+            'name' => 'required|min:1',
+            'hex' => 'required',
+            'factor' => 'required',
+        ]);
+        $color->update($validatedData);
+
+        return redirect()->route('admin.colors');
+    }
+
     public function deletecolor(Color $color)
     {
         try {
@@ -400,6 +437,33 @@ class AdminController extends Controller
         return (
             Inertia::render('Admin/Category/Categories', ['categories' => $categories])
         );
+    }
+
+    public function addCategory () {
+        return Inertia::render('Admin/Category/Add');
+    }
+    
+    public function storeCategory (Request $request) {
+        $validatedData = $request->validate([
+            'name' => 'required|min:1',
+        ]);
+        Category::create($validatedData);
+
+        return redirect()->route('admin.categories');
+    }
+
+    public function editCategory (Category $category) {
+        return Inertia::render('Admin/Category/Edit', compact('category'));
+    }
+
+    public function updateCategory (Request $request, Category $category) {
+        $validatedData = $request->validate([
+            'name' => 'required|min:1',
+        ]);
+        
+        $category->update($validatedData);
+        
+        return redirect()->route('admin.categories');
     }
 
     public function deletecategory(Category $category)

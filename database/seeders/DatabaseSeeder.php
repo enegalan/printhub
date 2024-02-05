@@ -29,35 +29,49 @@ class DatabaseSeeder extends Seeder
         ]);
         //Material #6
         \App\Models\Material::create([
-            'name' => 'pla'
+            'name' => 'PLA'
         ]);
         \App\Models\Material::create([
-            'name' => 'abs'
+            'name' => 'ABS'
         ]);
         \App\Models\Material::create([
-            'name' => 'petg'
+            'name' => 'PETG'
         ]);
         \App\Models\Material::create([
-            'name' => 'red'
+            'name' => 'TPU'
         ]);
         \App\Models\Material::create([
-            'name' => 'orange'
+            'name' => 'Nylon'
         ]);
         \App\Models\Material::create([
-            'name' => 'blue'
+            'name' => 'PC'
+        ]);
+        \App\Models\Material::create([
+            'name' => 'HIPS'
+        ]);
+        \App\Models\Material::create([
+            'name' => 'Resin'
         ]);
         //Colors #4
         \App\Models\Color::create([
-            'name' => 'blue'
+            'name' => 'blue',
+            'hex' => '#0250ff',
         ]);
         \App\Models\Color::create([
-            'name' => 'orange'
+            'name' => 'orange',
+            'hex' => '#f17b01'
         ]);
         \App\Models\Color::create([
-            'name' => 'red'
+            'name' => 'red',
+            'hex' => '#c90a0a'
         ]);
         \App\Models\Color::create([
-            'name' => 'green'
+            'name' => 'green',
+            'hex' => '#31b529'
+        ]);
+        \App\Models\Color::create([
+            'name' => 'purple',
+            'hex' => '#770bd9'
         ]);
         //Categories for proucts_cob #2
         \App\Models\Category::create([
@@ -65,6 +79,9 @@ class DatabaseSeeder extends Seeder
         ]);
         \App\Models\Category::create([
             'name' => 'spares'
+        ]);
+        \App\Models\Category::create([
+            'name' => 'games'
         ]);
         //Product & Cart
         \App\Models\Product::factory(100)->create();

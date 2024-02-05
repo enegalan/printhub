@@ -4,7 +4,7 @@ import Pagination from "@/Components/Pagination";
 import toast, { Toaster } from 'react-hot-toast';
 import { router } from '@inertiajs/react'
 
-function ProductsSection({ user = null, products = [], onSuccess, onError }) {
+function ProductsSection({ user = null, products = [], colors = [], onSuccess, onError }) {
     const { data, prev_page_url, next_page_url, current_page, last_page } = products;
 
     const getWishlistStatus = async (productId) => {
@@ -40,7 +40,6 @@ function ProductsSection({ user = null, products = [], onSuccess, onError }) {
                 method: 'POST',
             });
 
-            // Actualizar el estado de la wishlist después de la acción
             const updatedStatuses = wishlistStatuses.map(status => {
                 if (status.productId === productId) {
                     return { ...status, isWishlistItem: !status.isWishlistItem };
@@ -51,7 +50,7 @@ function ProductsSection({ user = null, products = [], onSuccess, onError }) {
             setWishlistStatuses(updatedStatuses);
 
             const data = await response.json();
-            onSuccess(data.message); // Ajusta esto según la estructura de tu respuesta del servidor
+            onSuccess(data.message);
         } catch (error) {
             console.error(error);
             onError('Cannot update wishlist');
@@ -72,10 +71,12 @@ function ProductsSection({ user = null, products = [], onSuccess, onError }) {
                             isWishlistItem={isWishlistItem}
                             onAddWishlist={() => onAddWishlist(product.id)}
                             image="/images/imagen1.png"
+                            file={product.file}
                             id={product.id}
                             name={product.name}
                             price={product.price}
                             href={`/market/product/${product.id}`}
+                            colors={colors}
                         />
                     );
                 })}

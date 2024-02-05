@@ -14,7 +14,7 @@ import ProductsSection from '@/Components/sections/ProductsSection';
 
 import toast, { Toaster } from 'react-hot-toast';
 
-function Market({ auth, products = [] }) {
+function Market({ auth, products = [], colors = [] }) {
     const [categoriesFilter, setCategories] = useState([]);
     const [priceFilter, setPrice] = useState([]);
     const [arrivalFilter, setArrival] = useState([]);
@@ -104,6 +104,8 @@ function Market({ auth, products = [] }) {
         toast.error(message);
     }
 
+    const headerImageStyle = { width: '100%', height: '65vh', display: 'block', marginTop: '110px'  }
+
     return (
         <div className='bg-[var(--light-grey)]'>
             <NavBar
@@ -114,7 +116,7 @@ function Market({ auth, products = [] }) {
             />
             <Toaster />
 
-            <header className='-mt-24 h-[550px] relative overflow-hidden'>
+            <header className='-mt-24 h-[65vh] relative overflow-hidden'>
                 <Carousel
                     autoplay={true}
                     cellAlign='center'
@@ -124,8 +126,8 @@ function Market({ auth, products = [] }) {
                     renderCenterLeftControls={({ previousSlide }) => <></>}
                     renderCenterRightControls={({ nextSlide }) => <></>}
                 >
-                    <img src='/images/banners/bestproducts.png' style={{ width: '100%', height: '650px', display: 'block', marginTop: '80px', objectFit: 'cover' }} />
-                    <img src='/images/impresion1.jpg' style={{ width: '100%', height: '650px', display: 'block', marginTop: '80px', objectFit: 'cover' }} />
+                    <img src='/images/banners/bestproducts.png' style={headerImageStyle} />
+                    <img src='/images/impresion1.jpg' style={headerImageStyle} />
                 </Carousel>
             </header>
 
@@ -183,7 +185,7 @@ function Market({ auth, products = [] }) {
                             <OrderBy options={{ 'lowhigh' : 'Price: Low to High', 'highlow' : 'Price: High to Low' }} onChange={onOrderByChange} />
                         </section>
                     </div>
-                    <ProductsSection user={auth.user} onSuccess={onSuccess} onError={onError} products={products} />
+                    <ProductsSection user={auth.user} onSuccess={onSuccess} onError={onError} products={products} colors={colors} />
                 </div>
             </main>
 

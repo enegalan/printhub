@@ -18,8 +18,9 @@ class ProductController extends Controller
     public function getAll()
     {
         app()->call([UserController::class, 'getRoles']);
-        $products = Product::paginate($this->productPerPagination);
-        return Inertia::render('Market', ['products' => $products]);
+        $products = Product::where('visible', true)->paginate($this->productPerPagination);
+        $colors = Color::all();
+        return Inertia::render('Market', ['products' => $products, 'colors' => $colors]);
     }
 
     public function search(Request $request)
@@ -27,7 +28,7 @@ class ProductController extends Controller
         app()->call([UserController::class, 'getRoles']);
 
         $query = $request->input('query');
-        $products = Product::where('name', 'like', "%$query%")->paginate($this->productPerPagination);
+        $products = Product::where('name', 'like', "%$query%")->where('visible', true)->paginate($this->productPerPagination);
         return Inertia::render('Market', ['products' => $products]);
     }
 
@@ -91,7 +92,7 @@ class ProductController extends Controller
             if ($search !== "%") {
                 $productsQuery->where('name', 'like', '%' . $search . '%');
             }
-            $products = $productsQuery->paginate($this->productPerPagination);
+            $products = $productsQuery->where('visible', true)->paginate($this->productPerPagination);
 
             return Inertia::render('Market', ['products' => $products]);
 

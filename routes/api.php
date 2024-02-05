@@ -3,6 +3,7 @@
 use App\Models\Cart;
 use App\Models\Fact_address;
 use App\Models\Order;
+use App\Models\User;
 use App\Models\Ship_address;
 use App\Models\Invoice;
 use App\Models\Stock_cart;
@@ -78,8 +79,13 @@ Route::post('/complete-payment', function (Request $request) {
 
     return response()->json(['redirect' => route('paymentcomplete')]);
 });
-
-
+Route::post('/complete-payment/plan',function(Request $request){
+    $user = User::findOrFail($request->input('user_id'));
+    $user->roles()->attach(3);
+    $user->save();
+    
+    return response()->json(['redirect' => route('paymentcomplete')]);
+});
 Route::delete('/delete-cart-product/{stock}', function (Stock_cart $stock){
     $stock->delete();
     return response()->json(['redirect' => route('user.cart')]);

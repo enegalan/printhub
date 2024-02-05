@@ -1,12 +1,18 @@
 import NavBar from '@/Components/NavBar';
 import { Footer } from '@/Components/Footer';
 import PricingCard from '@/Components/PricingCard';
+import toast, { Toaster } from 'react-hot-toast';
+import error from '../error';
 
-function Dashboard ({user}) {
+function Dashboard ({user,errors}) {
     const VIP_PRICE = 9.99
+    if (errors[0]) {
+        toast.error(errors[0].toString())
+    }
     return (
         <>
             <NavBar user={user} className="lg:backdrop-blur-md border-b max-lg:bg-blue-900/50 border-blue-950/50" defaultBackgroundColor="transparent" defaultTextColor="var(--white)" dynamicBackground={false} />
+            <Toaster/>
                 <main className='py-44 px-10 bg-[url(/images/dark-blue-blur-background-vector.webp)] bg-cover bg-no-repeat space-y-10 gap-10 -mb-16'>
                     
                     <header className='text-white text-center'>
@@ -26,7 +32,7 @@ function Dashboard ({user}) {
                         description="Deno Deploy is a distributed system that runs JavaScript, TypeScript, and WebAssembly at the edge, worldwide."
                         advantagesArray={["Higer priority orders","Order discounts","No shiping cost"]}
                         popular={true}
-                        href={route('pricing.payment',9.99)}
+                        href={route('pricing.payment')}
                         />
                         <PricingCard 
                         plan="Enterprice" 

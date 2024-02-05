@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
-    public function show(){
+    public static function show(){
         app()->call([UserController::class, 'getRoles']);
         
         $cart = Cart::where('user_id', auth()->user()->id)

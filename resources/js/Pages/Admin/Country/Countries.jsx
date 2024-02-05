@@ -20,9 +20,6 @@ export default function ({ countries }) {
     <Dashboard>
       <div className='flex flex-col min-h-full '>
         <Toaster />
-        <Link href={route('provider.add')} className="bg-[lightgrey] w-[40px] p-3 rounded-lg mb-5 self-end transition hover:bg-[#bbbbbb]">
-          <FaPlus />
-        </Link>
         <div className='overflow-x-scroll'>
           <table className="min-w-full bg-white border border-gray-300">
             <thead>
@@ -30,7 +27,6 @@ export default function ({ countries }) {
                 <th className="py-2 px-4 border-b">ID</th>
                 <th className="py-2 px-4 border-b">Name</th>
                 <th className="py-2 px-4 border-b">Regions</th>
-                <th className="py-2 px-4 border-b">Actions</th>
               </tr>
             </thead>
             <tbody className=''>
@@ -44,25 +40,7 @@ export default function ({ countries }) {
                   >
                     View
                   </Link></td>
-                  <td className="py-2 px-4 border-b">
-                    <Link
-                      href={route('admin.country.edit', country.id)}
-                      className="text-blue-500 hover:underline mr-2"
-                    >
-                      Edit
-                    </Link>
-                    <button
-                      onClick={() => handleDelete(route("admin.country.delete", country), {
-                        onSuccess: onDelete,
-                        onError: onError,
-                      }
-
-                      )}
-                      className="text-red-500 hover:underline"
-                    >
-                      Delete
-                    </button>
-                  </td>
+                  
                 </tr>
               ))}
             </tbody>
