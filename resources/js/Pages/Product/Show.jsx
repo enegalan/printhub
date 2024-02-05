@@ -68,7 +68,6 @@ export default function Show({
     }
   };
   var colorNames = colors.map((color) => { return color.name });
-  console.log(data.hex)
   return (
     <main className="bg-white">
       <Toaster></Toaster>
@@ -80,7 +79,7 @@ export default function Show({
       <section className="flex justify-center mt-16">
         <div className="max-w-[1200px] mt-8 mx-4 pb-4">
           <div className="flex flex-col flex-wrap md:flex-row md:flex-nowrap">
-            <div className="w-full md:w-1/3 lg:w-1/2 max-w-full relative flex justify-center items-center bg-gray-200 rounded-xl">
+            <div className="w-full md:w-1/3 lg:w-1/2 max-w-full flex justify-center items-center bg-gray-200 rounded-xl">
               {/* This need to be removed on deploy to if image != null */}
               {product.image ? (<img
                 src={
