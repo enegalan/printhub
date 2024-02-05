@@ -72,13 +72,6 @@ export default function ({ products }) {
                   <td className="py-2 px-4 border-b">{product.name}</td>
                   <td className="py-2 px-4 border-b">{product.description}</td>
                   <td className="py-2 px-4 border-b">
-<<<<<<< HEAD
-                    {product.categories.map((category) => category.name + ",")}
-                  </td>
-                  <td className="py-2 px-4 border-b">
-                    <img src={`/storage/products/${product.image}`}></img>
-                  </td>
-=======
                     {product.categories.length > 0 ? (
                       product.categories.map((category, index) => (
                         <span key={index}>
@@ -91,7 +84,6 @@ export default function ({ products }) {
                     )}
                   </td>
                   <td className="py-2 px-4 border-b">{product.file ? (<StlViewer modelProps={{ color: 'grey' }} style={{ top: 0, left: 0, width: '100%', height: '30vh', }} orbitControls shadows url={product.file} />) : (<img src={`/storage/products/${product.image}`}></img>)}</td>
->>>>>>> 3c3189f48ab53cab2c504008558e573ed57286b3
                   <td className="py-2 px-4 border-b">{product.price}$</td>
                   <td className="py-2 px-4 border-b">
                     <Link
