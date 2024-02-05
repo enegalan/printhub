@@ -170,6 +170,7 @@ Route::delete('/admin/material/delete/{material}', [AdminController::class, 'del
 //ORDERS
 Route::get('/admin/orders', [AdminController::class, 'orders'])->name('admin.orders');
 Route::get('/admin/order/view/{order}', [AdminController::class, 'vieworder'])->name('admin.order.view');
+Route::post('/admin/material/store', [AdminController::class, 'storeColor'])->name('admin.store.color');
 
 //COLORS
 Route::get('/admin/colors', [AdminController::class, 'colors'])->name('admin.colors');

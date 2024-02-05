@@ -14,7 +14,7 @@ import { AboutSection } from '@/Components/sections/AboutSection';
 import { PricingSection } from '@/Components/sections/PricingSection';
 import LatestProductsSection from '@/Components/sections/LatestProductsSection';
 
-function Index({ auth }) {
+function Index({ auth, latestProducts }) {
   return (
     <>
       <div className='overflow-hidden bg-[var(--light-grey)]'>
@@ -108,7 +108,7 @@ function Index({ auth }) {
 
         <PricingSection />
         <AboutSection />
-        <LatestProductsSection />
+        <LatestProductsSection latestProducts={latestProducts} />
         <NewsSection />
         <Footer />
       </div>
