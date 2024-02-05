@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
-use Illuminate\Http\Request;
-use App\Models\Category;
-
 use Inertia\Inertia;
+use App\Models\Order;
 use Inertia\Response;
+
+use App\Models\Product;
+use App\Models\Category;
+use Illuminate\Http\Request;
 
 class ProviderController extends Controller
 {
@@ -18,6 +19,11 @@ class ProviderController extends Controller
     
     public function dashboard() {
         app()->call([UserController::class, 'getRoles']);
+        return Inertia::render('Provider/Dashboard');
+    }
+
+    public function productdashboard(){
+        app()->call([UserController::class, 'getRoles']);
         $paginatedProducts = Product::where('user_id', auth()->user()->id)
         ->paginate($this->productPerPagination);
         $paginatedProducts->load('categories');
@@ -25,6 +31,7 @@ class ProviderController extends Controller
             'user' => auth()->user(),
             'products' => $paginatedProducts,
         ]);
+
     }
     public function destroy(Product $product){
         Product::destroy($product);
@@ -44,5 +51,23 @@ class ProviderController extends Controller
             $product->load('categories');
             return Inertia::render('Provider/Edit', ['user' => auth()->user(), 'product' => $product, 'categories' => $categories]);
         }
+    }
+
+    public function orderdashboard(){
+        app()->call([UserController::class, 'getRoles']);
+        
+        $userId = auth()->id();
+
+    $orders = Order::whereHas('cart.stock_carts.prod_comb.product', function ($query) use ($userId) {
+        $query->where('user_id', $userId);
+    })->paginate($this->productPerPagination);
+        $orders->load('invoice');
+        return (
+            Inertia::render('Provider/Orders', ['orders' => $orders])
+        );
+    }
+
+    public function orderview(Order $order){
+        
     }
 }

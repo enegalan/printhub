@@ -60,10 +60,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile/wishlist', [UserController::class, 'wishlist'])->name('profile.wishlist');
     Route::post('/add/wishlist/{product}', [UserController::class, 'addProductToWishlist'])->name('add.product.wishlist');
     Route::delete('/profile/wishlist/delete/{product}', [UserController::class, 'deleteProductFromWishlist'])->name('delete.product.wishlist');
+    
     //PROVIDERS
-    Route::get('/profile/provider', [ProviderController::class, 'dashboard'])->name('profile.provider');
-    Route::get('/profile/provider/create', [ProviderController::class, 'add'])->name('provider.add');
-    Route::get('/profile/provider/edit/{product}', [ProviderController::class, 'edit'])->name('provider.edit');
+    Route::get('/profile/provider', [ProviderController::class, 'dashboard'])->name('profile.provider.dashboard');
+    
+    Route::get('/profile/provider/products', [ProviderController::class, 'productdashboard'])->name('profile.provider.products');
+    Route::get('/profile/provider/products/create', [ProviderController::class, 'add'])->name('provider.add');
+    Route::get('/profile/provider/products/edit/{product}', [ProviderController::class, 'edit'])->name('provider.edit');
+
+    Route::get('/profile/provider/orders', [ProviderController::class, 'orderdashboard'])->name('profile.provider.orders');
+    Route::get('/profile/provider/orders/view/{order}', [ProviderController::class, 'orderview'])->name('profile.orders.view');
+
     // ---
     Route::post('/upload-avatar', [UserController::class, 'avatar'])->name('profile.avatar');
     Route::delete('/avatar-delete', [UserController::class, 'deleteAvatar'])->name('profile.avatar-delete');
