@@ -23,7 +23,7 @@ export default function ({ categories }) {
     const successMessage = localStorage.getItem('successMessageCategory');
     if (successMessage) {
         toast.success(successMessage);
-        localStorage.removeItem('successMessageCategory'); // Limpiar después de mostrar
+        localStorage.removeItem('successMessageCategory');
     }
 }, []);
 
