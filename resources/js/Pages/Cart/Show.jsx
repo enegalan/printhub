@@ -169,7 +169,7 @@ function Cart({ auth, cart, materials, colors, isVip }) {
                           <td className='p-2'>{stockItem.name}</td>
                           <td className='p-2'>{stockItem.material_name}</td>
                           <td className='p-2'>
-                            <div className={`w-[30px] h-[30px] rounded-full flex items-center content-center justify-center bg-[${stockItem.color_hex}]`}></div>
+                            <div className={`w-[30px] h-[30px] rounded-full flex border-2 border-slate-400 items-center content-center justify-center bg-[${stockItem.color_hex}]`}></div>
                           </td>
                           <td className='p-2'>{stockItem.quantity}</td>
                           <td className='p-2'>{(stockItem.quantity * stockItem.price).toFixed(2)}$</td>

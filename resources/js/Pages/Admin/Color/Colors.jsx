@@ -41,7 +41,7 @@ export default function ({ colors }) {
                   <td className="py-2 px-4 border-b">{color.id}</td>
                   <td className="py-2 px-4 border-b">{color.name}</td>
                   <td className="py-2 px-4 border-b flex items-center content-center justify-center">
-                    <div className={`w-[50px] h-[50px] rounded-full flex items-center content-center justify-center bg-[${color.hex}]`}></div>
+                    <div className={`w-[50px] h-[50px] rounded-full border-2 border-slate-400 flex items-center content-center justify-center bg-[${color.hex}]`}></div>
                   </td>
                   <td className="py-2 px-4 border-b">{color.factor}</td>
                   <td className="py-2 px-4 border-b">{color.created_at}</td>
