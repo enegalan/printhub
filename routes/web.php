@@ -174,7 +174,7 @@ Route::get('/admin/order/view/{order}', [AdminController::class, 'vieworder'])->
 //COLORS
 Route::get('/admin/colors', [AdminController::class, 'colors'])->name('admin.colors');
 Route::get('/admin/color/create', [AdminController::class, 'addColor'])->name('admin.color.add');
-Route::get('/admin/color/edit/{color}', [AdminController::class, 'edituser'])->name('admin.color.edit');
+Route::get('/admin/color/edit/{color}', [AdminController::class, 'editColor'])->name('admin.color.edit');
 Route::delete('/admin/color/{color}/delete', [AdminController::class, 'deletecolor'])->name('admin.color.delete');
 
 //COUNTRIES
