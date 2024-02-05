@@ -8,9 +8,8 @@ use App\Models\Material;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
-
 use Illuminate\Support\Facades\Storage;
+use Inertia\Inertia;
 
 class ProductController extends Controller
 {
@@ -109,9 +108,9 @@ class ProductController extends Controller
         $colors = Color::all();
         $materials = Material::all();
         $product->categories;
-        $user = auth()->user()->load('roles');
+        $user = auth()->user();
         $randomProducts = Product::inRandomOrder()->take(10)->get();
-        return Inertia::render('Product/Show', compact('user','product','colors','materials','randomProducts'));
+        return Inertia::render('Product/Show', compact('user', 'product', 'colors', 'materials', 'randomProducts'));
     }
     public function destroy(Product $product)
     {
@@ -131,18 +130,18 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required|string|max:100',
             'description' => 'required|string',
-            'image' => 'required|image|max:2048',
+            'file' => 'required|file|max:2048',
             'price' => 'required|numeric',
             'user_id' => 'exists:App\Models\User,id',
             'categories' => 'array',
         ]);
 
-        $productImage = $request->file('image');
-        $productImageName = $productImage->hashName();
-        $productImage->storeAs('products', $productImageName, 'public');
+        $productFile = $request->file('file');
+        $productFileName = $productFile->hashName();
+        $productFile->storeAs('stl', $productFileName, 'public');
 
-        $productData = $request->except('image');
-        $productData['image'] = $productImageName;
+        $productData = $request->except('file');
+        $productData['file'] = asset('storage/stl/' . $productFileName);
 
         $product = Product::create($productData);
 
@@ -150,10 +149,9 @@ class ProductController extends Controller
         if (!empty($categories)) {
             $product->categories()->attach($categories);
         }
-
     }
 
-    public function update(Request $request, String $id)
+    public function update(Request $request, string $id)
     {
         $request->validate([
             'name' => 'required|string|max:100',
@@ -161,37 +159,30 @@ class ProductController extends Controller
             'price' => 'required|numeric',
             'user_id' => 'exists:App\Models\User,id',
             'categories' => 'array',
+            'file' => 'file|max:2048', // Add validation for file update
         ]);
 
         $product = Product::findOrFail($id);
 
         // Update basic product information
-        $product->update($request->except('image'));
+        $product->update($request->except('file'));
 
         // Update image if provided
-        if ($request->hasFile('image')) {
-            $request->validate([
-                'image' => 'image|max:2048',
-            ]);
-
-            $productImage = $request->file('image');
-            $productImageName = $productImage->hashName();
-            $productImage->storeAs('products', $productImageName, 'public');
-
-            // Delete old image if exists
-            if ($product->image) {
-                Storage::disk('public')->delete('products/' . $product->image);
+        if ($request->hasFile('file')) {
+            $productSTL = $request->file('file');
+            $productSTLName = $productSTL->hashName();
+            $productSTL->storeAs('stl', $productSTLName, 'public');
+    
+            // Delete old STL file if exists
+            if ($product->file) {
+                Storage::disk('public')->delete('stl/' . $product->file);
             }
 
-            $product->update(['image' => $productImageName]);
+            $product->update(['file' => asset('storage/stl/' . $productSTLName)]);
         }
 
+        // Update categories
         $categories = $request->input('categories');
-        $product->categories()->detach();
-        if(!empty($categories)){
-            $product->categories()->attach($categories);
-        }
-
-        return redirect()->route('profile.provider')->with('success', 'Product updated successfully.');
+        $product->categories()->sync($categories);
     }
 }

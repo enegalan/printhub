@@ -4,6 +4,7 @@ import Pagination from "@/Components/Pagination";
 import { Link, useForm } from '@inertiajs/react';
 import toast, { Toaster } from 'react-hot-toast';
 import { FaPlus } from 'react-icons/fa';
+import { StlViewer } from 'react-stl-viewer';
 export default function ({ products }) {
   const { data, prev_page_url, next_page_url, current_page, last_page } = products;
   const { delete: handleDelete, data: formData } = useForm();
@@ -41,8 +42,19 @@ export default function ({ products }) {
                   <td className="py-2 px-4 border-b">{product.id}</td>
                   <td className="py-2 px-4 border-b">{product.name}</td>
                   <td className="py-2 px-4 border-b">{product.description}</td>
-                  <td className="py-2 px-4 border-b">{product.categories.map((category) => (category.name) + ',')}</td>
-                  <td className="py-2 px-4 border-b"><img src={`/storage/products/${product.image}`}></img></td>
+                  <td className="py-2 px-4 border-b">
+                    {product.categories.length > 0 ? (
+                      product.categories.map((category, index) => (
+                        <span key={index}>
+                          {category.name}
+                          {index < product.categories.length - 1 && ', '}
+                        </span>
+                      ))
+                    ) : (
+                      product.categories[0]?.name
+                    )}
+                  </td>
+                  <td className="py-2 px-4 border-b">{product.file ? (<StlViewer modelProps={{ color: 'grey' }} style={{ top: 0, left: 0, width: '100%', height: '30vh', }} orbitControls shadows url={product.file} />) : (<img src={`/storage/products/${product.image}`}></img>)}</td>
                   <td className="py-2 px-4 border-b">{product.price}$</td>
                   <td className="py-2 px-4 border-b">
                     <Link
