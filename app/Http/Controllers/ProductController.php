@@ -151,7 +151,6 @@ class ProductController extends Controller
             $product->categories()->attach($categories);
         }
 
-        return redirect()->route('profile.provider')->with('success', 'Product created successfully.');
     }
 
     public function update(Request $request, String $id)

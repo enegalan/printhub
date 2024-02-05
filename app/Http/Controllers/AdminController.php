@@ -164,7 +164,18 @@ class AdminController extends Controller
         );
     }
 
-    public function deleteproduct(Product $product)
+    public function addProduct() {
+        app()->call([UserController::class, 'getRoles']);
+        $categories = Category::all();
+        $user = auth()->user();
+        return Inertia::render('Admin/Product/Add', compact('user', 'categories'));
+    }
+
+    public function editProduct() {
+        return Inertia::render('Admin/Product/Edit', compact(''));
+    }
+
+    public function deleteProduct(Product $product)
     {
         try {
 

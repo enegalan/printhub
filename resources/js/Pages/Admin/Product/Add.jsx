@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import ProfileLayout from "@/Layouts/ProfileLayout";
+import Dashboard from "../Dashboard";
 import InputLabel from "@/Components/InputLabel";
 import TextInput from "@/Components/TextInput";
 import InputError from "@/Components/InputError";
@@ -7,8 +7,9 @@ import { useForm } from "@inertiajs/inertia-react";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { Link } from "@inertiajs/react";
 import toast, { Toaster } from 'react-hot-toast';
+import { router } from "@inertiajs/react";
 
-export default function ProviderDashboard({ user, categories = [] }) {
+export default function addProduct({ user, categories = [] }) {
   const { data, setData, post, processing, errors, reset } = useForm({
     name: "",
     description: "",
@@ -52,15 +53,15 @@ export default function ProviderDashboard({ user, categories = [] }) {
     formData.append("user_id", data.user_id);
     try {
       post(route("product.store"));
-      window.location.href = route('profile.provider')
+      window.location.href = route('admin.products')
     } catch (e) {
       onError(e);
     }
   };
 
   return (
-    <ProfileLayout user={user} pageName="Provider" pageSubtitle="Add new product">
-      <Link href={route('profile.provider')} className="bg-[lightgrey] w-[40px] p-3 rounded-lg mb-5 self-start transition hover:bg-[#bbbbbb]">
+    <Dashboard pageName="Products" pageSubtitle="Add new product">
+      <Link href={route('admin.products')} className="bg-[lightgrey] w-[40px] p-3 rounded-lg mb-5 self-start transition hover:bg-[#bbbbbb]">
           <IoMdArrowRoundBack />
       </Link>
       <Toaster />
@@ -192,6 +193,6 @@ export default function ProviderDashboard({ user, categories = [] }) {
           </div>
         </form>
       </div>
-    </ProfileLayout>
+    </Dashboard>
   );
 }

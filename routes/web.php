@@ -62,8 +62,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/profile/wishlist/delete/{product}', [UserController::class, 'deleteProductFromWishlist'])->name('delete.product.wishlist');
     //PROVIDERS
     Route::get('/profile/provider', [ProviderController::class, 'dashboard'])->name('profile.provider');
-    Route::get('/profile/provider/add-product', [ProviderController::class, 'add'])->name('provider.add');
-    Route::get('/profile/provider/edit-product/{product}', [ProviderController::class, 'edit'])->name('provider.edit');
+    Route::get('/profile/provider/create', [ProviderController::class, 'add'])->name('provider.add');
+    Route::get('/profile/provider/edit/{product}', [ProviderController::class, 'edit'])->name('provider.edit');
     // ---
     Route::post('/upload-avatar', [UserController::class, 'avatar'])->name('profile.avatar');
     Route::delete('/avatar-delete', [UserController::class, 'deleteAvatar'])->name('profile.avatar-delete');
@@ -138,17 +138,31 @@ Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin.dashboa
 
 //USERS
 Route::get('/admin/users', [AdminController::class, 'users'])->name('admin.users');
+<<<<<<< HEAD
+Route::get('/admin/user/add', [AdminController::class, 'createUser'])->name('admin.user.add');
+Route::post('/admin/user/add', [AdminController::class, 'storeUser'])->name('admin.user.store');
+Route::get('/admin/user/edit/{user}', [AdminController::class, 'editUser'])->name('admin.user.edit');
+Route::post('/admin/user/edit/{user}', [AdminController::class, 'updateUser'])->name('admin.user.update');
+Route::post('/admin/user/toggle/{user}', [AdminController::class, 'toggleStatus'])->name('admin.user.toggle');
+=======
 Route::get('/admin/create', [AdminController::class, 'createUser'])->name('admin.user.add');
 Route::post('/admin/add-user', [AdminController::class, 'storeUser'])->name('admin.user.store');
 Route::get('/admin/user/{user}/edit', [AdminController::class, 'editUser'])->name('admin.user.edit');
 Route::post('/admin/user/{user}/edited', [AdminController::class, 'updateUser'])->name('admin.user.update');
 Route::post('/admin/user/{user}/toggle', [AdminController::class, 'toggleStatus'])->name('admin.user.toggle');
+>>>>>>> 22b2a7256ac2a03f7b11115cd19bf5c65a0ef34b
 
 //PRODUCTS
 Route::get('/admin/products', [AdminController::class, 'products'])->name('admin.products');
+<<<<<<< HEAD
+Route::get('/admin/product/create', [AdminController::class, 'addProduct'])->name('admin.product.add');
+Route::get('/admin/product/edit/{product}', [AdminController::class, 'editProduct'])->name('admin.product.edit');
+Route::delete('/admin/product/delete/{product}', [AdminController::class, 'deleteProduct'])->name('admin.product.delete');
+=======
 Route::get('/admin/product/create', [AdminController::class, 'addproduct'])->name('admin.product.edit');
 Route::get('/admin/product/{product}/edit', [AdminController::class, 'editproduct'])->name('admin.product.edit');
 Route::delete('/admin/product/{product}/delete', [AdminController::class, 'deleteproduct'])->name('admin.product.delete');
+>>>>>>> 22b2a7256ac2a03f7b11115cd19bf5c65a0ef34b
 
 //MATERIALS
 Route::get('/admin/materials', [AdminController::class, 'materials'])->name('admin.materials');
@@ -156,42 +170,67 @@ Route::get('/admin/material/create', [AdminController::class, 'addMaterial'])->n
 Route::post('/admin/material/store', [AdminController::class, 'storeMaterial'])->name('admin.store.material');
 Route::get('/admin/material/edit/{material}', [AdminController::class, 'editMaterial'])->name('admin.material.edit');
 Route::post('/admin/material/update/{material}', [AdminController::class, 'updateMaterial'])->name('admin.update.material');
-Route::delete('/admin/material/{material}/delete', [AdminController::class, 'deletematerial'])->name('admin.material.delete');
+Route::delete('/admin/material/delete/{material}', [AdminController::class, 'deletematerial'])->name('admin.material.delete');
 
 //ORDERS
 Route::get('/admin/orders', [AdminController::class, 'orders'])->name('admin.orders');
-Route::get('/admin/order/{order}/view', [AdminController::class, 'vieworder'])->name('admin.order.view');
+Route::get('/admin/order/view/{order}', [AdminController::class, 'vieworder'])->name('admin.order.view');
 
 //COLORS
 Route::get('/admin/colors', [AdminController::class, 'colors'])->name('admin.colors');
+<<<<<<< HEAD
+Route::get('/admin/color/add', [AdminController::class, 'adduser'])->name('admin.color.add');
+Route::get('/admin/color/edit/{color}', [AdminController::class, 'edituser'])->name('admin.color.edit');
+=======
 Route::get('/admin/color/create', [AdminController::class, 'addColor'])->name('admin.color.add');
 Route::post('/admin/color/store', [AdminController::class, 'storeColor'])->name('admin.store.color');
 Route::get('/admin/color/{color}/edit', [AdminController::class, 'editColor'])->name('admin.color.edit');
 Route::post('/admin/color/update/{color}', [AdminController::class, 'updateColor'])->name('admin.update.color');
+>>>>>>> 22b2a7256ac2a03f7b11115cd19bf5c65a0ef34b
 Route::delete('/admin/color/{color}/delete', [AdminController::class, 'deletecolor'])->name('admin.color.delete');
 
 //COUNTRIES
 Route::get('/admin/countries', [AdminController::class, 'countries'])->name('admin.countries');
+<<<<<<< HEAD
+Route::get('/admin/country/create-country', [AdminController::class, 'adduser'])->name('admin.country.add');
+Route::get('/admin/country/edit/{country}', [AdminController::class, 'edituser'])->name('admin.country.edit');
+Route::get('/admin/country/{country}/regions', [AdminController::class, 'viewregionscountry'])->name('admin.country.viewregions');
+Route::delete('/admin/country/delete/{country}', [AdminController::class, 'deletecountry'])->name('admin.country.delete');
+=======
 Route::get('/admin/country/create', [AdminController::class, 'adduser'])->name('admin.country.add');
 Route::get('/admin/country/{country}/edit', [AdminController::class, 'edituser'])->name('admin.country.edit');
 Route::get('/admin/country/{country}/regions', [AdminController::class, 'viewCountryRegions'])->name('admin.country.viewregions');
 Route::delete('/admin/country/{country}/delete', [AdminController::class, 'deletecountry'])->name('admin.country.delete');
+>>>>>>> 22b2a7256ac2a03f7b11115cd19bf5c65a0ef34b
 
 //REGIONS
 Route::get('/admin/regions', [AdminController::class, 'regions'])->name('admin.regions');
 Route::get('/admin/region/create', [AdminController::class, 'adduser'])->name('admin.region.add');
+<<<<<<< HEAD
+Route::get('/admin/region/edit/{region}', [AdminController::class, 'edituser'])->name('admin.region.edit');
+Route::delete('/admin/region/delete/{region}', [AdminController::class, 'deleteregion'])->name('admin.region.delete');
+
+=======
 Route::get('/admin/region/{region}/edit', [AdminController::class, 'edituser'])->name('admin.region.edit');
 Route::delete('/admin/region/{region}/delete', [AdminController::class, 'deleteregion'])->name('admin.region.delete');
+>>>>>>> 22b2a7256ac2a03f7b11115cd19bf5c65a0ef34b
 
 //CATEGORIES
 Route::get('/admin/categories', [AdminController::class, 'categories'])->name('admin.categories');
 Route::get('/admin/category/create', [AdminController::class, 'addcategory'])->name('admin.category.add');
+<<<<<<< HEAD
+Route::get('/admin/category/edit/{category}', [AdminController::class, 'editcategory'])->name('admin.category.edit');
+Route::delete('/admin/category/delete/{category}', [AdminController::class, 'deletecategory'])->name('admin.category.delete');
+
+
+=======
 Route::post('/admin/category/store', [AdminController::class, 'storeCategory'])->name('admin.store.category');
 Route::get('/admin/category/{category}/edit', [AdminController::class, 'editcategory'])->name('admin.category.edit');
 Route::post('/admin/category/update/{category}', [AdminController::class, 'updateCategory'])->name('admin.update.category');
 Route::delete('/admin/category/{category}/delete', [AdminController::class, 'deletecategory'])->name('admin.category.delete');
 
 //PRODUCTS
+>>>>>>> 22b2a7256ac2a03f7b11115cd19bf5c65a0ef34b
 Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('product.destroy');
 Route::post('/products/{product}', [ProductController::class, 'update'])->name('product.update');
 Route::post('/products', [ProductController::class, 'store'])->name('product.store');

@@ -1,30 +1,25 @@
 import React, { useEffect, useState } from "react";
-import ProfileLayout from "@/Layouts/ProfileLayout";
+import Dashboard from "../Dashboard";
 import InputLabel from "@/Components/InputLabel";
 import TextInput from "@/Components/TextInput";
 import InputError from "@/Components/InputError";
 import { useForm } from "@inertiajs/inertia-react";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { Link } from "@inertiajs/react";
-import toast, { Toaster } from 'react-hot-toast';
+import { Toaster } from "react-hot-toast";
 
-export default function ProviderDashboard({ user, categories = [] }) {
+export default function ProviderDashboard({ user, product, categories = [] }) {
   const { data, setData, post, processing, errors, reset } = useForm({
-    name: "",
-    description: "",
+    name: product.name,
+    description: product.description,
     image: null,
-    price: "",
-    categories: [],
+    price: product.price,
+    categories: product.categories.map((category) => category.id),
     user_id: user.id,
   });
-  const onAdd = () => {
-    toast.success('Product added successfully');
-  }
-
-  const onError = (e) => {
-    toast.error('Error adding product');
-  }
-  const [previewUrl, setPreviewUrl] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState(
+    `/storage/products/${product.image}`
+  );
   const handleFileChange = (e) => {
     const selectedImage = e.target.files[0];
     setData("image", selectedImage);
@@ -40,7 +35,7 @@ export default function ProviderDashboard({ user, categories = [] }) {
       }
     };
   }, [previewUrl]);
-
+  
   const submit = (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -50,21 +45,27 @@ export default function ProviderDashboard({ user, categories = [] }) {
     formData.append("price", data.price);
     formData.append("categories", data.categories);
     formData.append("user_id", data.user_id);
-    try {
-      post(route("product.store"));
-      window.location.href = route('profile.provider')
-    } catch (e) {
-      onError(e);
-    }
+    formData.append("product_id", data.product_id);
+    
+    console.log(data.image ? data.image : image);
+    console.log([...formData.entries()]);
+    post(route("product.update", product));
   };
 
+  const handleCheck = (categoryId)=>{
+    return data.categories.includes(categoryId);
+  }
+
   return (
-    <ProfileLayout user={user} pageName="Provider" pageSubtitle="Add new product">
-      <Link href={route('profile.provider')} className="bg-[lightgrey] w-[40px] p-3 rounded-lg mb-5 self-start transition hover:bg-[#bbbbbb]">
-          <IoMdArrowRoundBack />
+    <Dashboard pageName="Products" pageSubtitle="Edit a product">
+      <Link
+        href={route("admin.products")}
+        className="bg-[lightgrey] w-[40px] p-3 rounded-lg mb-5 self-start transition hover:bg-[#bbbbbb]"
+      >
+        <IoMdArrowRoundBack />
       </Link>
       <Toaster />
-      <h1 className="text-2xl mb-5 text-center">Add new product</h1>
+      <h1 className="text-2xl mb-5 text-center">Edit product</h1>
       <div className="row-span-4 bg-white rounded-xl p-4 lg:mx-20">
         <form
           className="px-10 py-5 flex flex-col gap-5"
@@ -72,7 +73,7 @@ export default function ProviderDashboard({ user, categories = [] }) {
           encType="multipart/form-data"
         >
           <div>
-            <InputLabel forInput="name" value="Product name*" className="text-gray-900" />
+            <InputLabel forInput="name" value="Product name" className="" />
             <TextInput
               id="name"
               name="name"
@@ -81,12 +82,11 @@ export default function ProviderDashboard({ user, categories = [] }) {
               autoComplete="name"
               isFocused={true}
               onChange={(e) => setData("name", e.target.value)}
-              required
             />
             <InputError message={errors.name} className="mt-2" />
           </div>
           <div>
-            <InputLabel value="Description" className="text-gray-900" />
+            <InputLabel value="Description" className="" />
             <textarea
               id="description"
               name="description"
@@ -103,7 +103,7 @@ export default function ProviderDashboard({ user, categories = [] }) {
           <div>
             <InputLabel
               forInput="image"
-              value="Choose an image*"
+              value="Choose an image"
               className="font-medium text-gray-900"
             />
             <TextInput
@@ -119,7 +119,6 @@ export default function ProviderDashboard({ user, categories = [] }) {
               autoComplete="image"
               isFocused={true}
               onChange={handleFileChange}
-              required
             />
             {previewUrl && (
               <img
@@ -133,21 +132,20 @@ export default function ProviderDashboard({ user, categories = [] }) {
           <div>
             <InputLabel
               forInput="price"
-              value="Set price*"
+              value="Set price"
               className="font-medium text-gray-900"
             />
             <div className="flex gap-2">
               <TextInput
                 id="price"
                 type="number"
-                step="any"
+                step="0.1"
                 name="price"
                 value={data.price}
                 className="mt-1 w-full"
                 autoComplete="price"
                 isFocused={true}
                 onChange={(e) => setData("price", e.target.value)}
-                required
               />
             </div>
             <InputError message={errors.price} className="mt-2" />
@@ -162,24 +160,39 @@ export default function ProviderDashboard({ user, categories = [] }) {
               {categories.map((category, index) => (
                 <div key={index} className="flex gap-2">
                   <TextInput
-                    id="categories"
+                    id={`category-${category.id}`}
                     type="checkbox"
                     name="categories[]"
-                    value={data.categories.includes(category.id)}
+                    value={category.id}
                     className="mt-1"
-                    autoComplete="categories"
+                    autoComplete={`categories-${category.id}`}
                     isFocused={true}
+                    checked={handleCheck(category.id)}
                     onChange={(e) => {
                       const isChecked = e.target.checked;
-                      setData(
-                        "categories",
-                        isChecked
-                          ? [...data.categories, category.id]
-                          : data.categories.filter((id) => id !== category.id)
-                      );
+                      setData((prevData) => {
+                        let updatedCategories;
+                        if (isChecked) {
+                          // Agregar la categoría si no está presente
+                          updatedCategories = [...prevData.categories, category.id];
+                        } else {
+                          // Filtrar la categoría si ya está presente
+                          updatedCategories = prevData.categories.filter(
+                            (categoryId) => categoryId !== category.id
+                          );
+                        }
+        
+                        return {
+                          ...prevData,
+                          categories: updatedCategories,
+                        };
+                      });
                     }}
                   />
-                  <label> {category.name.charAt(0).toUpperCase() + category.name.slice(1)}</label>
+                  <label htmlFor={`category-${category.id}`}>
+                    {category.name.charAt(0).toUpperCase() +
+                      category.name.slice(1)}
+                  </label>
                 </div>
               ))}
             </div>
@@ -192,6 +205,6 @@ export default function ProviderDashboard({ user, categories = [] }) {
           </div>
         </form>
       </div>
-    </ProfileLayout>
+    </Dashboard>
   );
 }
