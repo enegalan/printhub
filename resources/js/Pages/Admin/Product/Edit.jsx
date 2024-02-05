@@ -7,25 +7,28 @@ import { useForm } from "@inertiajs/inertia-react";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { Link } from "@inertiajs/react";
 import { Toaster } from "react-hot-toast";
+import { StlViewer } from "react-stl-viewer";
+import { router } from "@inertiajs/react";
 
 export default function ProviderDashboard({ user, product, categories = [] }) {
+  console.log(product)
   const { data, setData, post, processing, errors, reset } = useForm({
     name: product.name,
     description: product.description,
-    image: null,
+    file: product.file,
     price: product.price,
     categories: product.categories.map((category) => category.id),
     user_id: user.id,
   });
   const [previewUrl, setPreviewUrl] = useState(
-    `/storage/products/${product.image}`
+    product.file
   );
   const handleFileChange = (e) => {
-    const selectedImage = e.target.files[0];
-    setData("image", selectedImage);
+    const selectedFile = e.target.files[0];
+    setData("file", selectedFile);
 
     // Create an object URL for the preview
-    const objectUrl = URL.createObjectURL(selectedImage);
+    const objectUrl = URL.createObjectURL(selectedFile);
     setPreviewUrl(objectUrl);
   };
   useEffect(() => {
@@ -35,24 +38,22 @@ export default function ProviderDashboard({ user, product, categories = [] }) {
       }
     };
   }, [previewUrl]);
-  
+
   const submit = (e) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("name", data.name);
     formData.append("description", data.description);
-    formData.append("image", data.image);
+    formData.append("file", data.file);
     formData.append("price", data.price);
     formData.append("categories", data.categories);
     formData.append("user_id", data.user_id);
     formData.append("product_id", data.product_id);
-    
-    console.log(data.image ? data.image : image);
-    console.log([...formData.entries()]);
     post(route("product.update", product));
+    window.location.href = route('admin.products');
   };
 
-  const handleCheck = (categoryId)=>{
+  const handleCheck = (categoryId) => {
     return data.categories.includes(categoryId);
   }
 
@@ -102,32 +103,30 @@ export default function ProviderDashboard({ user, product, categories = [] }) {
           </div>
           <div>
             <InputLabel
-              forInput="image"
-              value="Choose an image"
+              forInput="file"
+              value="Choose an STL file*"
               className="font-medium text-gray-900"
             />
             <TextInput
-              id="image"
+              id="file"
               type="file"
-              name="image"
+              name="file"
               className="mt-1 block shadow-transparent text-slate-500
                 file:mr-4 file:py-2 file:px-10
                 file:rounded-full file:border-0
                 file:text-sm file:font-semibold
                 file:bg-blue-50 file:text-blue-700
                 hover:file:bg-blue-100 "
-              autoComplete="image"
+              autoComplete="file"
               isFocused={true}
               onChange={handleFileChange}
             />
             {previewUrl && (
-              <img
-                src={previewUrl}
-                alt="Image Preview"
-                className="mt-2 w-32 h-32"
-              />
+              <div className="my-5 bg-gray-200 rounded-lg">
+                <StlViewer modelProps={{ color: 'grey' }} style={{ top: 0, left: 0, width: '100%', height: '50vh', }} orbitControls shadows url={previewUrl} />
+              </div>
             )}
-            <InputError message={errors.image} className="mt-2" />
+            <InputError message={errors.file} className="mt-2" />
           </div>
           <div>
             <InputLabel
@@ -181,7 +180,7 @@ export default function ProviderDashboard({ user, product, categories = [] }) {
                             (categoryId) => categoryId !== category.id
                           );
                         }
-        
+
                         return {
                           ...prevData,
                           categories: updatedCategories,

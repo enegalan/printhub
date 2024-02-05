@@ -60,7 +60,7 @@ export default function Wishlist({ user, products = [] }) {
                         </Link>
                         <div className="border relative z-10 max-w-sm rounded-lg shadow-lg bg-gray-100 flex flex-col">
                             <button
-                                className="absolute top-[-10px] right-[-10px] px-4 py-2 z-100 text-white cursor-pointer bg-red-500 rounded-lg p-1 transition ease-in delay-400 hover:scale-105"
+                                className="absolute top-[-10px] right-[-10px] px-4 py-2 z-[100] text-white cursor-pointer bg-red-500 rounded-lg p-1 transition ease-in delay-400 hover:scale-105"
                                 onClick={() => handleDelete(product.id)}
                             >
                                 X

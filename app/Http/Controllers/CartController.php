@@ -46,8 +46,11 @@ class CartController extends Controller
         Add product to cart from market
     */
     public function store(Request $request, string $id) {
+        //return $request->all();
         // Get user id
         $userId = auth()->user()->id;
+
+        $quantity = $request->input('quantity');
         // Get default color
         if ($request->input('color')) {
             $color = Color::findOrFail($request->input('color'));
@@ -84,10 +87,10 @@ class CartController extends Controller
             Stock_cart::create([
                 'cart_id' => $cart->id,
                 'prod_comb_id' => $prodCombId,
-                'quantity' => 1
+                'quantity' => $quantity,
             ]);
         }
-        return redirect()->back();
+        return redirect()->route('user.cart');
     }
 
 }

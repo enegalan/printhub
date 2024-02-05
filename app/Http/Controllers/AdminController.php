@@ -171,8 +171,13 @@ class AdminController extends Controller
         return Inertia::render('Admin/Product/Add', compact('user', 'categories'));
     }
 
-    public function editProduct() {
-        return Inertia::render('Admin/Product/Edit', compact(''));
+    public function editProduct(Product $product) {
+        $user = auth()->user();
+        $user->roles();
+        $roles = Role::all();
+        $product->load('categories');
+        $categories = Category::all();
+        return Inertia::render('Admin/Product/Edit', compact('product', 'user', 'roles', 'categories'));
     }
 
     public function deleteProduct(Product $product)
