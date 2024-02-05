@@ -14,7 +14,8 @@ export default function Add() {
     });
 
     const onAdd = () => {
-        toast.success('Category created successfully');
+        const successMessage = 'Category created successfully';
+        localStorage.setItem('successMessageCategory', successMessage);
     }
 
     const onError = (e) => {
