@@ -11,7 +11,7 @@ export default function ProviderShow({ user, products }) {
   return (
     <ProfileLayout user={user} pageName="Provider" pageSubtitle="Provider dashboard - Products list">
       <Link
-        href={route("profile.provider.dashboard")}
+        href={route("profile.provider")}
         className="bg-[lightgrey] w-[40px] p-3 rounded-lg mb-5 self-start transition hover:bg-[#bbbbbb]"
       >
         <IoMdArrowRoundBack />

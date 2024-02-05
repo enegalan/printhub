@@ -11,7 +11,7 @@ export default function ({ auth, orders }) {
   return (
     <ProfileLayout pageName='Orders' user={auth.user} pageSubtitle='Checkout the orders'>
         <Link
-        href={route("profile.provider.dashboard")}
+        href={route("profile.provider")}
         className="bg-[lightgrey] w-[40px] p-3 rounded-lg mb-5 self-start transition hover:bg-[#bbbbbb]"
       >
         <IoMdArrowRoundBack />

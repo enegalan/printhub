@@ -88,7 +88,7 @@ export default function ProfileLayout({ children, pageName = "Dashboard", pageSu
             {isProvider && (
               <li className="hover:bg-blue-100 py-2">
                 <Link
-                  href={route("profile.provider.dashboard")}
+                  href={route("profile.provider")}
                   className="flex gap-2 items-center px-5 "
                 >
                   <FaHandshake className="text-blue-700 hidden md:block" />
