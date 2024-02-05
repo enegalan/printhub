@@ -29,7 +29,9 @@ class ProductController extends Controller
 
         $query = $request->input('query');
         $products = Product::where('name', 'like', "%$query%")->where('visible', true)->paginate($this->productPerPagination);
-        return Inertia::render('Market', ['products' => $products]);
+        $colors = Color::all();
+
+        return Inertia::render('Market', ['products' => $products, 'colors' => $colors]);
     }
 
     public function filter(Request $request)
@@ -93,8 +95,9 @@ class ProductController extends Controller
                 $productsQuery->where('name', 'like', '%' . $search . '%');
             }
             $products = $productsQuery->where('visible', true)->paginate($this->productPerPagination);
+            $colors = Color::all();
 
-            return Inertia::render('Market', ['products' => $products]);
+            return Inertia::render('Market', ['products' => $products, 'colors' => $colors]);
 
         } else {
             return $this->getAll();
