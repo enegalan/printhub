@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\UserController;
 use App\Models\Country;
+use App\Models\Product;
 use App\Models\Region;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -24,7 +25,8 @@ use Inertia\Inertia;
 
 Route::get('/', function () {
     app()->call([UserController::class, 'getRoles']);
-    return Inertia::render('Index');
+    $latestProducts = Product::inRandomOrder()->limit(4)->get();
+    return Inertia::render('Index',compact('latestProducts'));
 })->name('index');
 
 Route::get('/about', function () {
@@ -171,13 +173,13 @@ Route::get('/admin/order/view/{order}', [AdminController::class, 'vieworder'])->
 
 //COLORS
 Route::get('/admin/colors', [AdminController::class, 'colors'])->name('admin.colors');
-Route::get('/admin/color/add', [AdminController::class, 'adduser'])->name('admin.color.add');
+Route::get('/admin/color/create', [AdminController::class, 'addColor'])->name('admin.color.add');
 Route::get('/admin/color/edit/{color}', [AdminController::class, 'edituser'])->name('admin.color.edit');
 Route::delete('/admin/color/{color}/delete', [AdminController::class, 'deletecolor'])->name('admin.color.delete');
 
 //COUNTRIES
 Route::get('/admin/countries', [AdminController::class, 'countries'])->name('admin.countries');
-Route::get('/admin/country/create-country', [AdminController::class, 'adduser'])->name('admin.country.add');
+Route::get('/admin/country/create', [AdminController::class, 'addCountry'])->name('admin.country.add');
 Route::get('/admin/country/edit/{country}', [AdminController::class, 'edituser'])->name('admin.country.edit');
 Route::get('/admin/country/{country}/regions', [AdminController::class, 'viewregionscountry'])->name('admin.country.viewregions');
 Route::delete('/admin/country/delete/{country}', [AdminController::class, 'deletecountry'])->name('admin.country.delete');
