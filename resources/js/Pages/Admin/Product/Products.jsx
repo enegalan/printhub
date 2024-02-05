@@ -19,7 +19,7 @@ export default function ({ products }) {
     <Dashboard>
       <div className='flex flex-col min-h-full '>
         <Toaster />
-        <Link href={route('provider.add')} className="bg-[lightgrey] w-[40px] p-3 rounded-lg mb-5 self-end transition hover:bg-[#bbbbbb]">
+        <Link href={route('admin.product.add')} className="bg-[lightgrey] w-[40px] p-3 rounded-lg mb-5 self-end transition hover:bg-[#bbbbbb]">
           <FaPlus />
         </Link>
         <div className='overflow-x-scroll'>
