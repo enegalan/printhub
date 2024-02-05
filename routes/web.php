@@ -170,6 +170,7 @@ Route::get('/admin/colors', [AdminController::class, 'colors'])->name('admin.col
 Route::get('/admin/color/create', [AdminController::class, 'addColor'])->name('admin.color.add');
 Route::get('/admin/color/edit/{color}', [AdminController::class, 'editColor'])->name('admin.color.edit');
 Route::delete('/admin/color/{color}/delete', [AdminController::class, 'deletecolor'])->name('admin.color.delete');
+Route::post('/admin/color/update/{color}', [AdminController::class, 'updateColor'])->name('admin.update.color');
 
 //COUNTRIES
 Route::get('/admin/countries', [AdminController::class, 'countries'])->name('admin.countries');
