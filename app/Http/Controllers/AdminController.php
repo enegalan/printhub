@@ -7,15 +7,16 @@ use App\Models\Color;
 use App\Models\Country;
 use App\Models\Material;
 use App\Models\Order;
+use App\Models\Prod_comb;
 use App\Models\Product;
 use App\Models\Region;
 use App\Models\Role;
 use App\Models\Ship_address;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
-use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -31,11 +32,12 @@ class AdminController extends Controller
         $usersMonth = $this->getUsersThisMonth();
         $ordersZone = $this->getOrdersByZoneThisYear();
         return (
-            Inertia::render('Admin/Reports', compact('ordersYear',  'usersMonth', 'ordersZone'))
+            Inertia::render('Admin/Reports', compact('ordersYear', 'usersMonth', 'ordersZone'))
         );
     }
 
-    public function getOrdersThisYear() {
+    public function getOrdersThisYear()
+    {
         $currentYear = date('Y');
         $months = range(1, 12);
 
@@ -53,7 +55,8 @@ class AdminController extends Controller
         return $result;
     }
 
-    public function getUsersThisMonth () {
+    public function getUsersThisMonth()
+    {
         $currentMonth = date('m');
         $daysInMonth = cal_days_in_month(CAL_GREGORIAN, $currentMonth, date('Y'));
         $days = range(1, $daysInMonth);
@@ -74,7 +77,8 @@ class AdminController extends Controller
         return $result;
     }
 
-    public function getOrdersByZoneThisYear () {
+    public function getOrdersByZoneThisYear()
+    {
         // Get all orders this year
         $currentYear = date('Y');
         $orders = Order::whereYear('created_at', $currentYear)->get();
@@ -114,7 +118,8 @@ class AdminController extends Controller
         );
     }
 
-    public function viewCountryRegions(Country $country) {
+    public function viewCountryRegions(Country $country)
+    {
         $regions = Region::where('country_id', $country->id)->paginate($this->productPerPagination);
         return Inertia::render('Admin/Country/View', compact('regions'));
     }
@@ -155,32 +160,25 @@ class AdminController extends Controller
 
     public function products()
     {
-        $products = Product::query()
-        ->when(request('search'), function ($query, $search) {
-            $query->where('name', 'like', "%{$search}%");
-        })
-        ->paginate(10)
-        ->withQueryString();
-
-        $products->load('user','categories');
-
-        $filters = request()->only(['search']);
-
         app()->call([UserController::class, 'getRoles']);
-
+        $products = Product::where('visible', true)->paginate($this->productPerPagination);
+        $products->load('user');
+        $products->load('categories');
         return (
-            Inertia::render('Admin/Product/Products', ['products' => $products, 'filters' => $filters])
+            Inertia::render('Admin/Product/Products', ['products' => $products])
         );
     }
 
-    public function addProduct() {
+    public function addProduct()
+    {
         app()->call([UserController::class, 'getRoles']);
         $categories = Category::all();
         $user = auth()->user();
         return Inertia::render('Admin/Product/Add', compact('user', 'categories'));
     }
 
-    public function editProduct(Product $product) {
+    public function editProduct(Product $product)
+    {
         $user = auth()->user();
         $user->roles();
         $roles = Role::all();
@@ -218,7 +216,8 @@ class AdminController extends Controller
         return Inertia::render('Admin/User/Add', ['user' => $user, 'roles' => $roles]);
     }
 
-    public function storeUser(Request $request) {
+    public function storeUser(Request $request)
+    {
         $validatedData = request()->validate([
             'name' => 'string|required',
             'lastname' => 'string|required',
@@ -260,7 +259,8 @@ class AdminController extends Controller
         return Inertia::render('Admin/User/Edit', ['user' => $user, 'roles' => $roles]);
     }
 
-    public function updateUser(Request $request, $id, $withTrashed = false) {
+    public function updateUser(Request $request, $id, $withTrashed = false)
+    {
         $user = $withTrashed ? User::withTrashed()->findOrFail($id) : User::findOrFail($id);
         $validatedData = $request->validate([
             'name' => 'string|required',
@@ -269,8 +269,7 @@ class AdminController extends Controller
             'email' => 'string|required',
             'roles' => 'array',
         ]);
-    
-        
+
         // Prepare the update array with fields that should always be updated
         $updateData = [
             'name' => $validatedData['name'],
@@ -278,18 +277,18 @@ class AdminController extends Controller
             'birthdate' => $validatedData['birthdate'],
             'email' => $validatedData['email'],
         ];
-    
+
         // Check if password is provided in the request, and include it in the update array
         if ($request->has('password')) {
             $updateData['password'] = bcrypt($request->input('password')); // Hash the password
         }
-    
+
         // Update user attributes
         $user->update($updateData);
 
         if ($request->input('roles')) {
             $roles = $request->input('roles');
-    
+
             $user->roles()->detach();
             if (count($roles) > 0) {
                 $roleIds = array_map(function ($role) {
@@ -300,23 +299,23 @@ class AdminController extends Controller
         } else {
             $user->roles()->detach();
         }
-    
+
         if ($request->hasFile('avatar')) {
             $avatar = $request->file('avatar');
-    
+
             $avatarName = $avatar->hashName();
             $avatar->storeAs('avatars', $avatarName, 'public');
-    
+
             // Delete the previous avatar if it exists
             if ($user->avatar) {
                 Storage::disk('public')->delete('avatars/' . $user->avatar);
             }
-    
+
             // Update user avatar
             $user->update(['avatar' => $avatarName]);
             return "Avatar updated";
         }
-    
+
         return redirect()->route('admin.users');
     }
 
@@ -348,6 +347,62 @@ class AdminController extends Controller
         );
     }
 
+    public function viewOrder(Order $order)
+{
+    $order->load(['cart.stock_carts.prod_comb.product.user', 'invoice']);
+    $user = auth()->user();
+    $user->roles();
+    $userId = $user->id;
+
+    // Extracting products from the order
+    $products = [];
+
+    // Obtener el primer cart que tenga active == 1
+    $cart = $order->cart()->where('active', 1)->first();
+    $cart->load('stock_carts');
+    if ($cart) {
+        // Obtener el prod_comb_id desde stock_carts
+        $stockCart = $cart->stock_carts->first();
+        
+        if ($stockCart) {
+            $prodCombId = $stockCart->prod_comb_id;
+
+            // Obtener el product_id, color_id y material_id desde prod_combs
+            $prodComb = Prod_comb::findOrFail($prodCombId);
+
+            $color = Color::find($prodComb->color_id);
+            $colorName = $color->name;
+            $colorHex = $color->hex;
+
+
+            if ($prodComb) {
+                $productId = $prodComb->product_id;
+
+                // Obtener el name, image, file y price desde products
+                $product = Product::findOrFail($productId);
+
+                if ($product) {
+                    // Agregar la información del producto al array de productos
+                    $products[] = [
+                        'id' => $product->id,
+                        'name' => $product->name,
+                        'image' => $product->image,
+                        'file' => $product->file,
+                        'price' => $product->price,
+                        'colorName' => $colorName,
+                        'colorHex' => $colorHex,
+                    ];
+                }
+            }
+        }
+    }
+
+    return Inertia::render('Admin/Order/ViewOrder', [
+        'order' => $order,
+        'products' => $products,
+    ]);
+}
+
     public function materials()
     {
         app()->call([UserController::class, 'getRoles']);
@@ -357,11 +412,13 @@ class AdminController extends Controller
         );
     }
 
-    public function addMaterial () {
+    public function addMaterial()
+    {
         return Inertia::render('Admin/Material/Add');
     }
-    
-    public function storeMaterial (Request $request) {
+
+    public function storeMaterial(Request $request)
+    {
         $validatedData = $request->validate([
             'name' => 'required|min:1',
         ]);
@@ -370,11 +427,13 @@ class AdminController extends Controller
         return redirect()->route('admin.materials');
     }
 
-    public function editMaterial (Material $material) {
+    public function editMaterial(Material $material)
+    {
         return Inertia::render('Admin/Material/Edit', compact('material'));
     }
 
-    public function updateMaterial (Request $request, Material $material) {
+    public function updateMaterial(Request $request, Material $material)
+    {
         $validatedData = $request->validate([
             'name' => 'required|min:1',
         ]);
@@ -403,15 +462,18 @@ class AdminController extends Controller
         );
     }
 
-    public function addColor () {
+    public function addColor()
+    {
         return Inertia::render('Admin/Color/Add');
     }
 
-    public function editColor (Color $color) {
+    public function editColor(Color $color)
+    {
         return Inertia::render('Admin/Color/Edit', compact('color'));
     }
 
-    public function storeColor (Request $request) {
+    public function storeColor(Request $request)
+    {
         $validatedData = $request->validate([
             'name' => 'required|min:1',
             'hex' => 'required',
@@ -422,7 +484,8 @@ class AdminController extends Controller
         return redirect()->route('admin.colors');
     }
 
-    public function updateColor (Request $request, Color $color) {
+    public function updateColor(Request $request, Color $color)
+    {
         $validatedData = $request->validate([
             'name' => 'required|min:1',
             'hex' => 'required',
@@ -453,11 +516,13 @@ class AdminController extends Controller
         );
     }
 
-    public function addCategory () {
+    public function addCategory()
+    {
         return Inertia::render('Admin/Category/Add');
     }
-    
-    public function storeCategory (Request $request) {
+
+    public function storeCategory(Request $request)
+    {
         $validatedData = $request->validate([
             'name' => 'required|min:1',
         ]);
@@ -466,17 +531,19 @@ class AdminController extends Controller
         return redirect()->route('admin.categories');
     }
 
-    public function editCategory (Category $category) {
+    public function editCategory(Category $category)
+    {
         return Inertia::render('Admin/Category/Edit', compact('category'));
     }
 
-    public function updateCategory (Request $request, Category $category) {
+    public function updateCategory(Request $request, Category $category)
+    {
         $validatedData = $request->validate([
             'name' => 'required|min:1',
         ]);
-        
+
         $category->update($validatedData);
-        
+
         return redirect()->route('admin.categories');
     }
 
