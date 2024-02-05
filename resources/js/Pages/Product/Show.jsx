@@ -26,10 +26,12 @@ export default function Show({
   const categories = product.categories;
   const { data, setData, post, processing, errors, reset } = useForm({
     color: "",
-    hex: colors[0].hex,
     material: "",
+    quantity: 1,
   });
+
   const [swiper, setSwiper] = useState(null);
+
   const goNext = () => {
     if (swiper) {
       swiper.slideNext();
@@ -40,36 +42,35 @@ export default function Show({
       swiper.slidePrev();
     }
   };
+  const handleIncrement = () => {
+    setData("quantity", data.quantity + 1);
+  };
+  const handleDecrement = () => {
+    if (data.quantity > 1) {
+      setData("quantity", data.quantity - 1);
+    }
+  };
   const submit = (e) => {
     e.preventDefault();
 
-    // Reset errors before each submission
-    reset("color", "material");
-
-    if (!data.color) {
-      setData("color", "");
-      errors.color = "Color is required";
-    }
-
-    if (!data.material) {
-      setData("material", "");
-      errors.material = "Material is required";
-    }
-
-    if (data.color && data.material) {
+    if (!data.color || !data.material) {
+      errors.color = !data.color ? "Color is required" : null;
+      errors.material = !data.material ? "Material is required" : null;
+    } else {
       try {
         post(route("cart.add", product.id), { preserveState: true });
         toast.success("Product Successfully added to cart", {
           duration: 3000,
         });
       } catch (error) {
-        toast.error("Error: Can not add this product to the cart");
+        toast.error("Error: Can not add this produt to the cart");
       }
     }
   };
   var colorNames = colors.map((color) => { return color.name });
   return (
     <main className="bg-white">
+      
       <Toaster></Toaster>
       <NavBar
         user={user}
@@ -112,14 +113,10 @@ export default function Show({
                 <div className="space-y-2">
                   <h1 className="text-xl">Color</h1>
                   <SelectOptions
-                    options={colorNames}
-                    usingObject={false}
+                    options={colors}
+                    usingObject={true}
                     name="color"
-                    onChangeOption={(o) => {
-                      var hexColor = colors.find((color) => o === color.name)?.hex;
-                      setData("color", o);
-                      setData("hex", hexColor);
-                    }}
+                    onChangeOption={(o) => {setData("color", o)}}
                   />
                   <InputError message={errors.color} className="mt-2" />
                 </div>
@@ -133,7 +130,17 @@ export default function Show({
                   />
                   <InputError message={errors.material} className="mt-2" />
                 </div>
+                
               </div>
+              <div className="flex">
+                <button className="bg-blue-950 p-3 px-5 text-white rounded" onClick={handleDecrement}>
+                    -
+                </button>
+                <input type="text" className="text-black text-xl mx-2 w-1/5 text-center" value={data.quantity} readOnly />
+                <button className="bg-blue-950 p-3 px-5 text-white rounded" onClick={handleIncrement}>
+                    +
+                </button>
+            </div>
               <div className="flex flex-col gap-2 h-full justify-end">
                 <button
                   className="bg-blue-950 font-semibold text-lg text-white py-4 w-full rounded-full mt-4 hover:bg-blue-800 text-center disabled:text-slate-500 disabled:bg-slate-800"

@@ -38,7 +38,7 @@ export default function ProductCard({image, file, name, price, allcolors, allmat
     const colorHex = selectedColorObj ? selectedColorObj.hex : "#000000";
   
     setSelectedColorHex(colorHex);
-    onUpdateProduct({ color_name: newColor });
+    onUpdateProduct({ color_hex: colorHex });
   };
 
   const handleMaterialChange = (newMaterial) => {
@@ -69,7 +69,7 @@ export default function ProductCard({image, file, name, price, allcolors, allmat
                 </div>
                 <select className="ms-2 text-black" onChange={(e) => handleColorChange(e.target[e.target.selectedIndex].text)}>
                         {allcolors.map((colorr) => 
-                            <option key={colorr.id} name={colorr.name} value={colorr.id} selected={colorr.name === selectedColor}>{colorr.name}</option>
+                            <option key={colorr.id} name={colorr.hex} value={colorr.id} selected={colorr.name === selectedColor}>{colorr.name}</option>
                         )}
                     </select>
             </div>

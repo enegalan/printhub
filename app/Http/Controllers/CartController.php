@@ -27,7 +27,7 @@ class CartController extends Controller
                 ->join('materials', 'prod_combs.material_id', '=', 'materials.id')
                 ->join('colors', 'prod_combs.color_id', '=', 'colors.id')
                 ->join('products', 'prod_combs.product_id', '=', 'products.id')
-                ->select('stock_carts.*', 'stock_carts.id as stock_cart_id', 'materials.name as material_name', 'materials.id as material_id', 'colors.name as color_name', 'colors.id as color_id', 'products.*');
+                ->select('stock_carts.*', 'stock_carts.id as stock_cart_id', 'materials.name as material_name', 'materials.id as material_id', 'colors.name as color_name', 'colors.hex as color_hex', 'colors.id as color_id', 'products.*');
         }])
         ->first();
 
@@ -46,8 +46,11 @@ class CartController extends Controller
         Add product to cart from market
     */
     public function store(Request $request, string $id) {
+        //return $request->all();
         // Get user id
         $userId = auth()->user()->id;
+
+        $quantity = $request->input('quantity');
         // Get default color
         if ($request->input('color')) {
             $color = Color::findOrFail($request->input('color'));
@@ -84,10 +87,10 @@ class CartController extends Controller
             Stock_cart::create([
                 'cart_id' => $cart->id,
                 'prod_comb_id' => $prodCombId,
-                'quantity' => 1
+                'quantity' => $quantity,
             ]);
         }
-        return redirect()->back();
+        return redirect()->route('user.cart');
     }
 
 }
