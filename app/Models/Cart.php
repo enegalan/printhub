@@ -17,4 +17,8 @@ class Cart extends Model
     public function stock_carts(){
         return $this->hasMany(Stock_cart::class);
     }
+
+    public function order(){
+        return $this->hasOne(Order::class);
+    }
 }

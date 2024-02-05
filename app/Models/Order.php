@@ -26,4 +26,8 @@ public function invoice(){
     return $this->hasOne(Invoice::class);
 }
 
+public function cart(){
+    return $this->belongsTo(Cart::class);
+}
+
 }

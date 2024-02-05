@@ -8,6 +8,7 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 import { Link } from "@inertiajs/react";
 import toast, { Toaster } from 'react-hot-toast';
 import { router } from "@inertiajs/react";
+import { StlViewer } from "react-stl-viewer";
 
 export default function addProduct({ user, categories = [] }) {
   const { data, setData, post, processing, errors, reset } = useForm({
@@ -27,11 +28,11 @@ export default function addProduct({ user, categories = [] }) {
   }
   const [previewUrl, setPreviewUrl] = useState(null);
   const handleFileChange = (e) => {
-    const selectedImage = e.target.files[0];
-    setData("image", selectedImage);
+    const selectedFile = e.target.files[0];
+    setData("file", selectedFile);
 
     // Create an object URL for the preview
-    const objectUrl = URL.createObjectURL(selectedImage);
+    const objectUrl = URL.createObjectURL(selectedFile);
     setPreviewUrl(objectUrl);
   };
   useEffect(() => {
@@ -47,7 +48,7 @@ export default function addProduct({ user, categories = [] }) {
     const formData = new FormData();
     formData.append("name", data.name);
     formData.append("description", data.description);
-    formData.append("image", data.image);
+    formData.append("file", data.file);
     formData.append("price", data.price);
     formData.append("categories", data.categories);
     formData.append("user_id", data.user_id);
@@ -103,33 +104,31 @@ export default function addProduct({ user, categories = [] }) {
           </div>
           <div>
             <InputLabel
-              forInput="image"
-              value="Choose an image*"
+              forInput="file"
+              value="Choose an STL file*"
               className="font-medium text-gray-900"
             />
             <TextInput
-              id="image"
+              id="file"
               type="file"
-              name="image"
+              name="file"
               className="mt-1 block shadow-transparent text-slate-500
                 file:mr-4 file:py-2 file:px-10
                 file:rounded-full file:border-0
                 file:text-sm file:font-semibold
                 file:bg-blue-50 file:text-blue-700
                 hover:file:bg-blue-100 "
-              autoComplete="image"
+              autoComplete="file"
               isFocused={true}
               onChange={handleFileChange}
               required
             />
             {previewUrl && (
-              <img
-                src={previewUrl}
-                alt="Image Preview"
-                className="mt-2 w-32 h-32"
-              />
+              <div className="my-5 bg-gray-200 rounded-lg">
+                <StlViewer modelProps={{ color: 'grey' }} style={{ top: 0, left: 0, width: '100%', height: '50vh', }} orbitControls shadows url={previewUrl} />
+              </div>
             )}
-            <InputError message={errors.image} className="mt-2" />
+            <InputError message={errors.file} className="mt-2" />
           </div>
           <div>
             <InputLabel

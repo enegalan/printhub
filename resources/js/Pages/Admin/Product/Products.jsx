@@ -1,13 +1,12 @@
 import React from "react";
 import Dashboard from "../Dashboard";
 import Pagination from "@/Components/Pagination";
-import { Link, useForm,router } from "@inertiajs/react";
-import toast, { Toaster } from "react-hot-toast";
-import { FaPlus } from "react-icons/fa";
-import { useState } from "react";
-export default function ({ products,filters }) {
-  const { data, prev_page_url, next_page_url, current_page, last_page } =
-    products;
+import { Link, useForm } from '@inertiajs/react';
+import toast, { Toaster } from 'react-hot-toast';
+import { FaPlus } from 'react-icons/fa';
+import { StlViewer } from 'react-stl-viewer';
+export default function ({ products }) {
+  const { data, prev_page_url, next_page_url, current_page, last_page } = products;
   const { delete: handleDelete, data: formData } = useForm();
 
   const [searchValue, setSearchValue] = useState(filters.search);
@@ -73,11 +72,26 @@ export default function ({ products,filters }) {
                   <td className="py-2 px-4 border-b">{product.name}</td>
                   <td className="py-2 px-4 border-b">{product.description}</td>
                   <td className="py-2 px-4 border-b">
+<<<<<<< HEAD
                     {product.categories.map((category) => category.name + ",")}
                   </td>
                   <td className="py-2 px-4 border-b">
                     <img src={`/storage/products/${product.image}`}></img>
                   </td>
+=======
+                    {product.categories.length > 0 ? (
+                      product.categories.map((category, index) => (
+                        <span key={index}>
+                          {category.name}
+                          {index < product.categories.length - 1 && ', '}
+                        </span>
+                      ))
+                    ) : (
+                      product.categories[0]?.name
+                    )}
+                  </td>
+                  <td className="py-2 px-4 border-b">{product.file ? (<StlViewer modelProps={{ color: 'grey' }} style={{ top: 0, left: 0, width: '100%', height: '30vh', }} orbitControls shadows url={product.file} />) : (<img src={`/storage/products/${product.image}`}></img>)}</td>
+>>>>>>> 3c3189f48ab53cab2c504008558e573ed57286b3
                   <td className="py-2 px-4 border-b">{product.price}$</td>
                   <td className="py-2 px-4 border-b">
                     <Link
