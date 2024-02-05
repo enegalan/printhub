@@ -14,7 +14,8 @@ export default function Edit({ material }) {
     });
 
     const onAdd = () => {
-        toast.success('Material updated successfully');
+        const successMessage = 'Material updated successfully';
+        localStorage.setItem('successMessageMaterial', successMessage);
     }
 
     const onError = (e) => {

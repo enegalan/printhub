@@ -14,7 +14,8 @@ export default function Add() {
     });
 
     const onAdd = () => {
-        toast.success('Material created successfully');
+        const successMessage = 'Material created successfully';
+        localStorage.setItem('successMessageMaterial', successMessage);
     }
 
     const onError = (e) => {

@@ -4,6 +4,7 @@ import Pagination from "@/Components/Pagination";
 import { Link, useForm } from '@inertiajs/react';
 import toast, { Toaster } from 'react-hot-toast';
 import { FaPlus } from 'react-icons/fa';
+import { useEffect, useState } from "react";
 
 export default function ({ materials }) {
   const { data, prev_page_url, next_page_url, current_page, last_page } = materials;
@@ -16,6 +17,14 @@ export default function ({ materials }) {
   const onError = () => {
     toast.error('Error deleting category');
   }
+
+  useEffect(() => {
+    const successMessage = localStorage.getItem('successMessageMaterial');
+    if (successMessage) {
+        toast.success(successMessage);
+        localStorage.removeItem('successMessageMaterial'); // Limpiar después de mostrar
+    }
+}, []);
   return (
     <Dashboard pageName='Materials' pageSubtitle="Manage product's materials">
       <div className='flex flex-col min-h-full '>
