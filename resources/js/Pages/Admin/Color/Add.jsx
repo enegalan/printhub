@@ -3,7 +3,7 @@ import Dashboard from '../Dashboard'
 import InputLabel from "@/Components/InputLabel";
 import TextInput from "@/Components/TextInput";
 import InputError from "@/Components/InputError";
-import { useForm } from "@inertiajs/inertia-react";
+import { useForm } from "@inertiajs/react";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { Link } from "@inertiajs/react";
 import toast, { Toaster } from 'react-hot-toast';
@@ -11,7 +11,7 @@ import toast, { Toaster } from 'react-hot-toast';
 export default function Add() {
     const { data, setData, post, processing, errors, reset } = useForm({
         name: "",
-        hex: '',
+        hex: "#000000",
         factor: 1.00,
     });
 
@@ -25,15 +25,11 @@ export default function Add() {
 
     const submit = (e) => {
         e.preventDefault();
-        const formData = new FormData();
-        formData.append("name", data.name);
-        formData.append("name", data.hex);
         try {
-            post(route("admin.store.color", formData));
+            post(route("admin.store.color"));
             onAdd();
         } catch (e) {
             onError(e);
-           
         }
     };
 
