@@ -14,7 +14,8 @@ export default function Edit({ category }) {
     });
 
     const onAdd = () => {
-        toast.success('Category updated successfully');
+        const successMessage = 'Category update successfully';
+        localStorage.setItem('successMessageCategory', successMessage);
     }
 
     const onError = (e) => {

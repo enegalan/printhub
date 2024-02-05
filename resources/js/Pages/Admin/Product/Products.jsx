@@ -1,11 +1,12 @@
 import React from "react";
 import Dashboard from "../Dashboard";
 import Pagination from "@/Components/Pagination";
-import { Link, useForm } from '@inertiajs/react';
+import { Link, useForm,  } from '@inertiajs/react';
 import toast, { Toaster } from 'react-hot-toast';
 import { FaPlus } from 'react-icons/fa';
 import { StlViewer } from 'react-stl-viewer';
-export default function ({ products }) {
+import { useState } from "react";
+export default function ({ products,filters }) {
   const { data, prev_page_url, next_page_url, current_page, last_page } = products;
   const { delete: handleDelete, data: formData } = useForm();
 

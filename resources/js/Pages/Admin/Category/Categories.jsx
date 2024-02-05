@@ -1,4 +1,5 @@
 import React from 'react'
+import { useEffect, useRef } from 'react';
 import Dashboard from '../Dashboard'
 import Pagination from "@/Components/Pagination";
 import { Link, useForm } from '@inertiajs/react';
@@ -17,6 +18,14 @@ export default function ({ categories }) {
   const onError = () => {
     toast.error('Error deleting category');
   }
+
+  useEffect(() => {
+    const successMessage = localStorage.getItem('successMessageCategory');
+    if (successMessage) {
+        toast.success(successMessage);
+        localStorage.removeItem('successMessageCategory');
+    }
+}, []);
 
   return (
     <Dashboard>
