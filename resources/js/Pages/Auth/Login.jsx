@@ -26,7 +26,6 @@ export default function Login({ status, canResetPassword }) {
             setData('password', data.password);
             errors.email = !data.email ? 'Email is required' : null;
             errors.password = !data.password ? 'Password is required' : null;
-            console.log('error');
         }else{
             post(route('login'));
         }

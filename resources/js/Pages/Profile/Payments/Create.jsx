@@ -41,12 +41,6 @@ export default function ({ user = [], errors }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(data.owner_name);
-        console.log(data.number);
-        console.log(data.expire_month);
-        console.log(data.expire_year);
-        console.log(data.cvv);
-        console.log(data.default);
 
         var formData = new FormData();
         formData.append('owner_name', data.owner_name);

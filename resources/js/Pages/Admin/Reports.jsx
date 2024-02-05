@@ -30,9 +30,6 @@ ChartJS.register(
 );
 
 export default function ({ ordersYear, usersMonth, ordersZone }) {
-    console.log('ordersYear', ordersYear);
-    console.log('usersMonth', usersMonth);
-    console.log('ordersZone', ordersZone);
     
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'December'];
     const daysInMonth = new Date(

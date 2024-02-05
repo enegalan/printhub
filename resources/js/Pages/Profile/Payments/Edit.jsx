@@ -67,7 +67,6 @@ export default function ({ payment = [], user = [] }) {
 
     function handleDelete(e) {
         e.preventDefault();
-        console.log('deleting...');
         router.delete('/profile/payment/delete/' + payment.id, { preserveState: true, onSuccess: () => { toast.success('Payment method successfully removed'); }, onError: () => { toast.error('Cannot remove this payment method'); } });
     }
 

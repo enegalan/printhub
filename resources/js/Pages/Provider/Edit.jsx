@@ -46,9 +46,6 @@ export default function ProviderDashboard({ user, product, categories = [] }) {
     formData.append("categories", data.categories);
     formData.append("user_id", data.user_id);
     formData.append("product_id", data.product_id);
-    
-    console.log(data.image ? data.image : image);
-    console.log([...formData.entries()]);
     post(route("product.update", product));
   };
 

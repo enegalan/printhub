@@ -42,7 +42,6 @@ export default function ModelViewer({ fileUrl = null, colors, materials, dimensi
 
     useEffect(() => {
         setPrice(getEstimatedPrice(width, height, length, quantity, color, material));
-        console.log(price)
     }, [colorHex, data.material, quantity]);
 
     const onSubmit = (e) => {

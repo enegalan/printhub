@@ -20,8 +20,6 @@ export default function Edit({ user = [], roles = [] }) {
         id: user.id,
     });
 
-    console.log('asdasd')
-    console.log(data.roles)
 
     const onAdd = () => {
         toast.success('User created successfully');
@@ -46,7 +44,6 @@ export default function Edit({ user = [], roles = [] }) {
             }
         };
     }, [previewUrl]);
-    console.log(user);
     const submit = (e) => {
         e.preventDefault();
         const formData = new FormData();
@@ -59,7 +56,6 @@ export default function Edit({ user = [], roles = [] }) {
             post(route("admin.user.update", { id: user.id, withTrashed: true }), formData);
             onAdd();
         } catch (e) {
-            console.log(e);
             onError(e);
         }
     };

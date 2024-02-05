@@ -20,6 +20,7 @@ export default function ProductCard({id, image, file, name, price, href, onSucce
             onSuccess('Product added successfully to cart');
         }
     }
+
     
     function onAddCart(e) {
         try {

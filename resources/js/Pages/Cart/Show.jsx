@@ -85,14 +85,14 @@ function Cart({ auth, cart, materials, colors, isVip }) {
             localStorage.setItem('successMessage', 'Product deleted from cart successfully!');
             window.location.href = data.redirect;
           } else {
-            console.log("Formularios enviados exitosamente:", data);
+            //console.log("Formularios enviados exitosamente:", data);
           }
         } else {
           localStorage.setItem('errorMessage', 'Something went wrong. Please try again.');
         }
       } catch (error) {
         localStorage.setItem('errorMessage', 'Something went wrong. Please try again.');
-        console.error("Error al enviar formularios:", error);
+        //console.error("Error al enviar formularios:", error);
       }
     };
 

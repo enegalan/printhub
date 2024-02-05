@@ -33,7 +33,7 @@ export default function Add() {
             onAdd();
         } catch (e) {
             onError(e);
-            console.log(e);
+           
         }
     };
 

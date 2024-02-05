@@ -82,11 +82,11 @@ export default function CheckOut({ user, price }) {
                     if (data.redirect) {
                       window.location.href = data.redirect;
                     } else {
-                      console.log("Formularios enviados exitosamente:", data);
+                      //console.log("Formularios enviados exitosamente:", data);
                     }
                   })
                   .catch((error) => {
-                    console.error("Error al enviar formularios:", error);
+                    //console.error("Error al enviar formularios:", error);
                   });
               }}
               total={price}
