@@ -4,27 +4,30 @@ import Faq from "react-faq-component";
 const data = {
     rows: [
         {
-            title: "Lorem ipsum dolor sit amet",
-            content: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sed tempor sem. Aenean vel turpis feugiat,
-            ultricies metus at, consequat velit. Curabitur est nibh, varius in tellus nec, mattis pulvinar metus.
-            In maximus cursus lorem, nec laoreet velit eleifend vel. Ut aliquet mauris tortor, sed egestas libero interdum vitae.
-            Fusce sed commodo purus, at tempus turpis.`,
+            title: "How does our 3D printing company stay competitive in the market?",
+            content: `Our company stays competitive by continually innovating our 3D printing technologies,
+                    offering custom solutions, and providing excellent customer support. 
+                    We also keep a close eye on market trends and adapt our strategies accordingly.`,
         },
         {
-            title: "Nunc maximus, magna at ultricies elementum",
-            content:
-                "Nunc maximus, magna at ultricies elementum, risus turpis vulputate quam, vitae convallis ex tortor sed dolor.",
+            title: "What are the key factors influencing the demand for 3D printing products?",
+            content: `Factors influencing demand include technological advancements, cost-effectiveness, 
+                    customization options, increasing applications across various industries, and growing awareness of the benefits of 3D printing.`,
         },
         {
-            title: "Curabitur laoreet, mauris vel blandit fringilla",
-            content: `Curabitur laoreet, mauris vel blandit fringilla, leo elit rhoncus nunc, ac sagittis leo elit vel lorem.
-            Fusce tempor lacus ut libero posuere viverra. Nunc velit dolor, tincidunt at varius vel, laoreet vel quam.
-            Sed dolor urna, lobortis in arcu auctor, tincidunt mattis ante. Vivamus venenatis ultricies nibh in volutpat.
-            Cras eu metus quis leo vestibulum feugiat nec sagittis lacus.Mauris vulputate arcu sed massa euismod dignissim. `,
+            title: "How do we ensure timely and efficient shipping of our products?",
+            content: `We partner with reliable shipping carriers and implement robust logistics management systems to ensure timely delivery of our products.
+                    Additionally, we track shipments closely and provide customers with updates throughout the shipping process to ensure transparency and peace of mind.`,
         },
         {
-            title: "What is the package version",
-            content: <p>current version is 1.2.1</p>,
+            title: "What steps do we take to maintain product quality during the shipping process?",
+            content: `We carefully package our products using high-quality materials to prevent damage during transit. 
+                    Additionally, we conduct thorough quality checks before shipping to ensure that only products meeting our stringent standards are sent out to customers.`,
+        },
+        {
+            title: "What sets our 3D printing company apart from competitors?",
+            content: `Our company stands out due to our commitment to innovation, exceptional product quality, personalized customer service, and competitive pricing. 
+                    We also offer a wide range of materials and printing options to cater to diverse customer needs.`,
         },
     ],
 };
