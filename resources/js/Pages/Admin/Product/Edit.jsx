@@ -11,7 +11,6 @@ import { StlViewer } from "react-stl-viewer";
 import { router } from "@inertiajs/react";
 
 export default function ProviderDashboard({ user, product, categories = [] }) {
-  console.log(product)
   const { data, setData, post, processing, errors, reset } = useForm({
     name: product.name,
     description: product.description,

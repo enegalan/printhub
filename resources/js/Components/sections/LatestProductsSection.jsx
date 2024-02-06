@@ -1,7 +1,6 @@
 
 import ProductCard from "@/Components/ProductCard";
 export default function LatestProductsSection({latestProducts}){
-    console.log(latestProducts);
     return(
         <section id="partsSectionIndex" className="relative z-10 bg-[var(--light-grey)] pt-20">
             <div className="mx-2 flex flex-col items-center">

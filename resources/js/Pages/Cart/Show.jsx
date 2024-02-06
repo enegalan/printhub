@@ -90,8 +90,6 @@ function Cart({ auth, cart, materials, colors, isVip }) {
           if (data.redirect) {
             localStorage.setItem('successMessage', 'Product deleted from cart successfully!');
             window.location.href = data.redirect;
-          } else {
-            //console.log("Formularios enviados exitosamente:", data);
           }
         } else {
           localStorage.setItem('errorMessage', 'Something went wrong. Please try again.');

@@ -440,12 +440,10 @@ function Payment({ auth, countries, regions, total }) {
                     .then((data) => {
                       if (data.redirect) {
                         window.location.href = data.redirect;
-                      } else {
-                        //console.log("Formularios enviados exitosamente:", data);
                       }
                     })
                     .catch((error) => {
-                      //console.error("Error al enviar formularios:", error);
+                      console.error("Error sending form:", error);
                     });
                 }}
                 total={total}
