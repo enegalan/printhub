@@ -6,6 +6,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import { FaPlus } from 'react-icons/fa';
 import { StlViewer } from 'react-stl-viewer';
 import { useState } from "react";
+import { router } from "@inertiajs/react";
 export default function ({ products,filters }) {
   const { data, prev_page_url, next_page_url, current_page, last_page } = products;
   const { delete: handleDelete, data: formData } = useForm();

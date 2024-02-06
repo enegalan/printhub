@@ -161,12 +161,18 @@ class AdminController extends Controller
     public function products()
     {
         app()->call([UserController::class, 'getRoles']);
-        $products = Product::where('visible', true)->paginate($this->productPerPagination);
-        $products->load('user');
-        $products->load('categories');
+        $products = Product::query()
+        ->when(request('search'), function ($query, $search) {
+            $query->where('name', 'like', "%{$search}%");
+        })
+        ->paginate(10)
+        ->withQueryString();
+
+        $products->load('user','categories');
+
+        $filters = request()->only(['search']);
         return (
-            Inertia::render('Admin/Product/Products', ['products' => $products])
-        );
+            Inertia::render('Admin/Product/Products', ['products' => $products, 'filters' => $filters])        );
     }
 
     public function addProduct()
