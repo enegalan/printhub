@@ -9,6 +9,7 @@ use App\Models\Invoice;
 use App\Models\Stock_cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Models\Product;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::get('/products', function (Request $request) {
+    $products = Product::all();
+    return response()->json($products);
 });
 
 Route::post('/complete-payment', function (Request $request) {
