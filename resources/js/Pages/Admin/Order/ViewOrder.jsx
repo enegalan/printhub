@@ -22,7 +22,7 @@ export default function ({ order, products }) {
                         {products.length > 0 ? (
                             products.map((product) => (
 
-                                <div className='bg-white rounded p-6 shadow-lg' key={product.id}>
+                                <div className='bg-white rounded p-6 shadow-lg min-w-[40vh]' key={product.id}>
                                     <section>
                                         {product.file ? (<StlViewer modelProps={{ color: product.colorHex }} style={{ top: 0, left: 0, width: '100%', height: '30vh', }} orbitControls shadows url={product.file} />) :
                                             (<Link href={"/market/product/" + product.id}><img className="w-full cursor-pointer transition ease-in delay-400 hover:scale-110" src={product.image} alt={product.name} /></Link>)}
@@ -33,7 +33,7 @@ export default function ({ order, products }) {
                                         <p>Color: {product.colorName}</p>
                                     </section>
                                     <div className='mt-5'>
-                                        <Link href={"/market/product/" + product.id}><PrimaryButton>Check out</PrimaryButton></Link>
+                                        <Link href={"/market/product/" + product.id}><PrimaryButton>Check product</PrimaryButton></Link>
                                     </div>
                                 </div>
                             ))
