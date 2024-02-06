@@ -163,12 +163,13 @@ Route::delete('/admin/material/delete/{material}', [AdminController::class, 'del
 //ORDERS
 Route::get('/admin/orders', [AdminController::class, 'orders'])->name('admin.orders');
 Route::get('/admin/order/view/{order}', [AdminController::class, 'vieworder'])->name('admin.order.view');
-Route::post('/admin/material/store', [AdminController::class, 'storeColor'])->name('admin.store.color');
+
 
 //COLORS
 Route::get('/admin/colors', [AdminController::class, 'colors'])->name('admin.colors');
 Route::get('/admin/color/create', [AdminController::class, 'addColor'])->name('admin.color.add');
 Route::get('/admin/color/edit/{color}', [AdminController::class, 'editColor'])->name('admin.color.edit');
+Route::post('/admin/color/store', [AdminController::class, 'storeColor'])->name('admin.store.color');
 Route::delete('/admin/color/{color}/delete', [AdminController::class, 'deletecolor'])->name('admin.color.delete');
 Route::post('/admin/color/update/{color}', [AdminController::class, 'updateColor'])->name('admin.update.color');
 
@@ -189,8 +190,10 @@ Route::delete('/admin/region/delete/{region}', [AdminController::class, 'deleter
 //CATEGORIES
 Route::get('/admin/categories', [AdminController::class, 'categories'])->name('admin.categories');
 Route::get('/admin/category/create', [AdminController::class, 'addcategory'])->name('admin.category.add');
+Route::post('/admin/category/store', [AdminController::class, 'storeCategory'])->name('admin.store.category');
 Route::get('/admin/category/edit/{category}', [AdminController::class, 'editcategory'])->name('admin.category.edit');
 Route::delete('/admin/category/delete/{category}', [AdminController::class, 'deletecategory'])->name('admin.category.delete');
+Route::post('/admin/category/update/{category}', [AdminController::class, 'updateCategory'])->name('admin.update.category');
 
 
 Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('product.destroy');
