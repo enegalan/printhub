@@ -7,7 +7,7 @@ export const ContactUsSection = () => {
             <form method='POST' action='' className="max-w-lg mx-auto relative z-10">
                 <p className='text-3xl mb-5 font-bold'>Contact us</p>
                 <div className="mb-4">
-                    <TextInput minLength='10' name='email' icon="fas fa-envelope" type="email" placeholder="Enter your email" />
+                    <TextInput minLength='10' name='email' id='contact-us-email' icon="fas fa-envelope" type="email" placeholder="Enter your email" />
                 </div>
                 <div className="mb-4">
                     <TextInput minLength='6' name='subject' icon="fas fa-envelope-open-text" type="text" placeholder="Enter the subject" />

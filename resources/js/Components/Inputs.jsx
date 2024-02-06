@@ -123,7 +123,7 @@ const DragAndDropBox = () => {
     );
 }
 
-const TextInput = ({ name = "", placeholder = "", width = "full", type = "text", icon = "", image = "", value = "", minLength = "", maxLength = "" }) => {
+const TextInput = ({ name = "", placeholder = "", width = "full", type = "text", icon = "", image = "", value = "", minLength = "", maxLength = "", id = "" }) => {
     const [inputValue, setInputValue] = useState(value);
 
     const handleInputChange = (e) => {
@@ -134,7 +134,7 @@ const TextInput = ({ name = "", placeholder = "", width = "full", type = "text",
 
     return (
         <div className="relative mt-2 z-20">
-            <input maxLength={maxLength} minLength={minLength} name={name} className={`textInput ${width} ${hasContentClass}`} onChange={handleInputChange} type={type} placeholder="" value={inputValue}/>
+            <input id={id} maxLength={maxLength} minLength={minLength} name={name} className={`textInput ${width} ${hasContentClass}`} onChange={handleInputChange} type={type} placeholder="" value={inputValue}/>
             {icon && <div className="flex w-[35px] h-full items-center absolute top-0"><i className={`${icon}`}></i></div>}
             {image && <img className="w-[20px] h-[20px]" src={`${image}`} alt="icon" />}
             {(icon || image) && <label>{placeholder}</label>}
