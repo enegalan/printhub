@@ -126,6 +126,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile/payment/edit/{payment}', [UserController::class, 'editPayment'])->name('profile.edit.payment');
     Route::post('/profile/payment/edit/{payment}', [UserController::class, 'updatePayment'])->name('profile.update.payment');
     Route::delete('/profile/payment/delete/{payment}', [UserController::class, 'deletePayment'])->name('profile.delete.payment');
+    
+    //PRICING
+    Route::get('/pricing/payment', [PricingController::class, 'payment'])->name('pricing.payment');
 
     // MODEL PREVIEW
     Route::get('/preview', function () {
@@ -202,6 +205,5 @@ Route::post('/products', [ProductController::class, 'store'])->name('product.sto
 
 //PRICING
 Route::get('/pricing', [PricingController::class, 'index'])->name('pricing');
-Route::get('/pricing/payment', [PricingController::class, 'payment'])->name('pricing.payment');
 
 require __DIR__ . '/auth.php';
