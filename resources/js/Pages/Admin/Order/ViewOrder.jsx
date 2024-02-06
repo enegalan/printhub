@@ -5,11 +5,16 @@ import { Link } from '@inertiajs/react';
 import { FaPlus } from 'react-icons/fa';
 import { StlViewer } from 'react-stl-viewer';
 import PrimaryButton from '@/Components/PrimaryButton';
+import { IoMdArrowRoundBack } from 'react-icons/io';
 export default function ({ order, products }) {
-    console.log(order)
-    console.log(products)
     return (
         <Dashboard pageName='Orders' pageSubtitle='Checkout the orders'>
+            <Link
+                href={route("admin.orders")}
+                className="bg-[lightgrey] w-[40px] p-3 rounded-lg mb-5 self-start transition hover:bg-[#bbbbbb]"
+            >
+                <IoMdArrowRoundBack />
+            </Link>
             <div className='flex flex-col min-h-full '>
                 <div className='overflow-x-scroll'>
                     <h3 className='font-bold text-2xl'>Order #{order.id}</h3>
