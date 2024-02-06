@@ -19,7 +19,7 @@ class ProductFactory extends Factory
         return [
             'name' => fake()->name(),
             'description' => fake()->text(),
-            'image' => fake()->image(null, 640, 480),
+            'file' => "/images/products/".fake()->randomElements(['dragon.stl', 'eyeball.stl']),
             'price' => fake()->randomFloat(2, 10, 100),
             'user_id'=> fake()->numberBetween(1, 20),
         ];

@@ -12,8 +12,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\User::factory(50)->create();
-        \App\Models\Payment_method::factory(30)->create();
+        \App\Models\User::factory(10)->create();
         //User roles
         \App\Models\Role::factory()->create([
             'name' => 'admin',
@@ -85,15 +84,5 @@ class DatabaseSeeder extends Seeder
         ]);
         //Product & Cart
         \App\Models\Product::factory(100)->create();
-        \App\Models\Cart::factory(40)->create();
-        // Needs user, country, region.
-        \App\Models\Country::factory(40)->create();
-        \App\Models\Region::factory(20)->create();
-        \App\Models\Fact_address::factory(10)->create();
-        \App\Models\Ship_address::factory(10)->create();
-        \App\Models\Order::factory(20)->create();
-        \App\Models\Invoice::factory(20)->create();
-        //addresse
-        //orders
     }
 }
