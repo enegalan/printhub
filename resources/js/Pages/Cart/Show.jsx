@@ -18,9 +18,21 @@ function Cart({ auth, cart, materials, colors, isVip }) {
     const [cartItems, setCartItems] = useState(cart.stock_carts);
 
     useEffect(() => {
-      const successMessage = localStorage.getItem('successMessageCart');
+
+      const successMessage = localStorage.getItem('successMessage');
+      const errorMessage = localStorage.getItem('errorMessage');
+  
       if (successMessage) {
-          toast.success(successMessage);
+        toast.success(successMessage);
+        localStorage.removeItem('successMessage');
+      } else if (errorMessage) {
+        toast.error(errorMessage);
+        localStorage.removeItem('errorMessage');
+      }
+
+      const successMessageCart = localStorage.getItem('successMessageCart');
+      if (successMessageCart) {
+          toast.success(successMessageCart);
           localStorage.removeItem('successMessageCart'); // Limpiar después de mostrar
       }
   }, []);
@@ -42,20 +54,6 @@ function Cart({ auth, cart, materials, colors, isVip }) {
     const total = orderTotal + iva + (isVip ? 0 : shipping_cost);
 
     const [selectedProductId, setSelectedProductId] = useState(null);
-    
-
-    useEffect(() => {
-      const successMessage = localStorage.getItem('successMessage');
-      const errorMessage = localStorage.getItem('errorMessage');
-  
-      if (successMessage) {
-        toast.success(successMessage);
-        localStorage.removeItem('successMessage');
-      } else if (errorMessage) {
-        toast.error(errorMessage);
-        localStorage.removeItem('errorMessage');
-      }
-    }, []);
 
 
     const handleDelete = (productId) => {
@@ -142,7 +140,7 @@ function Cart({ auth, cart, materials, colors, isVip }) {
             )}
           </div>
 
-          <div id="confirmModal" className="fixed inset-0 z-40 bg-gray-500 bg-opacity-75 flex items-center justify-center">
+          <div id="confirmModal" className="fixed inset-0 z-40 bg-gray-500 bg-opacity-75 flex hidden items-center justify-center">
             <div className="bg-white p-8 rounded shadow-md">
               <p className="text-lg font-semibold mb-4">Are you sure you want delete this from your cart?</p>
               <div className="flex justify-center">
