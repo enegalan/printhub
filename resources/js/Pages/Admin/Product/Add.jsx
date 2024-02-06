@@ -20,7 +20,8 @@ export default function addProduct({ user, categories = [] }) {
     user_id: user.id,
   });
   const onAdd = () => {
-    toast.success('Product added successfully');
+    const successMessage = 'Product created successfully';
+    localStorage.setItem('successMessageProduct', successMessage);
   }
 
   const onError = (e) => {
@@ -54,6 +55,7 @@ export default function addProduct({ user, categories = [] }) {
     formData.append("user_id", data.user_id);
     try {
       post(route("product.store"));
+      onAdd();
       window.location.href = route('admin.products')
     } catch (e) {
       onError(e);

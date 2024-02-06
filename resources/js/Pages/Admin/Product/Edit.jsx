@@ -6,7 +6,7 @@ import InputError from "@/Components/InputError";
 import { useForm } from "@inertiajs/inertia-react";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { Link } from "@inertiajs/react";
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster } from 'react-hot-toast';
 import { StlViewer } from "react-stl-viewer";
 import { router } from "@inertiajs/react";
 
@@ -39,6 +39,15 @@ export default function ProviderDashboard({ user, product, categories = [] }) {
     };
   }, [previewUrl]);
 
+  const onAdd = () => {
+    const successMessage = 'Product updated successfully';
+    localStorage.setItem('successMessageProduct', successMessage);
+  }
+
+  const onError = (e) => {
+    toast.error('Error updating product');
+  }
+
   const submit = (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -49,7 +58,15 @@ export default function ProviderDashboard({ user, product, categories = [] }) {
     formData.append("categories", data.categories);
     formData.append("user_id", data.user_id);
     formData.append("product_id", data.product_id);
-    post(route("product.update", product));
+
+    try {
+      post(route("product.update", product));
+      onAdd();
+    } catch (e) {
+      onError(e);
+    }
+
+    
     //window.location.href = route('admin.products');
   };
 
