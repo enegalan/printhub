@@ -390,7 +390,7 @@ class UserController extends Controller
             $request->input('expire_month') &&  $request->input('expire_year') ? $validatedData['expire_date'] = $request->input('expire_month') . "/" . $request->input('expire_year') : '';
             $validatedData['user_id'] = auth()->user()->id;
 
-            if ($validatedData['default'] && $validatedData['default'] == 1) {
+            if ($request->input('default') && $request->input('default') == 1) {
                 // Set all payment methods as not defaul
                 $payments = Payment_method::where('user_id', auth()->user()->id)->get();
                 foreach ($payments as $payment) {
@@ -399,15 +399,12 @@ class UserController extends Controller
             }
             
             try {
-                // Create the payment method
                 Payment_method::create($validatedData);
         
-                // Return a success response or redirect
-                return response()->json(['message' => 'Payment method successfully added']);
+                return redirect()->route('profile.payments');
             } catch (Exception $e) {
                 \Log::error($e->getMessage());
 
-                // Devuelve una respuesta de error con el código 500
                 return response()->json(['error' => 'Internal Server Error'], 500);
             }
         } else {
