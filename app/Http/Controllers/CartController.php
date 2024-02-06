@@ -50,7 +50,7 @@ class CartController extends Controller
         // Get user id
         $userId = auth()->user()->id;
 
-        $quantity = $request->input('quantity');
+        $quantity = $request->input('quantity') ?? 1;
         // Get default color
         if ($request->input('color')) {
             $color = Color::findOrFail($request->input('color'));
