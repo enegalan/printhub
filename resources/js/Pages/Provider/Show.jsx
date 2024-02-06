@@ -4,6 +4,7 @@ import ProfileLayout from "@/Layouts/ProfileLayout";
 import { Link, useForm } from "@inertiajs/react";
 import { FaPlus } from "react-icons/fa6";
 import { IoMdArrowRoundBack } from "react-icons/io";
+import { StlViewer } from "react-stl-viewer";
 
 export default function ProviderShow({ user, products }) {
   const { data, prev_page_url, next_page_url, current_page, last_page } = products;
@@ -28,7 +29,7 @@ export default function ProviderShow({ user, products }) {
                 <th className="py-2 px-4 border-b">Name</th>
                 <th className="py-2 px-4 border-b">Description</th>
                 <th className="py-2 px-4 border-b">Categories</th>
-                <th className="py-2 px-4 border-b">Image URL</th>
+                <th className="py-2 px-4 border-b">Image</th>
                 <th className="py-2 px-4 border-b">Price</th>
                 <th className="py-2 px-4 border-b">Actions</th>
               </tr>
@@ -50,14 +51,7 @@ export default function ProviderShow({ user, products }) {
                       </span>
                     ))}
                   </td>
-                  <td className="py-2 px-4 border-b">
-                    <img
-                      width={100}
-                      height={100}
-                      src={`/storage/products/${product.image}`}
-                      alt={"default"}
-                    />
-                  </td>
+                  <td className="py-2 px-4 border-b flex justify-center">{product.file ? (<StlViewer modelProps={{ color: '#1e40af' }} style={{ top: 0, left: 0, width: '15vh', height: '30vh', }} orbitControls shadows url={product.file} />) : (<img src={`/storage/products/${product.image}`}></img>)}</td>
                   <td className="py-2 px-4 border-b">{product.price}$</td>
                   <td className="py-2 px-4 border-b">
                     <Link

@@ -7,6 +7,7 @@ import { useForm } from "@inertiajs/inertia-react";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { Link } from "@inertiajs/react";
 import toast, { Toaster } from 'react-hot-toast';
+import { StlViewer } from "react-stl-viewer";
 
 export default function ProviderDashboard({ user, categories = [] }) {
   const { data, setData, post, processing, errors, reset } = useForm({
@@ -102,33 +103,31 @@ export default function ProviderDashboard({ user, categories = [] }) {
           </div>
           <div>
             <InputLabel
-              forInput="image"
-              value="Choose an image*"
+              forInput="file"
+              value="Choose an STL file*"
               className="font-medium text-gray-900"
             />
             <TextInput
-              id="image"
+              id="file"
               type="file"
-              name="image"
+              name="file"
               className="mt-1 block shadow-transparent text-slate-500
                 file:mr-4 file:py-2 file:px-10
                 file:rounded-full file:border-0
                 file:text-sm file:font-semibold
                 file:bg-blue-50 file:text-blue-700
                 hover:file:bg-blue-100 "
-              autoComplete="image"
+              autoComplete="file"
               isFocused={true}
               onChange={handleFileChange}
               required
             />
             {previewUrl && (
-              <img
-                src={previewUrl}
-                alt="Image Preview"
-                className="mt-2 w-32 h-32"
-              />
+              <div className="my-5 bg-gray-200 rounded-lg">
+                <StlViewer modelProps={{ color: '#1e40af' }} style={{ top: 0, left: 0, width: '100%', height: '50vh', }} orbitControls shadows url={previewUrl} />
+              </div>
             )}
-            <InputError message={errors.image} className="mt-2" />
+            <InputError message={errors.file} className="mt-2" />
           </div>
           <div>
             <InputLabel
