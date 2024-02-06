@@ -144,7 +144,7 @@ function Cart({ auth, cart, materials, colors, isVip }) {
             )}
           </div>
 
-          <div id="confirmModal" className="fixed inset-0 z-40 bg-gray-500 bg-opacity-75 flex items-center justify-center hidden">
+          <div id="confirmModal" className="fixed inset-0 z-40 bg-gray-500 bg-opacity-75 flex items-center justify-center">
             <div className="bg-white p-8 rounded shadow-md">
               <p className="text-lg font-semibold mb-4">Are you sure you want delete this from your cart?</p>
               <div className="flex justify-center">

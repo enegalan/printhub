@@ -59,7 +59,7 @@ function ProductsSection({ user = null, products = [], colors = [], onSuccess, o
 
     return (
         <section id="products_section" className="relative z-10 bg-[var(--light-grey)]">
-            <div className="mt-10 pb-10 flex flex-wrap justify-center gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-2 mt-10 max-md:px-2">
                 {data.map((product) => {
                     const wishlistStatus = wishlistStatuses.find(status => status.productId === product.id);
                     const isWishlistItem = wishlistStatus ? wishlistStatus.isWishlistItem : false;
