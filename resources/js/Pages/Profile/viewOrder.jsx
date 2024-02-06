@@ -12,7 +12,7 @@ export default function ({ user, products = [] }) {
                 {products.map(function(product) {
                     return (
                         <>
-                            <Link className="max-h-[375px]" key={`product_${product.id}`} href={`products/${product.id}`}>
+                            <Link className="max-h-[375px]" key={`product_${product.id}`} href={`/market/product/${product.id}`}>
                                 <div className="flex justify-center items-center flex-col gap-5 bg-white rounded-lg shadow-md py-5 overflow-hidden">
                                     <img className="w-full h-full transition hover:scale-110" src={/* product.image */ "/images/imagen1.png"} />
                                     <p className="font-bold">{product.name}</p>
