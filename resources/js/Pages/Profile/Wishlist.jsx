@@ -51,7 +51,7 @@ export default function Wishlist({ user, products = [] }) {
             <div className='my-8 py-4 flex flex-wrap flex-row min-h-full overflow-y-auto gap-6 justify-center '>
                 {products.length > 0 ? products.map((product) => (
                     <div className="flex" key={`product_${product.id}`}>
-                        <Link className="max-h-[375px]" href={`products/${product.id}`}>
+                        <Link className="max-h-[375px]" href={`/market/products/${product.id}`}>
                             <div className="flex justify-center items-center flex-col gap-5 bg-white rounded-lg shadow-md py-5 overflow-hidden">
                                 <img className="w-full h-full transition hover:scale-110" src="/images/imagen1.png" alt={`Product: ${product.name}`} />
                                 <p className="font-bold">{product.name}</p>
