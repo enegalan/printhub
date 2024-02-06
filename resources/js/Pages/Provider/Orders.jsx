@@ -42,7 +42,7 @@ export default function ({ auth, orders }) {
                     <td className={`py-2 px-4 border-b ${order.status === 'Paid' ? 'bg-green-100' : order.status === 'Not paid' ? 'bg-red-100' : order.status === 'Shipping' ? 'bg-orange-100' : order.status === 'Delivered' ? 'bg-blue-100' : ''}`}>{order.status}</td>
                     <td className="py-2 px-4 border-b">
                       <Link
-                        href={route('admin.order.view', order.id)}
+                        href={route('profile.orders.view', order.id)}
                         className="text-blue-500 hover:underline mr-2"
                       >
                         View

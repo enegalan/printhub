@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Inertia\Inertia;
+use App\Models\Color;
 use App\Models\Order;
-use Inertia\Response;
 
+use Inertia\Response;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Prod_comb;
 use Illuminate\Http\Request;
 
 class ProviderController extends Controller
@@ -67,7 +69,58 @@ class ProviderController extends Controller
         );
     }
 
-    public function orderview(Order $order){
+    public function orderview(Order $order)
+    {
+        $order->load(['cart.stock_carts.prod_comb.product.user', 'invoice']);
+        //$user = auth()->user();
+        //$user->roles();
+        //$userId = $user->id;
+
+        // Extracting products from the order
+        $products = [];
+        // Obtener el primer cart que tenga active == 1
+        $cart = $order->cart;
+
+        if ($cart) {
+            // Obtener el prod_comb_id desde stock_carts
+            $stockCart = $cart->stock_carts->first();
         
+            if ($stockCart) {
+                $prodCombId = $stockCart->prod_comb_id;
+
+                // Obtener el product_id, color_id y material_id desde prod_combs
+                $prodComb = Prod_comb::findOrFail($prodCombId);
+
+                $color = Color::find($prodComb->color_id);
+                $colorName = $color->name;
+                $colorHex = $color->hex;
+
+
+                if ($prodComb) {
+                    $productId = $prodComb->product_id;
+
+                    // Obtener el name, image, file y price desde products
+                    $product = Product::findOrFail($productId);
+
+                    if ($product) {
+                        // Agregar la información del producto al array de productos
+                        $products[] = [
+                            'id' => $product->id,
+                            'name' => $product->name,
+                            'image' => $product->image,
+                            'file' => $product->file,
+                            'price' => $product->price,
+                            'colorName' => $colorName,
+                            'colorHex' => $colorHex,
+                        ];
+                    }
+                }
+            }
+        }
+
+        return Inertia::render('Provider/ViewOrder', [
+            'order' => $order,
+            'products' => $products,
+        ]);
     }
 }

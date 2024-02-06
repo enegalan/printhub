@@ -19,6 +19,10 @@ class Cart extends Model
     }
 
     public function order(){
-        return $this->hasOne(Order::class);
+        return $this->hasMany(Order::class);
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 }
