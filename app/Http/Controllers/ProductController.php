@@ -105,12 +105,15 @@ class ProductController extends Controller
     public function show(string $id)
     {
         $product = Product::findOrFail($id);
+        if (!$product->visible || !$product) {
+            return redirect()->route('market');
+        }
         $colors = Color::all();
         $materials = Material::all();
         $product->categories;
         $user = auth()->user()? auth()->user()->load('roles'): auth()->user();
         $randomProducts = Product::inRandomOrder()->take(10)->get();
-        return Inertia::render('Product/Show', compact('user', 'product', 'colors', 'materials', 'randomProducts'));
+        return Inertia::render('Product/Show', compact('user', 'product', 'colors', 'materials', 'randomProducts'));        
     }
     public function destroy(Product $product)
     {

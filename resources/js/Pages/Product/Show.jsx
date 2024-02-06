@@ -15,6 +15,9 @@ import InputError from "@/Components/InputError";
 import toast, { Toaster } from "react-hot-toast";
 import { useState } from "react";
 import { StlViewer } from "react-stl-viewer";
+import { Footer } from "@/Components/Footer";
+import { IoMdArrowRoundBack } from "react-icons/io";
+import { Link } from "@inertiajs/react";
 
 export default function Show({
   user,
@@ -74,15 +77,20 @@ export default function Show({
   var colorNames = colors.map((color) => { return color.name });
   return (
     <main className="bg-white">
-      
       <Toaster></Toaster>
       <NavBar
         user={user}
         defaultBackgroundColor="var(--main-blue)"
         dynamicBackground={false}
       ></NavBar>
-      <section className="flex justify-center mt-16">
-        <div className="max-w-[1200px] mt-8 mx-4 pb-4">
+      <section className="flex justify-center mt-24">
+        <div className="absolute flex justify-start w-full pb-4 ml-10">
+        <Link href={route('market')} >
+          <IoMdArrowRoundBack className="text-4xl bg-[lightgrey] hover:bg-[#bbbbbb] rounded"/>
+        </Link>
+        </div>
+      
+        <div className="max-w-[1200px] mt-16 mx-4 pb-4">
           <div className="flex flex-col flex-wrap md:flex-row md:flex-nowrap">
             <div className="w-full md:w-1/3 lg:w-1/2 max-w-full flex justify-center items-center bg-gray-200 rounded-xl">
               {/* This need to be removed on deploy to if image != null */}
@@ -188,6 +196,8 @@ export default function Show({
           </div>
         </div>
       </section>
+      <Footer className="mt-32"/>
     </main>
+    
   );
 }
