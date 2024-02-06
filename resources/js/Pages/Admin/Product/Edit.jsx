@@ -62,6 +62,7 @@ export default function ProviderDashboard({ user, product, categories = [] }) {
     try {
       post(route("product.update", product));
       onAdd();
+      window.location.href = route('admin.products');
     } catch (e) {
       onError(e);
     }
