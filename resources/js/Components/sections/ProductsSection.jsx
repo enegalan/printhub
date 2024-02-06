@@ -70,7 +70,7 @@ function ProductsSection({ user = null, products = [], colors = [], onSuccess, o
                             onError={onError}
                             isWishlistItem={isWishlistItem}
                             onAddWishlist={() => onAddWishlist(product.id)}
-                            image="/images/imagen1.png"
+                            image=""
                             file={product.file}
                             id={product.id}
                             name={product.name}
