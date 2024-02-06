@@ -50,7 +50,7 @@ export default function ProviderDashboard({ user, product, categories = [] }) {
     formData.append("user_id", data.user_id);
     formData.append("product_id", data.product_id);
     post(route("product.update", product));
-    window.location.href = route('admin.products');
+    //window.location.href = route('admin.products');
   };
 
   const handleCheck = (categoryId) => {

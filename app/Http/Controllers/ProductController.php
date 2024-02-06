@@ -159,7 +159,6 @@ class ProductController extends Controller
             'price' => 'required|numeric',
             'user_id' => 'exists:App\Models\User,id',
             'categories' => 'array',
-            'file' => 'file|max:2048', // Add validation for file update
         ]);
 
         $product = Product::findOrFail($id);
