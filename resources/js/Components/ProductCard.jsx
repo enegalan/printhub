@@ -46,7 +46,7 @@ export default function ProductCard({id, image, file, name, price, href, onSucce
             </div>
             <div className="overflow-hidden">
                 
-                {file ? (<StlViewer modelProps={{ color: colors[0].hex }} style={{top: 0,left: 0,width: '100%',height: '30vh',}} orbitControls shadows url={file} />) : 
+                {file ? (<StlViewer modelProps={{ color: '#1e40af' }} style={{top: 0,left: 0,width: '100%',height: '30vh',}} orbitControls shadows url={file} />) : 
                 (<Link href={href}><img className="w-full cursor-pointer transition ease-in delay-400 hover:scale-110" src={image} alt={name} /></Link>)}
             </div>
             <div className="px-6 pt-4">

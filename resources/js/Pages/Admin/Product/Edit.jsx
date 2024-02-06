@@ -141,7 +141,7 @@ export default function ProviderDashboard({ user, product, categories = [] }) {
             />
             {previewUrl && (
               <div className="my-5 bg-gray-200 rounded-lg">
-                <StlViewer modelProps={{ color: 'grey' }} style={{ top: 0, left: 0, width: '100%', height: '50vh', }} orbitControls shadows url={previewUrl} />
+                <StlViewer modelProps={{ color: '#1e40af' }} style={{ top: 0, left: 0, width: '100%', height: '50vh', }} orbitControls shadows url={previewUrl} />
               </div>
             )}
             <InputError message={errors.file} className="mt-2" />
