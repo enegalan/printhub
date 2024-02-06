@@ -14,12 +14,17 @@ import ProductsSection from '@/Components/sections/ProductsSection';
 
 import toast, { Toaster } from 'react-hot-toast';
 
-function Market({ auth, products = [], colors = [] }) {
+function Market({ auth, products = [], colors = [], categories = [] }) {
     const [categoriesFilter, setCategories] = useState([]);
     const [priceFilter, setPrice] = useState([]);
     const [arrivalFilter, setArrival] = useState([]);
     const [orderFilter, setOrder] = useState([]);
     const [searchFilter, setSearch] = useState([]);
+    
+    var categoryOptions = categories.map(category => ({
+        id: category.id,
+        label: category.name.charAt(0).toUpperCase() + category.name.slice(1)
+    }));
 
     useEffect(() => {
         sendFilters();
@@ -137,7 +142,7 @@ function Market({ auth, products = [], colors = [] }) {
                         <h4 className='font-bold text-lg'>Category</h4>
                         <form className='flex' method="POST" action="">
                             <span onChange={onCategoryChange}>
-                                <DropdownCheckbox name='categories' options={[{ id: 1, 'label': 'Decoration' }, { id: 2, 'label': 'Spares' }]} />
+                                <DropdownCheckbox name='categories' options={categoryOptions} />
                             </span>
                         </form>
                     </section>
