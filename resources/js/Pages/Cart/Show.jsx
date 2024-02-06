@@ -17,7 +17,13 @@ function Cart({ auth, cart, materials, colors, isVip }) {
 
     const [cartItems, setCartItems] = useState(cart.stock_carts);
 
-    
+    useEffect(() => {
+      const successMessage = localStorage.getItem('successMessageCart');
+      if (successMessage) {
+          toast.success(successMessage);
+          localStorage.removeItem('successMessageCart'); // Limpiar después de mostrar
+      }
+  }, []);
 
     const handleProductChange = (productId, updatedData) => {
       
