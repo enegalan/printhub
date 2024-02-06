@@ -17,27 +17,31 @@ function Dashboard ({user,errors}) {
                     
                     <header className='text-white text-center'>
                         <h1 className='text-6xl font-bold'>Pricing</h1>
-                        <p className='md:w-[32rem] pt-5 w-auto md:m-auto text-2xl text-gray-400'>Get started for free with everything you need to launch your project in just a few clicks</p>
+                        <p className='md:w-[32rem] pt-5 w-auto md:m-auto text-2xl text-gray-400'>Get started and make your ideas become true with our <b>printing</b> service</p>
                     </header>
                     <section className='flex xl:flex-row gap-4 flex-col items-center justify-center'>
                         <PricingCard 
                         plan="Free" 
                         price={0}
-                        description="Deno Deploy is a distributed system that runs JavaScript, "
-                        advantagesArray={["No pice limit","asda","asdasd"]}
+                        description="Take your printings to another level with us."
+                        advantagesArray={["No piece limit"]}
                         />
                         <PricingCard 
                         plan="Vip" 
                         price={VIP_PRICE}
-                        description="Deno Deploy is a distributed system that runs JavaScript, TypeScript, and WebAssembly at the edge, worldwide."
-                        advantagesArray={["Higer priority orders","Order discounts","No shiping cost"]}
+                        description="Join the VIP team and acquire the benefits that come with it."
+                        advantagesArray={["High priority orders","Order discounts","No shipping costs"]}
                         popular={true}
                         href={route('pricing.payment')}
                         />
                         <PricingCard 
-                        plan="Enterprice" 
-                        description="Deno Deploy is a distributed system that runs JavaScri"
-                        advantagesArray={["asdas","asda","asdasd"]}
+                        plan="Provider" 
+                        description="Contact with us to become a piece Provider for our market."
+                        advantagesArray={["Support 24/7"]}
+                        href="#contact-us-email"
+                        onRedirect={() => {
+                            document.querySelector('#contact-us-email').focus();
+                        }}
                         />
                     </section>
                 </main>

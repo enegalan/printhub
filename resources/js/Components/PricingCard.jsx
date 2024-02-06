@@ -1,7 +1,7 @@
 import { Link } from "@inertiajs/react";
 import { FaCheckCircle } from "react-icons/fa";
 
-export default function PricingCard({plan, price, description, advantagesArray, popular, href}) {
+export default function PricingCard({plan, price, description, advantagesArray, popular, href, onRedirect = () => {} }) {
   function isFloat(n){
     if (Number.isInteger(n)) {
       return true
