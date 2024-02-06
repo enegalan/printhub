@@ -141,7 +141,7 @@ class ProductController extends Controller
         $productFile->storeAs('stl', $productFileName, 'public');
 
         $productData = $request->except('file');
-        $productData['file'] = asset('storage/stl/' . $productFileName);
+        $productData['file'] = '/storage/stl/' . $productFileName;
 
         $product = Product::create($productData);
 
