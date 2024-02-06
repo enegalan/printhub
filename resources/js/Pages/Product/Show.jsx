@@ -50,6 +50,12 @@ export default function Show({
       setData("quantity", data.quantity - 1);
     }
   };
+  const onAdd = () => {
+    if(user){
+      const successMessage = 'Product added to the cart';
+      localStorage.setItem('successMessageCart', successMessage);
+    }
+  }
   const submit = (e) => {
     e.preventDefault();
 
@@ -59,9 +65,7 @@ export default function Show({
     } else {
       try {
         post(route("cart.add", product.id), { preserveState: true });
-        toast.success("Product Successfully added to cart", {
-          duration: 3000,
-        });
+        onAdd();
       } catch (error) {
         toast.error("Error: Can not add this produt to the cart");
       }
