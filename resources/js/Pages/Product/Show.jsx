@@ -28,8 +28,8 @@ export default function Show({
 }) {
   const categories = product.categories;
   const { data, setData, post, processing, errors, reset } = useForm({
-    color: "",
-    material: "",
+    color: colors[0].id,
+    material: materials[0].id,
     quantity: 1,
   });
   const [hex, setHex] = useState(colors[0].hex)
