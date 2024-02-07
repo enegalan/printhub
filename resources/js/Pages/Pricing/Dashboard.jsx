@@ -21,7 +21,8 @@ function Dashboard ({user,errors}) {
                     </header>
                     <section className='flex xl:flex-row gap-4 flex-col items-center justify-center'>
                         <PricingCard 
-                        plan="Free" 
+                        plan="Free"
+                        href={route('register')}
                         price={0}
                         description="Take your printings to another level with us."
                         advantagesArray={["No piece limit"]}

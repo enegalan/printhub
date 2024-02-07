@@ -13,7 +13,7 @@ export default function ProviderDashboard({ user, categories = [] }) {
   const { data, setData, post, processing, errors, reset } = useForm({
     name: "",
     description: "",
-    image: null,
+    file: null,
     price: "",
     categories: [],
     user_id: user.id,
@@ -28,7 +28,7 @@ export default function ProviderDashboard({ user, categories = [] }) {
   const [previewUrl, setPreviewUrl] = useState(null);
   const handleFileChange = (e) => {
     const selectedImage = e.target.files[0];
-    setData("image", selectedImage);
+    setData("file", selectedImage);
 
     // Create an object URL for the preview
     const objectUrl = URL.createObjectURL(selectedImage);
@@ -47,7 +47,7 @@ export default function ProviderDashboard({ user, categories = [] }) {
     const formData = new FormData();
     formData.append("name", data.name);
     formData.append("description", data.description);
-    formData.append("image", data.image);
+    formData.append("file", data.file);
     formData.append("price", data.price);
     formData.append("categories", data.categories);
     formData.append("user_id", data.user_id);
