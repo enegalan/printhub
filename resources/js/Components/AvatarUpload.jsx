@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { usePage } from '@inertiajs/react';
 import PrimaryButton from '@/Components/PrimaryButton';
 import AvatarDelete from "@/Components/AvatarDelete";
+import TextInput from './TextInput';
 
 const AvatarUpload = ({ user }) => {
   const { url } = usePage();
@@ -45,14 +46,21 @@ const AvatarUpload = ({ user }) => {
     <div className='mt-2 flex flex-col md:flex-row justify-between'>
       <div className="flex flex-col justify-between">
         <div>
-          <input
-            className="block w-75 text-sm text-gray-900 mb-5 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-            id="file_input"
-            type="file"
-            onChange={handleFileChange}
-          />
+          <TextInput
+              id="file_input"
+              type="file"
+              name="file"
+              className="mt-2 mb-3 block shadow-transparent text-slate-500
+                file:mr-4 file:py-2 file:px-10
+                file:rounded-full file:border-0
+                file:text-sm file:font-semibold
+                file:bg-blue-50 file:text-blue-700
+                hover:file:bg-blue-100 file:cursor-pointer"
+              autoComplete="file"
+              onChange={handleFileChange}
+            />
         </div>
-        <div>
+        <div className='flex flex-col self-start items-center'>
           {previewUrl && <img src={previewUrl} alt="Preview" className="mb-4 w-[100px] h-[100px] rounded-full border-2 border-slate-200" />}
 
           <button
@@ -64,6 +72,7 @@ const AvatarUpload = ({ user }) => {
           </button>
         </div>
       </div>
+      <hr className='mt-4'/>
       <AvatarDelete user={user} reloadPage={handleUpload} />
     </div>
   );
