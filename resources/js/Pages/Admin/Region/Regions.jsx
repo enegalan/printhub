@@ -16,7 +16,7 @@ export default function ({ regions }) {
     toast.error('Error deleting category');
   }
   return (
-    <Dashboard>
+    <Dashboard pageName='Regions' pageSubtitle='Manage the regions'>
       <div className='flex flex-col min-h-full '>
         <Toaster />
         <div className='overflow-x-scroll'>

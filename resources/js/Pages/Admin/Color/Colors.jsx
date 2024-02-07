@@ -17,7 +17,7 @@ export default function ({ colors }) {
     toast.error('Error deleting category');
   }
   return (
-    <Dashboard>
+    <Dashboard pageName='Colors' pageSubtitle="Manage the product's colors">
       <div className='flex flex-col min-h-full '>
         <Toaster />
         <Link href={route('admin.color.add')} className="bg-[lightgrey] w-[40px] p-3 rounded-lg mb-5 self-end transition hover:bg-[#bbbbbb]">
