@@ -15,7 +15,7 @@ const AvatarDelete = ({ user }) => {
   };
 
   return (
-    <div className="flex flex-col justify-end items-center">
+    <div className="flex flex-col mt-4 md:mt-0 justify-end items-center">
   {user.avatar ? (
     <img className="w-[100px] self-center h-[100px] rounded-full border-2 border-slate-200" src={`/storage/avatars/${user.avatar}`} alt="Avatar" />
   ) : (

@@ -42,7 +42,7 @@ const AvatarUpload = ({ user }) => {
   };
 
   return (
-    <div className='mt-2 flex justify-between'>
+    <div className='mt-2 flex flex-col md:flex-row justify-between'>
       <div className="flex flex-col justify-between">
         <div>
           <input
