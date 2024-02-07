@@ -11,61 +11,66 @@ import {
 } from "react-icons/fa";
 import { AiFillDashboard } from "react-icons/ai";
 import { FaCartShopping, FaGear, FaHandshake } from "react-icons/fa6";
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 export default function ProfileLayout({ children, pageName = "Dashboard", pageSubtitle = "Welcome to the admin section", user }) {
   var isProvider = false;
   if (user && user.hasOwnProperty("roles"))
     isProvider = user.roles.some((role) => role.name === "provider");
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-    const toggleMenu = () => {
-      setIsMenuOpen(!isMenuOpen);
-    };
-    const NavLinks = [
-      {
-        link: route("index"),
-        icon: FaHome,
-        name: "Home",
-      },
-      {
-        link: route("profile.dashboard"),
-        icon: AiFillDashboard,
-        name: "Dashboard",
-      },
-      {
-        link: route("profile.edit"),
-        icon: FaUser,
-        name: "Account",
-      },
-      {
-        link: route("profile.orders"),
-        icon: FaCartShopping,
-        name: "Orders",
-      },
-      {
-        link: route("profile.wishlist"),
-        icon: FaHeart,
-        name: "Wishlist",
-      },
-      {
-        link: route("profile.payments"),
-        icon: FaWallet,
-        name: "Payments",
-      },
-      {
-        link: route("profile.provider.dashboard"),
-        icon: FaHandshake,
-        name: "Provider",
-        showInMenu: isProvider,
-      },
-      ];
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+  const NavLinks = [
+    {
+      link: route("index"),
+      icon: FaHome,
+      name: "Home",
+      showInMenu: true,
+    },
+    {
+      link: route("profile.dashboard"),
+      icon: AiFillDashboard,
+      name: "Dashboard",
+      showInMenu: true,
+    },
+    {
+      link: route("profile.edit"),
+      icon: FaUser,
+      name: "Account",
+      showInMenu: true,
+    },
+    {
+      link: route("profile.orders"),
+      icon: FaCartShopping,
+      name: "Orders",
+      showInMenu: true,
+    },
+    {
+      link: route("profile.wishlist"),
+      icon: FaHeart,
+      name: "Wishlist",
+      showInMenu: true,
+    },
+    {
+      link: route("profile.payments"),
+      icon: FaWallet,
+      name: "Payments",
+      showInMenu: true,
+    },
+    {
+      link: route("profile.provider.dashboard"),
+      icon: FaHandshake,
+      name: "Provider",
+      showInMenu: isProvider,
+    },
+  ];
   return (
     <main className={`bg-[url('${gbBlue}')] bg-cover h-full`}>
       <div className="md:h-screen flex md:flex-row flex-col bg-white/30">
         <nav
-          className={`md:w-52 flex flex-col justify-center max-md:px-4 ${
-            isMenuOpen ? "md:hidden" : ""
-          }`}
+          className={`md:w-52 flex flex-col justify-center max-md:px-4 ${isMenuOpen ? "md:hidden" : ""
+            }`}
         >
           <div className="mt-4 flex justify-between md:justify-center">
             <Link href={route("index")}>
@@ -79,21 +84,25 @@ export default function ProfileLayout({ children, pageName = "Dashboard", pageSu
             </button>
           </div>
           <ul
-            className={`flex flex-col w-full max-md:justify-center max-md:items-center md:flex-col gap-2 md:mt-10 my-5 text-xl md:flex-1 flex-wrap ${
-              isMenuOpen ? "block" : "hidden md:block"
-            }`}
+            className={`flex flex-col w-full max-md:justify-center max-md:items-center md:flex-col gap-2 md:mt-10 my-5 text-xl md:flex-1 flex-wrap ${isMenuOpen ? "block" : "hidden md:block"
+              }`}
           >
-            {NavLinks.map(({ link, icon: Icon, name }, index) => (
-              <li
-                key={index}
-                className="flex justify-center hover:bg-blue-100 py-2 w-full md:block"
-              >
-                <Link href={link} className="flex gap-2 items-center px-5">
-                  {Icon && <Icon className="text-blue-700 hidden md:block" />}
-                  <p className="text-2xl md:text-xl">{name}</p>
-                </Link>
-              </li>
-            ))}
+            {NavLinks.map(({ link, icon: Icon, name, showInMenu }, index) => {
+              if (showInMenu) {
+                return (
+                  <li
+                    key={index}
+                    className="flex justify-center hover:bg-blue-100 py-2 w-full md:block"
+                  >
+                    <Link href={link} className="flex gap-2 items-center px-5">
+                      {Icon && <Icon className="text-blue-700 hidden md:block" />}
+                      <p className="text-2xl md:text-xl">{name}</p>
+                    </Link>
+                  </li>
+                )
+              }
+            }
+            )}
           </ul>
           <div className="self-center mb-5">
             <Link

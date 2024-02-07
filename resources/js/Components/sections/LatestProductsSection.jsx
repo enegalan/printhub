@@ -11,7 +11,9 @@ export default function LatestProductsSection({latestProducts}){
                 {latestProducts.map((item, index) => (
                     <ProductCard
                         key={index}
-                        image={item.image}
+                        image=""
+                        href={`/market/product/${item.id}`}
+                        file={item.file}
                         name={item.name}
                         price={item.price}
                         colors={[]}

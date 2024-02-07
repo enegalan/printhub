@@ -3,6 +3,7 @@ import { FaAngleRight } from "react-icons/fa";
 import { Link } from "@inertiajs/react";
 export default function ({user, orders = [], wishlist = []}){
     const priorities = ['admin', 'provider', 'vip', 'guest'];
+    console.log(user)
     const getBackgroundColor = (roles) => {
         const priorityRole = getHighestPriorityRole(roles);
 
@@ -21,7 +22,10 @@ export default function ({user, orders = [], wishlist = []}){
     };
 
     const getHighestPriorityRole = (roles) => {
-        return roles.find(role => priorities.includes(role.name)) || {};
+        const sortedRoles = roles.sort((a, b) => {
+            return priorities.indexOf(a.name) - priorities.indexOf(b.name);
+        });
+        return sortedRoles[0] || {};
     };
 
     const orderPagination = 4;

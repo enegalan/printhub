@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Models\Color;
 use App\Models\Material;
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -19,7 +20,8 @@ class ProductController extends Controller
         app()->call([UserController::class, 'getRoles']);
         $products = Product::where('visible', true)->paginate($this->productPerPagination);
         $colors = Color::all();
-        return Inertia::render('Market', ['products' => $products, 'colors' => $colors]);
+        $categories = Category::all();
+        return Inertia::render('Market', ['products' => $products, 'colors' => $colors, 'categories' => $categories]);
     }
 
     public function search(Request $request)
@@ -29,8 +31,8 @@ class ProductController extends Controller
         $query = $request->input('query');
         $products = Product::where('name', 'like', "%$query%")->where('visible', true)->paginate($this->productPerPagination);
         $colors = Color::all();
-
-        return Inertia::render('Market', ['products' => $products, 'colors' => $colors]);
+        $categories = Category::all();
+        return Inertia::render('Market', ['products' => $products, 'colors' => $colors, 'categories' => $categories]);
     }
 
     public function filter(Request $request)
@@ -95,8 +97,9 @@ class ProductController extends Controller
             }
             $products = $productsQuery->where('visible', true)->paginate($this->productPerPagination);
             $colors = Color::all();
+            $categories = Category::all();
 
-            return Inertia::render('Market', ['products' => $products, 'colors' => $colors]);
+            return Inertia::render('Market', ['products' => $products, 'colors' => $colors, 'categories' => $categories]);
 
         } else {
             return $this->getAll();
