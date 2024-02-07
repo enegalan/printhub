@@ -19,9 +19,9 @@ class ProductFactory extends Factory
         return [
             'name' => fake()->name(),
             'description' => fake()->text(),
-            'file' => "/images/products/".fake()->randomElements(['dragon.stl', 'eyeball.stl']),
+            'file' => fake()->randomElement(['/images/products/dragon.stl', '/images/products/eyeball.stl']),
             'price' => fake()->randomFloat(2, 10, 100),
-            'user_id'=> fake()->numberBetween(1, 20),
+            'user_id'=> null,
         ];
     }
 }
