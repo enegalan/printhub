@@ -1,8 +1,10 @@
 import NavBar from "@/Components/NavBar";
 import { Footer } from "@/Components/Footer";
 import { useState, useEffect } from "react";
+import {Link} from '@inertiajs/react';
+import {FaCartShopping} from "react-icons/fa6";
 
-function PaymentComplete({ auth, env }) {
+function PaymentComplete({ auth, env, order }) {
   const [nozzleTemp, setNozzleTemp] = useState("--");
   const [bedTemp, setBedTemp] = useState("--");
   const [printerStatus, setPrinterStatus] = useState("--");
@@ -90,47 +92,50 @@ function PaymentComplete({ auth, env }) {
 
   return (
     <>
-      <div className="overflow-hidden bg-[var(--light-grey)]">
-        <NavBar
-          user={auth.user}
-          sectionsBg={{ about: "--dark" }}
-          sectionsText={{ about: "white" }}
-        />
-
-        <header
-          id="about"
-          className="relative overflow-hidden py-48 text-center bg-green-200"
-        >
-          <h1 className="relative z-10 text-green-400 font-bold text-4xl">
-            Payment Successful!
-          </h1>
-        </header>
-
-        <main className="my-12 mx-5 md:mx-24 mb-36 relative z-10">
-          {/* What is PrintHub */}
-          <section className="my-6 flex flex-col gap-3">
-          <p className="ml-5 text-gray-700">Thank you for your purchase.</p>
-      <h2 className="text-2xl font-bold mb-2">Printer Status</h2>
-      <table className="min-w-full bg-white border border-gray-300">
-        <thead className="bg-gray-200">
-          <tr>
-            <th className="py-2 px-4">Nozzle Temperature</th>
-            <th className="py-2 px-4">Bed Temperature</th>
-            <th className="py-2 px-4">Status</th>
-            <th className="py-2 px-4">Print Progress</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td className="py-2 px-4">{nozzleTemp}</td>
-            <td className="py-2 px-4">{bedTemp}</td>
-            <td className="py-2 px-4">{printerStatus}</td>
-            <td className="py-2 px-4">{printProgress}</td>
-          </tr>
-        </tbody>
-      </table>
-          </section>
+      <div className='overflow-hidden bg-green-200'>
+        <NavBar user={auth.user} dynamicBackground={false} className="lg:backdrop-blur-md max-lg:bg-gray-900/50" />
+        <main id="payment-complete" className='relative flex justify-center flex-col mx-12 rounded-lg my-48 py-12 text-center bg-white'>
+          <Link href={route('market')} className="bg-[lightgrey] w-[40px] ml-16 p-3 rounded-lg mb-5 self-start transition hover:bg-[#bbbbbb]">
+            <FaCartShopping />
+          </Link>
+          <div className='bg-white rounded-full p-3 self-center absolute top-[-100px]'>
+            <div className='bg-green-600 rounded-full p-3'>
+              <div className='bg-green-800 rounded-full p-8'>
+                <img className='w-24 invert' src="/images/invoice.png" alt="Invoice" />
+              </div>
+            </div>
+          </div>
+          <h1 className='mt-16 relative z-10 text-green-400 font-bold text-4xl'>Payment Successful!</h1>
+          <h1 className='mt-6 relative z-10 text-green-400 font-bold text-3xl'>Order #{order.id}</h1>
+          <div className='my-6 mx-5 md:mx-24 mb-6 relative z-10'>
+            <section className='my-6 flex flex-col gap-3'>
+              <p className='ml-5 text-gray-700'>
+                Thank you for your purchase. Please check the order status in the <Link className='text-[var(--blue-1)] hover:underline' href={route('profile.orders')}>Orders</Link> section in your profile.
+              </p>
+              <h2 className="text-2xl font-bold my-2">Printer Status</h2>
+              <table className="min-w-full bg-white border border-gray-300">
+                <thead className="bg-gray-200">
+                  <tr>
+                    <th className="py-2 px-4">Nozzle Temperature</th>
+                    <th className="py-2 px-4">Bed Temperature</th>
+                    <th className="py-2 px-4">Status</th>
+                    <th className="py-2 px-4">Print Progress</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="py-2 px-4">{nozzleTemp}</td>
+                    <td className="py-2 px-4">{bedTemp}</td>
+                    <td className="py-2 px-4">{printerStatus}</td>
+                    <td className="py-2 px-4">{printProgress}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
+          </div>
         </main>
+
+
 
         <Footer />
       </div>
