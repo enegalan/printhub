@@ -103,17 +103,17 @@ export default function ProfileLayout({ children, pageName = "Dashboard", pageSu
               }
             }
             )}
+            <div className="self-center mb-5">
+              <Link
+                href={route("logout")}
+                method="post"
+                as="button"
+                className="text-white hover:underline text-lg bg-blue-700 py-1 px-4 rounded font-bold"
+              >
+                Log out
+              </Link>
+            </div>
           </ul>
-          <div className="self-center mb-5">
-            <Link
-              href={route("logout")}
-              method="post"
-              as="button"
-              className="text-white hover:underline text-lg bg-blue-700 py-1 px-4 rounded font-bold"
-            >
-              Log out
-            </Link>
-          </div>
         </nav>
         <div className="flex flex-col flex-1 overflow-x-scroll">
           <div className="my-4">

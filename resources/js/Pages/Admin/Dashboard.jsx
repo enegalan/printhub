@@ -80,9 +80,8 @@ export default function AdminLayout({
     <main className={`bg-[url('${gbBlue}')] bg-cover h-full`}>
       <div className="md:h-screen flex md:flex-row flex-col bg-white/30">
         <nav
-          className={`md:w-52 flex flex-col justify-center max-md:px-4 ${
-            isMenuOpen ? "md:hidden" : ""
-          }`}
+          className={`md:w-52 flex flex-col justify-center max-md:px-4 ${isMenuOpen ? "md:hidden" : ""
+            }`}
         >
           <div className="mt-4 flex justify-between md:justify-center">
             <Link href={route("index")}>
@@ -96,9 +95,8 @@ export default function AdminLayout({
             </button>
           </div>
           <ul
-            className={`flex flex-col w-full max-md:justify-center max-md:items-center md:flex-col gap-2 md:mt-10 my-5 text-xl md:flex-1 flex-wrap ${
-              isMenuOpen ? "block" : "hidden md:block"
-            }`}
+            className={`flex flex-col w-full max-md:justify-center max-md:items-center md:flex-col gap-2 md:mt-10 my-5 text-xl md:flex-1 flex-wrap ${isMenuOpen ? "block" : "hidden md:block"
+              }`}
           >
             {NavLinks.map(({ link, icon: Icon, name }, index) => (
               <li
@@ -111,17 +109,17 @@ export default function AdminLayout({
                 </Link>
               </li>
             ))}
+            <div className="self-center mb-5">
+              <Link
+                href={route("logout")}
+                method="post"
+                as="button"
+                className="text-white hover:underline text-lg bg-blue-700 py-1 px-4 rounded font-bold"
+              >
+                Log out
+              </Link>
+            </div>
           </ul>
-          <div className="self-center mb-5">
-            <Link
-              href={route("logout")}
-              method="post"
-              as="button"
-              className="text-white hover:underline text-lg bg-blue-700 py-1 px-4 rounded font-bold"
-            >
-              Log out
-            </Link>
-          </div>
         </nav>
         <div className="flex flex-col flex-1 overflow-x-scroll">
           <div className="my-4">
