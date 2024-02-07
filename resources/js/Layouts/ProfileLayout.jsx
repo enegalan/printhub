@@ -66,7 +66,7 @@ export default function ProfileLayout({ children, pageName = "Dashboard", pageSu
     },
   ];
   return (
-    <main className={`bg-[url('${gbBlue}')] bg-cover h-full`}>
+    <main className={`bg-[url('${gbBlue}')] bg-cover h-screen h-full`}>
       <div className="md:h-screen flex md:flex-row flex-col bg-white/30">
         <nav
           className={`md:w-52 flex flex-col justify-center max-md:px-4 ${isMenuOpen ? "md:hidden" : ""

@@ -123,6 +123,7 @@ export default function ({ user = [], errors }) {
                             value={formatCardNumber(data.number)}
                             className="mt-1 block w-full"
                             isFocused={true}
+                            maxlength="19"
                             onChange={(e) => setData('number', e.target.value.replace(/\s/g, ''))}
                         />
                         {errors.number && <InputError message={errors.number} className="mt-2" />}
@@ -162,7 +163,8 @@ export default function ({ user = [], errors }) {
                             value={data.cvv}
                             className="mt-1 block w-full"
                             isFocused={true}
-                            onChange={(e) => setData('cvv', e.target.value.replace(/\D/g, '').slice(0, 4))}
+                            maxlength="3"
+                            onChange={(e) => setData('cvv', e.target.value)}
                             pattern="\d*"
                             inputMode="numeric"
                         />
