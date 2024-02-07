@@ -12,6 +12,7 @@ export default function LatestProductsSection({latestProducts}){
                     <ProductCard
                         key={index}
                         image=""
+                        id={item.id}
                         href={`/market/product/${item.id}`}
                         file={item.file}
                         name={item.name}
