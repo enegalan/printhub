@@ -65,9 +65,9 @@ export default function ModelViewer({ fileUrl = null, colors, materials, dimensi
     }, []);
 
     return (
-        <div className='flex bg-white rounded p-16 mb-12 shadow-lg gap-5 overflow-hidden w-full lg:w-[70%]'>
-            <div className='bg-gray-100 w-[80%] rounded-lg border'>
-                <StlViewer modelProps={{ color: colorHex }} style={{ top: 0, left: 0, width: '100%', height: '100vh', }} orbitControls shadows url={fileUrl} />
+        <div className='flex flex-col lg:flex-row bg-white rounded p-16 mb-12 shadow-lg gap-5 overflow-hidden w-full lg:w-[70%]'>
+            <div className='bg-gray-100 w-full lg:w-[80%] rounded-lg border'>
+                <StlViewer modelProps={{ color: colorHex }} style={{ top: 0, left: 0, width: '100%', height: '70vh', }} orbitControls shadows url={fileUrl} />
                 <InputLabel className='text-gray-500 p-2'>Model dimensions: {modelWidth}x{modelHeight}x{modelLengh} cm</InputLabel>
             </div>
             <form onSubmit={onSubmit} className='flex flex-col items-center content-start flex-wrap justify-center gap-5 mb-5 flex-1'>

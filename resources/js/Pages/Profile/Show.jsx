@@ -1,7 +1,8 @@
 import ProfileLayout from "@/Layouts/ProfileLayout";
 import { FaAngleRight } from "react-icons/fa";
 import { Link } from "@inertiajs/react";
-export default function ({user, orders = [], wishlist = []}){
+import { StlViewer } from "react-stl-viewer";
+export default function ({ user, orders = [], wishlist = [] }) {
     const priorities = ['admin', 'provider', 'vip', 'guest'];
     console.log(user)
     const getBackgroundColor = (roles) => {
@@ -31,7 +32,7 @@ export default function ({user, orders = [], wishlist = []}){
     const orderPagination = 4;
     const wishlistPagination = 1;
 
-    return(
+    return (
         <ProfileLayout pageName="Dashboard" pageSubtitle="Welcome to your profile" user={user}>
             <div className="flex gap-4 flex-1 items-center justify-start flex-col">
                 <div className="flex gap-4 items-center w-full flex-1 flex-col lg:flex-row">
@@ -49,11 +50,11 @@ export default function ({user, orders = [], wishlist = []}){
                         <div className="w-full flex flex-col items-center gap-5">
                             <h1 className="font-bold">Membership</h1>
                             <div className="w-full flex flex-col gap-3 items-center">
-                            {user.roles.some(role => priorities.includes(role.name)) && (
-                                <span className={`bg-${getBackgroundColor(user.roles)} p-2 rounded-lg w-full text-center`}>
-                                    {getHighestPriorityRole(user.roles).name.charAt(0).toUpperCase() + getHighestPriorityRole(user.roles).name.slice(1)}
-                                </span>
-                            )}
+                                {user.roles.some(role => priorities.includes(role.name)) && (
+                                    <span className={`bg-${getBackgroundColor(user.roles)} p-2 rounded-lg w-full text-center`}>
+                                        {getHighestPriorityRole(user.roles).name.charAt(0).toUpperCase() + getHighestPriorityRole(user.roles).name.slice(1)}
+                                    </span>
+                                )}
                             </div>
                         </div>
 
@@ -62,7 +63,7 @@ export default function ({user, orders = [], wishlist = []}){
                         <h2 className="text-xl font-bold mb-5">Orders</h2>
                         {orders.length > 0 ? orders.slice(0, orderPagination).map((order, index) => (
                             <div key={index}>
-                                <Link href={"/market/product/"+order.id}>
+                                <Link href={"/market/product/" + order.id}>
                                     <div className="flex items-center my-2 justify-between gap-1 w-full cursor-pointer rounded-md hover:bg-[#ededed]" key={order.id}>
                                         <div className="flex gap-28 items-center py-5 px-3">
                                             Order #{order.id}
@@ -87,11 +88,11 @@ export default function ({user, orders = [], wishlist = []}){
                     <div className="overflow-x-scroll">
                         {wishlist.length > 0 ? wishlist.slice(0, wishlistPagination).map((product, index) => (
                             <div key={index}>
-                                <Link href={"/market/product/"+product.id}>
+                                <Link href={"/market/product/" + product.id}>
                                     <div className="flex items-center my-2 justify-between gap-1 w-full cursor-pointer rounded-md hover:bg-[#ededed]" key={product.id}>
                                         <div className="flex gap-28 items-center py-5 px-3">
                                             <div className="flex gap-5 items-center flex-wrap text-center">
-                                                <img className="w-[120px] h-[100px]" src="images/imagen1.png" />
+                                                <StlViewer modelProps={{ color: '#1e40af' }} style={{ top: 0, left: 0, width: '20vh', height: '20vh', }} shadows url={product.file} />
                                                 {product.name}
                                             </div>
                                             <div className="flex gap-12 items-center flex-nowrap text-center">
