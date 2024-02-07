@@ -190,7 +190,7 @@ Route::post('/admin/color/update/{color}', [AdminController::class, 'updateColor
 Route::get('/admin/countries', [AdminController::class, 'countries'])->name('admin.countries');
 Route::get('/admin/country/create', [AdminController::class, 'addCountry'])->name('admin.country.add');
 Route::get('/admin/country/edit/{country}', [AdminController::class, 'edituser'])->name('admin.country.edit');
-Route::get('/admin/country/{country}/regions', [AdminController::class, 'viewregionscountry'])->name('admin.country.viewregions');
+Route::get('/admin/country/{country}/regions', [AdminController::class, 'viewCountryRegions'])->name('admin.country.viewregions');
 Route::delete('/admin/country/delete/{country}', [AdminController::class, 'deletecountry'])->name('admin.country.delete');
 
 //REGIONS
