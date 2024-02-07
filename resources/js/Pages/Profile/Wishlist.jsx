@@ -2,6 +2,7 @@ import ProfileLayout from "@/Layouts/ProfileLayout";
 import { Link, router } from "@inertiajs/react";
 import PrimaryButton from '@/Components/PrimaryButton';
 import SecondaryButton from '@/Components/SecondaryButton';
+import { StlViewer } from "react-stl-viewer";
 
 import toast, { Toaster } from 'react-hot-toast';
 
@@ -53,7 +54,7 @@ export default function Wishlist({ user, products = [] }) {
                     <div className="flex" key={`product_${product.id}`}>
                         <Link className="max-h-[375px]" href={`/market/products/${product.id}`}>
                             <div className="flex justify-center items-center flex-col gap-5 bg-white rounded-lg shadow-md py-5 overflow-hidden">
-                                <img className="w-full h-full transition hover:scale-110" src="/images/imagen1.png" alt={`Product: ${product.name}`} />
+                                <StlViewer modelProps={{ color: '#1e40af' }} style={{ top: 0, left: 0, width: '50vh', height: '50vh', }} shadows url={product.file} />
                                 <p className="font-bold">{product.name}</p>
                                 <p className="text-gray-600">{product.price}€</p>
                             </div>
