@@ -21,7 +21,7 @@ export default function ProviderShow({ user, products }) {
           <FaPlus />
       </Link>
       <div className="flex flex-col min-h-full">
-        <div className="">
+        <div className="overflow-x-scroll">
           <table className="min-w-full bg-white border border-gray-300">
             <thead>
               <tr className="bg-gray-100">
