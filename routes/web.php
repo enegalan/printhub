@@ -122,7 +122,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/payment/complete', function () {
         app()->call([UserController::class, 'getRoles']);
-        return Inertia::render('PaymentComplete');
+        $env = ['host' => env('OCTOPRINT_HOST'),'apiKey' => env('OCTOPRINT_API_KEY')];
+        return Inertia::render('PaymentComplete', compact('env'));
     })->name('paymentcomplete');
 
     Route::get('/cart', [CartController::class, 'show'])->name('user.cart');
