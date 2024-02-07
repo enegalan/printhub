@@ -132,7 +132,7 @@ export default function ProviderDashboard({ user, categories = [] }) {
           <div>
             <InputLabel
               forInput="price"
-              value="Set price*"
+              value="Set price* ($)"
               className="font-medium text-gray-900"
             />
             <div className="flex gap-2">
