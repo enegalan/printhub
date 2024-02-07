@@ -32,6 +32,7 @@ export default function Show({
     material: "",
     quantity: 1,
   });
+  const [hex, setHex] = useState(colors[0].hex)
 
   const [swiper, setSwiper] = useState(null);
 
@@ -54,7 +55,7 @@ export default function Show({
     }
   };
   const onAdd = () => {
-    if(user){
+    if (user) {
       const successMessage = 'Product added to the cart';
       localStorage.setItem('successMessageCart', successMessage);
     }
@@ -85,25 +86,15 @@ export default function Show({
       ></NavBar>
       <section className="flex justify-center mt-24">
         <div className="absolute flex justify-start w-full pb-4 ml-10">
-        <Link href={route('market')} >
-          <IoMdArrowRoundBack className="text-4xl bg-[lightgrey] hover:bg-[#bbbbbb] rounded"/>
-        </Link>
+          <Link href={route('market')} >
+            <IoMdArrowRoundBack className="text-4xl bg-[lightgrey] hover:bg-[#bbbbbb] rounded" />
+          </Link>
         </div>
-      
+
         <div className="max-w-[1200px] mt-16 mx-4 pb-4">
           <div className="flex flex-col flex-wrap md:flex-row md:flex-nowrap">
             <div className="w-full md:w-1/3 lg:w-1/2 max-w-full flex justify-center items-center bg-gray-200 rounded-xl">
-              {/* This need to be removed on deploy to if image != null */}
-              {product.image ? (<img
-                src={
-                  product.image.includes("/tmp/")
-                    ? "/images/imagen1.png"
-                    : `/storage/products/${product.image}`
-                }
-                width="200px"
-                height="200px"
-                alt="product"
-              />) : (<StlViewer modelProps={{ color: data.hex }} style={{ top: 0, left: 0, width: '100%', height: '50vh', }} orbitControls shadows url={product.file} />)}
+              <StlViewer modelProps={{ color: hex }} style={{ top: 0, left: 0, width: '100%', height: '50vh', }} orbitControls shadows url={product.file} />
             </div>
             <div className="w-full md:w-2/3 lg:w-1/2 lg:flex-1 max-w-full py-4 px-6 flex flex-col gap-2 ">
               <h1 className="text-xl ">{product.name}</h1>
@@ -128,7 +119,14 @@ export default function Show({
                     options={colors}
                     usingObject={true}
                     name="color"
-                    onChangeOption={(o) => {setData("color", o)}}
+                    defaultOption={false}
+                    onChangeOption={(colorId) => {
+                      const selectedColor = colors.find(color => color.id == colorId);
+                      setData("color", colorId);
+                      if (selectedColor) {
+                        setHex(selectedColor.hex);
+                      }
+                    }}
                   />
                   <InputError message={errors.color} className="mt-2" />
                 </div>
@@ -137,22 +135,23 @@ export default function Show({
                   <SelectOptions
                     options={materials}
                     usingObject={true}
+                    defaultOption={false}
                     name="material"
                     onChangeOption={(o) => setData("material", o)}
                   />
                   <InputError message={errors.material} className="mt-2" />
                 </div>
-                
+
               </div>
               <div className="flex">
                 <button className="bg-blue-950 p-3 px-5 text-white rounded" onClick={handleDecrement}>
-                    -
+                  -
                 </button>
                 <input type="text" className="text-black text-xl mx-2 w-1/5 text-center" value={data.quantity} readOnly />
                 <button className="bg-blue-950 p-3 px-5 text-white rounded" onClick={handleIncrement}>
-                    +
+                  +
                 </button>
-            </div>
+              </div>
               <div className="flex flex-col gap-2 h-full justify-end">
                 <button
                   className="bg-blue-950 font-semibold text-lg text-white py-4 w-full rounded-full mt-4 hover:bg-blue-800 text-center disabled:text-slate-500 disabled:bg-slate-800"
@@ -196,8 +195,8 @@ export default function Show({
           </div>
         </div>
       </section>
-      <Footer className="mt-32"/>
+      <Footer className="mt-32" />
     </main>
-    
+
   );
 }
