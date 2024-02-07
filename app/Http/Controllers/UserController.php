@@ -301,6 +301,7 @@ class UserController extends Controller
 
     public function viewOrder(Request $request, Order $order)
     {
+        $this->getRoles();
         // Get the cart_id
         $cartId = $order->cart_id;
 

@@ -1,9 +1,10 @@
 import ProfileLayout from "@/Layouts/ProfileLayout";
 import { Link } from "@inertiajs/react";
 import { IoMdArrowRoundBack } from "react-icons/io";
-export default function ({ user, products = [] }) {
+export default function ({ auth, products = [] }) {
+    console.log(auth)
     return (
-        <ProfileLayout pageName="Dashboard" pageSubtitle="Welcome to your profile" user={user}>
+        <ProfileLayout pageName="Dashboard" pageSubtitle="Welcome to your profile" user={auth.user}>
             <Link href={route('profile.orders')} className="bg-[lightgrey] w-[40px] p-3 rounded-lg mb-5 self-start transition hover:bg-[#bbbbbb]">
                 <IoMdArrowRoundBack />
             </Link>
