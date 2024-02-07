@@ -103,7 +103,7 @@ export default function ProfileLayout({ children, pageName = "Dashboard", pageSu
               }
             }
             )}
-            <div className="text-center mb-5 w-full">
+            <div className="text-center mb-5 w-full mt-12">
               <Link
                 href={route("logout")}
                 method="post"

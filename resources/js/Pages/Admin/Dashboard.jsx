@@ -109,7 +109,7 @@ export default function AdminLayout({
                 </Link>
               </li>
             ))}
-            <div className="text-center mb-5">
+            <div className="text-center mb-5 mt-12">
               <Link
                 href={route("logout")}
                 method="post"
