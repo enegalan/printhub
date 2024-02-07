@@ -173,7 +173,7 @@ const Navbar = ({
             <div className={`bg-${headerTextColor}`}></div>
           </div>
         </div>
-        <div className="hidden flex-1 lg:flex justify-end items-center gap-[5px]">
+        <div className="hidden flex-1 lg:flex justify-end items-center xl:gap-4 gap-2">
           {user ? (
             <div className="hidden sm:flex sm:items-center sm:ms-6">
               <div className="ms-3 relative">
@@ -245,15 +245,15 @@ const Navbar = ({
             <>
               <Link
                 href={route("login")}
-                className="transition duration-300 bg-blue-950 px-8 py-2 text-white font-bold rounded-lg hover:bg-blue-900"
+                className="transition duration-300 bg-blue-950 xl:px-8 px-4 py-2 text-white font-bold rounded-lg hover:bg-blue-900"
               >
-                Login
+                <i class="fas fa-sign-in-alt mr-2"></i> Login
               </Link>
               <Link
                 href={route("register")}
-                className="transition duration-300 bg-gray-200 px-8 py-2 text-[var(--main-blue)] font-bold rounded-lg hover:bg-blue-900 hover:text-white"
+                className="transition duration-300 bg-gray-200 xl:px-8 px-4 py-2 text-[var(--main-blue)] font-bold rounded-lg hover:bg-blue-900 hover:text-white"
               >
-                START PRINTING
+                <i class="fas fa-user-plus mr-2"></i> START PRINTING
               </Link>
             </>
           )}
