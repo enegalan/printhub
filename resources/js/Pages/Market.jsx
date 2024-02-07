@@ -131,8 +131,9 @@ function Market({ auth, products = [], colors = [], categories = [] }) {
                     renderCenterLeftControls={({ previousSlide }) => <></>}
                     renderCenterRightControls={({ nextSlide }) => <></>}
                 >
-                    <img src='/images/banners/bestproducts.png' style={headerImageStyle} />
-                    <img src='/images/impresion1.jpg' style={headerImageStyle} />
+                    <img src='/images/banners/bestproductsforyou.png' style={headerImageStyle} />
+                    <img src='/images/banners/innovativegoals.png' style={headerImageStyle} />
+                    <img src='/images/banners/advantageai.png' style={headerImageStyle} />
                 </Carousel>
             </header>
 
