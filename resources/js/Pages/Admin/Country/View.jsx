@@ -8,7 +8,7 @@ export default function CountryView({ regions }) {
     const { data, prev_page_url, next_page_url, current_page, last_page } = regions;
 
     return (
-        <Dashboard>
+        <Dashboard pageName='Countries' pageSubtitle="Manage country's regions">
             <Link href={route('admin.countries')} className="bg-[lightgrey] w-[40px] p-3 rounded-lg mb-5 self-start transition hover:bg-[#bbbbbb]">
                 <IoMdArrowRoundBack />
             </Link>

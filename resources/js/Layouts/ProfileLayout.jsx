@@ -116,7 +116,7 @@ export default function ProfileLayout({ children, pageName = "Dashboard", pageSu
           </ul>
         </nav>
         <div className="flex flex-col flex-1 overflow-x-scroll">
-          <div className="my-4">
+          <div className="my-4 px-6">
             <h1 className="text-4xl">{pageName}</h1>
             <p className="text-gray-700">{pageSubtitle}</p>
           </div>

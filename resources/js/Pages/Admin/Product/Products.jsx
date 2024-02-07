@@ -33,7 +33,7 @@ export default function ({ products,filters }) {
   };
 
   return (
-    <Dashboard>
+    <Dashboard pageName="Products" pageSubtitle="Manage the website products">
       <div className="flex flex-col min-h-full ">
         <Toaster />
         <div className="flex w-full gap-10 items-center mb-5">
