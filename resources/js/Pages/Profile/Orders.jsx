@@ -23,7 +23,6 @@ export default function ({ orders = [], user = [] }) {
               {data.map((order) => (
                 <tr key={order.id} className="hover:bg-gray-50 text-center divide-x">
                   <td className="py-2 px-4 border-b">{order.id}</td>
-                  <td className="py-2 px-4 border-b">{order.status}</td>
                   <td className="py-2 px-4 border-b">
                     <Link
                       href={route('user.order.view', order)}
@@ -31,6 +30,7 @@ export default function ({ orders = [], user = [] }) {
                     >
                       View
                     </Link></td>
+                  <td className={`py-2 px-4 border-b ${order.status === 'Paid' ? 'bg-green-100' : order.status === 'Not paid' ? 'bg-red-100' : order.status === 'Shipping' ? 'bg-orange-100' : order.status === 'Delivered' ? 'bg-blue-100' : ''}`}>{order.status}</td>
                   <td className="py-2 px-4 border-b">{order.created_at}</td>
                 </tr>
               ))}
