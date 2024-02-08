@@ -93,7 +93,7 @@ function PaymentComplete({ auth, env, order }) {
   return (
     <>
       <div className='overflow-hidden bg-green-200'>
-        <NavBar user={auth.user} dynamicBackground={false} className="lg:backdrop-blur-md max-lg:bg-gray-900/50" />
+        <NavBar user={auth.user} dynamicBackground={false} className="backdrop-blur-md bg-gray-900/50 border-b border-blue-950/50" />
         <main id="payment-complete" className='relative flex justify-center flex-col mx-12 rounded-lg my-48 py-12 text-center bg-white'>
           <Link href={route('market')} className="bg-[lightgrey] w-[40px] ml-16 p-3 rounded-lg mb-5 self-start transition hover:bg-[#bbbbbb]">
             <FaCartShopping />
