@@ -15,7 +15,7 @@ export default function ({ auth, products = [] }) {
                         <>
                             <Link className="max-h-[375px]" key={`product_${product.id}`} href={`/market/product/${product.id}`}>
                                 <div className="flex justify-center items-center flex-col gap-5 bg-white rounded-lg shadow-md py-5 overflow-hidden">
-                                    <img className="w-full h-full transition hover:scale-110" src={/* product.image */ "/images/imagen1.png"} />
+                                    <img className="w-full h-full transition hover:scale-110" src={product.file} />
                                     <p className="font-bold">{product.name}</p>
                                     <p className="text-gray-600">{product.price}$</p>
                                     <p className="text-gray-600">Amount: {product.amount}</p>
