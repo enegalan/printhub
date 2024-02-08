@@ -1,10 +1,11 @@
 import NavBar from "@/Components/NavBar";
 import { Footer } from "@/Components/Footer";
 import { useState, useEffect } from "react";
-import {Link} from '@inertiajs/react';
-import {FaCartShopping} from "react-icons/fa6";
+import { Link } from '@inertiajs/react';
+import { FaCartShopping } from "react-icons/fa6";
 
-function PaymentComplete({ auth, env, order }) {
+function PaymentComplete({ auth, env, order, files }) {
+  console.log(files)
   const [nozzleTemp, setNozzleTemp] = useState("--");
   const [bedTemp, setBedTemp] = useState("--");
   const [printerStatus, setPrinterStatus] = useState("--");
@@ -12,11 +13,13 @@ function PaymentComplete({ auth, env, order }) {
   const apiUrl = env.host;
   const apiKey = env.apiKey;
   useEffect(() => {
-    updatePrinterStatus();
-
-    const intervalId = setInterval(updatePrinterStatus, 1000);
-
-    uploadFile();
+    
+    
+    if (env[0] !== undefined && env[1] !== undefined) {
+      updatePrinterStatus();
+      const intervalId = setInterval(updatePrinterStatus, 1000);
+      uploadFilesSequentially(files);
+    }
 
     return () => clearInterval(intervalId);
   }, []);
@@ -52,20 +55,26 @@ function PaymentComplete({ auth, env, order }) {
       });
   };
 
-  const uploadFile = () => {
-    const filePath = "/gcode/dragon.gcode";
+  const uploadFilesSequentially = (files, index = 0) => {
+    if (index >= files.length) {
+      // Si hemos enviado todos los archivos, salir de la función
+      return;
+    }
 
-    // Fetch the file from the public folder
+    const file = files[index];
+    const filePath = `/gcode/${file}.gcode`; // Ajusta la ruta si es necesario
+
+    // Fetch el archivo desde la carpeta public
     fetch(filePath)
       .then((response) => response.blob())
       .then((blob) => {
-        // Create FormData and append the file
+        // Crea FormData y agrega el archivo
         const formData = new FormData();
-        formData.append("file", blob, "dragon.gcode");
+        formData.append("file", blob, `${file}.gcode`);
         formData.append("command", "start");
         formData.append("print", true);
 
-        // Send the file and 'start' command to OctoPrint
+        // Envía el archivo y el comando 'start' a OctoPrint
         fetch(`${apiUrl}/files/local`, {
           method: "POST",
           headers: {
@@ -76,9 +85,11 @@ function PaymentComplete({ auth, env, order }) {
           .then((response) => response.json())
           .then((data) => {
             if (data && data.done) {
-              //alert("File sent and printing started successfully");
+              // Si se envió correctamente, pasar al siguiente archivo
+              uploadFilesSequentially(files, index + 1);
             } else {
-              //alert("Error sending file or starting printing");
+              // Si hubo un error, mostrar un mensaje de error y detener el proceso
+              console.error("Error sending file or starting printing:", data);
             }
           })
           .catch((error) => {
