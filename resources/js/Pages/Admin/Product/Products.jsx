@@ -32,6 +32,14 @@ export default function ({ products,filters }) {
     );
   };
 
+  useEffect(() => {
+    const successMessage = localStorage.getItem('successMessageProduct');
+    if (successMessage) {
+        toast.success(successMessage);
+        localStorage.removeItem('successMessageProduct');
+    }
+}, []);
+
   return (
     <Dashboard pageName="Products" pageSubtitle="Manage the website products">
       <div className="flex flex-col min-h-full ">
