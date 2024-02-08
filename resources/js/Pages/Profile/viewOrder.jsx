@@ -1,8 +1,10 @@
 import ProfileLayout from "@/Layouts/ProfileLayout";
 import { Link } from "@inertiajs/react";
 import { IoMdArrowRoundBack } from "react-icons/io";
+import { StlViewer } from 'react-stl-viewer';
+
 export default function ({ auth, products = [] }) {
-    console.log(auth)
+    console.log(products)
     return (
         <ProfileLayout pageName="Dashboard" pageSubtitle="Welcome to your profile" user={auth.user}>
             <Link href={route('profile.orders')} className="bg-[lightgrey] w-[40px] p-3 rounded-lg mb-5 self-start transition hover:bg-[#bbbbbb]">
@@ -15,7 +17,7 @@ export default function ({ auth, products = [] }) {
                         <>
                             <Link className="max-h-[375px]" key={`product_${product.id}`} href={`/market/product/${product.id}`}>
                                 <div className="flex justify-center items-center flex-col gap-5 bg-white rounded-lg shadow-md py-5 overflow-hidden">
-                                    <img className="w-full h-full transition hover:scale-110" src={/* product.image */ "/images/imagen1.png"} />
+                                    <StlViewer modelProps={{ color: product.colorName }} style={{top: 0,left: 0,width: '100%',height: '30vh',}} shadows url={product.file} />
                                     <p className="font-bold">{product.name}</p>
                                     <p className="text-gray-600">{product.price}$</p>
                                     <p className="text-gray-600">Amount: {product.amount}</p>

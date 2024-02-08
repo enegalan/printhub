@@ -47,15 +47,15 @@ export default function ProductCard({ image, file, name, price, allcolors, allma
   };
 
   return (
-    <div className="border relative z-10 max-w-sm rounded-lg shadow-lg bg-gray-100 flex flex-col">
+    <div className="border relative max-w-[17rem] 2xl:max-w-sm rounded-lg shadow-lg bg-gray-100 flex flex-col">
       <button
         className="absolute top-[-10px] right-[-10px] px-4 py-2 z-[100] text-white cursor-pointer bg-red-500 rounded-lg p-1 transition ease-in delay-400 hover:scale-105"
         onClick={() => handleDelete(stockItem.stock_cart_id)}
       >
         X
       </button>
-      <div>
-        <StlViewer modelProps={{ color: selectedColorHex }} style={{ top: 0, left: 0, width: '100%', height: '30vh', }} shadows url={file} />
+      <div className="overflow-hidden flex justify-center">
+        <StlViewer modelProps={{ color: selectedColorHex }} style={{ top: 0, left: 0, width: '60%', height: '30vh', }} shadows url={file} />
       </div>
       <div className="px-6 pt-4">
         <div className="flex justify-between font-bold text-xl mb-2 gap-2">

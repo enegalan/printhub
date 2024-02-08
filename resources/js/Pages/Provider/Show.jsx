@@ -51,7 +51,7 @@ export default function ProviderShow({ user, products }) {
                       </span>
                     ))}
                   </td>
-                  <td className="py-2 px-4 border-b flex justify-center">{product.file ? (<StlViewer modelProps={{ color: '#1e40af' }} style={{ top: 0, left: 0, width: '15vh', height: '30vh', }} orbitControls shadows url={product.file} />) : (<img src={`/storage/products/${product.image}`}></img>)}</td>
+                  <td className="py-2 px-4 border-b flex justify-center"><StlViewer modelProps={{ color: '#1e40af' }} style={{ top: 0, left: 0, width: '15vh', height: '30vh', }} orbitControls shadows url={product.file} /></td>
                   <td className="py-2 px-4 border-b">{product.price}$</td>
                   <td className="py-2 px-4 border-b">
                     <Link

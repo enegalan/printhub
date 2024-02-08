@@ -93,7 +93,7 @@ export default function ({ products,filters }) {
                       product.categories[0]?.name
                     )}
                   </td>
-                  <td className="py-2 px-4 border-b">{product.file ? (<StlViewer modelProps={{ color: '#1e40af' }} style={{ top: 0, left: 0, width: '100%', height: '30vh', }} orbitControls shadows url={product.file} />) : (<img src={`/storage/products/${product.image}`}></img>)}</td>
+                  <td className="py-2 px-4 border-b"><StlViewer modelProps={{ color: '#1e40af' }} style={{ top: 0, left: 0, width: '100%', height: '30vh', }} orbitControls shadows url={product.file} /></td>
                   <td className="py-2 px-4 border-b">{product.price}$</td>
                   <td className="py-2 px-4 border-b">
                     <Link

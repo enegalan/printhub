@@ -9,6 +9,8 @@ use App\Http\Controllers\UserController;
 use App\Models\Country;
 use App\Models\Product;
 use App\Models\Region;
+use App\Models\Order;
+use App\Models\Cart;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -122,7 +124,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/payment/complete', function () {
         app()->call([UserController::class, 'getRoles']);
-        return Inertia::render('PaymentComplete');
+        $env = ['host' => env('OCTOPRINT_HOST'),'apiKey' => env('OCTOPRINT_API_KEY')];
+        $user = auth()->user();
+        $cart = Cart::where('user_id', $user->id)->where('active', '0')->latest()->first();
+        $order = Order::where('cart_id', $cart->id)->latest()->first();
+        return Inertia::render('PaymentComplete', compact('env', 'order'));
     })->name('paymentcomplete');
 
     Route::get('/cart', [CartController::class, 'show'])->name('user.cart');

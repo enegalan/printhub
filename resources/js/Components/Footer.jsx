@@ -48,7 +48,7 @@ export const Footer = ({className, ...props}) => {
                         </li>
                     </ul>
                     {/* Footer Links */}
-                    <div className='flex w-full justify-around mt-5'>
+                    <div className='flex w-full justify-between mt-5'>
                         <div className="flex flex-col">
                             <h6 className="text-left text-sm font-bold">Products</h6>
                             <ul className="flex flex-col items-start">
