@@ -334,6 +334,8 @@ class UserController extends Controller
 
             $productName = $product->name;
 
+            $productFile = $product->file;
+
             $productImage = $product->image;
 
             $productPrice = $product->price;
@@ -348,6 +350,7 @@ class UserController extends Controller
                 'name' => $productName,
                 'colorName' => $colorName,
                 'materialName' => $materialName,
+                'file' => $productFile,
                 'image' => $productImage,
                 'price' => $productPrice,
                 'amount' => $sc->quantity,
