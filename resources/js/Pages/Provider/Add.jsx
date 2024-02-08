@@ -51,9 +51,14 @@ export default function ProviderDashboard({ user, categories = [] }) {
     formData.append("price", data.price);
     formData.append("categories", data.categories);
     formData.append("user_id", data.user_id);
+    console.log(data.categories)
+    console.log(data.price);
+    console.log(data.file);
+    console.log(data.description);
+    console.log(data.name)
     try {
-      post(route("product.store"));
-      window.location.href = route('profile.provider.products')
+      post(route("product.store"), { onFinish: () => {window.location.href = route('profile.provider.products')}});
+      //window.location.href = route('profile.provider.products')
     } catch (e) {
       onError(e);
     }
@@ -87,7 +92,7 @@ export default function ProviderDashboard({ user, categories = [] }) {
             <InputError message={errors.name} className="mt-2" />
           </div>
           <div>
-            <InputLabel value="Description" className="text-gray-900" />
+            <InputLabel value="Description*" className="text-gray-900" />
             <textarea
               id="description"
               name="description"
@@ -98,6 +103,7 @@ export default function ProviderDashboard({ user, categories = [] }) {
               onChange={(e) => setData("description", e.target.value)}
               rows="5"
               placeholder="Maximun 255 chararcters"
+              required
             />
             <InputError message={errors.description} className="mt-2" />
           </div>

@@ -13,14 +13,9 @@ function PaymentComplete({ auth, env, order, files }) {
   const apiUrl = env.host;
   const apiKey = env.apiKey;
   useEffect(() => {
-    
-    
-    if (env[0] !== undefined && env[1] !== undefined) {
       updatePrinterStatus();
-      const intervalId = setInterval(updatePrinterStatus, 1000);
+      var intervalId = setInterval(updatePrinterStatus, 1000);
       uploadFilesSequentially(files);
-    }
-
     return () => clearInterval(intervalId);
   }, []);
   const updatePrinterStatus = () => {
@@ -57,14 +52,13 @@ function PaymentComplete({ auth, env, order, files }) {
 
   const uploadFilesSequentially = (files, index = 0) => {
     if (index >= files.length) {
-      // Si hemos enviado todos los archivos, salir de la función
       return;
     }
 
     const file = files[index];
-    const filePath = `/gcode/${file}.gcode`; // Ajusta la ruta si es necesario
+    //const filePath = `/gcode/${file}.gcode`;
+    const filePath = '/gcode/dragon.gcode'
 
-    // Fetch el archivo desde la carpeta public
     fetch(filePath)
       .then((response) => response.blob())
       .then((blob) => {
