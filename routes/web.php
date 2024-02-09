@@ -132,18 +132,18 @@ Route::middleware(['auth', 'verified'])->group(function () {
         $cart = Cart::where('user_id', $user->id)->where('active', '0')->latest()->first();
         $stock_carts = Stock_cart::where('cart_id', $cart->id)->get();
         $files = [];
-        foreach ($stock_carts as $stock_cart) {
+        /*foreach ($stock_carts as $stock_cart) {
             $product_combination = \App\Models\Prod_comb::find($stock_cart->prod_comb_id);
             $product = Product::find($product_combination->product_id);
-            $file = public_path($product->file);
-            $gcodePath = public_path('gcode/'.$user->id . Str::random(10) .'.gcode');
-            exec("slic3r " . escapeshellarg($file) . " --output " . escapeshellarg($gcodePath));
+            //$file = public_path($product->file);
+            //$gcodePath = public_path('gcode/'.$user->id . Str::random(10) .'.gcode');
+            //exec("slic3r " . escapeshellarg($file) . " --output " . escapeshellarg($gcodePath));
             if (File::exists($gcodePath)) {
                 $files[] = $gcodePath;
             } else {
                 return "ERROR: STL cannot be converted to GCODE";
             }
-        }
+        }*/
         $order = Order::where('cart_id', $cart->id)->latest()->first();
         return Inertia::render('PaymentComplete', compact('env', 'order', 'files'));
     })->name('paymentcomplete');

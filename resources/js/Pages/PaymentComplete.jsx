@@ -4,8 +4,7 @@ import { useState, useEffect } from "react";
 import { Link } from '@inertiajs/react';
 import { FaCartShopping } from "react-icons/fa6";
 
-function PaymentComplete({ auth, env, order, files }) {
-  console.log(files)
+function PaymentComplete({ auth, env, order, files = [] }) {
   const [nozzleTemp, setNozzleTemp] = useState("--");
   const [bedTemp, setBedTemp] = useState("--");
   const [printerStatus, setPrinterStatus] = useState("--");
