@@ -131,7 +131,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         $user = auth()->user();
         $cart = Cart::where('user_id', $user->id)->where('active', '0')->latest()->first();
         $stock_carts = Stock_cart::where('cart_id', $cart->id)->get();
-        $files = [];
+        //$files = [];
         /*foreach ($stock_carts as $stock_cart) {
             $product_combination = \App\Models\Prod_comb::find($stock_cart->prod_comb_id);
             $product = Product::find($product_combination->product_id);
@@ -145,7 +145,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             }
         }*/
         $order = Order::where('cart_id', $cart->id)->latest()->first();
-        return Inertia::render('PaymentComplete', compact('env', 'order', 'files'));
+        return Inertia::render('PaymentComplete', compact('env', 'order'));
     })->name('paymentcomplete');
 
     Route::get('/cart', [CartController::class, 'show'])->name('user.cart');
