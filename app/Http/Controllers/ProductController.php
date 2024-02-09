@@ -133,15 +133,6 @@ class ProductController extends Controller
     }
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:100',
-            'description' => 'required|string',
-            'file' => 'required|file|max:2048',
-            'price' => 'required|numeric',
-            'user_id' => 'exists:App\Models\User,id',
-            'categories' => 'array',
-        ]);
-
         $productFile = $request->file('file');
         $productFileName = $productFile->hashName();
         $productFile->storeAs('stl', $productFileName, 'public');

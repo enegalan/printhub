@@ -85,7 +85,7 @@ export default function Show({
         dynamicBackground={false}
       ></NavBar>
       <section className="flex justify-center mt-24">
-        <div className="absolute flex justify-start w-full pb-4 ml-10">
+        <div className="absolute flex justify-start w-full pb-4 pl-5">
           <Link href={route('market')} >
             <IoMdArrowRoundBack className="text-4xl bg-[lightgrey] hover:bg-[#bbbbbb] rounded" />
           </Link>

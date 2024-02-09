@@ -109,7 +109,7 @@ function Market({ auth, products = [], colors = [], categories = [] }) {
         toast.error(message);
     }
 
-    const headerImageStyle = { width: '100%', height: '65vh', display: 'block', marginTop: '110px'  }
+    const headerImageStyle = { display: 'block', marginTop: '110px'  }
 
     return (
         <div className='bg-[var(--light-grey)]'>
@@ -121,7 +121,7 @@ function Market({ auth, products = [], colors = [], categories = [] }) {
             />
             <Toaster />
 
-            <header className='-mt-24 h-[65vh] relative overflow-hidden'>
+            <header className='-mt-10 xl:-mt-24 xl:h-[75vh] relative overflow-hidden'>
                 <Carousel
                     autoplay={true}
                     cellAlign='center'
