@@ -200,7 +200,7 @@ const BackButton = ({ className = "", iconClass = "", href = "index", }) => {
     const defaultClass = "bg-[lightgrey] w-[40px] p-3 rounded-lg mb-5 self-start transition hover:bg-[#bbbbbb]";
     return (
         <Link href={route(href)} className={defaultClass + ' ' + className}>
-            <IoMdArrowRoundBack iconClass={iconClass} />
+            <IoMdArrowRoundBack className={iconClass} />
         </Link> 
     );
 };

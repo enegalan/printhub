@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ProductCard from "@/Components/ProductCard";
 import Pagination from "@/Components/Pagination";
-import toast, { Toaster } from 'react-hot-toast';
-import { router } from '@inertiajs/react'
 
 function ProductsSection({ user = null, products = [], colors = [], onSuccess, onError }) {
     const { data, prev_page_url, next_page_url, current_page, last_page } = products;

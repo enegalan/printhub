@@ -3,7 +3,7 @@ import InputLabel from "@/Components/InputLabel";
 import TextInput from "@/Components/TextInput";
 import InputError from "@/Components/InputError";
 import { useForm } from "@inertiajs/react";
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { BackButton } from '@/Components/Buttons';
 
 export default function Edit({ color }) {
@@ -35,7 +35,6 @@ export default function Edit({ color }) {
     return (
         <Dashboard pageName='Colors' pageSubtitle="Manage product's colors">
             <BackButton href="admin.colors" />
-            <Toaster />
             <h1 className="text-2xl mb-5 text-center">Edit color</h1>
             <div className="row-span-4 bg-white rounded-xl p-4 lg:mx-20">
                 <form

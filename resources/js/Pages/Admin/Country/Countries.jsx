@@ -2,7 +2,7 @@ import React from 'react'
 import Dashboard from '../Dashboard'
 import Pagination from "@/Components/Pagination";
 import { Link, useForm } from '@inertiajs/react';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { FaPlus } from 'react-icons/fa';
 
 export default function ({ countries }) {
@@ -19,7 +19,6 @@ export default function ({ countries }) {
   return (
     <Dashboard pageName='Countries' pageSubtitle='Manage the countries'>
       <div className='flex flex-col min-h-full '>
-        <Toaster />
         <div className='overflow-x-scroll'>
           <table className="min-w-full bg-white border border-gray-300">
             <thead>

@@ -12,7 +12,7 @@ import OrderBy from '@/Components/OrderBy';
 
 import ProductsSection from '@/Components/sections/ProductsSection';
 
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 function Market({ auth, products = [], colors = [], categories = [] }) {
     const [categoriesFilter, setCategories] = useState([]);
@@ -119,7 +119,6 @@ function Market({ auth, products = [], colors = [], categories = [] }) {
                 defaultBackgroundColor='var(--main-blue)'
                 defaultTextColor='white'
             />
-            <Toaster />
 
             <header className='-mt-10 xl:-mt-24 xl:h-[75vh] relative overflow-hidden'>
                 <Carousel

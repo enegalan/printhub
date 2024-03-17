@@ -4,7 +4,7 @@ import InputLabel from "@/Components/InputLabel";
 import TextInput from "@/Components/TextInput";
 import InputError from "@/Components/InputError";
 import { useForm } from "@inertiajs/inertia-react";
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { BackButton } from "@/Components/Buttons";
 
 export default function Add() {
@@ -36,7 +36,6 @@ export default function Add() {
     return (
         <Dashboard pageName='Materials' pageSubtitle="Manage product's materials">
             <BackButton href="admin.materials" />
-            <Toaster />
             <h1 className="text-2xl mb-5 text-center">Create material</h1>
             <div className="row-span-4 bg-white rounded-xl p-4 lg:mx-20">
                 <form

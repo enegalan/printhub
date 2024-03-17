@@ -1,7 +1,7 @@
 import {  useEffect } from 'react';
 import { useForm } from '@inertiajs/inertia-react';
 import ProfileLayout from "@/Layouts/ProfileLayout";
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import InputLabel from '@/Components/InputLabel';
 import TextInput from '@/Components/TextInput';
 import InputError from '@/Components/InputError';
@@ -71,7 +71,7 @@ export default function ({ payment = [], user = [] }) {
     return (
         <ProfileLayout pageName='Edit Payment Method' pageSubtitle='Manage your cards and accounts' user={user}>
             <BackButton href="profile.payments" />
-            <Toaster />
+            
             <h1 className="text-2xl mb-5 text-center">Edit payment method</h1>
             <div className="row-span-4 bg-white rounded-xl p-4 lg:mx-20">
                 <form

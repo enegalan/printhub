@@ -2,10 +2,8 @@ import { router } from '@inertiajs/react';
 
 import { Button } from "./Buttons.jsx";
 import PropTypes from "prop-types";
-import { Link } from "@inertiajs/react";
 import { FaRegHeart, FaHeart, FaCartPlus } from "react-icons/fa";
-import toast, { Toaster } from 'react-hot-toast';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { StlViewer } from 'react-stl-viewer';
 
 export default function ProductCard({id, image, file, name, price, href, onSuccess, onError, isWishlistItem, onAddWishlist, colors}){

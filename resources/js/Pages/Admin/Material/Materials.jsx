@@ -2,7 +2,7 @@ import React from 'react'
 import Dashboard from '../Dashboard'
 import Pagination from "@/Components/Pagination";
 import { Link, useForm } from '@inertiajs/react';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { FaPlus } from 'react-icons/fa';
 import { useEffect, useState } from "react";
 
@@ -28,7 +28,7 @@ export default function ({ materials }) {
   return (
     <Dashboard pageName='Materials' pageSubtitle="Manage product's materials">
       <div className='flex flex-col min-h-full '>
-        <Toaster />
+        
         <Link href={route('admin.add.material')} className="bg-[lightgrey] w-[40px] p-3 rounded-lg mb-5 self-end transition hover:bg-[#bbbbbb]">
           <FaPlus />
         </Link>

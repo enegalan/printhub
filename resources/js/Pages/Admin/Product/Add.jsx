@@ -4,7 +4,7 @@ import InputLabel from "@/Components/InputLabel";
 import TextInput from "@/Components/TextInput";
 import InputError from "@/Components/InputError";
 import { useForm } from "@inertiajs/inertia-react";
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { StlViewer } from "react-stl-viewer";
 import { BackButton } from "@/Components/Buttons";
 
@@ -63,7 +63,7 @@ export default function addProduct({ user, categories = [] }) {
   return (
     <Dashboard pageName="Products" pageSubtitle="Add new product">
       <BackButton href="admin.products" />
-      <Toaster />
+      
       <h1 className="text-2xl mb-5 text-center">Add new product</h1>
       <div className="row-span-4 bg-white rounded-xl p-4 lg:mx-20">
         <form

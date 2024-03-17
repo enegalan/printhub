@@ -12,7 +12,7 @@ import "@/../css/backgroundWhite.css";
 import ProductCardMini from "@/Components/ProductCardMini";
 import SelectOptions from "@/Components/SelectOptions";
 import InputError from "@/Components/InputError";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { useState } from "react";
 import { StlViewer } from "react-stl-viewer";
 import { Footer } from "@/Components/Footer";
@@ -76,7 +76,6 @@ export default function Show({
   };
   return (
     <main className="bg-white">
-      <Toaster></Toaster>
       <NavBar
         user={user}
         defaultBackgroundColor="var(--main-blue)"

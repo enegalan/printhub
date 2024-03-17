@@ -4,7 +4,7 @@ import InputLabel from "@/Components/InputLabel";
 import TextInput from "@/Components/TextInput";
 import InputError from "@/Components/InputError";
 import { useForm } from "@inertiajs/inertia-react";
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { StlViewer } from "react-stl-viewer";
 
 export default function ProviderDashboard({ user, product, categories = [] }) {
@@ -70,7 +70,7 @@ export default function ProviderDashboard({ user, product, categories = [] }) {
   return (
     <Dashboard pageName="Products" pageSubtitle="Edit a product">
       <BackButton href="admin.products" />
-      <Toaster />
+      
       <h1 className="text-2xl mb-5 text-center">Edit product</h1>
       <div className="row-span-4 bg-white rounded-xl p-4 lg:mx-20">
         <form

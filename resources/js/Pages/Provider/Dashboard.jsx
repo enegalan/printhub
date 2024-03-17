@@ -6,12 +6,12 @@ import SecondaryButton from '@/Components/SecondaryButton';
 import { FaCartShopping, FaGear, FaHandshake } from "react-icons/fa6";
 import { FaBox, FaWallet, FaHome, FaUsers } from "react-icons/fa";
 
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 export default function Dashboard({ auth }) {
   return (
     <ProfileLayout pageName="Dashboard" pageSubtitle="Welcome to your profile" user={auth.user}>
-      <Toaster />
+      
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <div class="w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
           <a href={route('profile.provider.products')}>

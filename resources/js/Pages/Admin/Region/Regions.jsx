@@ -2,7 +2,7 @@ import React from 'react'
 import Dashboard from '../Dashboard'
 import Pagination from "@/Components/Pagination";
 import { Link, useForm } from '@inertiajs/react';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 export default function ({ regions }) {
   const { data, prev_page_url, next_page_url, current_page, last_page } = regions;
@@ -18,7 +18,7 @@ export default function ({ regions }) {
   return (
     <Dashboard pageName='Regions' pageSubtitle='Manage the regions'>
       <div className='flex flex-col min-h-full '>
-        <Toaster />
+        
         <div className='overflow-x-scroll'>
           <table className="min-w-full bg-white border border-gray-300">
             <thead>

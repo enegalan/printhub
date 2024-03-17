@@ -4,7 +4,7 @@ import InputLabel from "@/Components/InputLabel";
 import TextInput from "@/Components/TextInput";
 import InputError from "@/Components/InputError";
 import { useForm } from "@inertiajs/inertia-react";
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 export default function Edit({ material }) {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -35,7 +35,7 @@ export default function Edit({ material }) {
     return (
         <Dashboard pageName='Materials' pageSubtitle="Manage product's materials">
             <BackButton href="admin.materials" />
-            <Toaster />
+            
             <h1 className="text-2xl mb-5 text-center">Edit material</h1>
             <div className="row-span-4 bg-white rounded-xl p-4 lg:mx-20">
                 <form

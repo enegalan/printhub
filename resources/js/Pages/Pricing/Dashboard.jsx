@@ -1,7 +1,7 @@
 import NavBar from '@/Components/NavBar';
 import { Footer } from '@/Components/Footer';
 import PricingCard from '@/Components/PricingCard';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import error from '../error';
 
 function Dashboard ({user,errors}) {
@@ -12,7 +12,7 @@ function Dashboard ({user,errors}) {
     return (
         <>
             <NavBar user={user} className="lg:backdrop-blur-md border-b max-lg:bg-blue-900/50 border-blue-950/50" defaultBackgroundColor="transparent" defaultTextColor="var(--white)" dynamicBackground={false} />
-            <Toaster/>
+            />
                 <main className='py-44 px-10 bg-[url(/images/dark-blue-blur-background-vector.webp)] bg-cover bg-no-repeat space-y-10 gap-10 -mb-16'>
                     
                     <header className='text-white text-center'>

@@ -10,7 +10,7 @@ import { useState, useEffect } from "react";
 
 import PrimaryButton from '@/Components/PrimaryButton';
 import SecondaryButton from '@/Components/SecondaryButton';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 function Cart({ auth, cart, materials, colors, isVip }) {
 
@@ -102,7 +102,7 @@ function Cart({ auth, cart, materials, colors, isVip }) {
     <>
       <div className='overflow-hidden bg-[var(--light-grey)]'>
         <NavBar user={auth.user} sectionsBg={{ 'about': '--dark' }} sectionsText={{ 'about': 'white' }} />
-        <Toaster />
+        
         <header id="about" className='relative overflow-hidden py-48 text-center'>
           <div className="absolute top-0 bottom-0">
             <video autoPlay={true} muted={true} loop={true}  className="h-screen w-screen object-cover brightness-[0.20]" src='/images/printer1.mp4'></video>
