@@ -55,7 +55,7 @@ export default function ProductCard({ image, file, name, price, allcolors, allma
         X
       </button>
       <div className="overflow-hidden flex justify-center">
-        <StlViewer modelProps={{ color: selectedColorHex }} style={{ top: 0, left: 0, width: '60%', height: '30vh', }} shadows url={file} />
+        <StlViewer modelProps={{ color: selectedColorHex }} style={{ top: 0, left: 0, width: '60%', height: '30vh', }} url={file} />
       </div>
       <div className="px-6 pt-4">
         <div className="flex justify-between font-bold text-xl mb-2 gap-2">
@@ -67,7 +67,7 @@ export default function ProductCard({ image, file, name, price, allcolors, allma
       <div className="px-6 mt-3 pb-4 pt-2 flex justify-between">
         <div className="text-black text-xl mb-2">Color:
         </div>
-        <select className="ms-2 text-black" onChange={(e) => handleColorChange(e.target[e.target.selectedIndex].text)}>
+        <select className="ms-2 text-black rounded-lg" onChange={(e) => handleColorChange(e.target[e.target.selectedIndex].text)}>
           {allcolors.map((colorr) =>
             <option key={colorr.id} name={colorr.hex} value={colorr.id} selected={colorr.name === selectedColor}>{colorr.name}</option>
           )}
@@ -76,7 +76,7 @@ export default function ProductCard({ image, file, name, price, allcolors, allma
       <div className="px-6 pb-4 pt-2 flex justify-between">
         <div className="text-black text-xl mb-2">Material:
         </div>
-        <select className="ms-2" onChange={(e) => handleMaterialChange(e.target[e.target.selectedIndex].text)}>
+        <select className="ms-2 rounded-lg" onChange={(e) => handleMaterialChange(e.target[e.target.selectedIndex].text)}>
           {allmaterials.map((materiall) =>
             <option key={materiall.id} name={material_name} value={materiall.id} selected={materiall.name === selectedMaterial}>{materiall.name}</option>
           )}
@@ -84,11 +84,11 @@ export default function ProductCard({ image, file, name, price, allcolors, allma
       </div>
       <div className="px-6 pb-4 pt-2">
         <div className="flex items-center justify-center">
-          <button className="bg-blue-950 p-3 px-5 text-white rounded" onClick={handleDecrement}>
+          <button className="bg-blue-950 p-3 px-5 text-white rounded transition hover:bg-blue-800" onClick={handleDecrement}>
             -
           </button>
           <input type="text" className="text-black text-xl mx-2 w-1/5 text-center" value={selectedQuantity} readOnly />
-          <button className="bg-blue-950 p-3 px-5 text-white rounded" onClick={handleIncrement}>
+          <button className="bg-blue-950 p-3 px-5 text-white rounded transition hover:bg-blue-800" onClick={handleIncrement}>
             +
           </button>
         </div>

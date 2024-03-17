@@ -13,12 +13,8 @@ import SecondaryButton from '@/Components/SecondaryButton';
 import toast from 'react-hot-toast';
 
 function Cart({ auth, cart, materials, colors, isVip }) {
-
-
     const [cartItems, setCartItems] = useState(cart.stock_carts);
-
     useEffect(() => {
-
       const successMessage = localStorage.getItem('successMessage');
       const errorMessage = localStorage.getItem('errorMessage');
   
@@ -54,7 +50,6 @@ function Cart({ auth, cart, materials, colors, isVip }) {
     const total = orderTotal + iva + (isVip ? 0 : shipping_cost);
 
     const [selectedProductId, setSelectedProductId] = useState(null);
-
 
     const handleDelete = (productId) => {
       setSelectedProductId(productId);
@@ -151,7 +146,7 @@ function Cart({ auth, cart, materials, colors, isVip }) {
           </div>
       
           {cartItems.length > 0 && (
-            <div className='border border-slate-500 w-full md:w-full lg:w-1/3 p-6 rounded-xl shadow-lg bg-white'>
+            <div className='w-full md:w-full lg:w-1/3 p-6 rounded-xl shadow-lg bg-white'>
             <h1 className='text-3xl font-bold mb-4'>Order summary</h1>
               <div className='flex flex-col content-between'>
                 <div className='overflow-x-auto max-h-[310px] overflow-y-auto'>
@@ -192,7 +187,7 @@ function Cart({ auth, cart, materials, colors, isVip }) {
                   </span>
                 )}</p>
                 <p className='text-2xl mt-5 flex justify-between text-red-500 font-bold'><strong className='text-black'>Total:</strong> {total.toFixed(2)}$</p>
-                <Link href="/payment" as="button" className="bg-blue-950 font-semibold text-lg text-white py-4 w-full rounded-full mt-4 hover:bg-blue-800" type="button">Buy Now</Link>
+                <Link href="/payment" as="button" className="bg-blue-950 font-semibold text-lg text-white py-4 w-full rounded-full mt-4 transition hover:bg-blue-800" type="button">Buy Now</Link>
                 </div>
                 </div>
             </div>

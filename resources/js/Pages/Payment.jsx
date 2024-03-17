@@ -4,6 +4,9 @@ import NavBar from "@/Components/NavBar";
 import { Footer } from "@/Components/Footer";
 import PayPalPayment from "@/Components/PayPal";
 import TextInput from "@/Components/TextInput";
+import { Link } from '@inertiajs/react';
+import Divider from "@/Components/Divider";
+import Checkbox from "@/Components/Checkbox";
 
 function Payment({ auth, countries, regions, total }) {
   const [activeStep, setActiveStep] = useState(0);
@@ -13,6 +16,8 @@ function Payment({ auth, countries, regions, total }) {
 
   const [filteredRegions, setFilteredRegions] = useState([]);
   const [filteredFactRegions, setFilteredFactRegions] = useState([]);
+
+  const [useShippingInfo, setUseShippingInfo] = useState(false);
 
   const handleCountryChange = (selectedCountry) => {
     setSelectedCountry(selectedCountry);
@@ -121,20 +126,15 @@ function Payment({ auth, countries, regions, total }) {
 
   const isStepValid = () => {
     switch (activeStep) {
-      case 0:
-        return !Object.values(personalInfo.errors).some((error) => error) && personalInfo.name.trim() !== '';
       case 1:
         return !Object.values(shippingAddress.errors).some((error) => error) && shippingAddress.shipName.trim() !== '' && shippingAddress.shipAddress.trim() !== '' && shippingAddress.shipCountry.trim() !== '' && shippingAddress.shipRegion.trim() !== '' && shippingAddress.shipZip.trim() !== '';
       case 2:
-        return !Object.values(facturationAddress.errors).some((error) => error) && facturationAddress.factName.trim() !== '' && facturationAddress.factAddress.trim() !== '' && facturationAddress.factCountry.trim() !== '' && facturationAddress.factRegion.trim() !== '' && facturationAddress.factZip.trim() !== '';
+        if (!useShippingInfo) {
+          return !Object.values(facturationAddress.errors).some((error) => error) && facturationAddress.factName.trim() !== '' && facturationAddress.factAddress.trim() !== '' && facturationAddress.factCountry.trim() !== '' && facturationAddress.factRegion.trim() !== '' && facturationAddress.factZip.trim() !== '';
+        }
       default:
         return true;
     }
-  };
-
-  const isValidEmail = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
   };
 
   const handleNext = () => {
@@ -143,23 +143,6 @@ function Payment({ auth, countries, regions, total }) {
     } else {
       // Mostrar mensajes de error al hacer clic en "Next" si hay errores
       switch (activeStep) {
-        case 0:
-        setPersonalInfo((prevInfo) => {
-          const emailFormatError =
-            prevInfo.email.trim() !== "" && !isValidEmail(prevInfo.email)
-              ? "Invalid email format"
-              : "";
-
-          return {
-            ...prevInfo,
-            errors: {
-              name: prevInfo.name.trim() === "" ? "Name is required" : "",
-              surname: prevInfo.surname.trim() === "" ? "Surname is required" : "",
-              email: prevInfo.email.trim() === "" ? "Email is required" : emailFormatError,
-            },
-          };
-        });
-        break;
         case 1:
           setShippingAddress((prevAddress) => ({
             ...prevAddress,
@@ -173,22 +156,33 @@ function Payment({ auth, countries, regions, total }) {
           }));
           break;
         case 2:
-          setFacturationAddress((prevAddress) => ({
-            ...prevAddress,
-            errors: {
-              factName: facturationAddress.factName.trim() === "" ? "Name is required" : "",
-              factAddress: facturationAddress.factAddress.trim() === "" ? "Address is required" : "",
-              factCountry: facturationAddress.factCountry.trim() === "" ? "Country is required" : "",
-              factRegion: facturationAddress.factRegion.trim() === "" ? "Region is required" : "",
-              factZip: facturationAddress.factZip.trim() === "" ? "Zip is required" : "",
-            },
-          }));
+          if (!useShippingInfo) {
+            setFacturationAddress((prevAddress) => ({
+              ...prevAddress,
+              errors: {
+                factName: facturationAddress.factName.trim() === "" ? "Name is required" : "",
+                factAddress: facturationAddress.factAddress.trim() === "" ? "Address is required" : "",
+                factCountry: facturationAddress.factCountry.trim() === "" ? "Country is required" : "",
+                factRegion: facturationAddress.factRegion.trim() === "" ? "Region is required" : "",
+                factZip: facturationAddress.factZip.trim() === "" ? "Zip is required" : "",
+              },
+            }));
+          }
           break;
         default:
           break;
       }
     }
   };
+
+  function setFacturationAsShipping () {
+    handleFacturationAddressChange('factAddress', shippingAddress.shipAddress);
+    handleFacturationAddressChange('factCountry', shippingAddress.shipCountry);
+    handleFactCountryChange(shippingAddress.shipCountry);
+    handleFacturationAddressChange('factRegion', shippingAddress.shipRegion);
+    handleFacturationAddressChange('factName', shippingAddress.shipName);
+    handleFacturationAddressChange('factZip', shippingAddress.shipZip);
+  }
 
   return (
     <>
@@ -208,48 +202,36 @@ function Payment({ auth, countries, regions, total }) {
               <form className="flex flex-col">
                 <label htmlFor="name">Name: </label>
                 <TextInput
-                  className={`${personalInfo.errors.name && "border-red-500"}`}
+                  className={`bg-gray-100 text-gray-500 ${personalInfo.errors.name && "border-red-500"}`}
                   type="text"
                   id="name"
                   name="name"
-                  value={personalInfo.name}
+                  value={auth.user?.name}
                   onChange={(e) => handlePersonalInfoChange("name", e.target.value)}
+                  disabled
                 />
-                <span className="mb-3 text-red-500">{personalInfo.errors.name && "Name is required"}</span>
-
                 <label htmlFor="surname">Surname: </label>
                 <TextInput
-                  className={`${personalInfo.errors.surname && "border-red-500"}`}
+                  className={`bg-gray-100 text-gray-500 ${personalInfo.errors.surname && "border-red-500"}`}
                   type="text"
                   id="surname"
                   name="surname"
-                  value={personalInfo.surname}
+                  value={auth.user?.lastname}
                   onChange={(e) => handlePersonalInfoChange("surname", e.target.value)}
+                  disabled
                 />
-                <span className="mb-3 text-red-500">{personalInfo.errors.surname && "Surname is required"}</span>
-
                 <label htmlFor="email">Email: </label>
                 <TextInput
-                  className={`${personalInfo.errors.email && "border-red-500"}`}
+                  className={`bg-gray-100 text-gray-500 ${personalInfo.errors.email && "border-red-500"}`}
                   type="text"
                   id="email"
                   name="email"
-                  value={personalInfo.email}
+                  value={auth.user?.email}
                   onChange={(e) => handlePersonalInfoChange("email", e.target.value)}
+                  disabled
                 />
-                <span className="mb-3 text-red-500">
-  {personalInfo.errors.email === "Email is required" && "Email is required"}
-  {personalInfo.errors.email === "Invalid email format" && "Invalid email format"}
-</span>
-
-                <TextInput
-                  type="hidden"
-                  id="user"
-                  name="user"
-                  value={personalInfo.user}
-                  onChange={(e) => handlePersonalInfoChange("user", e.target.value)}
-                ></TextInput>
               </form>
+              <p className="my-3 text-md">Not correct information? Update it on your <Link className="text-[var(--blue-1)] transition hover:text-[var(--main-blue)]" href={route("profile.edit")}>profile</Link>.</p>
             </div>
           )}
 
@@ -257,7 +239,7 @@ function Payment({ auth, countries, regions, total }) {
             <div>
               <h2 className="text-2xl font-bold mb-4">Shipping Address</h2>
               <form className="flex flex-col">
-                <label htmlFor="shipName">Name: </label>
+                <label htmlFor="shipName">Full name: </label>
                 <TextInput
                   className={`${shippingAddress.errors.shipName && "border-red-500"}`}
                   type="text"
@@ -266,7 +248,6 @@ function Payment({ auth, countries, regions, total }) {
                   value={shippingAddress.shipName}
                   onChange={(e) => handleShippingAddressChange("shipName", e.target.value)}
                 />
-                <span className="mb-3 text-red-500">{shippingAddress.errors.shipName && "Name is required"}</span>
 
                 <label htmlFor="shipAddress">Address: </label>
                 <TextInput
@@ -334,38 +315,41 @@ function Payment({ auth, countries, regions, total }) {
             <div>
               <h2 className="text-2xl font-bold mb-4">Facturation Address</h2>
               <form className="flex flex-col">
-                <label htmlFor="factName">Name: </label>
+                <label htmlFor="factName">Full name: </label>
                 <TextInput
-                  className={`${facturationAddress.errors.factName && "border-red-500"}`}
+                  className={`${useShippingInfo && "text-gray-400 bg-gray-100"} ${facturationAddress?.errors?.factName && "border-red-500"}`}
                   type="text"
                   id="factName"
                   name="factName"
-                  value={facturationAddress.factName}
+                  value={useShippingInfo ? shippingAddress.shipName : facturationAddress.factName}
                   onChange={(e) => handleFacturationAddressChange("factName", e.target.value)}
+                  disabled={useShippingInfo}
                 />
-                <span className="mb-3 text-red-500">{facturationAddress.errors.factName && "Name is required"}</span>
+                <span className="mb-3 text-red-500">{facturationAddress?.errors?.factName && "Name is required"}</span>
 
                 <label htmlFor="factAddress">Address: </label>
                 <TextInput
-                  className={`${facturationAddress.errors.factAddress && "border-red-500"}`}
+                  className={`${useShippingInfo && "text-gray-400 bg-gray-100"} ${facturationAddress?.errors?.factAddress && "border-red-500"}`}
                   type="text"
                   id="factAddress"
                   name="factAddress"
-                  value={facturationAddress.factAddress}
+                  value={useShippingInfo ? shippingAddress.shipAddress :  facturationAddress.factAddress}
                   onChange={(e) => handleFacturationAddressChange("factAddress", e.target.value)}
+                  disabled={useShippingInfo}
                 />
                 <span className="mb-3 text-red-500">{facturationAddress.errors.factAddress && "Address is required"}</span>
 
                 <label htmlFor="factCountry">Country: </label>
                 <select
-                  className={`rounded border-gray-300 ${facturationAddress.errors.factCountry && "border-red-500"}`}
+                  className={`${useShippingInfo && "text-gray-400 bg-gray-100"} rounded border-gray-300 ${facturationAddress.errors.factCountry && "border-red-500"}`}
                   name="factCountry"
                   id="factCountry"
-                  value={facturationAddress.factCountry}
+                  value={useShippingInfo ? shippingAddress.shipCountry : facturationAddress.factCountry}
                   onChange={(e) => {
                     handleFactCountryChange(e.target.value);
                     handleFacturationAddressChange("factCountry", e.target.value);
                   }}
+                  disabled={useShippingInfo}
                 >
                   <option value="">Select a country</option>
                   {countries.map((country) => (
@@ -378,11 +362,12 @@ function Payment({ auth, countries, regions, total }) {
 
                 <label htmlFor="factRegion">Region: </label>
                 <select
-                  className={`rounded border-gray-300 ${facturationAddress.errors.factRegion && "border-red-500"}`}
+                  className={`${useShippingInfo && "text-gray-400 bg-gray-100"} rounded border-gray-300 ${facturationAddress.errors.factRegion && "border-red-500"}`}
                   name="factRegion"
                   id="factRegion"
-                  value={facturationAddress.factRegion}
+                  value={useShippingInfo && shippingAddress.shipRegion ? shippingAddress.shipRegion : facturationAddress.factRegion}
                   onChange={(e) => handleFacturationAddressChange("factRegion", e.target.value)}
+                  disabled={useShippingInfo}
                 >
                   <option value="">Select a region</option>
                   {filteredFactRegions.map((region) => (
@@ -395,15 +380,23 @@ function Payment({ auth, countries, regions, total }) {
 
                 <label htmlFor="factZip">Zip: </label>
                 <TextInput
-                  className={`${facturationAddress.errors.factZip && "border-red-500"}`}
+                  className={`${useShippingInfo && "text-gray-400 bg-gray-100"} ${facturationAddress.errors.factZip && "border-red-500"}`}
                   type="text"
                   id="factZip"
                   name="factZip"
-                  value={facturationAddress.factZip}
+                  value={useShippingInfo ? shippingAddress.shipZip : facturationAddress.factZip}
                   onChange={(e) => handleFacturationAddressChange("factZip", e.target.value)}
+                  disabled={useShippingInfo}
                 />
                 <span className="mb-3 text-red-500">{facturationAddress.errors.factZip && "Zip is required"}</span>
               </form>
+              <Divider value="Or" />
+              <Checkbox
+                  name="default"
+                  checked={useShippingInfo}
+                  onChange={(e) => {setUseShippingInfo(e.target.checked); setFacturationAsShipping();}}
+              />
+              <span className="ms-2 text-sm text-gray-600">Use shipping address information</span>
             </div>
           )}
 
