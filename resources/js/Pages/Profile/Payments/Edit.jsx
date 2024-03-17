@@ -8,6 +8,7 @@ import InputError from '@/Components/InputError';
 import SelectOptions from '@/Components/SelectOptions';
 import Checkbox from '@/Components/Checkbox';
 import { router } from '@inertiajs/react';
+import { BackButton } from '@/Components/Buttons';
 
 export default function ({ payment = [], user = [] }) {
     const { data, setData, post, errors } = useForm({

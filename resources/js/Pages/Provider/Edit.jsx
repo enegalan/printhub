@@ -5,6 +5,7 @@ import TextInput from "@/Components/TextInput";
 import InputError from "@/Components/InputError";
 import { useForm } from "@inertiajs/inertia-react";
 import { StlViewer } from "react-stl-viewer";
+import { BackButton } from "@/Components/Buttons";
 
 export default function ProviderDashboard({ user, product, categories = [] }) {
   const { data, setData, post, processing, errors, reset } = useForm({

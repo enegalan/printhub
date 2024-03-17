@@ -5,6 +5,7 @@ import TextInput from "@/Components/TextInput";
 import InputError from "@/Components/InputError";
 import { useForm } from "@inertiajs/inertia-react";
 import toast from 'react-hot-toast';
+import { BackButton } from "@/Components/Buttons";
 
 export default function Edit({ material }) {
     const { data, setData, post, processing, errors, reset } = useForm({

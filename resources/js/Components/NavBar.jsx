@@ -216,23 +216,23 @@ const Navbar = ({
                     </div>
 
                     <hr></hr>
-                    <Dropdown.Link href={route("profile.dashboard")}>
+                    <Dropdown.Link className="rounded" href={route("profile.dashboard")}>
                       Dashboard
                     </Dropdown.Link>
-                    <Dropdown.Link href={route("profile.edit")}>
+                    <Dropdown.Link className="rounded" href={route("profile.edit")}>
                       Profile
                     </Dropdown.Link>
                     
-                    <Dropdown.Link href={route("user.cart")}>Cart</Dropdown.Link>
-                    <Dropdown.Link href={route('profile.wishlist')}>Wishlist</Dropdown.Link>
+                    <Dropdown.Link className="rounded" href={route("user.cart")}>Cart</Dropdown.Link>
+                    <Dropdown.Link className="rounded" href={route('profile.wishlist')}>Wishlist</Dropdown.Link>
                     <hr></hr>
-                    {isAdmin && (<Dropdown.Link href={route('admin.dashboard')}>Admin Dashboard</Dropdown.Link>)}
+                    {isAdmin && (<Dropdown.Link className="rounded" href={route('admin.dashboard')}>Admin Dashboard</Dropdown.Link>)}
                     {isAdmin && (<hr/>)}
                     <Dropdown.Link
                       href={route("logout")}
                       method="post"
                       as="button"
-                      className="text-red-700"
+                      className="rounded text-red-700"
                     >
                       Log Out
                     </Dropdown.Link>

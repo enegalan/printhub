@@ -37,8 +37,7 @@ export default function Wishlist({ user, products = [] }) {
     };
 
     return (
-        <ProfileLayout pageName="Dashboard" pageSubtitle="Welcome to your profile" user={user}>
-            
+        <ProfileLayout pageName="Wishlists" pageSubtitle="Your favourite pieces are waiting you!" user={user}>
             <div id="confirmModal" className="fixed inset-0 z-40 bg-gray-500 bg-opacity-75 flex items-center justify-center hidden" data-product-id="">
                 <div className="bg-white p-8 rounded shadow-md">
                     <p className="text-lg font-semibold mb-4">Are you sure you want to delete this from your wishlist?</p>

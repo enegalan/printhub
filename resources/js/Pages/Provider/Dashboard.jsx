@@ -13,14 +13,14 @@ export default function Dashboard({ auth }) {
     <ProfileLayout pageName="Dashboard" pageSubtitle="Welcome to your profile" user={auth.user}>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div class="w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+        <div class="w-full bg-white border border-gray-200 rounded-lg shadow">
           <a href={route('profile.provider.products')}>
             <FaBox className="text-blue-700 text-[200px] mt-3 p-3 mx-auto rounded-t-lg" />
           </a>
           <hr />
           <div class="p-5">
             <a href={route('profile.provider.products')}>
-              <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Products</h5>
+              <h5 class="mb-2 text-2xl font-bold tracking-tight">Products</h5>
             </a>
             <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Create, edit, or delete your products.</p>
 

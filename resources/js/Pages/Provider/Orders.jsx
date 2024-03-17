@@ -2,6 +2,7 @@ import React from 'react'
 import Pagination from "@/Components/Pagination";
 import { Link } from '@inertiajs/react';
 import ProfileLayout from "@/Layouts/ProfileLayout";
+import { BackButton } from '@/Components/Buttons';
 export default function ({ auth, orders }) {
   const { data, prev_page_url, next_page_url, current_page, last_page } = orders;
 

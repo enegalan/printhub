@@ -1,3 +1,4 @@
+import { BackButton } from "@/Components/Buttons";
 import Pagination from "@/Components/Pagination";
 import ProfileLayout from "@/Layouts/ProfileLayout";
 import { Link, useForm } from "@inertiajs/react";

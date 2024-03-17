@@ -7,7 +7,7 @@ import { FaPlus } from 'react-icons/fa';
 export default function ({ orders = [], user = [] }) {
   const { data, prev_page_url, next_page_url, current_page, last_page } = orders;
   return (
-    <ProfileLayout pageName='Dashboard' pageSubtitle='Checkout your orders status' user={user}>
+    <ProfileLayout pageName='Orders' pageSubtitle='Manage your orders status' user={user}>
       <div className='flex flex-col min-h-full '>
         <div className=''>
           <table className="min-w-full bg-white border border-gray-300">

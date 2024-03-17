@@ -3,6 +3,7 @@ import ProfileLayout from "@/Layouts/ProfileLayout";
 import { Link } from '@inertiajs/react';
 import { StlViewer } from 'react-stl-viewer';
 import PrimaryButton from '@/Components/PrimaryButton';
+import { BackButton } from '@/Components/Buttons';
 export default function ({ auth, order, products }) {
     return (
         <ProfileLayout user={auth.user} pageName='Orders' pageSubtitle='Checkout the orders'>

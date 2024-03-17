@@ -1,10 +1,11 @@
+import { BackButton } from "@/Components/Buttons";
 import ProfileLayout from "@/Layouts/ProfileLayout";
 import { Link } from "@inertiajs/react";
 import { StlViewer } from 'react-stl-viewer';
 
 export default function ({ auth, products = [] }) {
     return (
-        <ProfileLayout pageName="Dashboard" pageSubtitle="Welcome to your profile" user={auth.user}>
+        <ProfileLayout pageName="Check order" pageSubtitle="Manage an order" user={auth.user}>
             <BackButton href="profile.orders" />
             <h3 className="z-10 text-xl lg:text-3xl font-semibold">Order #{products[0].orderId}</h3>
             <div className='mt-8 flex flex-wrap flex-row min-h-full overflow-y-auto gap-2 justify-center '>
