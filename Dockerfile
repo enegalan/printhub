@@ -26,7 +26,5 @@ RUN composer install --no-scripts
 
 RUN npm install
 
-EXPOSE 8000
-
-# Run the application
+# Run the application for dev: localhost:8000 and localhost:5173
 CMD ["sh", "-c", "npm run printhub_docker"]
