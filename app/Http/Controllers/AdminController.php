@@ -58,8 +58,9 @@ class AdminController extends Controller
     public function getUsersThisMonth()
     {
         $currentMonth = date('m');
-        $daysInMonth = cal_days_in_month(CAL_GREGORIAN, $currentMonth, date('Y'));
-        $days = range(1, $daysInMonth);
+        $currentYear = date('Y');
+        $lastDayOfMonth = date('t', mktime(0, 0, 0, $currentMonth, 1, $currentYear));
+        $days = range(1, $lastDayOfMonth);
 
         // Obtener todos los días del mes con la cantidad de usuarios registrados
         $usersData = User::select(DB::raw('DAY(created_at) as day'), DB::raw('COUNT(*) as count'))
