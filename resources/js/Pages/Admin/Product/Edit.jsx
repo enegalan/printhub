@@ -4,11 +4,8 @@ import InputLabel from "@/Components/InputLabel";
 import TextInput from "@/Components/TextInput";
 import InputError from "@/Components/InputError";
 import { useForm } from "@inertiajs/inertia-react";
-import { IoMdArrowRoundBack } from "react-icons/io";
-import { Link } from "@inertiajs/react";
 import toast, { Toaster } from 'react-hot-toast';
 import { StlViewer } from "react-stl-viewer";
-import { router } from "@inertiajs/react";
 
 export default function ProviderDashboard({ user, product, categories = [] }) {
   const { data, setData, post, processing, errors, reset } = useForm({
@@ -57,7 +54,6 @@ export default function ProviderDashboard({ user, product, categories = [] }) {
     formData.append("categories", data.categories);
     formData.append("user_id", data.user_id);
     formData.append("product_id", data.product_id);
-
     try {
       post(route("product.update", product));
       onAdd();
@@ -65,9 +61,6 @@ export default function ProviderDashboard({ user, product, categories = [] }) {
     } catch (e) {
       onError(e);
     }
-
-    
-    //window.location.href = route('admin.products');
   };
 
   const handleCheck = (categoryId) => {
@@ -76,12 +69,7 @@ export default function ProviderDashboard({ user, product, categories = [] }) {
 
   return (
     <Dashboard pageName="Products" pageSubtitle="Edit a product">
-      <Link
-        href={route("admin.products")}
-        className="bg-[lightgrey] w-[40px] p-3 rounded-lg mb-5 self-start transition hover:bg-[#bbbbbb]"
-      >
-        <IoMdArrowRoundBack />
-      </Link>
+      <BackButton href="admin.products" />
       <Toaster />
       <h1 className="text-2xl mb-5 text-center">Edit product</h1>
       <div className="row-span-4 bg-white rounded-xl p-4 lg:mx-20">

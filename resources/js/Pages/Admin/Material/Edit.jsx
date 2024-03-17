@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Dashboard from '../Dashboard'
 import InputLabel from "@/Components/InputLabel";
 import TextInput from "@/Components/TextInput";
 import InputError from "@/Components/InputError";
 import { useForm } from "@inertiajs/inertia-react";
-import { IoMdArrowRoundBack } from "react-icons/io";
-import { Link } from "@inertiajs/react";
 import toast, { Toaster } from 'react-hot-toast';
 
 export default function Edit({ material }) {
@@ -36,9 +34,7 @@ export default function Edit({ material }) {
 
     return (
         <Dashboard pageName='Materials' pageSubtitle="Manage product's materials">
-            <Link href={route('admin.materials')} className="bg-[lightgrey] w-[40px] p-3 rounded-lg mb-5 self-start transition hover:bg-[#bbbbbb]">
-                <IoMdArrowRoundBack />
-            </Link>
+            <BackButton href="admin.materials" />
             <Toaster />
             <h1 className="text-2xl mb-5 text-center">Edit material</h1>
             <div className="row-span-4 bg-white rounded-xl p-4 lg:mx-20">

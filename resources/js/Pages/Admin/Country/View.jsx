@@ -1,17 +1,14 @@
 import React from 'react'
 import Dashboard from '../Dashboard'
 import Pagination from "@/Components/Pagination";
-import { Link } from "@inertiajs/react";
-import { IoMdArrowRoundBack } from "react-icons/io";
+import { BackButton } from '@/Components/Buttons';
 
 export default function CountryView({ regions }) {
     const { data, prev_page_url, next_page_url, current_page, last_page } = regions;
 
     return (
         <Dashboard pageName='Countries' pageSubtitle="Manage country's regions">
-            <Link href={route('admin.countries')} className="bg-[lightgrey] w-[40px] p-3 rounded-lg mb-5 self-start transition hover:bg-[#bbbbbb]">
-                <IoMdArrowRoundBack />
-            </Link>
+            <BackButton href="admin.countries" />
             <div className='flex flex-col min-h-full '>
                 <div className='overflow-x-scroll'>
                     <table className="min-w-full bg-white border border-gray-300">

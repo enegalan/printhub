@@ -16,8 +16,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { useState } from "react";
 import { StlViewer } from "react-stl-viewer";
 import { Footer } from "@/Components/Footer";
-import { IoMdArrowRoundBack } from "react-icons/io";
-import { Link } from "@inertiajs/react";
+import { BackButton } from "@/Components/Buttons";
 
 export default function Show({
   user,
@@ -75,7 +74,6 @@ export default function Show({
       }
     }
   };
-  var colorNames = colors.map((color) => { return color.name });
   return (
     <main className="bg-white">
       <Toaster></Toaster>
@@ -85,12 +83,7 @@ export default function Show({
         dynamicBackground={false}
       ></NavBar>
       <section className="flex justify-center mt-24">
-        <div className="absolute flex justify-start w-full pb-4 pl-5">
-          <Link href={route('market')} >
-            <IoMdArrowRoundBack className="text-4xl bg-[lightgrey] hover:bg-[#bbbbbb] rounded" />
-          </Link>
-        </div>
-
+      <BackButton href="market" className="bg-[lightgrey] w-[40px] p-3 rounded-lg mb-5 self-start transition hover:bg-[#bbbbbb]" />
         <div className="max-w-[1200px] mt-16 mx-4 pb-4">
           <div className="flex flex-col flex-wrap md:flex-row md:flex-nowrap">
             <div className="w-full md:w-1/3 lg:w-1/2 max-w-full flex justify-center items-center bg-gray-200 rounded-xl">
@@ -144,17 +137,17 @@ export default function Show({
 
               </div>
               <div className="flex">
-                <button className="bg-blue-950 p-3 px-5 text-white rounded" onClick={handleDecrement}>
+                <button className="bg-blue-950 p-3 px-5 text-white rounded transition hover:bg-blue-800" onClick={handleDecrement}>
                   -
                 </button>
                 <input type="text" className="text-black text-xl mx-2 w-1/5 text-center" value={data.quantity} readOnly />
-                <button className="bg-blue-950 p-3 px-5 text-white rounded" onClick={handleIncrement}>
+                <button className="bg-blue-950 p-3 px-5 text-white rounded transition hover:bg-blue-800" onClick={handleIncrement}>
                   +
                 </button>
               </div>
               <div className="flex flex-col gap-2 h-full justify-end">
                 <button
-                  className="bg-blue-950 font-semibold text-lg text-white py-4 w-full rounded-full mt-4 hover:bg-blue-800 text-center disabled:text-slate-500 disabled:bg-slate-800"
+                  className="bg-blue-950 font-semibold text-lg text-white py-4 w-full rounded-full mt-4 transition hover:bg-blue-800 text-center disabled:text-slate-500 disabled:bg-slate-800"
                   onClick={submit}
                   disabled={processing}
                 >
@@ -170,7 +163,7 @@ export default function Show({
         <h1 className="text-2xl py-10 font-bold">Related products</h1>
         <div className="flex items-center gap-2">
           <div className="cursor-pointer">
-            <FaArrowAltCircleLeft className="text-4xl" onClick={goPrev} />
+            <FaArrowAltCircleLeft className="text-4xl text-blue-950 transition hover:text-blue-800" onClick={goPrev} />
           </div>
           <Swiper
             slidesPerView={3}
@@ -191,7 +184,7 @@ export default function Show({
             ))}
           </Swiper>
           <div className="cursor-pointer" onClick={goNext}>
-            <FaArrowAltCircleRight className="text-4xl" />
+            <FaArrowAltCircleRight className="text-4xl text-blue-950 transition hover:text-blue-800" />
           </div>
         </div>
       </section>

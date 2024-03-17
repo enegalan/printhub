@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Dashboard from '../Dashboard'
 import InputLabel from "@/Components/InputLabel";
 import TextInput from "@/Components/TextInput";
 import InputError from "@/Components/InputError";
 import { useForm } from "@inertiajs/inertia-react";
-import { IoMdArrowRoundBack } from "react-icons/io";
-import { Link } from "@inertiajs/react";
 import toast, { Toaster } from 'react-hot-toast';
+import { BackButton } from "@/Components/Buttons";
 
 export default function Add() {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -36,9 +35,7 @@ export default function Add() {
 
     return (
         <Dashboard pageName='Categories' pageSubtitle="Manage product's categories">
-            <Link href={route('admin.categories')} className="bg-[lightgrey] w-[40px] p-3 rounded-lg mb-5 self-start transition hover:bg-[#bbbbbb]">
-                <IoMdArrowRoundBack />
-            </Link>
+            <BackButton href="admin.categories" />
             <Toaster />
             <h1 className="text-2xl mb-5 text-center">Create category</h1>
             <div className="row-span-4 bg-white rounded-xl p-4 lg:mx-20">

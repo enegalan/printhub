@@ -4,8 +4,6 @@ import InputLabel from "@/Components/InputLabel";
 import TextInput from "@/Components/TextInput";
 import InputError from "@/Components/InputError";
 import { useForm } from "@inertiajs/inertia-react";
-import { IoMdArrowRoundBack } from "react-icons/io";
-import { Link } from "@inertiajs/react";
 import { Toaster } from "react-hot-toast";
 import { StlViewer } from "react-stl-viewer";
 
@@ -57,12 +55,7 @@ export default function ProviderDashboard({ user, product, categories = [] }) {
 
   return (
     <ProfileLayout user={user} pageName="Provider" pageSubtitle="Edit your product">
-      <Link
-        href={route("profile.provider.products")}
-        className="bg-[lightgrey] w-[40px] p-3 rounded-lg mb-5 self-start transition hover:bg-[#bbbbbb]"
-      >
-        <IoMdArrowRoundBack />
-      </Link>
+      <BackButton href="profile.provider.products" />
       <Toaster />
       <h1 className="text-2xl mb-5 text-center">Edit product</h1>
       <div className="row-span-4 bg-white rounded-xl p-4 lg:mx-20">

@@ -1,15 +1,11 @@
 import ProfileLayout from "@/Layouts/ProfileLayout";
 import { Link } from "@inertiajs/react";
-import { IoMdArrowRoundBack } from "react-icons/io";
 import { StlViewer } from 'react-stl-viewer';
 
 export default function ({ auth, products = [] }) {
-    console.log(products)
     return (
         <ProfileLayout pageName="Dashboard" pageSubtitle="Welcome to your profile" user={auth.user}>
-            <Link href={route('profile.orders')} className="bg-[lightgrey] w-[40px] p-3 rounded-lg mb-5 self-start transition hover:bg-[#bbbbbb]">
-                <IoMdArrowRoundBack />
-            </Link>
+            <BackButton href="profile.orders" />
             <h3 className="z-10 text-xl lg:text-3xl font-semibold">Order #{products[0].orderId}</h3>
             <div className='mt-8 flex flex-wrap flex-row min-h-full overflow-y-auto gap-2 justify-center '>
                 {products.map(function(product) {

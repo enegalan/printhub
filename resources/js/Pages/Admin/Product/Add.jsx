@@ -4,11 +4,9 @@ import InputLabel from "@/Components/InputLabel";
 import TextInput from "@/Components/TextInput";
 import InputError from "@/Components/InputError";
 import { useForm } from "@inertiajs/inertia-react";
-import { IoMdArrowRoundBack } from "react-icons/io";
-import { Link } from "@inertiajs/react";
 import toast, { Toaster } from 'react-hot-toast';
-import { router } from "@inertiajs/react";
 import { StlViewer } from "react-stl-viewer";
+import { BackButton } from "@/Components/Buttons";
 
 export default function addProduct({ user, categories = [] }) {
   const { data, setData, post, processing, errors, reset } = useForm({
@@ -64,9 +62,7 @@ export default function addProduct({ user, categories = [] }) {
 
   return (
     <Dashboard pageName="Products" pageSubtitle="Add new product">
-      <Link href={route('admin.products')} className="bg-[lightgrey] w-[40px] p-3 rounded-lg mb-5 self-start transition hover:bg-[#bbbbbb]">
-          <IoMdArrowRoundBack />
-      </Link>
+      <BackButton href="admin.products" />
       <Toaster />
       <h1 className="text-2xl mb-5 text-center">Add new product</h1>
       <div className="row-span-4 bg-white rounded-xl p-4 lg:mx-20">

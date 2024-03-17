@@ -1,21 +1,13 @@
 import React from 'react'
-import Dashboard from '../Dashboard'
 import Pagination from "@/Components/Pagination";
 import { Link } from '@inertiajs/react';
 import ProfileLayout from "@/Layouts/ProfileLayout";
-import { FaPlus } from 'react-icons/fa';
-import { IoMdArrowRoundBack } from "react-icons/io";
 export default function ({ auth, orders }) {
   const { data, prev_page_url, next_page_url, current_page, last_page } = orders;
 
   return (
     <ProfileLayout pageName='Orders' user={auth.user} pageSubtitle='Checkout the orders'>
-        <Link
-        href={route("profile.provider.dashboard")}
-        className="bg-[lightgrey] w-[40px] p-3 rounded-lg mb-5 self-start transition hover:bg-[#bbbbbb]"
-      >
-        <IoMdArrowRoundBack />
-      </Link>
+      <BackButton href="profile.provider.dashboard" />
       <div className='flex flex-col min-h-full '>
         <div className='overflow-x-scroll'>
           <table className="min-w-full bg-white border border-gray-300">

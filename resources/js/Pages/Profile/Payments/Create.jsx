@@ -1,15 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useForm } from '@inertiajs/inertia-react';
 import ProfileLayout from "@/Layouts/ProfileLayout";
-import { Link } from '@inertiajs/react';
-import { IoMdArrowRoundBack } from "react-icons/io";
 import toast, { Toaster } from 'react-hot-toast';
 import InputLabel from '@/Components/InputLabel';
 import TextInput from '@/Components/TextInput';
 import InputError from '@/Components/InputError';
 import SelectOptions from '@/Components/SelectOptions';
 import Checkbox from '@/Components/Checkbox';
-import { router } from '@inertiajs/react';
+import { BackButton } from '@/Components/Buttons';
 
 export default function ({ user = [], errors }) {
     const defaultExpireMonth = '01';
@@ -49,8 +47,6 @@ export default function ({ user = [], errors }) {
         formData.append('expire_year', data.expire_year);
         formData.append('cvv', data.cvv);
         formData.append('default', data.default);
-        
-
         post('/profile/payment/store/', formData, {
             preserveState: true,
             onSuccess: (response) => {
@@ -89,9 +85,7 @@ export default function ({ user = [], errors }) {
 
     return (
         <ProfileLayout pageName='Add Payment Method' pageSubtitle='Manage your cards and accounts' user={user}>
-            <Link href={route('profile.payments')} className="bg-[lightgrey] w-[40px] p-3 rounded-lg mb-5 self-start transition hover:bg-[#bbbbbb]">
-                <IoMdArrowRoundBack />
-            </Link>
+            <BackButton href="profile.payments" />
             <Toaster />
             <h1 className="text-2xl mb-5 text-center">Add payment method</h1>
             <div className="row-span-4 bg-white rounded-xl p-4 lg:mx-20">

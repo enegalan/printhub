@@ -4,6 +4,7 @@ import gsap from 'gsap';
 import chroma from 'chroma-js';
 import '../../css/ButtonGlow.css';
 import { Link } from '@inertiajs/react';
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 const GlowButton = ({ value = "", href = "#", backgroundColor = "#09041e", textColor = "white", image = "", imageClass = "", icon = "" }) => {
     const buttonRef = useRef(null);
@@ -195,4 +196,18 @@ SubmitButton.propTypes = {
     icon: PropTypes.string,
 };
 
-export { GlowButton, GlowSubmitButton, BouncingButton, Button, SubmitButton };
+const BackButton = ({ className = "", iconClass = "", href = "index", }) => {
+    const defaultClass = "bg-[lightgrey] w-[40px] p-3 rounded-lg mb-5 self-start transition hover:bg-[#bbbbbb]";
+    return (
+        <Link href={route(href)} className={defaultClass + ' ' + className}>
+            <IoMdArrowRoundBack iconClass={iconClass} />
+        </Link> 
+    );
+};
+BackButton.propTypes = {
+    divClass: PropTypes.string,
+    iconClass: PropTypes.string,
+    href: PropTypes.string,
+};
+
+export { GlowButton, GlowSubmitButton, BouncingButton, Button, SubmitButton, BackButton };

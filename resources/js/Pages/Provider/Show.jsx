@@ -1,9 +1,7 @@
 import Pagination from "@/Components/Pagination";
-import TextInput from "@/Components/TextInput";
 import ProfileLayout from "@/Layouts/ProfileLayout";
 import { Link, useForm } from "@inertiajs/react";
 import { FaPlus } from "react-icons/fa6";
-import { IoMdArrowRoundBack } from "react-icons/io";
 import { StlViewer } from "react-stl-viewer";
 
 export default function ProviderShow({ user, products }) {
@@ -11,12 +9,7 @@ export default function ProviderShow({ user, products }) {
   const { delete: handleDelete } = useForm();
   return (
     <ProfileLayout user={user} pageName="Provider" pageSubtitle="Provider dashboard - Products list">
-      <Link
-        href={route("profile.provider.dashboard")}
-        className="bg-[lightgrey] w-[40px] p-3 rounded-lg mb-5 self-start transition hover:bg-[#bbbbbb]"
-      >
-        <IoMdArrowRoundBack />
-      </Link>
+      <BackButton href="profile.provider.dashboard" />
       <Link href={route('provider.add')} className="bg-[lightgrey] w-[40px] p-3 rounded-lg mb-5 self-end transition hover:bg-[#bbbbbb]">
           <FaPlus />
       </Link>
