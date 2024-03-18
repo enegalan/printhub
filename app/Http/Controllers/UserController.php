@@ -388,6 +388,7 @@ class UserController extends Controller
             'owner_name' => 'required|string',
             'number' => 'required|string',
             'cvv' => 'required|string',
+            'default' => 'integer'
         ]);
 
         if ($validatedData) {

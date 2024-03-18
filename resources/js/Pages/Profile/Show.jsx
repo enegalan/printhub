@@ -92,7 +92,7 @@ export default function ({ user, orders = [], wishlist = [] }) {
                                     <div className="flex items-center my-2 justify-between gap-1 w-full cursor-pointer rounded-md hover:bg-[#ededed]" key={product.id}>
                                         <div className="flex gap-28 items-center py-5 px-3">
                                             <div className="flex gap-5 items-center flex-wrap text-center">
-                                                <StlViewer modelProps={{ color: '#1e40af' }} style={{ top: 0, left: 0, width: '20vh', height: '20vh', }} shadows url={product.file} />
+                                                <StlViewer modelProps={{ color: '#1e40af' }} style={{ top: 0, left: 0, width: '20vh', height: '20vh', }} url={product.file} />
                                                 {product.name}
                                             </div>
                                             <div className="flex gap-12 items-center flex-nowrap text-center">

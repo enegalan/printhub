@@ -43,7 +43,7 @@ export default function ProductCard({id, image, file, name, price, href, onSucce
                 </div>
             </div>
             <div className="overflow-hidden">
-                <StlViewer modelProps={{ color: '#1e40af' }} style={{top: 0,left: 0,width: '100%',height: '30vh',}} shadows url={file} />
+                <StlViewer modelProps={{ color: '#1e40af' }} style={{top: 0,left: 0,width: '100%',height: '30vh',}} url={file} />
             </div>
             <div className="px-6 pt-4">
                 <div className="flex justify-between font-bold text-xl mb-2 gap-2">
