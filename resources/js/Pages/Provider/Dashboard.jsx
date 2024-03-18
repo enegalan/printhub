@@ -26,7 +26,7 @@ export default function Dashboard({ auth }) {
 
             <Link
               href={route('profile.provider.products')}
-              className="items-center justify-center flex px-5 py-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              className="items-center justify-center flex px-5 py-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
             >
               Go
             </Link>
@@ -34,20 +34,20 @@ export default function Dashboard({ auth }) {
         </div>
 
         
-        <div class="w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+        <div class="w-full bg-white border border-gray-200 rounded-lg shadow">
           <a href={route('profile.provider.orders')}>
             <FaCartShopping className="text-blue-700 text-[200px] mt-3 mx-auto rounded-t-lg" />
           </a>
           <hr />
           <div class="p-5">
             <a href={route('profile.provider.orders')}>
-              <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Orders</h5>
+              <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Orders</h5>
             </a>
-            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Check the orders related to your products.</p>
+            <p class="mb-3 font-normal text-gray-700">Check the orders related to your products.</p>
 
             <Link
               href={route('profile.provider.orders')}
-              className="flex text-center items-center justify-center px-5 py-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              className="flex text-center items-center justify-center px-5 py-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
             >
               Go
             </Link>
