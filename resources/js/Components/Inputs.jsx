@@ -5,7 +5,6 @@ import PropTypes from "prop-types";
 import '../../css/Inputs.css';
 
 
-// TODO: This input should be updated in order to allow to display the results in a "Result modal" for the navbar' search input
 const SearchInput = ({ placeholder = '', action = null }) => {
     const { data, setData, post, processing, errors } = useForm({
         query: '',
@@ -17,7 +16,7 @@ const SearchInput = ({ placeholder = '', action = null }) => {
         setData('query', newQueryValue);
         if (action) {
             setData('query', newQueryValue);
-            router.get(action, {'query': newQueryValue}, { preserveState: true })
+            if (action !== null) router.get(action, {'query': newQueryValue}, { preserveState: true })
         }
     };
 
@@ -226,7 +225,7 @@ const DropdownCheckbox = ({ options = [{}], action = null, name = "elements" }) 
                 <button
                     type="button"
                     onClick={toggleDropdown}
-                    className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-70"
+                    className="block w-full py-1.5 px-5 text-gray-700 bg-white border border-gray-200 rounded-lg placeholder-gray-400/70"
                     id="options-menu"
                     aria-haspopup="true"
                     aria-expanded="true"

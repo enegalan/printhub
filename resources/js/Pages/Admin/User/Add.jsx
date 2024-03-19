@@ -182,7 +182,7 @@ export default function Add({ user, roles = [] }) {
               {roles.map((role, index) => (
                 <div key={index} className="flex gap-2">
                   <TextInput
-                    id="roles"
+                    id={`role-${role.id}`}
                     type="checkbox"
                     name="roles[]"
                     value={data.roles}
@@ -198,7 +198,7 @@ export default function Add({ user, roles = [] }) {
                       );
                     }}
                   />
-                  <label> {role.name.charAt(0).toUpperCase() + role.name.slice(1)}</label>
+                  <label htmlFor={`role-${role.id}`}> {role.name.charAt(0).toUpperCase() + role.name.slice(1)}</label>
                 </div>
               ))}
             </div>

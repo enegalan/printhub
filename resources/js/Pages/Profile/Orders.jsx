@@ -2,7 +2,6 @@ import React from 'react'
 import ProfileLayout from "@/Layouts/ProfileLayout";
 import Pagination from "@/Components/Pagination";
 import { Link } from '@inertiajs/react';
-import { FaPlus } from 'react-icons/fa';
 
 export default function ({ orders = [], user = [] }) {
   const { data, prev_page_url, next_page_url, current_page, last_page } = orders;

@@ -164,7 +164,7 @@ export default function ProviderDashboard({ user, categories = [] }) {
               {categories.map((category, index) => (
                 <div key={index} className="flex gap-2">
                   <TextInput
-                    id="categories"
+                    id={`category-${index}`}
                     type="checkbox"
                     name="categories[]"
                     value={data.categories.includes(category.id)}
@@ -181,7 +181,7 @@ export default function ProviderDashboard({ user, categories = [] }) {
                       );
                     }}
                   />
-                  <label> {category.name.charAt(0).toUpperCase() + category.name.slice(1)}</label>
+                  <label htmlFor={`category-${index}`}> {category.name.charAt(0).toUpperCase() + category.name.slice(1)}</label>
                 </div>
               ))}
             </div>

@@ -119,10 +119,11 @@ export default function ({ payment = [], user = [] }) {
                     <div>
                         <Checkbox
                             name="default"
+                            id="default-method"
                             checked={data.default}
                             onChange={(e) => setData('default', e.target.checked)}
                         />
-                        <span className="ms-2 text-sm text-gray-600">Set default payment method</span>
+                        <label htmlFor='default-method'  className="ms-2 text-sm text-gray-600">Set default payment method</label>
                     </div>
 
                     <div>

@@ -211,7 +211,7 @@ export default function Edit({ user = [], roles = [] }) {
                                             });
                                         }}
                                     />
-                                    <label> {role.name.charAt(0).toUpperCase() + role.name.slice(1)}</label>
+                                    <label htmlFor={`role-${role.id}`}> {role.name.charAt(0).toUpperCase() + role.name.slice(1)}</label>
                                 </div>
                             ))}
                         </div>

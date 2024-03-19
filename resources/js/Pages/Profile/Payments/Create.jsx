@@ -167,10 +167,11 @@ export default function ({ user = [], errors }) {
                     <div>
                         <Checkbox
                             name="default"
+                            id="default-method"
                             checked={data.default}
                             onChange={(e) => setData('default', e.target.checked)}
                         />
-                        <span className="ms-2 text-sm text-gray-600">Set default payment method</span>
+                        <label htmlFor='default-method' className="ms-2 text-sm text-gray-600">Set default payment method</label>
                     </div>
                     <div>
                         <button type="submit" className="rounded bg-blue-500 text-white px-5 py-2 font-medium" disabled={processing}>

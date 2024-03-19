@@ -20,7 +20,7 @@ function Market({ auth, products = [], colors = [], categories = [] }) {
     const [arrivalFilter, setArrival] = useState([]);
     const [orderFilter, setOrder] = useState([]);
     const [searchFilter, setSearch] = useState([]);
-    
+
     var categoryOptions = categories.map(category => ({
         id: category.id,
         label: category.name.charAt(0).toUpperCase() + category.name.slice(1)
@@ -92,13 +92,13 @@ function Market({ auth, products = [], colors = [], categories = [] }) {
             order: orderFilter.length != 0 ? orderFilter : '%',
             search: searchFilter.length != 0 ? searchFilter : '%',
         };
-        
+
         const filteredFilters = Object.fromEntries(
             Object.entries(newFilters).filter(([_, value]) => value.length > 0)
         );
 
         if (Object.keys(filteredFilters).length > 0) {
-            router.post('/market/filter?page='+currentPage, { filters: newFilters }, { preserveState: true });
+            router.post('/market/filter?page=' + currentPage, { filters: newFilters }, { preserveState: true });
         }
     }
 
@@ -109,7 +109,7 @@ function Market({ auth, products = [], colors = [], categories = [] }) {
         toast.error(message);
     }
 
-    const headerImageStyle = { display: 'block', marginTop: '110px'  }
+    const headerImageStyle = { display: 'block', marginTop: '110px' }
 
     return (
         <div className='bg-[var(--light-grey)]'>
@@ -151,16 +151,16 @@ function Market({ auth, products = [], colors = [], categories = [] }) {
                         <form method="POST" action="">
                             <ul className='flex flex-col gap-2' onChange={onPriceChange}>
                                 <li className='flex gap-3 items-center'>
-                                    <input className='rounded text-[var(--main-blue)]' type="checkbox" name="price" value="0" />
-                                    <label className='text-sm' htmlFor="price">0 - 20 USD</label>
+                                    <input className='rounded text-[var(--main-blue)]' type="checkbox" name="price" id="price1" value="0" />
+                                    <label className='text-sm' htmlFor="price1">0 - 20 USD</label>
                                 </li>
                                 <li className='flex gap-3 items-center'>
-                                    <input className='rounded text-[var(--main-blue)]' type="checkbox" name="price" value="20" />
-                                    <label className='text-sm' htmlFor="price">20 - 50 USD</label>
+                                    <input className='rounded text-[var(--main-blue)]' type="checkbox" name="price" id="price2" value="20" />
+                                    <label className='text-sm' htmlFor="price2">20 - 50 USD</label>
                                 </li>
                                 <li className='flex gap-3 items-center'>
-                                    <input className='rounded text-[var(--main-blue)]' type="checkbox" name="price" value="50" />
-                                    <label className='text-sm' htmlFor="price">More than 50 USD</label>
+                                    <input className='rounded text-[var(--main-blue)]' type="checkbox" name="price" id="price3" value="50" />
+                                    <label className='text-sm' htmlFor="price3">More than 50 USD</label>
                                 </li>
                             </ul>
                         </form>
@@ -170,12 +170,12 @@ function Market({ auth, products = [], colors = [], categories = [] }) {
                         <form method="POST" action="">
                             <ul className='flex flex-col gap-2' onChange={onArrivalsChange}>
                                 <li className='flex gap-3 items-center'>
-                                    <input className='rounded text-[var(--main-blue)]' type="checkbox" name="new_arrivals" value="30" />
-                                    <label className='text-sm' htmlFor="new_arrivals">Last 30 days</label>
+                                    <input className='rounded text-[var(--main-blue)]' type="checkbox" name="new_arrivals" id="new_arrivals1" value="30" />
+                                    <label className='text-sm' htmlFor="new_arrivals1">Last 30 days</label>
                                 </li>
                                 <li className='flex gap-3 items-center'>
-                                    <input className='rounded text-[var(--main-blue)]' type="checkbox" name="new_arrivals" value="90" />
-                                    <label className='text-sm' htmlFor="new_arrivals">Last 90 days</label>
+                                    <input className='rounded text-[var(--main-blue)]' type="checkbox" name="new_arrivals" id="new_arrivals2" value="90" />
+                                    <label className='text-sm' htmlFor="new_arrivals2">Last 90 days</label>
                                 </li>
                             </ul>
                         </form>
@@ -187,13 +187,12 @@ function Market({ auth, products = [], colors = [], categories = [] }) {
                             <SearchInput action="" placeholder='Search...' onChange={onSearchChange} />
                         </section>
                         <section className='self-end'>
-                            <OrderBy options={{ 'lowhigh' : 'Price: Low to High', 'highlow' : 'Price: High to Low' }} onChange={onOrderByChange} />
+                            <OrderBy options={{ 'lowhigh': 'Price: Low to High', 'highlow': 'Price: High to Low' }} onChange={onOrderByChange} />
                         </section>
                     </div>
                     <ProductsSection user={auth.user} onSuccess={onSuccess} onError={onError} products={products} colors={colors} />
                 </div>
             </main>
-
             <Footer />
         </div>
     );
