@@ -99,10 +99,10 @@ function Index({ auth, latestProducts }) {
                 </button>
               )}
             >
-              <img src="/images/impresion1.jpg" style={{ width: '100%', height: '650px', display: 'block', marginTop: '80px' }} />
-              <img src="/images/impresion2.jpeg" style={{ width: '100%', height: '650px', display: 'block', marginTop: '80px' }} />
-              <img src="/images/impresion3.jpg" style={{ width: '100%', height: '650px', display: 'block', marginTop: '80px' }} />
-            </Carousel>
+              <img src="/images/impresion1.jpg" style={{ width: '100%', height: '650px', display: 'block', marginTop: '80px', objectFit: 'contain' }} />
+              <img src="/images/impresion2.jpeg" style={{ width: '100%', height: '650px', display: 'block', marginTop: '80px', objectFit: 'contain' }} />
+              <img src="/images/impresion3.jpg" style={{ width: '100%', height: '650px', display: 'block', marginTop: '80px', objectFit: 'contain' }} />
+            </Carousel>,
           </div>
         </div>
 

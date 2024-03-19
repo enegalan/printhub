@@ -12,9 +12,10 @@ function Dashboard ({user,errors}) {
     return (
         <>
             <NavBar user={user} className="lg:backdrop-blur-md border-b max-lg:bg-blue-900/50 border-blue-950/50" defaultBackgroundColor="transparent" defaultTextColor="var(--white)" dynamicBackground={false} />
-            />
                 <main className='py-44 px-10 bg-[url(/images/dark-blue-blur-background-vector.webp)] bg-cover bg-no-repeat space-y-10 gap-10 -mb-16'>
-                    
+                    <div
+                        class="absolute inset-0 h-full w-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"
+                    ></div>
                     <header className='text-white text-center'>
                         <h1 className='text-6xl font-bold'>Pricing</h1>
                         <p className='md:w-[32rem] pt-5 w-auto md:m-auto text-2xl text-gray-400'>Get started and make your ideas become true with our <b>printing</b> service</p>
