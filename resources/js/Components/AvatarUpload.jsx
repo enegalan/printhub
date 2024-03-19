@@ -54,7 +54,7 @@ const AvatarUpload = ({ user }) => {
                 file:mr-4 file:py-2 file:px-10
                 file:rounded-full file:border-0
                 file:text-sm file:font-semibold
-                file:bg-blue-50 file:text-blue-700
+                file:bg-blue-50 file:text-[var(--blue)]
                 hover:file:bg-blue-100 file:cursor-pointer"
               autoComplete="file"
               onChange={handleFileChange}
