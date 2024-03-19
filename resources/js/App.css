@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;900&family=Kdam+Thmor+Pro&display=swap');
+@import url('../css/Colors.css');
 
 * {
   margin: 0;
@@ -14,7 +15,7 @@
 }
 
 ::-webkit-scrollbar-corner {
-  background-color: #ffffff00;
+  background-color: var(--white)00;
 }
 
 ::-webkit-scrollbar-track {
@@ -39,16 +40,6 @@ html {
 
 body {
   background-color: var(--light-grey);
-}
-
-:root {
-  --dark: #0d162c;
-  --dark-gray: #1c1c1c;
-  --main-blue: #1e40af;
-  --blue-1: #2563eb;
-  --light-blue: #a2c0f8;
-  --white: #FFFFFF;
-  --light-grey: #ebebeb;
 }
 
 /* HEARTBEAT ANIMATION */
@@ -88,7 +79,7 @@ body {
 
 /*Dotted Background*/
 .dotted_bg{
-  background-image: radial-gradient(#ffffff33 1px, #ffffff00 1px);
+  background-image: radial-gradient(var(--white)33 1px, var(--white)00 1px);
   background-size: 20px 20px;
   border-radius: 32px;
   height: 100vh;

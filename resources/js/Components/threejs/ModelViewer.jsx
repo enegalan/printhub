@@ -123,7 +123,7 @@ export default function ModelViewer({ fileUrl = null, colors, materials, dimensi
                     />
                 </div>
 
-                <SubmitButton value='Add to cart' backgroundColor='var(--main-blue)' hoverBackgroundColor='var(--blue-1)' />
+                <SubmitButton value='Add to cart' backgroundColor='var(--main-blue)' hoverBackgroundColor='var(--blue)' />
             </form>
         </div>
     );

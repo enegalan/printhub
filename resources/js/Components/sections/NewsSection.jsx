@@ -7,7 +7,7 @@ export const NewsSection = () => {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
 
                     <div className="bg-white p-6 rounded-md shadow-md transition transform hover:scale-105 hover:shadow-xl">
-                        <h3 className="text-2xl text-[--blue-1] font-bold mb-4">PrintHub Launches New 3D Printing Service</h3>
+                        <h3 className="text-2xl text-[--blue] font-bold mb-4">PrintHub Launches New 3D Printing Service</h3>
                         <p className="text-gray-500 mb-2">November 17, 2023</p>
                         <img className="mx-auto mb-4 rounded-md" src="/images/news/new1.jpg" alt="PrintHub 3D Printing Service"></img>
                         <p className="text-gray-700">PrintHub has recently unveiled its latest 3D printing service, bringing cutting-edge technology to users for a seamless printing experience. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
@@ -15,14 +15,14 @@ export const NewsSection = () => {
 
 
                     <div className="bg-white p-6 rounded-md shadow-md transition transform hover:scale-105 hover:shadow-xl">
-                        <h3 className="text-2xl text-[--blue-1] font-bold mb-4">3D Printing Technology Advancements</h3>
+                        <h3 className="text-2xl text-[--blue] font-bold mb-4">3D Printing Technology Advancements</h3>
                         <p className="text-gray-500 mb-2">November 15, 2023</p>
                         <img className="mx-auto mb-4 rounded-md" src="/images/news/new2.jpg" alt="3D Printing Technology Advancements"></img>
                         <p className="text-gray-700">Exciting breakthroughs in 3D printing technology have been announced, promising to revolutionize the industry. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
                     </div>
 
                     <div className="bg-white p-6 rounded-md shadow-md transition transform hover:scale-105 hover:shadow-xl">
-                        <h3 className="text-2xl text-[--blue-1] font-bold mb-4">New Features Added to PrintHub Platform</h3>
+                        <h3 className="text-2xl text-[--blue] font-bold mb-4">New Features Added to PrintHub Platform</h3>
                         <p className="text-gray-500 mb-2">November 12, 2023</p>
                         <img className="mx-auto mb-4 rounded-md" src="/images/news/new3.jpg" alt="New Features Added to PrintHub Platform"></img>
                         <p className="text-gray-700">PrintHub&apos;s platform receives a major update with new features designed to enhance user experience. Sed auctor odio et felis aliquet, vel interdum libero feugiat. Ut ut nisl sit amet turpis fermentum eleifend.</p>

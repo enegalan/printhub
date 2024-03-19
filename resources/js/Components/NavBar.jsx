@@ -136,7 +136,7 @@ const Navbar = ({
             <li>
               <Link
                 href={route("scan")}
-                className="block p-4 text-lg transition hover:text-[#a2c0f8]"
+                className="block p-4 text-lg transition hover:text-[var(--light-blue)]"
               >
                 Scan
               </Link>
@@ -144,7 +144,7 @@ const Navbar = ({
             <li>
               <Link
                 href={route("market")}
-                className="block p-4 text-lg transition hover:text-[#a2c0f8]"
+                className="block p-4 text-lg transition hover:text-[var(--light-blue)]"
               >
                 Market
               </Link>
@@ -152,7 +152,7 @@ const Navbar = ({
             <li>
               <Link
                 href={route("about")}
-                className="block p-4 text-lg transition hover:text-[#a2c0f8]"
+                className="block p-4 text-lg transition hover:text-[var(--light-blue)]"
               >
                 About
               </Link>
@@ -160,7 +160,7 @@ const Navbar = ({
             <li>
               <Link
                 href={route("pricing")}
-                className="block p-4 text-lg transition hover:text-[#a2c0f8]"
+                className="block p-4 text-lg transition hover:text-[var(--light-blue)]"
               >
                 Pricing
               </Link>
@@ -301,14 +301,14 @@ const Navbar = ({
                   <li className="mb-1">
                     <Link
                       href={route("index")}
-                      className="block p-4 text-lg transition font-semibold text-gray-400 hover:bg-blue-50 hover:text-[--blue-1] rounded"
+                      className="block p-4 text-lg transition font-semibold text-gray-400 hover:bg-blue-50 hover:text-[--blue] rounded"
                     >
                       Home
                     </Link>
                   </li>
                   <li className="mb-1">
                     <Link
-                      className="block p-4 text-lg transition font-semibold text-gray-400 hover:bg-blue-50 hover:text-[--blue-1] rounded"
+                      className="block p-4 text-lg transition font-semibold text-gray-400 hover:bg-blue-50 hover:text-[--blue] rounded"
                       href={route("scan")}
                     >
                       Scan
@@ -317,14 +317,14 @@ const Navbar = ({
                   <li className="mb-1">
                     <Link
                       href={route("pricing")}
-                      className="block p-4 text-lg transition font-semibold text-gray-400 hover:bg-blue-50 hover:text-[--blue-1] rounded"
+                      className="block p-4 text-lg transition font-semibold text-gray-400 hover:bg-blue-50 hover:text-[--blue] rounded"
                     >
                       Pricing
                     </Link>
                   </li>
                   <li className="mb-1">
                     <Link
-                      className="block p-4 text-lg transition font-semibold text-gray-400 hover:bg-blue-50 hover:text-[--blue-1] rounded"
+                      className="block p-4 text-lg transition font-semibold text-gray-400 hover:bg-blue-50 hover:text-[--blue] rounded"
                       href={route("market")}
                     >
                       Market
@@ -332,7 +332,7 @@ const Navbar = ({
                   </li>
                   <li className="mb-1">
                     <Link
-                      className="block p-4 text-lg transition font-semibold text-gray-400 hover:bg-blue-50 hover:text-[--blue-1] rounded"
+                      className="block p-4 text-lg transition font-semibold text-gray-400 hover:bg-blue-50 hover:text-[--blue] rounded"
                       href={route("about")}
                     >
                       About
@@ -342,7 +342,7 @@ const Navbar = ({
                     <>
                       <li className="mb-1">
                         <Link
-                          className="block p-4 text-lg transition font-semibold text-gray-400 hover:bg-blue-50 hover:text-[--blue-1] rounded"
+                          className="block p-4 text-lg transition font-semibold text-gray-400 hover:bg-blue-50 hover:text-[--blue] rounded"
                           href={route("profile.dashboard")}
                         >
                           Profile
@@ -350,7 +350,7 @@ const Navbar = ({
                     </li>
                     <li className="mb-1">
                         <Link
-                          className="block p-4 text-lg transition font-semibold text-gray-400 hover:bg-blue-50 hover:text-[--blue-1] rounded"
+                          className="block p-4 text-lg transition font-semibold text-gray-400 hover:bg-blue-50 hover:text-[--blue] rounded"
                           href={route("user.cart")}
                         >
                           Cart
@@ -361,7 +361,7 @@ const Navbar = ({
                   {isAdmin && (
                     <li className="mb-1">
                       <Link
-                        className="block p-4 text-lg transition font-semibold text-gray-400 hover:bg-blue-50 hover:text-[--blue-1] rounded"
+                        className="block p-4 text-lg transition font-semibold text-gray-400 hover:bg-blue-50 hover:text-[--blue] rounded"
                         href={route("admin.dashboard")}
                       >
                         Admin Dashboard

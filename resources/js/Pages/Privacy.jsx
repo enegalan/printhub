@@ -10,7 +10,7 @@ function Privacy({ auth }) {
       <div className='overflow-hidden bg-[var(--light-grey)]'>
         <NavBar user={auth.user} sectionsBg={{ 'about': '--dark' }} sectionsText={{ 'about': 'white' }} />
         
-        <header id="about" className='relative overflow-hidden py-48 text-center bg-[#1E40AF]'>
+        <header id="about" className='relative overflow-hidden py-48 text-center bg-[var(--main-blue)]'>
           <div className="absolute top-0 bottom-0">
             
           </div>

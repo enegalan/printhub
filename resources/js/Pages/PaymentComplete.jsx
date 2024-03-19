@@ -110,7 +110,7 @@ function PaymentComplete({ auth, env, order }) {
           <div className='my-6 mx-5 md:mx-24 mb-6 relative z-10'>
             <section className='my-6 flex flex-col gap-3'>
               <p className='ml-5 text-gray-700'>
-                Thank you for your purchase. Please check the order status in the <Link className='text-[var(--blue-1)] hover:underline' href={route('profile.orders')}>Orders</Link> section in your profile.
+                Thank you for your purchase. Please check the order status in the <Link className='text-[var(--blue)] hover:underline' href={route('profile.orders')}>Orders</Link> section in your profile.
               </p>
               <h2 className="text-2xl font-bold my-2">Printer Status</h2>
               <table className="min-w-full bg-white border border-gray-300">

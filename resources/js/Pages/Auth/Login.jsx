@@ -82,7 +82,7 @@ export default function Login({ status, canResetPassword }) {
                                 <label htmlFor="remember_me" className="text-white">Remember Me</label>
                             </div>
                             <div className="flex flex-col items-center mb-4 gap-5">
-                                <GlowSubmitButton backgroundColor='var(--blue-1)' value='Log in'/>
+                                <GlowSubmitButton backgroundColor='var(--blue)' value='Log in'/>
                                 {canResetPassword && (
                                     <Link
                                         href={route('password.request')}

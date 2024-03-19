@@ -231,7 +231,7 @@ function Payment({ auth, countries, regions, total }) {
                   disabled
                 />
               </form>
-              <p className="my-3 text-md">Not correct information? Update it on your <Link className="text-[var(--blue-1)] transition hover:text-[var(--main-blue)]" href={route("profile.edit")}>profile</Link>.</p>
+              <p className="my-3 text-md">Not correct information? Update it on your <Link className="text-[var(--blue)] transition hover:text-[var(--main-blue)]" href={route("profile.edit")}>profile</Link>.</p>
             </div>
           )}
 

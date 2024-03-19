@@ -17,7 +17,7 @@ function Scan ({auth}) {
                     <h1 className='font-bold text-4xl text-[var(--main-blue)] mb-5'>How it works</h1>
                     <div className='flex flex-col divide-y max-w-[1000px]'>
                         {/* Upload 3D model */}
-                        <div className='md:px-24 flex flex-col md:flex-row items-center gap-5 md:gap-20 bg-[var(--blue-1)] text-[var(--white)] p-5 rounded-t-md shadow-lg'>
+                        <div className='md:px-24 flex flex-col md:flex-row items-center gap-5 md:gap-20 bg-[var(--blue)] text-[var(--white)] p-5 rounded-t-md shadow-lg'>
                             <div className='w-1/2'>
                                 <img src="/images/upload-3d-model.png" alt="Upload your 3D model" />
                             </div>
@@ -30,7 +30,7 @@ function Scan ({auth}) {
                             </div>
                         </div>
                         {/* Choose size, material and color */}
-                        <div className='md:px-24 flex flex-col md:flex-row items-center gap-5 md:gap-20 bg-[var(--blue-1)] text-[var(--white)] p-5 shadow-lg'>
+                        <div className='md:px-24 flex flex-col md:flex-row items-center gap-5 md:gap-20 bg-[var(--blue)] text-[var(--white)] p-5 shadow-lg'>
                             <div className='flex flex-col items-center gap-7'>
                                 <h3 className='font-bold text-2xl text-center'>CHOOSE SIZE, MATERIAL AND COLOR</h3>
                                 <p className='max-w-[350px]'>
@@ -40,7 +40,7 @@ function Scan ({auth}) {
                             <img src="/images/choose-material.png" alt="Choose size, material and color" />
                         </div>
                         {/* Instant 3D printing */}
-                        <div className='md:px-24 flex flex-col md:flex-row items-center gap-5 md:gap-20 bg-[var(--blue-1)] text-[var(--white)] p-5 shadow-lg'>
+                        <div className='md:px-24 flex flex-col md:flex-row items-center gap-5 md:gap-20 bg-[var(--blue)] text-[var(--white)] p-5 shadow-lg'>
                             <img src="/images/instant-3d-printing.png" alt="Instant 3D printing" />
                             <div className='flex flex-col items-center gap-7'>
                                 <h3 className='font-bold text-2xl text-center'>INSTANT 3D PRINTING</h3>
@@ -50,7 +50,7 @@ function Scan ({auth}) {
                             </div>
                         </div>
                         {/* Receive order */}
-                        <div className='md:px-24 flex flex-col md:flex-row items-center gap-5 md:gap-20 bg-[var(--blue-1)] text-[var(--white)] p-5 rounded-b-md shadow-lg'>
+                        <div className='md:px-24 flex flex-col md:flex-row items-center gap-5 md:gap-20 bg-[var(--blue)] text-[var(--white)] p-5 rounded-b-md shadow-lg'>
                             <div className='flex flex-col items-center gap-7'>
                                 <h3 className='font-bold text-2xl text-center'>RECEIVE YOUR PRINTED PRODUCT</h3>
                                 <p className='max-w-[350px]'>

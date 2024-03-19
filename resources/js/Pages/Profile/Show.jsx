@@ -73,10 +73,10 @@ export default function ({ user, orders = [], wishlist = [] }) {
                                     </div>
                                 </Link>
                             </div>
-                        )) : <span className="pt-5">No orders found. Click <Link className="text-[#1e40af]" href="/market">here</Link> to check out the market.</span>}
+                        )) : <span className="pt-5">No orders found. Click <Link className="text-[var(--main-blue)]" href="/market">here</Link> to check out the market.</span>}
                         {orders.length > orderPagination && (
                             <Link className="float-right mt-6" href={route("profile.orders")}>
-                                <span className="cursor-pointer text-[white] mt-6 bg-[#1e40af] p-2 rounded-lg transition hover:bg-[#1536a1]">
+                                <span className="cursor-pointer text-[white] mt-6 bg-[var(--main-blue)] p-2 rounded-lg transition hover:bg-[#1536a1]">
                                     View more
                                 </span>
                             </Link>
@@ -104,10 +104,10 @@ export default function ({ user, orders = [], wishlist = [] }) {
                                     </div>
                                 </Link>
                             </div>
-                        )) : <span className="pt-5">Add your first product to your wishlist. Click <Link className="text-[#1e40af]" href="/market">here</Link> to check out the market.</span>}
+                        )) : <span className="pt-5">Add your first product to your wishlist. Click <Link className="text-[var(--main-blue)]" href="/market">here</Link> to check out the market.</span>}
                         {wishlist.length > wishlistPagination && (
                             <Link className="float-right mt-6" href={route('profile.wishlist')}>
-                                <span className="cursor-pointer text-[white] mt-6 bg-[#1e40af] p-2 rounded-lg transition hover:bg-[#1536a1]">
+                                <span className="cursor-pointer text-[white] mt-6 bg-[var(--main-blue)] p-2 rounded-lg transition hover:bg-[#1536a1]">
                                     View more
                                 </span>
                             </Link>
